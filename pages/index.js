@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Login from '../components/Login'
 import SideBar from '../components/SideBar'
 import styles from '../styles/Home.module.css'
 
@@ -11,7 +12,10 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
        <div>
-        <SideBar/>
+        {/* calling Sidebar */}
+        {/* <SideBar/> */}
+        {/* Calling Login component */}
+        <Login/>
        </div>
       </main>
     </div>

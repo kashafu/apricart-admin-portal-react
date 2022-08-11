@@ -28,7 +28,18 @@ module.exports = {
         },
         'main-green': {
           DEFAULT: '#296118'
-        }
+        },
+        // Text Colours
+        "txt-dark" :{
+          DEFAULT:"#333333"
+        },
+        "txt-light" :{
+          DEFAULT:"#f5faf6"
+        },
+        "txt-spec" :{
+          DEFAULT:"#9dacd1"
+        },
+
       }
     },
   },
