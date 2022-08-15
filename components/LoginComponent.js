@@ -50,9 +50,9 @@ const Login = () => {
 
 	}
 	return (
-		<>``
+		<>
 			{/* MODAL RESET PASSWORD */}
-			<div className={resetPw ?" top-0":"hidden"}>
+			<div className={resetPw ?" top-0 animate-dropdown transition-all":"hidden"}>
 				<div
 					className={resetPw ? "translate-x-[33%] translate-y-[10%] block overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0" : "hidden"}
 				>
@@ -126,7 +126,7 @@ const Login = () => {
 
 			{/* Login Component */}
 			
-				<div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+				<div className={resetPw  ? "animate-hideup hidden" : "animate-dropdown transition-all min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"}>
 					<div className="max-w-md w-full space-y-8">
 						<div>
 							<div className="flex justify-center items-center">

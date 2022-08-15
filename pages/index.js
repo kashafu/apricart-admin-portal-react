@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Login from '../components/Login'
-import SideBar from '../components/SideBar'
+import Login from '../components/LoginComponent'
+import SideBar from '../components/SideBarComponent'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -12,10 +12,6 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
        <div>
-        {/* calling Sidebar */}
-        {/* <SideBar/> */}
-        {/* Calling Login component */}
-        <Login/>
        </div>
       </main>
     </div>

@@ -10,6 +10,25 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+				dangle: {
+					"0%, 100%": { transform: "rotate(-3deg)", },
+					"50%": { transform: "rotate(3deg)" },
+				},
+				dropdown: {
+					"0%": { opacity: 0, transform: "translateY(-10px)"},
+					"100%": { opacity: 100, transform: "translateY(0px)" },
+				},
+				hideup: {
+					"0%": { opacity: 100, transform: "translateY(10px)"},
+					"100%": { opacity: 0, transform: "translateY(0px)" },
+				},
+			},
+			animation: {
+				dangle: "dangle infinite 3s ease-in",
+				dropdown: "dropdown 0.25s ease-in-out",
+				hideup: "hideup 0.25s ease-out",
+			},
       colors: {
         'main-yellow': {
           DEFAULT: '#FFD54C'

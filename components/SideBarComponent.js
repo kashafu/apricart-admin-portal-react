@@ -2,8 +2,8 @@ import React from "react";
 
 const SideBar = () => {
 	return (
-		<div className="bg-main-blue w-full">
-			<ul className="bg-main-yellow">API Call</ul>
+		<div className=" w-full">
+			<ul className="">API Call</ul>
 			<ul className="">API Call</ul>
 			<ul className="">API Call</ul>
 			<ul className="">API Call</ul>

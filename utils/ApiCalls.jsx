@@ -1,14 +1,19 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-export const loginApi = async (baseUrl, city, userId, phoneNumber,password,setErrorMessage,router, headers) => {
-    
-    const cookies = new Cookies();
+export const loginApi = async (
+	baseUrl,
+	city,
+	userId,
+	phoneNumber,
+	password,
+	setErrorMessage,
+	router,
+	headers
+) => {
+	const cookies = new Cookies();
 	let url =
-		baseUrl +
-		"/auth/open/login?city=" +
-		city +
-		"&lang=en&client_type=apricart"
+		baseUrl + "/auth/open/login?city=" + city + "&lang=en&client_type=apricart";
 	let body = {
 		guestuserid: userId,
 		username: "92" + phoneNumber,
@@ -17,8 +22,8 @@ export const loginApi = async (baseUrl, city, userId, phoneNumber,password,setEr
 	try {
 		let response = await axios.post(url, body, {
 			headers,
-		})
-        console.log(response)
+		});
+		console.log(response);
 		if (response.data.status == 1) {
 			cookies.set("cookies-token", response.data.data.token);
 			cookies.set("cookies-name", response.data.data.name);
@@ -26,15 +31,15 @@ export const loginApi = async (baseUrl, city, userId, phoneNumber,password,setEr
 			cookies.set("cookies-phoneNumber", response.data.data.phoneNumber);
 			cookies.set("cookies-userId", response.data.data.userId);
 			setErrorMessage("");
-			router.push("/");
-            return response
+			router.push("/dashboard");
+			return response;
 		} else {
 			setErrorMessage(response.message);
-			return response
+			return response;
 		}
 	} catch (err) {
 		setErrorMessage(err.response.data.message);
-       return err
+		return err;
 	}
 };
 
@@ -63,7 +68,6 @@ export const resetPasswordApi = async (
 	phoneNumber,
 	password,
 	otp,
-	
 	headers
 ) => {
 	let url = baseUrl + "/auth/open/password/forgot?lang=en&client_type=apricart";
@@ -82,5 +86,22 @@ export const resetPasswordApi = async (
 	} catch (error) {
 		console.log(error?.response);
 		toast.error(error?.response?.message);
+	}
+};
+
+export const uploadImagesApi = async (baseUrl, images, headers) => {
+	let url = baseUrl + "/options/uploads";
+	try {
+		await axios
+			.post(url, images, {
+				Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response)
+				return response
+			});
+	} catch (error) {
+		console.log(error?.response);
 	}
 };
