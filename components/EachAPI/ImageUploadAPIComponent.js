@@ -6,9 +6,8 @@ import { getGeneralApiParams } from "../../utils/GeneralVariables";
 import CustomImageInput from "../Misc/CustomImageInput";
 
 const ImageUploadAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-
 	var images = new FormData();
+	const [loading, setLoading] = useState(false);
 	const [imageInput, setImageInput] = useState([
 		{
 			img: "",
@@ -69,13 +68,21 @@ const ImageUploadAPIComponent = () => {
 							index={index}
 						/>
 						{imageInput.length - 1 === index && imageInput.length && (
-							<button type="button" className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2" onClick={handleInputAdd}>
+							<button
+								type="button"
+								className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
+								onClick={handleInputAdd}
+							>
 								<span>Add another Image</span>
 							</button>
 						)}
 						<div className="">
 							{imageInput.length !== 1 && (
-								<button type="button" className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2" onClick={() => handleInputRemove(index)}>
+								<button
+									type="button"
+									className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
+									onClick={() => handleInputRemove(index)}
+								>
 									<span>Remove</span>
 								</button>
 							)}

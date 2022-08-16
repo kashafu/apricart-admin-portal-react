@@ -98,10 +98,37 @@ export const uploadImagesApi = async (baseUrl, images, headers) => {
 				"Content-Type": "multipart/form-data",
 			})
 			.then((response) => {
-				console.log(response)
-				return response
+				console.log(response);
+				return response;
 			});
 	} catch (error) {
 		console.log(error?.response);
+	}
+};
+
+export const offerSaveApi = async (baseUrl, input, headers) => {
+	const { price, buying, buyingCondition, expiry, products, categories } =
+		input;
+	console.log(input);
+	let url = baseUrl + "/offers/save?city=karachi&lang=en&";
+	let body = {
+		price,
+		buying,
+		buyingCondition,
+		expiry,
+		products,
+		categories,
+	};
+	try {
+		let response = await axios.post(url, body, {
+			headers,
+		});
+		if (response.data.status == 1) {
+			console.log(response);
+			return response;
+		}
+	} catch (error) {
+		console.log(error?.response);
+		// toast.error(error?.response?.message);
 	}
 };
