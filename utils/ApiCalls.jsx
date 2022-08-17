@@ -155,3 +155,23 @@ export const downloadUsersApi = async (baseUrl, headers) => {
 		console.log(error);
 	}
 };
+
+export const downloadProductsApi = async (baseUrl, headers, summary) => {
+	const url = baseUrl + `/admin/download/products?summary=${summary}`;
+
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(blob.data, `Products_Report_${dateString1}.csv`);
+				return blob;
+			});
+	} catch (error) {
+		console.log(error);
+	}
+};

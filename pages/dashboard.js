@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import UsersReports from "../components/EachAPI/downloads/UsersReports";
+import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
+import GetUserReportsAPIComponent from "../components/EachAPI/downloads/GetUsersReportsAPIComponent";
 import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
@@ -13,7 +14,8 @@ const Dashboard = () => {
 			{/* <ProfileViewComponent profileDisplay={profileDisplay} setProfileDisplay={setProfileDisplay}/> */}
 			{/* <ImageUploadAPIComponent/> */}
 			{/* <OfferSaveAPIComponent /> */}
-			<UsersReports />
+			{/* <GetUserReportsAPIComponent /> */}
+			<GetProductReportsAPIComponent />
 		</div>
 	);
 };
