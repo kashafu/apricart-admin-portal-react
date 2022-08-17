@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import GetAbundantCartReportsAPIComponent from "../components/EachAPI/downloads/GetAbundantCartReportsAPIComponent";
+import GetOrdersReportsAPIComponent from "../components/EachAPI/downloads/GetOrdersReportsAPIComponent";
 import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
 import GetUserReportsAPIComponent from "../components/EachAPI/downloads/GetUsersReportsAPIComponent";
 import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPIComponent";
@@ -15,7 +17,9 @@ const Dashboard = () => {
 			{/* <ImageUploadAPIComponent/> */}
 			{/* <OfferSaveAPIComponent /> */}
 			{/* <GetUserReportsAPIComponent /> */}
-			<GetProductReportsAPIComponent />
+			{/* <GetProductReportsAPIComponent /> */}
+			{/* <GetOrdersReportsAPIComponent /> */}
+			<GetAbundantCartReportsAPIComponent />
 		</div>
 	);
 };

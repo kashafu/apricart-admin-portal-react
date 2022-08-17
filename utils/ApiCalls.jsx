@@ -175,3 +175,55 @@ export const downloadProductsApi = async (baseUrl, headers, summary) => {
 		console.log(error);
 	}
 };
+
+export const downloadOrdersApi = async (
+	baseUrl,
+	cityId,
+	fromDate,
+	toDate,
+	skus,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/admin/download/orders?cityid=${cityId}&from=${fromDate}&to=${toDate}&skus=${skus}`;
+
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(blob.data, `Orders_Report_${dateString1}.csv`);
+				return blob;
+			});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const downloadAbundantCart = async (baseUrl, horas, headers) => {
+	const url =
+		baseUrl + `/admin/download/abundantcart?interval_in_hours=${horas}`;
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(
+					blob.data,
+					`Abundant_Report_${horas}h_${dateString1}.csv`
+				);
+				return blob;
+			});
+	} catch (error) {
+		console.log(error);
+	}
+};
