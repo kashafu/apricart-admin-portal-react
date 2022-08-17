@@ -6,7 +6,7 @@ import { getGeneralApiParams } from "../../utils/GeneralVariables";
 const OfferSaveAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
-		price: "",
+		price: 0,
 		buying: "",
 		buyingCondition: "",
 		expiry: "",
@@ -45,6 +45,7 @@ const OfferSaveAPIComponent = () => {
 			};
 		}
 		const { baseUrl, headers } = getGeneralApiParams();
+		console.log(headers);
 		await offerSaveApi(baseUrl, newInput, headers).then(
 			(response) => console.log(response),
 			setLoading(false)
