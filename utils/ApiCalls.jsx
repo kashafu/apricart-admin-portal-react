@@ -1,5 +1,8 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
+import fileDownload from "js-file-download";
+import FileSaver, { saveAs } from "file-saver";
+import moment from "moment";
 
 export const loginApi = async (
 	baseUrl,
@@ -130,5 +133,25 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 	} catch (error) {
 		console.log(error?.response);
 		// toast.error(error?.response?.message);
+	}
+};
+
+export const downloadUsersApi = async (baseUrl, headers) => {
+	const url = baseUrl + "/admin/download/users";
+
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(blob.data, `User_Report_${dateString1}.csv`);
+				return blob;
+			});
+	} catch (error) {
+		console.log(error);
 	}
 };

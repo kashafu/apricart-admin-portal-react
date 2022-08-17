@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import UsersReports from "../components/EachAPI/downloads/UsersReports";
 import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
@@ -11,7 +12,8 @@ const Dashboard = () => {
 			{/* <button onClick={()=>setProfileDisplay(!profileDisplay)}>XD</button> */}
 			{/* <ProfileViewComponent profileDisplay={profileDisplay} setProfileDisplay={setProfileDisplay}/> */}
 			{/* <ImageUploadAPIComponent/> */}
-			<OfferSaveAPIComponent />
+			{/* <OfferSaveAPIComponent /> */}
+			<UsersReports />
 		</div>
 	);
 };
