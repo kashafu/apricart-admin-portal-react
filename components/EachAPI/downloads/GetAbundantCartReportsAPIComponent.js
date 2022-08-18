@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { downloadAbundantCart } from "../../../utils/ApiCalls";
+import { downloadAbundantCartApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import moment from "moment";
@@ -12,7 +12,7 @@ const GetAbundantCartReportsAPIComponent = () => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await downloadAbundantCart(baseUrl, horas, headers).then(() =>
+		await downloadAbundantCartApi(baseUrl, horas, headers).then(() =>
 			setLoading(false)
 		);
 	};

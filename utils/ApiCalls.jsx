@@ -205,7 +205,7 @@ export const downloadOrdersApi = async (
 	}
 };
 
-export const downloadAbundantCart = async (baseUrl, horas, headers) => {
+export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 	const url =
 		baseUrl + `/admin/download/abundantcart?interval_in_hours=${horas}`;
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
@@ -223,6 +223,17 @@ export const downloadAbundantCart = async (baseUrl, horas, headers) => {
 				);
 				return blob;
 			});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const getAllBannersApi = async (baseUrl, headers) => {
+	const url = baseUrl + `/offers/banners?city=karachi&lang=en`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
 		console.log(error);
 	}

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import BannersAPIComponent from "../components/EachAPI/banners/BannersAPIComponent";
+
 import GetAbundantCartReportsAPIComponent from "../components/EachAPI/downloads/GetAbundantCartReportsAPIComponent";
 import GetOrdersReportsAPIComponent from "../components/EachAPI/downloads/GetOrdersReportsAPIComponent";
 import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
@@ -19,7 +21,8 @@ const Dashboard = () => {
 			{/* <GetUserReportsAPIComponent /> */}
 			{/* <GetProductReportsAPIComponent /> */}
 			{/* <GetOrdersReportsAPIComponent /> */}
-			<GetAbundantCartReportsAPIComponent />
+			{/* <GetAbundantCartReportsAPIComponent /> */}
+			<BannersAPIComponent />
 		</div>
 	);
 };
