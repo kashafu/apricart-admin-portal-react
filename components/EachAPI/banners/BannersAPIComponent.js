@@ -4,11 +4,7 @@ import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import EachBannerRenderComponent from "./EachBannerRenderComponent";
 
 const BannersAPIComponent = () => {
-	const [banners, setBanners] = useState([
-		{
-			id: "01",
-		},
-	]);
+	const [banners, setBanners] = useState([]);
 
 	const fetchBannerData = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();

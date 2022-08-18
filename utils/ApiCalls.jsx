@@ -238,3 +238,15 @@ export const getAllBannersApi = async (baseUrl, headers) => {
 		console.log(error);
 	}
 };
+
+export const deleteBannerApi = async (baseUrl, id, headers) => {
+	const url = baseUrl + `/offers/banners/remove`;
+
+	try {
+		await axios.post(url, id, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
