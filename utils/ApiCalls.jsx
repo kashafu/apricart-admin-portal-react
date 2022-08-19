@@ -250,3 +250,5 @@ export const deleteBannerApi = async (baseUrl, id, headers) => {
 		console.log(error);
 	}
 };
+
+export const saveBannersApi = async (baseUrl, body, headers) => {};

@@ -32,9 +32,9 @@ const EachBannerRenderComponent = ({ props }) => {
 					className=""
 					src={propState?.bannerUrlWeb[0]}
 					alt={"bannerImg"}
-					// layout={"fill"}
-					width="1000px"
-					height="250px"
+					layout={"responsive"}
+					width="20px"
+					height="5px"
 				/>
 			</div>
 			<div className="w-1/3">

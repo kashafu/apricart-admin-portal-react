@@ -18,9 +18,10 @@ export const getGeneralApiParams = () => {
 		"Content-Type": "application/json",
 	};
 	if (token) {
+		console.log(token);
 		headers = {
 			...headers,
-			Authorization: "Bearer " + token,
+			Authorization: `Bearer ${token}`,
 		};
 	}
 	let isUserInitialized = cookies.get("user-initialized") ? true : false;

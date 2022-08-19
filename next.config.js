@@ -14,7 +14,7 @@ module.exports = {
 			},
 		];
 	},
-	basePath: "/portal",
+	basePath: "/admin",
 };
 
 // module.exports = nextConfig
