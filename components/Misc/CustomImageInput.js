@@ -1,16 +1,16 @@
 import React from "react";
 
-const CustomImageInput = ({handleChangeValue, index}) => {
+const CustomImageInput = ({ handleChangeValue, index }) => {
 	return (
 		<div className="w-full">
-      {console.log(index)}
+			{console.log(index)}
 			<div className="bg-blue-800 w-36 h-36 flex flex-col justify-center items-center">
 				<div>
 					<input
-          name="img"
+						name="img"
 						type={"file"}
 						accept="image/png, image/gif, image/jpeg, image/jpg"
-            onChange={(e)=>handleChangeValue(e, index)}
+						onChange={(e) => handleChangeValue(e, index)}
 					/>
 				</div>
 			</div>

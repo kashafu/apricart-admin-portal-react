@@ -22,7 +22,6 @@ const OfferSaveAPIComponent = () => {
 		setInput({ ...input, type: e.target.value });
 	};
 	const submitHandler = async (e) => {
-		e.preventDefault();
 		setLoading(true);
 		let newInput = {};
 		if (input.type === "categories") {

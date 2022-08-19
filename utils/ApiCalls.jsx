@@ -251,4 +251,19 @@ export const deleteBannerApi = async (baseUrl, id, headers) => {
 	}
 };
 
-export const saveBannersApi = async (baseUrl, body, headers) => {};
+export const saveBannersApi = async (baseUrl, banner, headers) => {
+	let url = baseUrl + "/offers/banners/save";
+	try {
+		await axios
+			.post(url, banner, {
+				Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};

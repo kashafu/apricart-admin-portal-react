@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ClimbingBoxLoader } from "react-spinners";
 import { uploadImagesApi } from "../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import Loading from "../../utils/Loading";
 import CustomImageInput from "../Misc/CustomImageInput";
 
 const ImageUploadAPIComponent = () => {
@@ -47,19 +48,7 @@ const ImageUploadAPIComponent = () => {
 
 	return (
 		<div>
-			{loading && (
-				<>
-					<div className="bg-main-blue bg-opacity-80 w-screen h-screen fixed z-10">
-						<ClimbingBoxLoader
-							className="absolute top-[45%] m-auto animate-pulse"
-							color="#FFD54C"
-							size={50}
-							speedMultiplier={2}
-						/>
-						<h1 className="z-20 text-white">Sending...</h1>
-					</div>
-				</>
-			)}
+			{<Loading loading={loading} />}
 			<section className="grid grid-cols-2 gap-2">
 				{imageInput.map((each, index) => (
 					<div key={index} className="ml-20">
