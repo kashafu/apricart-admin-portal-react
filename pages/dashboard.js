@@ -8,7 +8,9 @@ import GetOrdersReportsAPIComponent from "../components/EachAPI/downloads/GetOrd
 import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
 import GetUserReportsAPIComponent from "../components/EachAPI/downloads/GetUsersReportsAPIComponent";
 import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPIComponent";
+import NewNotificationSendAPIComponent from "../components/EachAPI/NewNotificationSendAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
+import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
 import ProfileViewComponent from "../components/ProfileViewComponent";
 
@@ -25,7 +27,9 @@ const Dashboard = () => {
 			{/* <GetOrdersReportsAPIComponent /> */}
 			{/* <GetAbundantCartReportsAPIComponent /> */}
 			{/* <BannersAPIComponent /> */}
-			<SaveBannersAPIComponent />
+			{/* <SaveBannersAPIComponent /> */}
+			{/* <TickerUpdateAPIComponent /> */}
+			<NewNotificationSendAPIComponent />
 		</div>
 	);
 };

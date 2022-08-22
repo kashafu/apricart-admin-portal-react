@@ -267,3 +267,42 @@ export const saveBannersApi = async (baseUrl, banner, headers) => {
 		console.log(error?.response);
 	}
 };
+
+export const updateBannersApi = async (baseUrl, newBanner, headers) => {
+	let url = baseUrl + "/offers/banners/save";
+	let body = {
+		id: newBanner.id,
+		bannerUrlWeb: newBanner.bannerUrlWeb,
+		bannerUrlApp: newBanner.bannerUrlApp,
+	};
+	try {
+		await axios
+			.post(url, body, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const updateTickerApi = async (baseUrl, text, headers) => {
+	let url =
+		baseUrl +
+		`/admin/ticker/update?text=${text}&prod_type=cus&order_type=delivery&city=karachi`;
+	try {
+		await axios
+			.get(url, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
