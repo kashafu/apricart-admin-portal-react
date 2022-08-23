@@ -8,6 +8,7 @@ import GetOrdersReportsAPIComponent from "../components/EachAPI/downloads/GetOrd
 import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
 import GetUserReportsAPIComponent from "../components/EachAPI/downloads/GetUsersReportsAPIComponent";
 import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPIComponent";
+import IsContinueAPIComponent from "../components/EachAPI/isContinueAPIComponent";
 import NewNotificationSendAPIComponent from "../components/EachAPI/NewNotificationSendAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
@@ -29,7 +30,8 @@ const Dashboard = () => {
 			{/* <BannersAPIComponent /> */}
 			{/* <SaveBannersAPIComponent /> */}
 			{/* <TickerUpdateAPIComponent /> */}
-			<NewNotificationSendAPIComponent />
+			{/* <NewNotificationSendAPIComponent /> */}
+			<IsContinueAPIComponent />
 		</div>
 	);
 };

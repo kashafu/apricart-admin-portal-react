@@ -306,3 +306,53 @@ export const updateTickerApi = async (baseUrl, text, headers) => {
 		console.log(error?.response);
 	}
 };
+
+export const sendNotificationApi = async (
+	baseUrl,
+	type,
+	value,
+	title,
+	message,
+	city,
+	to,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/notification?type=${type}&value=${value}&title=${title}&message=${message}&city=${city}&to=${to}`;
+	try {
+		return await axios
+			.get(url, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const isContinueUpdateApi = async (
+	baseUrl,
+	prodType,
+	orderType,
+	city,
+	text,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/iscontinue/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
+	try {
+		return await axios
+			.get(url, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
