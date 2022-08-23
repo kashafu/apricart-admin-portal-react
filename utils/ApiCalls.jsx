@@ -404,3 +404,20 @@ export const webUpdateApi = async (
 		console.log(error?.response);
 	}
 };
+
+export const productStockDetailAdminApi = async (
+	baseUrl,
+	id,
+	city,
+	headers
+) => {
+	let url =
+		baseUrl + `/admin/products/stock/detail?id=${id}&city=${city}&lang=en`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
