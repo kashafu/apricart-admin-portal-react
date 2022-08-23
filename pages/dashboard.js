@@ -11,6 +11,7 @@ import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPICompone
 import IsContinueAPIComponent from "../components/EachAPI/isContinueAPIComponent";
 import NewNotificationSendAPIComponent from "../components/EachAPI/NewNotificationSendAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
+import ProductAdminDetailAPIComponent from "../components/EachAPI/ProductAdminDetailAPIComponent";
 import ProductStockDetailAdminAPIComponent from "../components/EachAPI/ProductStockDetailAdminAPIComponent";
 import RecommendedUpdateAPIComponent from "../components/EachAPI/RecommendedUpdateAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
@@ -35,7 +36,8 @@ const Dashboard = () => {
 			{/* <NewNotificationSendAPIComponent /> */}
 			{/* <IsContinueAPIComponent /> */}
 			{/* <RecommendedUpdateAPIComponent /> */}
-			<ProductStockDetailAdminAPIComponent />
+			{/* <ProductStockDetailAdminAPIComponent /> */}
+			<ProductAdminDetailAPIComponent />
 		</div>
 	);
 };

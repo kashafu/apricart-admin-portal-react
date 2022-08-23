@@ -1,35 +1,40 @@
 import React, { useState } from "react";
-import { productStockDetailAdminApi } from "../../utils/ApiCalls";
+import { productAdminDetailApi } from "../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
 import Loading from "../../utils/Loading";
 import CustomButton from "../Misc/CustomButton";
 import CustomInput from "../Misc/CustomInput";
 
-const ProductStockDetailAdminAPIComponent = () => {
+const ProductAdminDetailAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		id: "APRA-BD02-01",
+		id: "APRA-OB05-01",
 		city: "Karachi",
+		warehouseId: "",
 	});
 	const [loading, setLoading] = useState(false);
 	const [detail, setDetail] = useState([]);
-	const { id, city } = inputs;
+	const { id, city, warehouseId } = inputs;
 	const handleId = (e) => {
 		setInputs({ ...inputs, id: e.target.value });
 	};
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
+	const handleWarehouse = (e) => {
+		setInputs({ ...inputs, warehouseId: e.target.value });
+	};
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
-		await productStockDetailAdminApi(baseUrl, id, city, headers).then(
+		await productAdminDetailApi(baseUrl, id, city, warehouseId, headers).then(
 			(response) => {
-				setDetail([response.data.data[0]]);
+				// setDetail([response.data.data[0]]);
+				console.log(response);
 				setLoading(false);
 			}
 		);
 	};
-	console.log(detail);
+	// console.log(detail);
 	return (
 		<section>
 			<Loading loading={loading} />
@@ -50,6 +55,15 @@ const ProductStockDetailAdminAPIComponent = () => {
 				<option value="karachi">Karachi</option>
 				<option value="peshawar">Peshawar</option>
 			</select>
+			<CustomInput
+				type={"number"}
+				position={"bottom"}
+				min={0}
+				value={warehouseId}
+				onChange={handleWarehouse}
+				required={true}
+				placeholder={"Warehouse Number"}
+			/>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Query
 			</CustomButton>
@@ -68,7 +82,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 								<div>SKU:</div>
 								<div>Title:</div>
 							</div>
-							<div className="px-4">
+							{/* <div className="px-4">
 								<div> {each.hayatabad}</div>
 								<div> {each.joharCC}</div>
 								<div> {each.korangiB2BDarkStore}</div>
@@ -76,7 +90,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 								<div> {each.northNazimabad}</div>
 								<div> {each.sku}</div>
 								<div> {each.title}</div>
-							</div>
+							</div> */}
 						</div>
 					);
 				})}
@@ -85,4 +99,4 @@ const ProductStockDetailAdminAPIComponent = () => {
 	);
 };
 
-export default ProductStockDetailAdminAPIComponent;
+export default ProductAdminDetailAPIComponent;

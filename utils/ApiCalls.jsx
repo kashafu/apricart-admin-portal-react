@@ -421,3 +421,22 @@ export const productStockDetailAdminApi = async (
 		console.log(error?.response);
 	}
 };
+
+export const productAdminDetailApi = async (
+	baseUrl,
+	id,
+	city,
+	warehouse_id,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/products/detail?id=${id}&city=${city}&lang=en&warehouse_id=${warehouse_id}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};

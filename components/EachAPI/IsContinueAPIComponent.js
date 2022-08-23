@@ -7,8 +7,8 @@ import CustomInput from "../Misc/CustomInput";
 const IsContinueAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		text: "Free delivery on orders above Rs.500. Same Day Delivery on orders placed till 6:00pm",
-		prodType: "",
-		orderType: "",
+		prodType: "cus",
+		orderType: "delivery",
 		city: "Karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
@@ -25,9 +25,11 @@ const IsContinueAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
+
 	const handleSubmit = async (e) => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedText = encodeURI(text);
+
 		await isContinueUpdateApi(
 			baseUrl,
 			prodType,
@@ -35,7 +37,7 @@ const IsContinueAPIComponent = () => {
 			city,
 			encodedText,
 			headers
-		).then((response) => alert(response.data.message));
+		).then((response) => console.log(response));
 	};
 	return (
 		<div>
@@ -51,9 +53,7 @@ const IsContinueAPIComponent = () => {
 				placeholder="Product Type"
 				onChange={(e) => handleProdType(e)}
 			>
-				<option disabled defaultChecked>
-					Product Type
-				</option>
+				<option disabled>Product Type</option>
 				<option value="cus">Customer (cus)</option>
 				<option value="b2b">Bulk Buy (b2b)</option>
 			</select>
