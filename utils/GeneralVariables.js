@@ -18,7 +18,6 @@ export const getGeneralApiParams = () => {
 		"Content-Type": "application/json",
 	};
 	if (token) {
-		console.log(token);
 		headers = {
 			...headers,
 			Authorization: "Bearer " + token,

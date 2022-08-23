@@ -11,6 +11,7 @@ import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPICompone
 import IsContinueAPIComponent from "../components/EachAPI/isContinueAPIComponent";
 import NewNotificationSendAPIComponent from "../components/EachAPI/NewNotificationSendAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
+import RecommendedUpdateAPIComponent from "../components/EachAPI/RecommendedUpdateAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
 import ProfileViewComponent from "../components/ProfileViewComponent";
@@ -31,7 +32,8 @@ const Dashboard = () => {
 			{/* <SaveBannersAPIComponent /> */}
 			{/* <TickerUpdateAPIComponent /> */}
 			{/* <NewNotificationSendAPIComponent /> */}
-			<IsContinueAPIComponent />
+			{/* <IsContinueAPIComponent /> */}
+			<RecommendedUpdateAPIComponent />
 		</div>
 	);
 };

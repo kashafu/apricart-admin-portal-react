@@ -356,3 +356,51 @@ export const isContinueUpdateApi = async (
 		console.log(error?.response);
 	}
 };
+
+export const recommendedUpdateApi = async (
+	baseUrl,
+	prodType,
+	orderType,
+	city,
+	text,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/recommended/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
+	try {
+		return await axios
+			.get(url, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const webUpdateApi = async (
+	baseUrl,
+	prodType,
+	orderType,
+	city,
+	text,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/web/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
+	try {
+		return await axios
+			.get(url, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};

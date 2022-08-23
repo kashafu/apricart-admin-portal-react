@@ -10,6 +10,7 @@ function CustomInput({
 	max,
 	required,
 	placeholder,
+	name,
 }) {
 	// give parent width in 1/2 -> 1/6
 	let className;
@@ -38,6 +39,7 @@ function CustomInput({
 					className={className}
 					onChange={onChange}
 					value={value}
+					name={name}
 				/>
 			</div>
 		</div>
