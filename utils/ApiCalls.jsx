@@ -228,6 +228,24 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 	}
 };
 
+export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
+	console.log(apiToken, file);
+	let url = baseUrl + `/admin/product/csv/update?apitoken=${apiToken}`;
+	try {
+		return await axios
+			.post(url, file, {
+				...headers,
+				// Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
 export const getAllBannersApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/offers/banners?city=karachi&lang=en`;
 	try {
@@ -500,12 +518,23 @@ export const productsAdminSearchApi = async (
 	userId,
 	headers
 ) => {
+	let cancelPrevRequest;
+
+	//Check if there are any previous pending requests
+	if (typeof cancelPrevRequest != typeof undefined) {
+		cancelPrevRequest.cancel("Operation canceled due to new request.");
+	}
+
+	//Save the cancel token for the current request
+	cancelPrevRequest = axios.CancelToken.source();
+
 	let url =
 		baseUrl +
 		`/admin/products/search?page=${page}&size=${size}&term=${term}&category=${category}&city=${city}&lang=en&userid=${userId}`;
 	try {
 		return await axios.get(url, {
 			headers,
+			cancelToken: cancelPrevRequest.token,
 		});
 	} catch (error) {
 		console.log(error?.response);

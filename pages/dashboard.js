@@ -18,6 +18,7 @@ import ProductAdminSearchAPIComponent from "../components/EachAPI/ProductAdminSe
 import ProductStockDetailAdminAPIComponent from "../components/EachAPI/ProductStockDetailAdminAPIComponent";
 import RecommendedUpdateAPIComponent from "../components/EachAPI/RecommendedUpdateAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
+import UpdateProductCSVAPIComponent from "../components/EachAPI/updateProductCSVAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
 import ProfileViewComponent from "../components/ProfileViewComponent";
 
@@ -33,7 +34,7 @@ const Dashboard = () => {
 			{/* <GetProductReportsAPIComponent /> */}
 			{/* <GetOrdersReportsAPIComponent /> */}
 			{/* <GetAbundantCartReportsAPIComponent /> */}
-			{/* <BannersAPIComponent /> */}
+			<BannersAPIComponent />
 			{/* <SaveBannersAPIComponent /> */}
 			{/* <TickerUpdateAPIComponent /> */}
 			{/* <NewNotificationSendAPIComponent /> */}
@@ -43,7 +44,8 @@ const Dashboard = () => {
 			{/* <ProductAdminDetailAPIComponent /> */}
 			{/* <PopupRedirectionUpdateAPIComponent /> */}
 			{/* <CsrOrderCancelAPIComponent /> */}
-			<ProductAdminSearchAPIComponent />
+			{/* <ProductAdminSearchAPIComponent /> */}
+			{/* <UpdateProductCSVAPIComponent /> */}
 		</div>
 	);
 };

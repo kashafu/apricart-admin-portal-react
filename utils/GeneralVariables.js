@@ -11,12 +11,11 @@ export const getGeneralApiParams = () => {
 	let selectedAddress = cookies.get("selected-address");
 	let latitude = 0;
 	let longitude = 0;
-	let userId =
-		cookies.get("guestUserId") === null ? "abc123" : cookies.get("guestUserId");
+	let userId = cookies.get("cookies-userId");
 	let headers = {
 		Accept: "application/json",
 		"Content-Type": "application/json",
-		"Access-Control-Allow-Origin": "http://localhost:4000",
+		// "Access-Control-Allow-Origin": "http://localhost:4000",
 	};
 	if (token) {
 		headers = {

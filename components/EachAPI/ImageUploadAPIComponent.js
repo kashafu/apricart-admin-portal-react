@@ -1,6 +1,5 @@
 import FormData from "form-data";
-import React, { useState, useEffect } from "react";
-import { ClimbingBoxLoader } from "react-spinners";
+import React, { useState } from "react";
 import { uploadImagesApi } from "../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
 import Loading from "../../utils/Loading";

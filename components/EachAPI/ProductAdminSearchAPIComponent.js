@@ -1,15 +1,17 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { productsAdminSearchApi } from "../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../utils/GeneralVariables";
 import CustomButton from "../Misc/CustomButton";
 import CustomInput from "../Misc/CustomInput";
 
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		term: "",
-		size: "",
-		page: "",
+		size: "1",
+		page: "20",
 		category: "",
-		city: "",
+		city: "karachi",
 		userid: "",
 	});
 	const [loading, setLoading] = useState(false);
@@ -53,6 +55,7 @@ const ProductAdminSearchAPIComponent = () => {
 			setLoading(false);
 		});
 	};
+	console.log(inputs);
 	return (
 		<section>
 			<form action="" method="POST">

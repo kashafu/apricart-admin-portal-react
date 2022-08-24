@@ -6,7 +6,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
 	const cookies = new Cookies();
 	axios.defaults.headers.common["Authorization"] =
-		"Bearer" + cookies.get("cookies-token");
+		"Bearer " + cookies.get("cookies-token");
 	return (
 		<>
 			<Component {...pageProps} />

@@ -11,6 +11,7 @@ function CustomInput({
 	required,
 	placeholder,
 	name,
+	accept,
 }) {
 	// give parent width in 1/2 -> 1/6
 	let className;
