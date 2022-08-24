@@ -1,25 +1,21 @@
-import axios from "axios";
 import FormData from "form-data";
 import React, { useState } from "react";
-import { saveBannersApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomImageInput from "../../Misc/CustomImageInput";
+import Loading from "../../utils/Loading";
+import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import { popupRedirectionUpdateApi } from "../../utils/ApiCalls";
 
-const SaveBannersAPIComponent = () => {
+const PopupRedirectionUpdateAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
 		prodType: "",
-		type: "",
-		offerId: 0,
-		level: 0,
 		city: "",
+		type: "offer",
+		value: 0,
 	});
-	const { bannerUrlApp, bannerUrlWeb, prodType, type, offerId, level, city } =
-		input;
+	const { bannerUrlApp, bannerUrlWeb, prodType, type, value, city } = input;
 
 	const handleWebImage = (e) => {
 		const { files } = e.target;
@@ -35,11 +31,9 @@ const SaveBannersAPIComponent = () => {
 		bannerData.append("app", bannerUrlApp[0]);
 		bannerData.append("web", bannerUrlWeb[0]);
 		bannerData.append("prod_type", prodType);
-		bannerData.append("type", type);
-		bannerData.append("offer_id", offerId);
-		bannerData.append("level", level);
 		bannerData.append("city", city);
-		bannerData.append("lang", "en");
+		bannerData.append("type", type);
+		bannerData.append("value", value);
 	};
 
 	const submitHandler = async (e) => {
@@ -47,10 +41,12 @@ const SaveBannersAPIComponent = () => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		await fillFormData();
-		await saveBannersApi(baseUrl, bannerData, headers).then((response) => {
-			console.log(response);
-			setLoading(false);
-		});
+		await popupRedirectionUpdateApi(baseUrl, bannerData, headers).then(
+			(response) => {
+				console.log(response);
+				setLoading(false);
+			}
+		);
 	};
 	return (
 		<section>
@@ -73,21 +69,14 @@ const SaveBannersAPIComponent = () => {
 					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
 					placeholder="Type"
 				/>
+
 				<input
-					value={offerId}
-					onChange={(e) => setInput({ ...input, offerId: e.target.value })}
+					value={value}
+					onChange={(e) => setInput({ ...input, value: e.target.value })}
 					type="number"
 					required
 					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
-					placeholder="Offer ID"
-				/>
-				<input
-					value={level}
-					onChange={(e) => setInput({ ...input, level: e.target.value })}
-					type="number"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
-					placeholder="Level"
+					placeholder="Value"
 				/>
 				<select
 					onChange={(e) => {
@@ -136,4 +125,4 @@ const SaveBannersAPIComponent = () => {
 	);
 };
 
-export default SaveBannersAPIComponent;
+export default PopupRedirectionUpdateAPIComponent;

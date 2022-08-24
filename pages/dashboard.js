@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import BannersAPIComponent from "../components/EachAPI/banners/BannersAPIComponent";
 import SaveBannersAPIComponent from "../components/EachAPI/banners/SaveBannersAPIComponent";
+import CsrOrderCancelAPIComponent from "../components/EachAPI/CsrOrderCancelAPIComponent";
 
 import GetAbundantCartReportsAPIComponent from "../components/EachAPI/downloads/GetAbundantCartReportsAPIComponent";
 import GetOrdersReportsAPIComponent from "../components/EachAPI/downloads/GetOrdersReportsAPIComponent";
@@ -11,7 +12,9 @@ import ImageUploadAPIComponent from "../components/EachAPI/ImageUploadAPICompone
 import IsContinueAPIComponent from "../components/EachAPI/isContinueAPIComponent";
 import NewNotificationSendAPIComponent from "../components/EachAPI/NewNotificationSendAPIComponent";
 import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
+import PopupRedirectionUpdateAPIComponent from "../components/EachAPI/PopupRedirectionUpdateAPIComponent";
 import ProductAdminDetailAPIComponent from "../components/EachAPI/ProductAdminDetailAPIComponent";
+import ProductAdminSearchAPIComponent from "../components/EachAPI/ProductAdminSearchAPIComponent";
 import ProductStockDetailAdminAPIComponent from "../components/EachAPI/ProductStockDetailAdminAPIComponent";
 import RecommendedUpdateAPIComponent from "../components/EachAPI/RecommendedUpdateAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
@@ -37,7 +40,10 @@ const Dashboard = () => {
 			{/* <IsContinueAPIComponent /> */}
 			{/* <RecommendedUpdateAPIComponent /> */}
 			{/* <ProductStockDetailAdminAPIComponent /> */}
-			<ProductAdminDetailAPIComponent />
+			{/* <ProductAdminDetailAPIComponent /> */}
+			{/* <PopupRedirectionUpdateAPIComponent /> */}
+			{/* <CsrOrderCancelAPIComponent /> */}
+			<ProductAdminSearchAPIComponent />
 		</div>
 	);
 };

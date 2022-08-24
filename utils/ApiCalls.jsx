@@ -440,3 +440,74 @@ export const productAdminDetailApi = async (
 		console.log(error?.response);
 	}
 };
+
+export const popupRedirectionUpdateApi = async (baseUrl, banner, headers) => {
+	let url = baseUrl + "/admin/popup/redirection/update";
+	try {
+		await axios
+			.post(url, banner, {
+				Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const csrOrderCancelApi = async (
+	baseUrl,
+	apitoken,
+	orderId,
+	headers
+) => {
+	let url = baseUrl + `/order/cancel?apitoken=${apitoken}&orderid=${orderId}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const csrOrderCompleteApi = async (
+	baseUrl,
+	apitoken,
+	orderId,
+	headers
+) => {
+	let url = baseUrl + `/order/complete?apitoken=${apitoken}&orderid=${orderId}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const productsAdminSearchApi = async (
+	baseUrl,
+	page,
+	size,
+	term,
+	category,
+	city,
+	userId,
+	headers
+) => {
+	let url =
+		baseUrl +
+		`/admin/products/search?page=${page}&size=${size}&term=${term}&category=${category}&city=${city}&lang=en&userid=${userId}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
