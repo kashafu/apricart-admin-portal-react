@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddNewCategoryAPIComponent from "../components/EachAPI/AddNewCategoryAPIComponent";
 import AddnUpdateProductPositionCSVAPIComponent from "../components/EachAPI/AddnUpdateProductPositionCSVAPIComponent";
 
 import BannersAPIComponent from "../components/EachAPI/banners/BannersAPIComponent";
@@ -57,7 +58,8 @@ const Dashboard = () => {
 			{/* <ProductPriceUpdatedLast24hAPIComponent /> */}
 			{/* <ProductPositionDeleteAdminAPIComponent /> */}
 			{/* <UpdateProductPositionCSVAPIComponent /> */}
-			<AddnUpdateProductPositionCSVAPIComponent />
+			{/* <AddnUpdateProductPositionCSVAPIComponent /> */}
+			<AddNewCategoryAPIComponent />
 		</div>
 	);
 };

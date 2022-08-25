@@ -662,9 +662,10 @@ export const addCategoryApi = async (
 	position,
 	headers
 ) => {
+	console.log(img);
 	let body = {
-		img,
-		parentId,
+		category_image: img,
+		parent_id: parentId,
 		name,
 		position,
 	};
