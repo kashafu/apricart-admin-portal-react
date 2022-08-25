@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddnUpdateProductPositionCSVAPIComponent from "../components/EachAPI/AddnUpdateProductPositionCSVAPIComponent";
 
 import BannersAPIComponent from "../components/EachAPI/banners/BannersAPIComponent";
 import SaveBannersAPIComponent from "../components/EachAPI/banners/SaveBannersAPIComponent";
@@ -15,10 +16,15 @@ import OfferSaveAPIComponent from "../components/EachAPI/OfferSaveAPIComponent";
 import PopupRedirectionUpdateAPIComponent from "../components/EachAPI/PopupRedirectionUpdateAPIComponent";
 import ProductAdminDetailAPIComponent from "../components/EachAPI/ProductAdminDetailAPIComponent";
 import ProductAdminSearchAPIComponent from "../components/EachAPI/ProductAdminSearchAPIComponent";
+import ProductPositionDeleteAdminAPIComponent from "../components/EachAPI/ProductPositionDeleteAdminAPIComponent";
+import ProductPositionDetailAdminAPIComponent from "../components/EachAPI/ProductPositionDetailAdminAPIComponent";
+import ProductPriceUpdatedLast24hAPIComponent from "../components/EachAPI/ProductPriceUpdatedLast24hAPIComponent";
 import ProductStockDetailAdminAPIComponent from "../components/EachAPI/ProductStockDetailAdminAPIComponent";
 import RecommendedUpdateAPIComponent from "../components/EachAPI/RecommendedUpdateAPIComponent";
 import TickerUpdateAPIComponent from "../components/EachAPI/TickerUpdateAPIComponent";
 import UpdateProductCSVAPIComponent from "../components/EachAPI/updateProductCSVAPIComponent";
+import UpdateProductPositionCSVAPIComponent from "../components/EachAPI/UpdateProductPositionCSVAPIComponent";
+import WebUpdateAPIComponent from "../components/EachAPI/WebUpdateAPIComponent";
 import CustomImageInput from "../components/Misc/CustomImageInput";
 import ProfileViewComponent from "../components/ProfileViewComponent";
 
@@ -34,7 +40,7 @@ const Dashboard = () => {
 			{/* <GetProductReportsAPIComponent /> */}
 			{/* <GetOrdersReportsAPIComponent /> */}
 			{/* <GetAbundantCartReportsAPIComponent /> */}
-			<BannersAPIComponent />
+			{/* <BannersAPIComponent /> */}
 			{/* <SaveBannersAPIComponent /> */}
 			{/* <TickerUpdateAPIComponent /> */}
 			{/* <NewNotificationSendAPIComponent /> */}
@@ -46,6 +52,12 @@ const Dashboard = () => {
 			{/* <CsrOrderCancelAPIComponent /> */}
 			{/* <ProductAdminSearchAPIComponent /> */}
 			{/* <UpdateProductCSVAPIComponent /> */}
+			{/* <WebUpdateAPIComponent /> */}
+			{/* <ProductPositionDetailAdminAPIComponent /> */}
+			{/* <ProductPriceUpdatedLast24hAPIComponent /> */}
+			{/* <ProductPositionDeleteAdminAPIComponent /> */}
+			{/* <UpdateProductPositionCSVAPIComponent /> */}
+			<AddnUpdateProductPositionCSVAPIComponent />
 		</div>
 	);
 };

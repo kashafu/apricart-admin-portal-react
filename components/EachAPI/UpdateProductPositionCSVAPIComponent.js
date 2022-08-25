@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import FormData from "form-data";
-import { updateProductCSVApi } from "../../utils/ApiCalls";
-import CustomInput from "../Misc/CustomInput";
-import CustomButton from "../Misc/CustomButton";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import FormData from "form-data";
 import Loading from "../../utils/Loading";
+import CustomButton from "../Misc/CustomButton";
+import CustomInput from "../Misc/CustomInput";
+import { updateProductPositionCSVApi } from "../../utils/ApiCalls";
 
-const UpdateProductCSVAPIComponent = () => {
+const UpdateProductPositionCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
 	const [ren, setRen] = useState("");
-	const [apiToken, setApiToken] = useState("");
 	const [loading, setLoading] = useState(false);
 	var file = new FormData();
 
@@ -39,7 +38,7 @@ const UpdateProductCSVAPIComponent = () => {
 		setLoading(true);
 		fillFormData();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await updateProductCSVApi(baseUrl, apiToken, file, headers).then(
+		await updateProductPositionCSVApi(baseUrl, file, headers).then(
 			(response) => {
 				setLoading(false);
 				console.log(response);
@@ -50,14 +49,7 @@ const UpdateProductCSVAPIComponent = () => {
 		<section>
 			<Loading loading={loading} />
 			<form action="" method="POST">
-				<CustomInput
-					type={"text"}
-					position={"top"}
-					onChange={handleToken}
-					placeholder={"API Token"}
-					required={true}
-				/>
-				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-b-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
+				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-t-xl border-b-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
 					Select Updated File
 				</label>
 				<input
@@ -74,4 +66,4 @@ const UpdateProductCSVAPIComponent = () => {
 	);
 };
 
-export default UpdateProductCSVAPIComponent;
+export default UpdateProductPositionCSVAPIComponent;

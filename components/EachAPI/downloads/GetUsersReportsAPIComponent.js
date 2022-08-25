@@ -5,7 +5,6 @@ import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 const UsersReports = () => {
 	const fetchReport = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
-
 		downloadUsersApi(baseUrl, headers);
 	};
 

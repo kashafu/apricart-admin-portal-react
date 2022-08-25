@@ -13,7 +13,7 @@ const GetOrdersReportsAPIComponent = () => {
 		skus: {},
 	});
 
-	const { cityId, toDate, fromDate } = inputs;
+	const { cityId, toDate, fromDate, skus } = inputs;
 
 	const fetchReport = async (e) => {
 		setLoading(true);

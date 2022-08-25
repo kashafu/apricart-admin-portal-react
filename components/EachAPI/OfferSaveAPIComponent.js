@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ClimbingBoxLoader } from "react-spinners";
+import Loading from "../../utils/Loading";
 import { offerSaveApi } from "../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
 
@@ -7,10 +7,10 @@ const OfferSaveAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
 		price: 0,
-		buying: "",
-		buyingCondition: "",
+		buying: "Bolivia",
+		buyingCondition: "Bolivia",
 		expiry: "",
-		products: "",
+		products: "APRA-HSI09-01,APRA-HSI09-02,APRA-HSI10-02",
 		categories: "",
 		type: "categories",
 	});
@@ -44,7 +44,6 @@ const OfferSaveAPIComponent = () => {
 			};
 		}
 		const { baseUrl, headers } = getGeneralApiParams();
-		console.log(headers);
 		await offerSaveApi(baseUrl, newInput, headers).then(
 			(response) => console.log(response),
 			setLoading(false)
@@ -52,19 +51,7 @@ const OfferSaveAPIComponent = () => {
 	};
 	return (
 		<div>
-			{loading && (
-				<>
-					<div className="bg-main-blue bg-opacity-80 w-screen h-screen fixed z-10">
-						<ClimbingBoxLoader
-							className="absolute top-[45%] m-auto animate-pulse"
-							color="#FFD54C"
-							size={50}
-							speedMultiplier={2}
-						/>
-						<h1 className="z-20 text-white">Sending...</h1>
-					</div>
-				</>
-			)}
+			<Loading loading={loading} />
 			<div>
 				<section className="rounded-md -space-y-px">
 					<form action="" method="POST">
@@ -101,22 +88,24 @@ const OfferSaveAPIComponent = () => {
 								placeholder="Expiry Date"
 							/>
 						</div>
-						<div>
+						<div className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
 							<input
 								type="radio"
 								name="type"
 								value="categories"
+								defaultChecked
 								onChange={(e) => handleRadioButton(e)}
 							/>
-							<label>Categories</label>
+							<label className="pr-4 pl-1">Categories</label>
 							<input
 								type="radio"
+								className="px-4"
 								id="age1"
 								name="type"
 								value="products"
 								onChange={(e) => handleRadioButton(e)}
 							/>
-							<label>Products</label>
+							<label className="pr-4 pl-1">Products</label>
 							<br />
 						</div>
 						{input.type === "products" && (
@@ -163,7 +152,7 @@ const OfferSaveAPIComponent = () => {
 							onClick={(e) => submitHandler(e)}
 							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
 						>
-							Submit Images
+							Save Offer
 						</button>
 					</form>
 				</section>

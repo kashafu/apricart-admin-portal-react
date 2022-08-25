@@ -12,11 +12,11 @@ const SaveBannersAPIComponent = () => {
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
-		prodType: "",
-		type: "",
+		prodType: "cus",
+		type: "offer",
 		offerId: 0,
 		level: 0,
-		city: "",
+		city: "karachi",
 	});
 	const { bannerUrlApp, bannerUrlWeb, prodType, type, offerId, level, city } =
 		input;

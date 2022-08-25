@@ -8,7 +8,7 @@ import CustomInput from "../Misc/CustomInput";
 const ProductStockDetailAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		id: "APRA-BD02-01",
-		city: "Karachi",
+		city: "karachi",
 	});
 	const [loading, setLoading] = useState(false);
 	const [detail, setDetail] = useState([]);

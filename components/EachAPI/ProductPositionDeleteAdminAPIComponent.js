@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { recommendedUpdateApi } from "../../utils/ApiCalls";
+import { productPositionDeleteAdminApi } from "../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
 import CustomButton from "../Misc/CustomButton";
 import CustomInput from "../Misc/CustomInput";
 
-const RecommendedUpdateAPIComponent = () => {
+const ProductPositionDeleteAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		text: "APRA-BD02-01,APRA-HS23-05,APR-MP03-01,APRA-OL26-01,APRA-SC16-08,APRA-HS23-03,APR-PK03-01,APR-DT14-01,APR-DT40-01",
+		id: 0,
 		prodType: "cus",
 		orderType: "delivery",
-		city: "karachi",
 	});
-	const { text, prodType, orderType, city } = inputs;
-	const handleText = (e) => {
-		setInputs({ ...inputs, text: e.target.value });
+	const { prodType, orderType, id } = inputs;
+
+	const handleId = (e) => {
+		setInputs({ ...inputs, id: e.target.value });
 	};
 	const handleProdType = (e) => {
 		setInputs({ ...inputs, prodType: e.target.value });
@@ -21,40 +21,35 @@ const RecommendedUpdateAPIComponent = () => {
 	const handleOrderType = (e) => {
 		setInputs({ ...inputs, orderType: e.target.value });
 	};
-	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
-	};
+	console.log(inputs);
+
 	const handleSubmit = async (e) => {
 		const { baseUrl, headers } = getGeneralApiParams();
 
-		await recommendedUpdateApi(
+		await productPositionDeleteAdminApi(
 			baseUrl,
+			id,
 			prodType,
 			orderType,
-			city,
-			text,
 			headers
 		).then((response) => console.log(response));
 	};
-
 	return (
 		<div>
 			<CustomInput
 				position={"top"}
-				type={"text"}
-				value={text}
-				onChange={handleText}
+				type={"number"}
+				min={0}
+				value={id}
+				onChange={handleId}
 				required={true}
-				placeholder={"Enter SKU's comma separated"}
 			/>
 			<select
 				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
 				placeholder="Product Type"
 				onChange={(e) => handleProdType(e)}
 			>
-				<option disabled defaultChecked>
-					Product Type
-				</option>
+				<option disabled>Product Type</option>
 				<option value="cus">Customer (cus)</option>
 				<option value="b2b">Bulk Buy (b2b)</option>
 			</select>
@@ -71,14 +66,6 @@ const RecommendedUpdateAPIComponent = () => {
 				<option value="pickup">Pick up</option>
 			</select>
 
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleCity(e)}
-			>
-				<option value="karachi">Karachi</option>
-				<option value="peshawar">Peshawar</option>
-			</select>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Message
 			</CustomButton>
@@ -86,4 +73,4 @@ const RecommendedUpdateAPIComponent = () => {
 	);
 };
 
-export default RecommendedUpdateAPIComponent;
+export default ProductPositionDeleteAdminAPIComponent;

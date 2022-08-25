@@ -6,10 +6,10 @@ import CustomInput from "../Misc/CustomInput";
 
 const WebUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		text: "APRA-BD02-01,APRA-HS23-05,APR-MP03-01,APRA-OL26-01,APRA-SC16-08,APRA-HS23-03,APR-PK03-01,APR-DT14-01,APR-DT40-01",
-		prodType: "",
-		orderType: "",
-		city: "Karachi",
+		text: "APR-PT36-02,APR-LM03-03,APR-MP02-02,APR-OL12-01,APRA-OB03-04,APRA-OB10-11,APRA-OB06-01,APRA-OB08-01,APRA-BF11-01,APRA-OB43-03,APR-T07-00,APRA-OB05-01",
+		prodType: "cus",
+		orderType: "delivery",
+		city: "karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
 	const handleText = (e) => {
@@ -32,7 +32,7 @@ const WebUpdateAPIComponent = () => {
 			prodType,
 			orderType,
 			city,
-			encodedText,
+			text,
 			headers
 		).then((response) => console.log(response));
 	};

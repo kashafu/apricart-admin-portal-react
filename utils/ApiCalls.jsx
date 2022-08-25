@@ -1,6 +1,5 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
-import fileDownload from "js-file-download";
 import FileSaver, { saveAs } from "file-saver";
 import moment from "moment";
 
@@ -112,24 +111,25 @@ export const uploadImagesApi = async (baseUrl, images, headers) => {
 export const offerSaveApi = async (baseUrl, input, headers) => {
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
-	console.log(input);
-	let url = baseUrl + "/offers/save?city=karachi&lang=en&";
+	let newExp = expiry.concat("T00:00:00Z");
+	console.log(newExp);
+	let url = baseUrl + "/offers/save?city=karachi&lang=en";
 	let body = {
 		price,
 		buying,
 		buyingCondition,
-		expiry,
+		expiry: newExp,
 		products,
 		categories,
 	};
 	try {
-		let response = await axios.post(url, body, {
+		return await axios.post(url, body, {
 			headers,
 		});
-		if (response.data.status == 1) {
-			console.log(response);
-			return response;
-		}
+		// if (response.data.status == 1) {
+		// 	console.log(response);
+		// 	return response;
+		// }
 	} catch (error) {
 		console.log(error?.response);
 		// toast.error(error?.response?.message);
@@ -246,6 +246,29 @@ export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
 	}
 };
 
+export const addUpdateProductCSVApi = async (
+	baseUrl,
+	apiToken,
+	file,
+	headers
+) => {
+	console.log(apiToken, file);
+	let url = baseUrl + `/admin/product/csv/addupdate?apitoken=${apiToken}`;
+	try {
+		return await axios
+			.post(url, file, {
+				...headers,
+				// Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
 export const getAllBannersApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/offers/banners?city=karachi&lang=en`;
 	try {
@@ -259,11 +282,18 @@ export const getAllBannersApi = async (baseUrl, headers) => {
 
 export const deleteBannerApi = async (baseUrl, id, headers) => {
 	const url = baseUrl + `/offers/banners/remove`;
-
 	try {
-		await axios.post(url, id, {
-			headers,
-		});
+		return await axios
+			.post(
+				url,
+				{ id },
+				{
+					headers,
+				}
+			)
+			.then((response) => {
+				return response;
+			});
 	} catch (error) {
 		console.log(error);
 	}
@@ -536,6 +566,147 @@ export const productsAdminSearchApi = async (
 			headers,
 			cancelToken: cancelPrevRequest.token,
 		});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const productPriceUpdatedLast24HoursApi = async (
+	baseUrl,
+	time,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/admin/download/products/price/updatedinlast24hours?interval_in_hours=${time}`;
+
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				FileSaver.saveAs(
+					blob.data,
+					`Products_Updated_Last${time}h_${dateString1}.csv`
+				);
+				return blob;
+			});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const productPositionDeleteAdminApi = async (
+	baseUrl,
+	id,
+	prodType,
+	orderType,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/admin/products/position/remove?id=${id}&prod_type=${prodType}&order_type=${orderType}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const updateProductPositionCSVApi = async (baseUrl, files, headers) => {
+	console.log(files);
+	let url = baseUrl + `/admin/product/position/csv/update	`;
+	try {
+		return await axios
+			.post(url, files, {
+				...headers,
+				"Content-Type": "multipart/form-data",
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const productPositionDetailApi = async (
+	baseUrl,
+	prodType,
+	orderType,
+	type,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/admin/products/position/detail?prod_type=${prodType}&order_type=${orderType}&type=${type}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const addCategoryApi = async (
+	baseUrl,
+	img,
+	parentId,
+	name,
+	position,
+	headers
+) => {
+	let body = {
+		img,
+		parentId,
+		name,
+		position,
+	};
+	let url = baseUrl + "/admin/category/add";
+	try {
+		await axios
+			.post(url, body, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
+	} catch (error) {
+		console.log(error?.response);
+	}
+};
+
+export const updateCategoryApi = async (
+	baseUrl,
+	img,
+	parentId,
+	name,
+	position,
+	headers
+) => {
+	let body = {
+		img,
+		parentId,
+		name,
+		position,
+	};
+	let url = baseUrl + "/admin/category/update";
+	try {
+		await axios
+			.post(url, body, {
+				headers,
+			})
+			.then((response) => {
+				console.log(response);
+				return response;
+			});
 	} catch (error) {
 		console.log(error?.response);
 	}

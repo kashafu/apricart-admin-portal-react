@@ -10,7 +10,7 @@ const NewNotificationSendAPIComponent = () => {
 		value: 0,
 		title: "Staging- Customers of Fleet Street",
 		message: "Sweeney Todd is back in town",
-		city: "Karachi",
+		city: "karachi",
 		to: "alldev",
 	});
 	const [toState, setToState] = useState(true);

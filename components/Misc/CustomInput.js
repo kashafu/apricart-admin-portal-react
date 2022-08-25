@@ -12,6 +12,7 @@ function CustomInput({
 	placeholder,
 	name,
 	accept,
+	disabled,
 }) {
 	// give parent width in 1/2 -> 1/6
 	let className;
@@ -32,6 +33,7 @@ function CustomInput({
 		<div className="w-full flex justify-center items-center">
 			<div className={`w-${width}`}>
 				<input
+					disabled={disabled}
 					placeholder={placeholder}
 					required={required}
 					min={min}

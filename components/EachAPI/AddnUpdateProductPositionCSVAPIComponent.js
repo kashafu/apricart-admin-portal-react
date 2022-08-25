@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import FormData from "form-data";
-import { updateProductCSVApi } from "../../utils/ApiCalls";
-import CustomInput from "../Misc/CustomInput";
-import CustomButton from "../Misc/CustomButton";
 import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import FormData from "form-data";
 import Loading from "../../utils/Loading";
+import CustomButton from "../Misc/CustomButton";
 
-const UpdateProductCSVAPIComponent = () => {
+import { updateProductPositionCSVApi } from "../../utils/ApiCalls";
+import CustomInput from "../Misc/CustomInput";
+
+const AddnUpdateProductPositionCSVAPIComponent = () => {
+	const [apiToken, setApiToken] = useState("");
 	const [csv, setCsv] = useState();
 	const [ren, setRen] = useState("");
-	const [apiToken, setApiToken] = useState("");
 	const [loading, setLoading] = useState(false);
 	var file = new FormData();
 
@@ -17,6 +18,9 @@ const UpdateProductCSVAPIComponent = () => {
 	// ren given as key to input
 	const updateRen = () => {
 		setRen(Math.random().toString(36));
+	};
+	const handleApiToken = (e) => {
+		setApiToken(e.target.value);
 	};
 	const handleFile = (e) => {
 		let verify = e.target.files[0];
@@ -39,7 +43,7 @@ const UpdateProductCSVAPIComponent = () => {
 		setLoading(true);
 		fillFormData();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await updateProductCSVApi(baseUrl, apiToken, file, headers).then(
+		await updateProductPositionCSVApi(baseUrl, file, headers).then(
 			(response) => {
 				setLoading(false);
 				console.log(response);
@@ -51,13 +55,12 @@ const UpdateProductCSVAPIComponent = () => {
 			<Loading loading={loading} />
 			<form action="" method="POST">
 				<CustomInput
-					type={"text"}
+					value={apiToken}
+					onChange={(e) => handleApiToken(e)}
 					position={"top"}
-					onChange={handleToken}
 					placeholder={"API Token"}
-					required={true}
 				/>
-				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-b-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
+				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-b-0 border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
 					Select Updated File
 				</label>
 				<input
@@ -74,4 +77,4 @@ const UpdateProductCSVAPIComponent = () => {
 	);
 };
 
-export default UpdateProductCSVAPIComponent;
+export default AddnUpdateProductPositionCSVAPIComponent;
