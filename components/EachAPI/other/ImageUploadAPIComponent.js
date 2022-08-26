@@ -1,9 +1,12 @@
 import FormData from "form-data";
 import React, { useState } from "react";
-import { uploadImagesApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
-import CustomImageInput from "../Misc/CustomImageInput";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { uploadImagesApi } from "../../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomImageInput from "../../Misc/CustomImageInput";
 
 const ImageUploadAPIComponent = () => {
 	var images = new FormData();
@@ -36,13 +39,37 @@ const ImageUploadAPIComponent = () => {
 		});
 	};
 
+	const checkStatus = (response) => {
+		if (response.data.status === 1) {
+			toast.success("Images Saved Successfully", {
+				position: "top-center",
+				autoClose: 600,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+			});
+		} else if (response.data.status !== 1) {
+			toast.error(response.data.error, {
+				position: "top-center",
+				autoClose: 600,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+			});
+		}
+	};
+
 	const submitHandler = async () => {
 		setLoading(true);
 		fillFormData();
 		const { baseUrl, headers } = getGeneralApiParams();
-		uploadImagesApi(baseUrl, images, headers).then((response) => {
-			console.log(response), setLoading(false);
+		uploadImagesApi(baseUrl, headers).then((response) => {
+			console.log(response);
+			checkStatus(response);
 		});
+		setLoading(false);
 	};
 
 	return (

@@ -1,8 +1,7 @@
 import axios from "axios";
-import Cookies from "universal-cookie";
 import FileSaver, { saveAs } from "file-saver";
+import Cookies from "universal-cookie";
 import moment from "moment";
-import { data } from "autoprefixer";
 
 export const loginApi = async (
 	baseUrl,
@@ -92,26 +91,21 @@ export const resetPasswordApi = async (
 			headers,
 		});
 		if (response.data.status == 1) {
-			toast.success(response.data.message);
+			// toast.success(response.data.message);
 		}
 	} catch (error) {
 		console.log(error?.response);
-		toast.error(error?.response?.message);
+		// toast.error(error?.response?.message);
 	}
 };
 
 export const uploadImagesApi = async (baseUrl, images, headers) => {
 	let url = baseUrl + "/options/uploads";
 	try {
-		await axios
-			.post(url, images, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, images, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
 		console.log(error?.response);
 	}
