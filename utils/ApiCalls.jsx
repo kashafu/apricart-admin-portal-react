@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import FileSaver, { saveAs } from "file-saver";
 import moment from "moment";
+import { data } from "autoprefixer";
 
 export const loginApi = async (
 	baseUrl,
@@ -25,8 +26,16 @@ export const loginApi = async (
 		let response = await axios.post(url, body, {
 			headers,
 		});
-		console.log(response);
+
 		if (response.data.status == 1) {
+			if (response.data.data.portal === false) {
+				return (data = {
+					data: {
+						status: 2,
+						message: "You are unauthorized to access this feature",
+					},
+				});
+			}
 			cookies.set("cookies-token", response.data.data.token);
 			cookies.set("cookies-name", response.data.data.name);
 			cookies.set("cookies-email", response.data.data.email);

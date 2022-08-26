@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import FormData from "form-data";
-import { updateProductCSVApi } from "../../utils/ApiCalls";
-import CustomInput from "../Misc/CustomInput";
-import CustomButton from "../Misc/CustomButton";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
+import { updateProductCSVApi } from "../../../utils/ApiCalls";
+import CustomInput from "../../Misc/CustomInput";
+import CustomButton from "../../Misc/CustomButton";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
 
 const UpdateProductCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();

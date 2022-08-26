@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import FormData from "form-data";
-import Loading from "../../utils/Loading";
-import CustomButton from "../Misc/CustomButton";
+import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
 
-import { updateProductPositionCSVApi } from "../../utils/ApiCalls";
-import CustomInput from "../Misc/CustomInput";
+import { updateProductPositionCSVApi } from "../../../utils/ApiCalls";
+import CustomInput from "../../Misc/CustomInput";
 
 const AddnUpdateProductPositionCSVAPIComponent = () => {
 	const [apiToken, setApiToken] = useState("");

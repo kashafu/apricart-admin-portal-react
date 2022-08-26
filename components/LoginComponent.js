@@ -1,13 +1,19 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import logoFile from "../public/logo.png";
 import { loginApi, resetPasswordApi, sendOtpApi } from "../utils/ApiCalls";
 import { getGeneralApiParams } from "../utils/GeneralVariables";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+	let noDuplicate = {
+		num: "noNumDuplicate",
+		pw: "noPwDuplicate",
+		success: "noSuccDuplicate",
+		auth: "noAuthDuplicate",
+	};
 	var numberToSend;
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [password, setPassword] = useState("");
@@ -31,12 +37,51 @@ const Login = () => {
 			router,
 			headers
 		).then((response) => {
-			response?.response?.status === 400 &&
+			console.log(response);
+			response?.data?.status === 2 &&
+				toast.error(response.data.message, {
+					position: "top-center",
+					autoClose: 1800,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: noDuplicate.auth,
+				});
+			response.response?.status === 400 &&
 				response?.response?.data?.status === 0 &&
-				alert(response?.response?.data?.message);
+				toast.error(response?.response?.data?.message, {
+					position: "top-center",
+					autoClose: 1800,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: noDuplicate.num,
+				});
 			response?.status === 200 &&
 				response?.data?.status === 0 &&
-				alert(response?.data?.message);
+				toast.error(response?.data?.message, {
+					position: "top-center",
+					autoClose: 1800,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: noDuplicate.pw,
+				});
+			response?.status === 200 &&
+				response?.data?.status === 1 &&
+				toast.success("Login Successful", {
+					position: "top-center",
+					autoClose: 600,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: noDuplicate.succ,
+				});
+			//
 		});
 	};
 	const callOTPApi = async () => {
@@ -162,7 +207,7 @@ const Login = () => {
 									type="number"
 									required
 									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-									placeholder="3030110220"
+									placeholder="Phone Number eg. 3030110220"
 								/>
 							</div>
 							<div>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { csrOrderCancelApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+import { csrOrderCancelApi } from "../../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
 
 const CsrOrderCancelAPIComponent = () => {
 	const [inputs, setInputs] = useState({

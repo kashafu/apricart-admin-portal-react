@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { addCategoryApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+import { addCategoryApi, updateCategoryApi } from "../../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
 
 const AddNewCategoryAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -45,6 +45,22 @@ const AddNewCategoryAPIComponent = () => {
 			setLoading(false);
 		});
 	};
+	const handleEdit = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const { baseUrl, headers } = getGeneralApiParams();
+		await updateCategoryApi(
+			baseUrl,
+			categoryImage,
+			parentId,
+			name,
+			position,
+			headers
+		).then((response) => {
+			console.log(response);
+			setLoading(false);
+		});
+	};
 
 	return (
 		<div>
@@ -75,9 +91,14 @@ const AddNewCategoryAPIComponent = () => {
 					accept="image/png, image/gif, image/jpeg, image/jpg"
 					onChange={(e) => handleImage(e)}
 				/>
-				<CustomButton onClick={(e) => handleSubmit(e)}>
-					Add Category
-				</CustomButton>
+				<div>
+					<CustomButton onClick={(e) => handleSubmit(e)}>
+						Add Category
+					</CustomButton>
+					<CustomButton onClick={(e) => handleEdit(e)}>
+						Update Category
+					</CustomButton>
+				</div>
 			</form>
 		</div>
 	);

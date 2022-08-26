@@ -1,12 +1,15 @@
 import React from "react";
 
-function CustomButton({ onClick, width, children }) {
+function CustomButton({ onClick, width, position, children }) {
 	// give width in 1/2 -> 1/6 as string
-	let className;
+	// no position prop means center
 	width ? width : (width = "full");
+	let placement = "center";
+	position === "left" ? (placement = "start") : "";
+	position === "right" ? (placement = "end") : "";
 
 	return (
-		<div className="w-full flex justify-center items-center">
+		<div className={`w-full flex justify-${placement} items-center`}>
 			<button
 				type="submit"
 				className={`my-2 w-${width} py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue`}
