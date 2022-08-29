@@ -21,6 +21,10 @@ export const loginApi = async (
 		username: "92" + phoneNumber,
 		password,
 	};
+	function useRegex(input) {
+		let regex = /Abdullah/i;
+		return regex.test(input);
+	}
 	try {
 		let response = await axios.post(url, body, {
 			headers,
@@ -28,12 +32,12 @@ export const loginApi = async (
 
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
-				return (data = {
+				return {
 					data: {
 						status: 2,
 						message: "You are unauthorized to access this feature",
 					},
-				});
+				};
 			}
 			cookies.set("cookies-token", response.data.data.token);
 			cookies.set("cookies-name", response.data.data.name);
@@ -44,12 +48,10 @@ export const loginApi = async (
 			router.push("/dashboard");
 			return response;
 		} else {
-			setErrorMessage(response.message);
 			return response;
 		}
 	} catch (err) {
-		setErrorMessage(err.response.data.message);
-		return err;
+		return { data: { err, status: 400 } };
 	}
 };
 
@@ -99,7 +101,7 @@ export const resetPasswordApi = async (
 	}
 };
 
-export const uploadImagesApi = async (baseUrl, images, headers) => {
+export const uploadImagesApi = async (baseUrl, images) => {
 	let url = baseUrl + "/options/uploads";
 	try {
 		return await axios.post(url, images, {
@@ -107,7 +109,12 @@ export const uploadImagesApi = async (baseUrl, images, headers) => {
 			"Content-Type": "multipart/form-data",
 		});
 	} catch (error) {
-		console.log(error?.response);
+		console.log(error);
+		return {
+			data: {
+				error,
+			},
+		};
 	}
 };
 
@@ -115,7 +122,6 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
 	let newExp = expiry.concat("T00:00:00Z");
-	console.log(newExp);
 	let url = baseUrl + "/offers/save?city=karachi&lang=en";
 	let body = {
 		price,
@@ -129,13 +135,8 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 		return await axios.post(url, body, {
 			headers,
 		});
-		// if (response.data.status == 1) {
-		// 	console.log(response);
-		// 	return response;
-		// }
 	} catch (error) {
-		console.log(error?.response);
-		// toast.error(error?.response?.message);
+		return error?.response;
 	}
 };
 

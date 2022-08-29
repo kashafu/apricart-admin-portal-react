@@ -37,8 +37,7 @@ const Login = () => {
 			router,
 			headers
 		).then((response) => {
-			console.log(response);
-			response?.data?.status === 2 &&
+			if (response.data.status === 2) {
 				toast.error(response.data.message, {
 					position: "top-center",
 					autoClose: 1800,
@@ -48,39 +47,81 @@ const Login = () => {
 					theme: "dark",
 					toastId: noDuplicate.auth,
 				});
-			response.response?.status === 400 &&
-				response?.response?.data?.status === 0 &&
-				toast.error(response?.response?.data?.message, {
+			} else if (response.status === 200) {
+				response.data.status === 0 &&
+					toast.error(response.data.message, {
+						position: "top-center",
+						autoClose: 1800,
+						hideProgressBar: false,
+						closeOnClick: true,
+						draggable: true,
+						theme: "dark",
+						toastId: noDuplicate.auth,
+					});
+				response.data.status === 1 &&
+					toast.success("Login Successful", {
+						position: "top-center",
+						autoClose: 600,
+						hideProgressBar: false,
+						closeOnClick: true,
+						draggable: true,
+						theme: "dark",
+						toastId: noDuplicate.succ,
+					});
+			} else {
+				toast.error(response?.data?.err?.response?.data?.message, {
 					position: "top-center",
 					autoClose: 1800,
 					hideProgressBar: false,
 					closeOnClick: true,
 					draggable: true,
 					theme: "dark",
-					toastId: noDuplicate.num,
+					toastId: noDuplicate.auth,
 				});
-			response?.status === 200 &&
-				response?.data?.status === 0 &&
-				toast.error(response?.data?.message, {
-					position: "top-center",
-					autoClose: 1800,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.pw,
-				});
-			response?.status === 200 &&
-				response?.data?.status === 1 &&
-				toast.success("Login Successful", {
-					position: "top-center",
-					autoClose: 600,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.succ,
-				});
+			}
+			// response?.data?.status === 2 &&
+			// toast.error(response.data.message, {
+			// 	position: "top-center",
+			// 	autoClose: 1800,
+			// 	hideProgressBar: false,
+			// 	closeOnClick: true,
+			// 	draggable: true,
+			// 	theme: "dark",
+			// 	toastId: noDuplicate.auth,
+			// });
+			// response.response?.status === 400 &&
+			// 	response?.response?.data?.status === 0 &&
+			// 	toast.error(response?.response?.data?.message, {
+			// 		position: "top-center",
+			// 		autoClose: 1800,
+			// 		hideProgressBar: false,
+			// 		closeOnClick: true,
+			// 		draggable: true,
+			// 		theme: "dark",
+			// 		toastId: noDuplicate.num,
+			// 	});
+			// response?.status === 200 &&
+			// 	response?.data?.status === 0 &&
+			// 	toast.error(response?.data?.message, {
+			// 		position: "top-center",
+			// 		autoClose: 1800,
+			// 		hideProgressBar: false,
+			// 		closeOnClick: true,
+			// 		draggable: true,
+			// 		theme: "dark",
+			// 		toastId: noDuplicate.pw,
+			// 	});
+			// response?.status === 200 &&
+			// 	response?.data?.status === 1 &&
+			// toast.success("Login Successful", {
+			// 	position: "top-center",
+			// 	autoClose: 600,
+			// 	hideProgressBar: false,
+			// 	closeOnClick: true,
+			// 	draggable: true,
+			// 	theme: "dark",
+			// 	toastId: noDuplicate.succ,
+			// });
 			//
 		});
 	};
