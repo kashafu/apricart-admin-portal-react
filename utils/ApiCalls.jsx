@@ -151,7 +151,6 @@ export const downloadUsersApi = async (baseUrl, headers) => {
 				responseType: "blob",
 			})
 			.then((blob) => {
-				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
 				FileSaver.saveAs(blob.data, `User_Report_${dateString1}.csv`);
 				return blob;
 			});
@@ -205,7 +204,7 @@ export const downloadOrdersApi = async (
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -220,11 +219,11 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 				responseType: "blob",
 			})
 			.then((blob) => {
-				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
-				FileSaver.saveAs(
-					blob.data,
-					`Abundant_Report_${horas}h_${dateString1}.csv`
-				);
+				console.log(blob);
+				// FileSaver.saveAs(
+				// 	blob.data,
+				// 	`Abundant_Report_${horas}h_${dateString1}.csv`
+				// );
 				return blob;
 			});
 	} catch (error) {

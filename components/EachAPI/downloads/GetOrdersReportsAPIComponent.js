@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { downloadOrdersApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import moment from "moment";
+import CustomButton from "../../Misc/CustomButton";
 
 const GetOrdersReportsAPIComponent = () => {
+	const [disabler, setDisabler] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
 		cityId: 1,
@@ -26,9 +31,26 @@ const GetOrdersReportsAPIComponent = () => {
 			toDate,
 			skus,
 			headers
-		).then(() => setLoading(false));
+		).then((response) => {
+			console.log(response);
+			toast.info(
+				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
+				{
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: "XD",
+				}
+			);
+			setLoading(false);
+			setTimeout(() => {
+				setDisabler(false);
+			}, 8000);
+		});
 	};
-	console.log(inputs);
 	return (
 		<section>
 			<form>
@@ -74,13 +96,14 @@ const GetOrdersReportsAPIComponent = () => {
 					}
 				/>
 
-				<button
-					// type="submit"
+				<CustomButton
 					onClick={(e) => fetchReport(e)}
-					className="group relative w-1/6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
+					disabled={disabler}
+					width={"1/3"}
+					position={"left"}
 				>
-					Fetch Product Report
-				</button>
+					Download Orders Report
+				</CustomButton>
 			</form>
 		</section>
 	);

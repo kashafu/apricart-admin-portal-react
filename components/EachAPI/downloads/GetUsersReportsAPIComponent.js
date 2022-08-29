@@ -1,24 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { downloadUsersApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import CustomButton from "../../Misc/CustomButton";
+import Loading from "../../../utils/Loading";
 
-const UsersReports = () => {
-	const fetchReport = () => {
+const GetUsersReportsAPIComponent = () => {
+	const [loading, setLoading] = useState(false);
+	const [disabler, setDisabler] = useState(false);
+	const fetchReport = async () => {
+		setDisabler(true);
+		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
-		downloadUsersApi(baseUrl, headers);
+		await downloadUsersApi(baseUrl, headers).then((res) => {
+			toast.info(
+				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
+				{
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: "XD",
+				}
+			);
+			setLoading(false);
+		});
+
+		setTimeout(() => {
+			setDisabler(false);
+		}, 8000);
 	};
 
 	return (
-		<div>
-			<button
-				type="submit"
+		<section>
+			<Loading loading={loading} />
+
+			<CustomButton
 				onClick={(e) => fetchReport(e)}
-				className="group relative w-1/6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
+				disabled={disabler}
+				width={"1/3"}
+				position={"left"}
 			>
-				Fetch Report
-			</button>
-		</div>
+				Download User Report
+			</CustomButton>
+		</section>
 	);
 };
 
-export default UsersReports;
+export default GetUsersReportsAPIComponent;
