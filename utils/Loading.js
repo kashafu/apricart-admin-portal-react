@@ -6,7 +6,7 @@ const Loading = ({ loading }) => {
 		<div>
 			{loading && (
 				<>
-					<div className="bg-main-blue bg-opacity-80 w-screen h-screen fixed z-10">
+					<div className="bg-main-blue bg-opacity-80 w-screen h-screen fixed z-50">
 						<ClimbingBoxLoader
 							className="absolute top-[45%] m-auto animate-pulse"
 							color="#FFD54C"

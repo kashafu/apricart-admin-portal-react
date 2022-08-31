@@ -219,11 +219,11 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 				responseType: "blob",
 			})
 			.then((blob) => {
-				console.log(blob);
-				// FileSaver.saveAs(
-				// 	blob.data,
-				// 	`Abundant_Report_${horas}h_${dateString1}.csv`
-				// );
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(
+					blob.data,
+					`Abundant_Report_${horas}h_${dateString1}.csv`
+				);
 				return blob;
 			});
 	} catch (error) {
@@ -232,18 +232,23 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 };
 
 export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
-	console.log(apiToken, file);
+	let entries = file.entries().next();
+	const { value } = entries;
+
+	if (value[1] === "undefined" || value[1] === "") {
+		return {
+			status: 404,
+			data: {
+				message: "Please submit a file to proceed",
+			},
+		};
+	}
 	let url = baseUrl + `/admin/product/csv/update?apitoken=${apiToken}`;
 	try {
-		return await axios
-			.post(url, file, {
-				...headers,
-				// Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.post(url, file, {
+			...headers,
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
 		console.log(error?.response);
 	}
