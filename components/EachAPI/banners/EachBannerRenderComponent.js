@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
-import axios from "axios";
 import { deleteBannerApi } from "../../../utils/ApiCalls";
 
 const EachBannerRenderComponent = ({ props }) => {
@@ -14,10 +16,28 @@ const EachBannerRenderComponent = ({ props }) => {
 		],
 	});
 
+	const checkStatus = (res) => {
+		if (res.status === 200)
+			toast.success(
+				res.data.message.concat(" Reload Page to remove from display"),
+				{
+					position: "top-center",
+					autoClose: 1800,
+					hideProgressBar: false,
+					closeOnClick: true,
+					draggable: true,
+					theme: "dark",
+					toastId: "errorId",
+				}
+			);
+		// else if (res.status !== 200)
+	};
+
 	const deleteThisBanner = async (id) => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await deleteBannerApi(baseUrl, id, headers).then((response) => {
 			console.log(response);
+			checkStatus(response);
 		});
 	};
 

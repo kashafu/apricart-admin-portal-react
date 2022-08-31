@@ -4,7 +4,6 @@ import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetPr
 const ProductReports = () => {
 	return (
 		<div>
-			{" "}
 			<GetProductReportsAPIComponent />
 		</div>
 	);

@@ -260,18 +260,22 @@ export const addUpdateProductCSVApi = async (
 	file,
 	headers
 ) => {
-	console.log(apiToken, file);
+	let entries = file.entries().next();
+	const { value } = entries;
+	if (value[1] === "undefined" || value[1] === "") {
+		return {
+			status: 404,
+			data: {
+				message: "Please submit a file to proceed",
+			},
+		};
+	}
 	let url = baseUrl + `/admin/product/csv/addupdate?apitoken=${apiToken}`;
 	try {
-		return await axios
-			.post(url, file, {
-				...headers,
-				// Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.post(url, file, {
+			...headers,
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
 		console.log(error?.response);
 	}
@@ -307,20 +311,15 @@ export const deleteBannerApi = async (baseUrl, id, headers) => {
 	}
 };
 
-export const saveBannersApi = async (baseUrl, banner, headers) => {
+export const saveBannersApi = async (baseUrl, banner) => {
 	let url = baseUrl + "/offers/banners/save";
 	try {
-		await axios
-			.post(url, banner, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -350,16 +349,11 @@ export const updateTickerApi = async (baseUrl, text, headers) => {
 		baseUrl +
 		`/admin/ticker/update?text=${text}&prod_type=cus&order_type=delivery&city=karachi`;
 	try {
-		await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 

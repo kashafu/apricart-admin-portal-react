@@ -1,12 +1,44 @@
 import React, { useState } from "react";
-import { updateTickerApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { updateTickerApi } from "../../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 
 const TickerUpdateAPIComponent = () => {
 	const [ticker, setTicker] = useState();
+
+	const checkStatus = (res) => {
+		console.log(res);
+		if (res.status === 200) {
+			toast.success(res.data.message, {
+				position: "top-center",
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "ren",
+			});
+		} else {
+			toast.error(res.data.message, {
+				position: "top-center",
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "ren",
+			});
+		}
+	};
+
 	const submitHandler = async (e) => {
+		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await updateTickerApi(baseUrl, ticker, headers);
+		await updateTickerApi(baseUrl, ticker, headers).then((response) => {
+			checkStatus(response);
+		});
 	};
 	return (
 		<section>
