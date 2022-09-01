@@ -126,3 +126,37 @@ export const checkStatus = (
 		return false;
 	}
 };
+
+export function displayErrorToast(message, timer, position) {
+	toast.error(message || "An Error Occured", {
+		position: position || "top-center",
+		autoClose: timer || 1500,
+		hideProgressBar: false,
+		closeOnClick: true,
+		draggable: true,
+		theme: "dark",
+		toastId: "errorId",
+	});
+}
+export function displaySuccessToast(message, timer, position) {
+	toast.success(message || "Success", {
+		position: position || "top-center",
+		autoClose: timer || 1500,
+		hideProgressBar: false,
+		closeOnClick: true,
+		draggable: true,
+		theme: "dark",
+		toastId: "errorId",
+	});
+}
+export function displayInfoToast(message, timer, position) {
+	toast.success(message, {
+		position: position || "top-center",
+		autoClose: timer || 1500,
+		hideProgressBar: false,
+		closeOnClick: true,
+		draggable: true,
+		theme: "dark",
+		toastId: "errorId",
+	});
+}

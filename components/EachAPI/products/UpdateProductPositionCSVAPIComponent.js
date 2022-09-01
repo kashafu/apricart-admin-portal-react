@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
+import {
+	checkStatus,
+	displayErrorToast,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import FormData from "form-data";
-import Loading from "../../utils/Loading";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
-import { updateProductPositionCSVApi } from "../../utils/ApiCalls";
+import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
+import { updateProductPositionCSVApi } from "../../../utils/ApiCalls";
 
 const UpdateProductPositionCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
@@ -22,7 +26,7 @@ const UpdateProductPositionCSVAPIComponent = () => {
 		if (verify.type !== "text/csv") {
 			setCsv();
 			updateRen();
-			alert("Only Upload CSV files");
+			displayErrorToast("Only Upload CSV files", 1500);
 		} else setCsv(verify);
 	};
 	const handleToken = (e) => {
@@ -42,6 +46,7 @@ const UpdateProductPositionCSVAPIComponent = () => {
 			(response) => {
 				setLoading(false);
 				console.log(response);
+				checkStatus(response, "Successfully Submitted updated CSV file");
 			}
 		);
 	};

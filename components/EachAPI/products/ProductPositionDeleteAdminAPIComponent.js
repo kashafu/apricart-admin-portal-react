@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { productPositionDeleteAdminApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
+import { productPositionDeleteAdminApi } from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 
 const ProductPositionDeleteAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -21,7 +24,6 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 	const handleOrderType = (e) => {
 		setInputs({ ...inputs, orderType: e.target.value });
 	};
-	console.log(inputs);
 
 	const handleSubmit = async (e) => {
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -32,11 +34,15 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 			prodType,
 			orderType,
 			headers
-		).then((response) => console.log(response));
+		).then((response) => {
+			console.log(response);
+			checkStatus(response);
+		});
 	};
 	return (
 		<div>
 			<CustomInput
+				placeholder={"Id"}
 				position={"top"}
 				type={"number"}
 				min={0}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
 import CustomInput from "../../Misc/CustomInput";
 
 const ProductAdminSearchAPIComponent = () => {
@@ -56,6 +57,7 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 	return (
 		<section>
+			<Loading loading={loading} />
 			<form action="" method="POST">
 				<CustomInput
 					position={"top"}
