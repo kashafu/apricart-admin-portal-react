@@ -1,4 +1,6 @@
 import Cookies from "universal-cookie";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const getGeneralApiParams = () => {
 	const cookies = new Cookies();
@@ -62,4 +64,65 @@ export const getGeneralApiParams = () => {
 		isUserInitialized,
 		baseUrl,
 	};
+};
+
+export const checkStatus = (
+	res,
+	successMessage,
+	errorMessage,
+	successTimer,
+	errorTimer
+) => {
+	if (res.status === 200) {
+		toast.success(successMessage || res.data.message, {
+			position: "top-center",
+			autoClose: successTimer || 1500,
+			hideProgressBar: false,
+			closeOnClick: true,
+			draggable: true,
+			theme: "dark",
+			toastId: "errorId",
+		});
+		return true;
+	} else if (res.status === 0) {
+		toast.error(
+			errorMessage ||
+				"An unknown error occured. Please try again later or contact backend services",
+			{
+				position: "top-center",
+				autoClose: errorTimer || 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "errorId",
+			}
+		);
+		return false;
+	} else if (res.status === 400) {
+		toast.error(
+			errorMessage || "Make sure all the fields are filled with valid inputs",
+			{
+				position: "top-center",
+				autoClose: errorTimer || 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "errorId",
+			}
+		);
+		return false;
+	} else if (res.status !== 200) {
+		toast.error(errorMessage || res.data.message, {
+			position: "top-center",
+			autoClose: errorTimer || 1500,
+			hideProgressBar: false,
+			closeOnClick: true,
+			draggable: true,
+			theme: "dark",
+			toastId: "errorId",
+		});
+		return false;
+	}
 };

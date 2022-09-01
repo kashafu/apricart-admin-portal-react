@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { recommendedUpdateApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+
+import { webUpdateApi } from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
 
 const WebUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -24,17 +28,17 @@ const WebUpdateAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
+
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 
-		await recommendedUpdateApi(
-			baseUrl,
-			prodType,
-			orderType,
-			city,
-			text,
-			headers
-		).then((response) => console.log(response));
+		await webUpdateApi(baseUrl, prodType, orderType, city, text, headers).then(
+			(response) => {
+				console.log(response);
+				checkStatus(response);
+			}
+		);
 	};
 
 	return (

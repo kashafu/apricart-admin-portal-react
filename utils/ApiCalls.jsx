@@ -1,6 +1,7 @@
-import axios from "axios";
 import FileSaver, { saveAs } from "file-saver";
+
 import Cookies from "universal-cookie";
+import axios from "axios";
 import moment from "moment";
 
 export const loginApi = async (
@@ -96,7 +97,7 @@ export const resetPasswordApi = async (
 			// toast.success(response.data.message);
 		}
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 		// toast.error(error?.response?.message);
 	}
 };
@@ -250,7 +251,7 @@ export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
 			"Content-Type": "multipart/form-data",
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -277,7 +278,7 @@ export const addUpdateProductCSVApi = async (
 			"Content-Type": "multipart/form-data",
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -340,7 +341,7 @@ export const updateBannersApi = async (baseUrl, newBanner, headers) => {
 				return response;
 			});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -371,15 +372,11 @@ export const sendNotificationApi = async (
 		baseUrl +
 		`/admin/notification?type=${type}&value=${value}&title=${title}&message=${message}&city=${city}&to=${to}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -395,15 +392,11 @@ export const isContinueUpdateApi = async (
 		baseUrl +
 		`/admin/iscontinue/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -419,15 +412,11 @@ export const recommendedUpdateApi = async (
 		baseUrl +
 		`/admin/recommended/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -443,15 +432,11 @@ export const webUpdateApi = async (
 		baseUrl +
 		`/admin/web/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -468,7 +453,7 @@ export const productStockDetailAdminApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -487,24 +472,19 @@ export const productAdminDetailApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
 export const popupRedirectionUpdateApi = async (baseUrl, banner, headers) => {
 	let url = baseUrl + "/admin/popup/redirection/update";
 	try {
-		await axios
-			.post(url, banner, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -520,7 +500,7 @@ export const csrOrderCancelApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -536,7 +516,7 @@ export const csrOrderCompleteApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -566,10 +546,10 @@ export const productsAdminSearchApi = async (
 	try {
 		return await axios.get(url, {
 			headers,
-			cancelToken: cancelPrevRequest.token,
+			// cancelToken: cancelPrevRequest.token,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -633,7 +613,7 @@ export const updateProductPositionCSVApi = async (baseUrl, files, headers) => {
 				console.log(response);
 			});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -682,7 +662,7 @@ export const addCategoryApi = async (
 				return response;
 			});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -711,6 +691,6 @@ export const updateCategoryApi = async (
 				return response;
 			});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { productAdminDetailApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
@@ -28,13 +31,13 @@ const ProductAdminDetailAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await productAdminDetailApi(baseUrl, id, city, warehouseId, headers).then(
 			(response) => {
-				// setDetail([response.data.data[0]]);
-				console.log(response);
+				let status = checkStatus(response, "Product Detail Fetched");
+				status ? setDetail([response.data.data[0]]) : setDetail();
 				setLoading(false);
 			}
 		);
 	};
-	// console.log(detail);
+
 	return (
 		<section>
 			<Loading loading={loading} />
@@ -72,25 +75,37 @@ const ProductAdminDetailAPIComponent = () => {
 				{detail?.map((each) => {
 					console.log(each);
 					return (
-						<div key={each.sku} className="flex ">
-							<div>
-								<div>Hayatabad:</div>
-								<div>JoharCC:</div>
-								<div>KorangiB2BDarkStore:</div>
-								<div>KorangiDarkStore:</div>
-								<div>North Nazimabad:</div>
-								<div>SKU:</div>
-								<div>Title:</div>
+						<div key={each.sku} className="flex w-full">
+							<div className="w-1/3">
+								<div className="font-bold font-nunito py-1">Id:</div>
+								<div className="font-bold font-nunito py-1">SKU:</div>
+								<div className="font-bold font-nunito py-1">Title:</div>
+								<div className="font-bold font-nunito py-1">Brand:</div>
+								<div className="font-bold font-nunito py-1">Description:</div>
+								<div className="font-bold font-nunito py-1">Quantity:</div>
+								<div className="font-bold font-nunito py-1">
+									Category Id&apos;s:
+								</div>
+								<div className="font-bold font-nunito py-1">
+									Category Leaf Name:
+								</div>
+								<div className="font-bold font-nunito py-1">Current Price:</div>
+								<div className="font-bold font-nunito py-1">
+									Product In Stock:
+								</div>
 							</div>
-							{/* <div className="px-4">
-								<div> {each.hayatabad}</div>
-								<div> {each.joharCC}</div>
-								<div> {each.korangiB2BDarkStore}</div>
-								<div> {each.korangiDarkStore}</div>
-								<div> {each.northNazimabad}</div>
-								<div> {each.sku}</div>
-								<div> {each.title}</div>
-							</div> */}
+							<div className="px-4 bg-main-yellow w-full">
+								<div className="py-1"> {each.id || "-"}</div>
+								<div className="py-1"> {each.sku || "-"}</div>
+								<div className="py-1"> {each.title || "-"}</div>
+								<div className="py-1"> {each.brand || "-"}</div>
+								<div className="py-1"> {each.description || "-"}</div>
+								<div className="py-1"> {each.qty || "-"}</div>
+								<div className="py-1"> {each.categoryIds || "-"}</div>
+								<div className="py-1"> {each.categoryleafName || "-"}</div>
+								<div className="py-1"> {each.currentPrice || "-"}</div>
+								<div className="py-1"> {each.inStock ? "Yes" : "No"}</div>
+							</div>
 						</div>
 					);
 				})}

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { productStockDetailAdminApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+import { productStockDetailAdminApi } from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
 
 const ProductStockDetailAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -13,6 +16,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [detail, setDetail] = useState([]);
 	const { id, city } = inputs;
+
 	const handleId = (e) => {
 		setInputs({ ...inputs, id: e.target.value });
 	};
@@ -20,16 +24,17 @@ const ProductStockDetailAdminAPIComponent = () => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
 		await productStockDetailAdminApi(baseUrl, id, city, headers).then(
 			(response) => {
-				setDetail([response.data.data[0]]);
+				let status = checkStatus(response, "Product Stock Detail Fetched");
+				status ? setDetail([response.data.data[0]]) : setDetail();
 				setLoading(false);
 			}
 		);
 	};
-	console.log(detail);
 	return (
 		<section>
 			<Loading loading={loading} />
@@ -56,26 +61,31 @@ const ProductStockDetailAdminAPIComponent = () => {
 
 			<section>
 				{detail?.map((each) => {
-					console.log(each);
 					return (
-						<div key={each.sku} className="flex ">
+						<div key={each.sku} className="flex p-2">
 							<div>
-								<div>Hayatabad:</div>
-								<div>JoharCC:</div>
-								<div>KorangiB2BDarkStore:</div>
-								<div>KorangiDarkStore:</div>
-								<div>North Nazimabad:</div>
-								<div>SKU:</div>
-								<div>Title:</div>
+								<div className="font-bold font-nunito py-1">Hayatabad:</div>
+								<div className="font-bold font-nunito py-1">JoharCC:</div>
+								<div className="font-bold font-nunito py-1">
+									KorangiB2BDarkStore:
+								</div>
+								<div className="font-bold font-nunito py-1">
+									KorangiDarkStore:
+								</div>
+								<div className="font-bold font-nunito py-1">
+									North Nazimabad:
+								</div>
+								<div className="font-bold font-nunito py-1">SKU:</div>
+								<div className="font-bold font-nunito py-1">Title:</div>
 							</div>
 							<div className="px-4">
-								<div> {each.hayatabad}</div>
-								<div> {each.joharCC}</div>
-								<div> {each.korangiB2BDarkStore}</div>
-								<div> {each.korangiDarkStore}</div>
-								<div> {each.northNazimabad}</div>
-								<div> {each.sku}</div>
-								<div> {each.title}</div>
+								<div className="py-1"> {each.hayatabad}</div>
+								<div className="py-1"> {each.joharCC}</div>
+								<div className="py-1"> {each.korangiB2BDarkStore}</div>
+								<div className="py-1"> {each.korangiDarkStore}</div>
+								<div className="py-1"> {each.northNazimabad}</div>
+								<div className="py-1"> {each.sku}</div>
+								<div className="py-1"> {each.title}</div>
 							</div>
 						</div>
 					);

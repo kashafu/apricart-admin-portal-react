@@ -1,8 +1,13 @@
-import FormData from "form-data";
 import React, { useState } from "react";
-import Loading from "../../utils/Loading";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import { popupRedirectionUpdateApi } from "../../utils/ApiCalls";
+
+import FormData from "form-data";
+import Loading from "../../../utils/Loading";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import { popupRedirectionUpdateApi } from "../../../utils/ApiCalls";
+import CustomButton from "../../Misc/CustomButton";
 
 const PopupRedirectionUpdateAPIComponent = () => {
 	var bannerData = new FormData();
@@ -43,7 +48,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		await fillFormData();
 		await popupRedirectionUpdateApi(baseUrl, bannerData, headers).then(
 			(response) => {
-				console.log(response);
+				checkStatus(response);
 				setLoading(false);
 			}
 		);
@@ -112,13 +117,9 @@ const PopupRedirectionUpdateAPIComponent = () => {
 					/>
 				</div>
 				<div>
-					<button
-						type="submit"
-						onClick={(e) => submitHandler(e)}
-						className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-					>
-						Submit
-					</button>
+					<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
+						Update Popup Redirection
+					</CustomButton>
 				</div>
 			</form>
 		</section>

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+
 import { csrOrderCancelApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
@@ -13,10 +17,10 @@ const CsrOrderCancelAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const { apiToken, orderId } = inputs;
 	const handleOrderId = (e) => {
-		setInputs({ ...inputs, value: e.target.value });
+		setInputs({ ...inputs, orderId: e.target.value });
 	};
 	const handleApiToken = (e) => {
-		setInputs({ ...inputs, value: e.target.value });
+		setInputs({ ...inputs, apiToken: e.target.value });
 	};
 	const handleSubmit = async (e) => {
 		setLoading(true);
@@ -25,7 +29,7 @@ const CsrOrderCancelAPIComponent = () => {
 		await csrOrderCancelApi(baseUrl, apiToken, encodedOrderId, headers).then(
 			(response) => {
 				// setDetail([response.data.data[0]]);
-				console.log(response);
+				checkStatus(response);
 				setLoading(false);
 			}
 		);
@@ -47,7 +51,7 @@ const CsrOrderCancelAPIComponent = () => {
 				value={orderId}
 				onChange={handleOrderId}
 			/>
-			<CustomButton width={"1/2"} onClick={handleSubmit}>
+			<CustomButton width={"1/3"} onClick={handleSubmit}>
 				Cancel This Order
 			</CustomButton>
 		</div>

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { isContinueUpdateApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import { isContinueUpdateApi } from "../../../utils/ApiCalls";
 
 const IsContinueAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		text: "Free delivery on orders above Rs.500. Same Day Delivery on orders placed till 6:00pm",
 		prodType: "cus",
 		orderType: "delivery",
-		city: "Karachi",
+		city: "karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
 
@@ -27,6 +31,7 @@ const IsContinueAPIComponent = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedText = encodeURI(text);
 
@@ -37,7 +42,9 @@ const IsContinueAPIComponent = () => {
 			city,
 			encodedText,
 			headers
-		).then((response) => console.log(response));
+		).then((response) => {
+			checkStatus(response, "isContinue text Updated");
+		});
 	};
 	return (
 		<div>

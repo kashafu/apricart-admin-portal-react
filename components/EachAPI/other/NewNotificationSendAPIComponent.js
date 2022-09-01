@@ -1,8 +1,15 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import React, { useState } from "react";
-import { sendNotificationApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+
+import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import { sendNotificationApi } from "../../../utils/ApiCalls";
+import { toast } from "react-toastify";
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -40,7 +47,9 @@ const NewNotificationSendAPIComponent = () => {
 		}
 		setInputs({ ...inputs, to: e.target.value });
 	};
+
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedType = encodeURI(type);
 		var encodedMessage = encodeURI(message);
@@ -53,7 +62,9 @@ const NewNotificationSendAPIComponent = () => {
 			city,
 			to,
 			headers
-		).then((response) => console.log(response));
+		).then((response) => {
+			checkStatus(response, "Notification Sent Successfully");
+		});
 	};
 	return (
 		<div>
@@ -117,7 +128,7 @@ const NewNotificationSendAPIComponent = () => {
 						placeholder={"Send To Who"}
 					/>
 				)}
-				<CustomButton width={"1/5"} onClick={handleSubmit} type={"submit"}>
+				<CustomButton width={"1/3"} onClick={handleSubmit} type={"submit"}>
 					Send Notification
 				</CustomButton>
 			</form>
