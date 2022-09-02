@@ -345,10 +345,17 @@ export const updateBannersApi = async (baseUrl, newBanner, headers) => {
 	}
 };
 
-export const updateTickerApi = async (baseUrl, text, headers) => {
+export const updateTickerApi = async (
+	baseUrl,
+	text,
+	prodType,
+	orderType,
+	city,
+	headers
+) => {
 	let url =
 		baseUrl +
-		`/admin/ticker/update?text=${text}&prod_type=cus&order_type=delivery&city=karachi`;
+		`/admin/ticker/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
 		return await axios.get(url, {
 			headers,

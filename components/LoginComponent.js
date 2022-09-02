@@ -15,8 +15,8 @@ const Login = () => {
 		auth: "noAuthDuplicate",
 	};
 	var numberToSend;
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [password, setPassword] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("3030550832");
+	const [password, setPassword] = useState("9July2000");
 	const [resetPw, setResetPw] = useState(false);
 	const [OTP, setOTP] = useState("");
 	const [newPW, setNewPW] = useState("");
