@@ -66,6 +66,8 @@ export const getGeneralApiParams = () => {
 	};
 };
 
+// Check status is a function to display toasts based on whether the request was successful
+// if it succeeds, it returns true, this is used to set information in the render components
 export const checkStatus = (
 	res,
 	successMessage,
@@ -81,7 +83,7 @@ export const checkStatus = (
 			closeOnClick: true,
 			draggable: true,
 			theme: "dark",
-			toastId: "errorId",
+			toastId: "successId",
 		});
 		return true;
 	} else if (res.status === 0) {
@@ -135,7 +137,7 @@ export function displayErrorToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "errorId",
+		toastId: "genErrorId",
 	});
 }
 export function displaySuccessToast(message, timer, position) {
@@ -146,7 +148,7 @@ export function displaySuccessToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "errorId",
+		toastId: "genSuccessId",
 	});
 }
 export function displayInfoToast(message, timer, position) {
@@ -157,6 +159,6 @@ export function displayInfoToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "errorId",
+		toastId: "genInfoId",
 	});
 }

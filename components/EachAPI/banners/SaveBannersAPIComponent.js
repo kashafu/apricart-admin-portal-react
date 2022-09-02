@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import FormData from "form-data";
+
 import { saveBannersApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";

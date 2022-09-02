@@ -638,64 +638,27 @@ export const productPositionDetailApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
-export const addCategoryApi = async (
-	baseUrl,
-	img,
-	parentId,
-	name,
-	position,
-	headers
-) => {
-	console.log(img);
-	let body = {
-		category_image: img,
-		parent_id: parentId,
-		name,
-		position,
-	};
+export const addCategoryApi = async (baseUrl, categoryData, headers) => {
 	let url = baseUrl + "/admin/category/add";
 	try {
-		await axios
-			.post(url, body, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, categoryData, {
+			headers,
+		});
 	} catch (error) {
 		return error?.response;
 	}
 };
 
-export const updateCategoryApi = async (
-	baseUrl,
-	img,
-	parentId,
-	name,
-	position,
-	headers
-) => {
-	let body = {
-		img,
-		parentId,
-		name,
-		position,
-	};
+export const updateCategoryApi = async (baseUrl, categoryData, headers) => {
 	let url = baseUrl + "/admin/category/update";
 	try {
-		await axios
-			.post(url, body, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, categoryData, {
+			headers,
+		});
 	} catch (error) {
 		return error?.response;
 	}

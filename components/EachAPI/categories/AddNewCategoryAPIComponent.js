@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import FormData from "form-data";
+
 import { addCategoryApi, updateCategoryApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 
 const AddNewCategoryAPIComponent = () => {
+	var categoryData = new FormData();
 	const [inputs, setInputs] = useState({
 		name: "",
 		position: 1,
@@ -26,22 +32,22 @@ const AddNewCategoryAPIComponent = () => {
 	};
 	const handleImage = (e) => {
 		const { files } = e.target;
-
+		console.log(files);
 		setInputs({ ...inputs, categoryImage: files[0] });
+	};
+	const fillFormData = () => {
+		categoryData.append("category_image", categoryImage);
+		categoryData.append("parent_id", parentId);
+		categoryData.append("name", name);
+		categoryData.append("position", position);
 	};
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await addCategoryApi(
-			baseUrl,
-			categoryImage,
-			parentId,
-			name,
-			position,
-			headers
-		).then((response) => {
-			console.log(response);
+		fillFormData();
+		await addCategoryApi(baseUrl, categoryData, headers).then((response) => {
+			checkStatus(response);
 			setLoading(false);
 		});
 	};
@@ -49,15 +55,8 @@ const AddNewCategoryAPIComponent = () => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await updateCategoryApi(
-			baseUrl,
-			categoryImage,
-			parentId,
-			name,
-			position,
-			headers
-		).then((response) => {
-			console.log(response);
+		await updateCategoryApi(baseUrl, categoryData, headers).then((response) => {
+			checkStatus(response);
 			setLoading(false);
 		});
 	};
@@ -92,10 +91,10 @@ const AddNewCategoryAPIComponent = () => {
 					onChange={(e) => handleImage(e)}
 				/>
 				<div>
-					<CustomButton onClick={(e) => handleSubmit(e)}>
+					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
 						Add Category
 					</CustomButton>
-					<CustomButton onClick={(e) => handleEdit(e)}>
+					<CustomButton width={"1/3"} onClick={(e) => handleEdit(e)}>
 						Update Category
 					</CustomButton>
 				</div>

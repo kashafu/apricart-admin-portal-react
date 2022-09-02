@@ -4,7 +4,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { uploadImagesApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomImageInput from "../../Misc/CustomImageInput";
 
@@ -39,28 +42,6 @@ const ImageUploadAPIComponent = () => {
 		});
 	};
 
-	const checkStatus = (response) => {
-		if (response.data.status === 1) {
-			toast.success("Image/s Saved Successfully", {
-				position: "top-center",
-				autoClose: 850,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-			});
-		} else if (response?.data?.error?.code === "ERR_NETWORK") {
-			toast.error("No Internet Connection", {
-				position: "top-center",
-				autoClose: 850,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-			});
-		}
-	};
-
 	const checkEmpty = () => {
 		let entries = images.entries().next();
 		console.log(entries);
@@ -80,10 +61,10 @@ const ImageUploadAPIComponent = () => {
 		fillFormData();
 		const { baseUrl } = getGeneralApiParams();
 		console.log(checkEmpty());
-		// uploadImagesApi(baseUrl, images).then((response) => {
-		// 	console.log(response);
-		// 	checkStatus(response);
-		// });
+		uploadImagesApi(baseUrl, images).then((response) => {
+			console.log(response);
+			checkStatus(response);
+		});
 
 		setLoading(false);
 	};
