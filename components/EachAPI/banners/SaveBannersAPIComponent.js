@@ -1,10 +1,12 @@
-import axios from "axios";
-import FormData from "form-data";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import FormData from "form-data";
+
 import { saveBannersApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
-import CustomImageInput from "../../Misc/CustomImageInput";
+import CustomButton from "../../Misc/CustomButton";
 
 const SaveBannersAPIComponent = () => {
 	var bannerData = new FormData();
@@ -42,18 +44,51 @@ const SaveBannersAPIComponent = () => {
 		bannerData.append("lang", "en");
 	};
 
+	const checkStatus = (res) => {
+		if (res.status === 400)
+			toast.error("Please Fill all the fields with valid data", {
+				position: "top-center",
+				autoClose: 1800,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "errorId",
+			});
+		else if (res.status !== 200)
+			toast.error(res.data.message, {
+				position: "top-center",
+				autoClose: 1800,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "errorId",
+			});
+		else if (res.status === 200)
+			toast.success(res.data.message, {
+				position: "top-center",
+				autoClose: 1800,
+				hideProgressBar: false,
+				closeOnClick: true,
+				draggable: true,
+				theme: "dark",
+				toastId: "errorId",
+			});
+	};
+
 	const submitHandler = async (e) => {
-		setLoading(true);
 		e.preventDefault();
+		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
 		await fillFormData();
 		await saveBannersApi(baseUrl, bannerData, headers).then((response) => {
-			console.log(response);
 			setLoading(false);
+			checkStatus(response);
 		});
 	};
 	return (
-		<section>
+		<section className="relative">
 			{<Loading loading={loading} />}
 			<form action="" method="POST">
 				<select
@@ -123,13 +158,9 @@ const SaveBannersAPIComponent = () => {
 					/>
 				</div>
 				<div>
-					<button
-						type="submit"
-						onClick={(e) => submitHandler(e)}
-						className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-					>
-						Submit
-					</button>
+					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
+						Submit New Banner
+					</CustomButton>
 				</div>
 			</form>
 		</section>

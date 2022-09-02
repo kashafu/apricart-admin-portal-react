@@ -1,9 +1,15 @@
 import FormData from "form-data";
 import React, { useState } from "react";
-import { uploadImagesApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import Loading from "../../utils/Loading";
-import CustomImageInput from "../Misc/CustomImageInput";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { uploadImagesApi } from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomImageInput from "../../Misc/CustomImageInput";
 
 const ImageUploadAPIComponent = () => {
 	var images = new FormData();
@@ -36,47 +42,67 @@ const ImageUploadAPIComponent = () => {
 		});
 	};
 
+	const checkEmpty = () => {
+		let entries = images.entries().next();
+		console.log(entries);
+		const { value } = entries;
+
+		for (let i = 1; i < value.length; i++) {
+			console.log(i);
+			if (i % 2 !== 0) {
+				// console.log(i, "odd");
+				if (value[i] === "") return true;
+			}
+		}
+	};
+
 	const submitHandler = async () => {
 		setLoading(true);
 		fillFormData();
-		const { baseUrl, headers } = getGeneralApiParams();
-		uploadImagesApi(baseUrl, images, headers).then((response) => {
-			console.log(response), setLoading(false);
+		const { baseUrl } = getGeneralApiParams();
+		console.log(checkEmpty());
+		uploadImagesApi(baseUrl, images).then((response) => {
+			console.log(response);
+			checkStatus(response);
 		});
+
+		setLoading(false);
 	};
 
 	return (
 		<div>
 			{<Loading loading={loading} />}
 			<section className="grid grid-cols-2 gap-2">
-				{imageInput.map((each, index) => (
-					<div key={index} className="ml-20">
-						<CustomImageInput
-							handleChangeValue={handleChangeValue}
-							index={index}
-						/>
-						{imageInput.length - 1 === index && imageInput.length && (
-							<button
-								type="button"
-								className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
-								onClick={handleInputAdd}
-							>
-								<span>Add another Image</span>
-							</button>
-						)}
-						<div className="">
-							{imageInput.length !== 1 && (
+				<form action="" method="POST">
+					{imageInput.map((each, index) => (
+						<div key={index} className="ml-20">
+							<CustomImageInput
+								handleChangeValue={handleChangeValue}
+								index={index}
+							/>
+							{imageInput.length - 1 === index && imageInput.length && (
 								<button
 									type="button"
 									className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
-									onClick={() => handleInputRemove(index)}
+									onClick={handleInputAdd}
 								>
-									<span>Remove</span>
+									<span>Add another Image</span>
 								</button>
 							)}
+							<div className="">
+								{imageInput.length !== 1 && (
+									<button
+										type="button"
+										className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
+										onClick={() => handleInputRemove(index)}
+									>
+										<span>Remove</span>
+									</button>
+								)}
+							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</form>
 			</section>
 			{/* <button onClick={submitHandler} className="">Submit Images</button> */}
 			<button

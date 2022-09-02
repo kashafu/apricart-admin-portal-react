@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoFile from "../public/logo.png";
 import { loginApi, resetPasswordApi, sendOtpApi } from "../utils/ApiCalls";
 import { getGeneralApiParams } from "../utils/GeneralVariables";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -15,8 +15,8 @@ const Login = () => {
 		auth: "noAuthDuplicate",
 	};
 	var numberToSend;
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [password, setPassword] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("3030550832");
+	const [password, setPassword] = useState("9July2000");
 	const [resetPw, setResetPw] = useState(false);
 	const [OTP, setOTP] = useState("");
 	const [newPW, setNewPW] = useState("");
@@ -37,8 +37,7 @@ const Login = () => {
 			router,
 			headers
 		).then((response) => {
-			console.log(response);
-			response?.data?.status === 2 &&
+			if (response.data.status === 2) {
 				toast.error(response.data.message, {
 					position: "top-center",
 					autoClose: 1800,
@@ -48,40 +47,38 @@ const Login = () => {
 					theme: "dark",
 					toastId: noDuplicate.auth,
 				});
-			response.response?.status === 400 &&
-				response?.response?.data?.status === 0 &&
-				toast.error(response?.response?.data?.message, {
+			} else if (response.status === 200) {
+				response.data.status === 0 &&
+					toast.error(response.data.message, {
+						position: "top-center",
+						autoClose: 1800,
+						hideProgressBar: false,
+						closeOnClick: true,
+						draggable: true,
+						theme: "dark",
+						toastId: noDuplicate.auth,
+					});
+				response.data.status === 1 &&
+					toast.success("Login Successful", {
+						position: "top-center",
+						autoClose: 600,
+						hideProgressBar: false,
+						closeOnClick: true,
+						draggable: true,
+						theme: "dark",
+						toastId: noDuplicate.succ,
+					});
+			} else {
+				toast.error(response?.data?.err?.response?.data?.message, {
 					position: "top-center",
 					autoClose: 1800,
 					hideProgressBar: false,
 					closeOnClick: true,
 					draggable: true,
 					theme: "dark",
-					toastId: noDuplicate.num,
+					toastId: noDuplicate.auth,
 				});
-			response?.status === 200 &&
-				response?.data?.status === 0 &&
-				toast.error(response?.data?.message, {
-					position: "top-center",
-					autoClose: 1800,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.pw,
-				});
-			response?.status === 200 &&
-				response?.data?.status === 1 &&
-				toast.success("Login Successful", {
-					position: "top-center",
-					autoClose: 600,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.succ,
-				});
-			//
+			}
 		});
 	};
 	const callOTPApi = async () => {
@@ -95,6 +92,7 @@ const Login = () => {
 	const submitResetPassword = async () => {
 		resetPasswordApi(baseUrl, numberToSend, newPW, OTP, headers);
 	};
+
 	return (
 		<>
 			{/* MODAL RESET PASSWORD */}

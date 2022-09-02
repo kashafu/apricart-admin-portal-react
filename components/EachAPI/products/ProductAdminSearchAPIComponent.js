@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { productsAdminSearchApi } from "../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../utils/GeneralVariables";
-import CustomButton from "../Misc/CustomButton";
-import CustomInput from "../Misc/CustomInput";
+
+import { productsAdminSearchApi } from "../../../utils/ApiCalls";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
+import CustomInput from "../../Misc/CustomInput";
 
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -20,7 +20,7 @@ const ProductAdminSearchAPIComponent = () => {
 	const handleTerm = (e) => {
 		setInputs({ ...inputs, term: e.target.value });
 
-		if (term.length > 2) {
+		if (term.length > 1) {
 			searchProduct();
 		}
 	};
@@ -55,9 +55,9 @@ const ProductAdminSearchAPIComponent = () => {
 			setLoading(false);
 		});
 	};
-	console.log(inputs);
 	return (
 		<section>
+			<Loading loading={loading} />
 			<form action="" method="POST">
 				<CustomInput
 					position={"top"}

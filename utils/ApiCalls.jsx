@@ -1,8 +1,8 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
 import FileSaver, { saveAs } from "file-saver";
+
+import Cookies from "universal-cookie";
+import axios from "axios";
 import moment from "moment";
-import { data } from "autoprefixer";
 
 export const loginApi = async (
 	baseUrl,
@@ -22,6 +22,10 @@ export const loginApi = async (
 		username: "92" + phoneNumber,
 		password,
 	};
+	function useRegex(input) {
+		let regex = /Abdullah/i;
+		return regex.test(input);
+	}
 	try {
 		let response = await axios.post(url, body, {
 			headers,
@@ -29,12 +33,12 @@ export const loginApi = async (
 
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
-				return (data = {
+				return {
 					data: {
 						status: 2,
 						message: "You are unauthorized to access this feature",
 					},
-				});
+				};
 			}
 			cookies.set("cookies-token", response.data.data.token);
 			cookies.set("cookies-name", response.data.data.name);
@@ -45,12 +49,10 @@ export const loginApi = async (
 			router.push("/dashboard");
 			return response;
 		} else {
-			setErrorMessage(response.message);
 			return response;
 		}
 	} catch (err) {
-		setErrorMessage(err.response.data.message);
-		return err;
+		return { data: { err, status: 400 } };
 	}
 };
 
@@ -92,28 +94,28 @@ export const resetPasswordApi = async (
 			headers,
 		});
 		if (response.data.status == 1) {
-			toast.success(response.data.message);
+			// toast.success(response.data.message);
 		}
 	} catch (error) {
-		console.log(error?.response);
-		toast.error(error?.response?.message);
+		return error?.response;
+		// toast.error(error?.response?.message);
 	}
 };
 
-export const uploadImagesApi = async (baseUrl, images, headers) => {
+export const uploadImagesApi = async (baseUrl, images) => {
 	let url = baseUrl + "/options/uploads";
 	try {
-		await axios
-			.post(url, images, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, images, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		console.log(error);
+		return {
+			data: {
+				error,
+			},
+		};
 	}
 };
 
@@ -121,7 +123,6 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
 	let newExp = expiry.concat("T00:00:00Z");
-	console.log(newExp);
 	let url = baseUrl + "/offers/save?city=karachi&lang=en";
 	let body = {
 		price,
@@ -135,13 +136,8 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 		return await axios.post(url, body, {
 			headers,
 		});
-		// if (response.data.status == 1) {
-		// 	console.log(response);
-		// 	return response;
-		// }
 	} catch (error) {
-		console.log(error?.response);
-		// toast.error(error?.response?.message);
+		return error?.response;
 	}
 };
 
@@ -156,7 +152,6 @@ export const downloadUsersApi = async (baseUrl, headers) => {
 				responseType: "blob",
 			})
 			.then((blob) => {
-				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
 				FileSaver.saveAs(blob.data, `User_Report_${dateString1}.csv`);
 				return blob;
 			});
@@ -210,7 +205,7 @@ export const downloadOrdersApi = async (
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -238,20 +233,25 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 };
 
 export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
-	console.log(apiToken, file);
+	let entries = file.entries().next();
+	const { value } = entries;
+
+	if (value[1] === "undefined" || value[1] === "") {
+		return {
+			status: 404,
+			data: {
+				message: "Please submit a file to proceed",
+			},
+		};
+	}
 	let url = baseUrl + `/admin/product/csv/update?apitoken=${apiToken}`;
 	try {
-		return await axios
-			.post(url, file, {
-				...headers,
-				// Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.post(url, file, {
+			...headers,
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -261,20 +261,24 @@ export const addUpdateProductCSVApi = async (
 	file,
 	headers
 ) => {
-	console.log(apiToken, file);
+	let entries = file.entries().next();
+	const { value } = entries;
+	if (value[1] === "undefined" || value[1] === "") {
+		return {
+			status: 404,
+			data: {
+				message: "Please submit a file to proceed",
+			},
+		};
+	}
 	let url = baseUrl + `/admin/product/csv/addupdate?apitoken=${apiToken}`;
 	try {
-		return await axios
-			.post(url, file, {
-				...headers,
-				// Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.post(url, file, {
+			...headers,
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -308,20 +312,15 @@ export const deleteBannerApi = async (baseUrl, id, headers) => {
 	}
 };
 
-export const saveBannersApi = async (baseUrl, banner, headers) => {
+export const saveBannersApi = async (baseUrl, banner) => {
 	let url = baseUrl + "/offers/banners/save";
 	try {
-		await axios
-			.post(url, banner, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -342,25 +341,27 @@ export const updateBannersApi = async (baseUrl, newBanner, headers) => {
 				return response;
 			});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
-export const updateTickerApi = async (baseUrl, text, headers) => {
+export const updateTickerApi = async (
+	baseUrl,
+	text,
+	prodType,
+	orderType,
+	city,
+	headers
+) => {
 	let url =
 		baseUrl +
-		`/admin/ticker/update?text=${text}&prod_type=cus&order_type=delivery&city=karachi`;
+		`/admin/ticker/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -378,15 +379,11 @@ export const sendNotificationApi = async (
 		baseUrl +
 		`/admin/notification?type=${type}&value=${value}&title=${title}&message=${message}&city=${city}&to=${to}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -402,15 +399,11 @@ export const isContinueUpdateApi = async (
 		baseUrl +
 		`/admin/iscontinue/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -426,15 +419,11 @@ export const recommendedUpdateApi = async (
 		baseUrl +
 		`/admin/recommended/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -450,15 +439,11 @@ export const webUpdateApi = async (
 		baseUrl +
 		`/admin/web/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
-		return await axios
-			.get(url, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.get(url, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -475,7 +460,7 @@ export const productStockDetailAdminApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -494,24 +479,19 @@ export const productAdminDetailApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
 export const popupRedirectionUpdateApi = async (baseUrl, banner, headers) => {
 	let url = baseUrl + "/admin/popup/redirection/update";
 	try {
-		await axios
-			.post(url, banner, {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -527,7 +507,7 @@ export const csrOrderCancelApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -543,7 +523,7 @@ export const csrOrderCompleteApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -573,10 +553,10 @@ export const productsAdminSearchApi = async (
 	try {
 		return await axios.get(url, {
 			headers,
-			cancelToken: cancelPrevRequest.token,
+			// cancelToken: cancelPrevRequest.token,
 		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -623,24 +603,30 @@ export const productPositionDeleteAdminApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
 export const updateProductPositionCSVApi = async (baseUrl, files, headers) => {
-	console.log(files);
+	let entries = files.entries().next();
+	const { value } = entries;
+
+	if (value[1] === "undefined" || value[1] === "") {
+		return {
+			status: 404,
+			data: {
+				message: "Please submit a file to proceed",
+			},
+		};
+	}
 	let url = baseUrl + `/admin/product/position/csv/update	`;
 	try {
-		return await axios
-			.post(url, files, {
-				...headers,
-				"Content-Type": "multipart/form-data",
-			})
-			.then((response) => {
-				console.log(response);
-			});
+		return await axios.post(url, files, {
+			...headers,
+			"Content-Type": "multipart/form-data",
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
@@ -659,65 +645,28 @@ export const productPositionDetailApi = async (
 			headers,
 		});
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
-export const addCategoryApi = async (
-	baseUrl,
-	img,
-	parentId,
-	name,
-	position,
-	headers
-) => {
-	console.log(img);
-	let body = {
-		category_image: img,
-		parent_id: parentId,
-		name,
-		position,
-	};
+export const addCategoryApi = async (baseUrl, categoryData, headers) => {
 	let url = baseUrl + "/admin/category/add";
 	try {
-		await axios
-			.post(url, body, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, categoryData, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
 
-export const updateCategoryApi = async (
-	baseUrl,
-	img,
-	parentId,
-	name,
-	position,
-	headers
-) => {
-	let body = {
-		img,
-		parentId,
-		name,
-		position,
-	};
+export const updateCategoryApi = async (baseUrl, categoryData, headers) => {
 	let url = baseUrl + "/admin/category/update";
 	try {
-		await axios
-			.post(url, body, {
-				headers,
-			})
-			.then((response) => {
-				console.log(response);
-				return response;
-			});
+		return await axios.post(url, categoryData, {
+			headers,
+		});
 	} catch (error) {
-		console.log(error?.response);
+		return error?.response;
 	}
 };
