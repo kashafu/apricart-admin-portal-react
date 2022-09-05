@@ -670,3 +670,27 @@ export const updateCategoryApi = async (baseUrl, categoryData, headers) => {
 		return error?.response;
 	}
 };
+
+export const updateCategoryBannerApi = async (baseUrl, banner) => {
+	let url = baseUrl + "/admin/category/banner/update";
+	try {
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const updateCategoryImageApi = async (baseUrl, banner) => {
+	let url = baseUrl + "/admin/category/image/update";
+	try {
+		return await axios.post(url, banner, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
