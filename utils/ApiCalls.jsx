@@ -355,7 +355,9 @@ export const updateTickerApi = async (
 ) => {
 	let url =
 		baseUrl +
-		`/admin/ticker/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
+		`/admin/ticker/update?text=${encodeURIComponent(
+			text
+		)}&prod_type=${prodType}&order_type=${orderType}&city=${city}`;
 	try {
 		return await axios.get(url, {
 			headers,

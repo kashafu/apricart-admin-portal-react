@@ -34,11 +34,10 @@ const TickerUpdateAPIComponent = () => {
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		const encodedText = encodeURI(text);
 
 		await updateTickerApi(
 			baseUrl,
-			encodedText,
+			text,
 			prodType,
 			orderType,
 			city,
