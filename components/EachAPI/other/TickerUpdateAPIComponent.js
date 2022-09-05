@@ -86,9 +86,7 @@ const TickerUpdateAPIComponent = () => {
 					className="bg-gray-200 w-full h-56 p-1"
 					value={text}
 				/>
-				<label className="text-xs text-main-red font-nunito font-bold">
-					To include the "&" sign, use &amp
-				</label>{" "}
+
 				<CustomButton
 					onClick={(e) => submitHandler(e)}
 					width="1/3"
