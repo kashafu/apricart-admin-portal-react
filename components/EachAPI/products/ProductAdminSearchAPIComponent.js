@@ -2,7 +2,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomInput from "../../Misc/CustomInput";
 
@@ -15,12 +18,15 @@ const ProductAdminSearchAPIComponent = () => {
 		city: "karachi",
 	});
 	const [loading, setLoading] = useState(false);
+	const [totalPages, setTotalPages] = useState(1);
 	const [detail, setDetail] = useState([]);
+
+	let pages = [];
 	const { term, size, page, category, city } = inputs;
 
 	const handleTerm = (e) => {
 		setInputs({ ...inputs, term: e.target.value });
-		if (e.target.value.length > 1) {
+		if (e.target.value.length > 2) {
 			searchProduct(e.target.value);
 		} else if (e.target.value.length === 0) {
 			setDetail([]);
@@ -31,8 +37,8 @@ const ProductAdminSearchAPIComponent = () => {
 	const handleSize = (e) => {
 		setInputs({ ...inputs, size: e.target.value });
 	};
-	const handlePage = (e) => {
-		setInputs({ ...inputs, page: e.target.value });
+	const handlePage = (newPage) => {
+		setInputs({ ...inputs, page: newPage });
 	};
 	const handleCategory = (e) => {
 		setInputs({ ...inputs, category: e.target.value });
@@ -40,10 +46,44 @@ const ProductAdminSearchAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
+	const handleTotalPages = (totalP) => {
+		setTotalPages(totalP);
+	};
+	const handleResponse = (response) => {
+		console.log(response);
+		setDetail(response.data.data);
+		getPagination(response.data.total, size);
+		setLoading(false);
+	};
+	const getPagination = (items, perPage) => {
+		let calc = +items / +perPage;
+		let totalPages = Math.ceil(calc);
+		handleTotalPages(totalPages);
+
+		// for (let index = 0; index < totalPages; index++) {
+		// 	setPagination([
+		// 		...pagination,
+		// 		<button
+		// 			key={index}
+		// 			onClick={handlePage(index)}
+		// 			className={
+		// 				index / size === page
+		// 					? "border-main-blue border-1 bg-main-blue p-2 text-white font-bold rounded-lg"
+		// 					: "border-main-blue border-1 p-2 text-main-blue font-bold rounded-lg duration-200 hover:bg-main-blue hover:text-white"
+		// 			}
+		// 		>
+		// 			{index + 1}
+		// 		</button>,
+		// 	]);
+		// }
+		for (let i = 1; i <= totalPages; i++) {
+			pages.push(i);
+		}
+	};
 	const searchProduct = async (text) => {
 		setLoading(true);
 		const { baseUrl, userId, headers } = getGeneralApiParams();
-		// let encodedOrderId = encodeURI(orderId);
+
 		await productsAdminSearchApi(
 			baseUrl,
 			page,
@@ -54,10 +94,10 @@ const ProductAdminSearchAPIComponent = () => {
 			userId,
 			headers
 		).then((response) => {
-			setDetail(response.data.data);
-			setLoading(false);
+			handleResponse(response, text);
 		});
 	};
+	console.log(totalPages);
 	return (
 		<section>
 			<form action="" method="POST">
@@ -72,12 +112,6 @@ const ProductAdminSearchAPIComponent = () => {
 					placeholder={"Size"}
 					value={size}
 					onChange={handleSize}
-					required={true}
-				/>
-				<CustomInput
-					placeholder={"Page"}
-					value={page}
-					onChange={handlePage}
 					required={true}
 				/>
 				<CustomInput
@@ -96,8 +130,13 @@ const ProductAdminSearchAPIComponent = () => {
 			</form>
 			<div className="rounded-none my-2">
 				{loading && <p className="text-black">Searching...</p>}
+				{/* {pagination.map((each) => {
+					return each;
+				})} */}
+				{}
 			</div>
 			<section>
+				<div></div>
 				{detail.length > 0 ? (
 					detail?.map((each) => {
 						return (
