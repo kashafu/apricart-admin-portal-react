@@ -1,7 +1,5 @@
 import FormData from "form-data";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { uploadImagesApi } from "../../../utils/ApiCalls";
 import {
@@ -37,9 +35,11 @@ const ImageUploadAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		imageInput.forEach((each) => {
-			images.append("files", each.img);
-		});
+		// imageInput.forEach((each) => {
+		// 	images.append("files", each);
+		// });
+		images.append("files", imageInput[0]);
+		images.append("files", imageInput[1]);
 	};
 
 	const checkEmpty = () => {
@@ -60,15 +60,17 @@ const ImageUploadAPIComponent = () => {
 		setLoading(true);
 		fillFormData();
 		const { baseUrl } = getGeneralApiParams();
-		console.log(checkEmpty());
-		uploadImagesApi(baseUrl, images).then((response) => {
+		// console.log(checkEmpty());
+		let entries = images.entries().next();
+		console.log(entries);
+		await uploadImagesApi(baseUrl, images).then((response) => {
 			console.log(response);
 			checkStatus(response);
 		});
 
 		setLoading(false);
 	};
-
+	console.log(imageInput);
 	return (
 		<div>
 			{<Loading loading={loading} />}

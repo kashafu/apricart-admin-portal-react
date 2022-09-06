@@ -103,19 +103,26 @@ export const resetPasswordApi = async (
 };
 
 export const uploadImagesApi = async (baseUrl, images) => {
-	let url = baseUrl + "/options/uploads";
+	let url = baseUrl + "/v1/options/images/uploads";
 	try {
 		return await axios.post(url, images, {
 			Accept: "application/json",
 			"Content-Type": "multipart/form-data",
 		});
 	} catch (error) {
-		console.log(error);
-		return {
-			data: {
-				error,
-			},
-		};
+		return error?.response;
+	}
+};
+
+export const uploadFilesApi = async (baseUrl, files) => {
+	let url = baseUrl + "/v1/options/files/uploads";
+	try {
+		return await axios.post(url, images, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
 	}
 };
 

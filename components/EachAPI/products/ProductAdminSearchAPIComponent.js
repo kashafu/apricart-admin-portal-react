@@ -1,12 +1,9 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
-import {
-	checkStatus,
-	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
+import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import CustomInput from "../../Misc/CustomInput";
 
 const ProductAdminSearchAPIComponent = () => {
@@ -18,10 +15,13 @@ const ProductAdminSearchAPIComponent = () => {
 		city: "karachi",
 	});
 	const [loading, setLoading] = useState(false);
-	const [totalPages, setTotalPages] = useState(1);
+	const [totalPages, setTotalPages] = useState(0);
 	const [detail, setDetail] = useState([]);
+	// Here we use item offsets; we could also use page offsets
+	// following the API or data you're working with.
+	const [itemOffset, setItemOffset] = useState(0);
+	// let pages = [];
 
-	let pages = [];
 	const { term, size, page, category, city } = inputs;
 
 	const handleTerm = (e) => {
@@ -36,6 +36,7 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 	const handleSize = (e) => {
 		setInputs({ ...inputs, size: e.target.value });
+		searchProduct(term, page, e.target.value);
 	};
 	const handlePage = (newPage) => {
 		setInputs({ ...inputs, page: newPage });
@@ -46,9 +47,7 @@ const ProductAdminSearchAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
-	const handleTotalPages = (totalP) => {
-		setTotalPages(totalP);
-	};
+
 	const handleResponse = (response) => {
 		console.log(response);
 		setDetail(response.data.data);
@@ -57,37 +56,17 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 	const getPagination = (items, perPage) => {
 		let calc = +items / +perPage;
-		let totalPages = Math.ceil(calc);
-		handleTotalPages(totalPages);
-
-		// for (let index = 0; index < totalPages; index++) {
-		// 	setPagination([
-		// 		...pagination,
-		// 		<button
-		// 			key={index}
-		// 			onClick={handlePage(index)}
-		// 			className={
-		// 				index / size === page
-		// 					? "border-main-blue border-1 bg-main-blue p-2 text-white font-bold rounded-lg"
-		// 					: "border-main-blue border-1 p-2 text-main-blue font-bold rounded-lg duration-200 hover:bg-main-blue hover:text-white"
-		// 			}
-		// 		>
-		// 			{index + 1}
-		// 		</button>,
-		// 	]);
-		// }
-		for (let i = 1; i <= totalPages; i++) {
-			pages.push(i);
-		}
+		let tot = Math.ceil(calc);
+		setTotalPages(tot);
 	};
-	const searchProduct = async (text) => {
+	const searchProduct = async (text, newPage, newSize) => {
 		setLoading(true);
 		const { baseUrl, userId, headers } = getGeneralApiParams();
 
 		await productsAdminSearchApi(
 			baseUrl,
-			page,
-			size,
+			(page = newPage || 1),
+			(size = newSize || size),
 			text,
 			category,
 			city,
@@ -97,9 +76,43 @@ const ProductAdminSearchAPIComponent = () => {
 			handleResponse(response, text);
 		});
 	};
+
+	const handlePageClick = (event) => {
+		const newOffset = (event.selected * size) % detail.length;
+		console.log(detail.length);
+		console.log(
+			`User requested page number ${event.selected}, which is offset ${newOffset}`
+		);
+		handlePage(event.selected + 1);
+		searchProduct(term, event.selected + 1);
+	};
+
+	useEffect(() => {
+		// Fetch items from another resources.
+		const endOffset = itemOffset + size;
+		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+	}, [itemOffset, size]);
+
 	console.log(totalPages);
 	return (
 		<section>
+			<ReactPaginate
+				breakLabel=". . ."
+				nextLabel="Next ->"
+				onPageChange={handlePageClick}
+				pageRangeDisplayed={5}
+				pageCount={totalPages}
+				previousLabel="<- Previous"
+				renderOnZeroPageCount={null}
+				pageClassName="px-2"
+				pageLinkClassName="border-2 p-1 bg-gray-200 border-main-blue rounded-md px-3"
+				previousClassName="font-lato font-bold"
+				nextClassName="font-nunito font-bold"
+				breakClassName="font-bold"
+				breakLinkClassName="text-lato"
+				containerClassName="p-4 justify-between flex"
+				activeClassName="bg-main-blue "
+			/>
 			<form action="" method="POST">
 				<CustomInput
 					position={"top"}

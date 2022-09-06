@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { updateTickerApi } from "../../../utils/ApiCalls";
-import CustomInput from "../../Misc/CustomInput";
 import {
 	checkStatus,
 	getGeneralApiParams,

@@ -3,7 +3,7 @@ import React from "react";
 const CustomImageInput = ({ handleChangeValue, index }) => {
 	return (
 		<div className="w-full">
-			<div className="bg-blue-800 w-36 h-36 flex flex-col justify-center items-center">
+			<div className="bg-main-blue text-white w-36 h-36 flex flex-col justify-center items-center">
 				<div>
 					<input
 						name="img"
