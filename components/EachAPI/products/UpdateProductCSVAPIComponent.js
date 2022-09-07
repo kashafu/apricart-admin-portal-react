@@ -16,7 +16,7 @@ const UpdateProductCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
 	const [ren, setRen] = useState("");
 	const [apiToken, setApiToken] = useState("");
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	var file = new FormData();
 
 	// updating the ren state causes the input tag to re render and delete whatever file was given to it
