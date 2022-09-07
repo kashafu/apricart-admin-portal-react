@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
 	checkStatus,

@@ -76,6 +76,8 @@ export const checkStatus = (
 	errorTimer
 ) => {
 	if (res.status === 200) {
+		if (successMessage === "") return true;
+
 		toast.success(successMessage || res.data.message, {
 			position: "top-center",
 			autoClose: successTimer || 1500,

@@ -1,5 +1,3 @@
-import "react-toastify/dist/ReactToastify.css";
-
 import React, { useState } from "react";
 
 import CustomButton from "../../Misc/CustomButton";
@@ -9,7 +7,6 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import { sendNotificationApi } from "../../../utils/ApiCalls";
-import { toast } from "react-toastify";
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({

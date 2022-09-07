@@ -3,17 +3,13 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import logoFile from "../public/logo.png";
 import { loginApi, resetPasswordApi, sendOtpApi } from "../utils/ApiCalls";
-import { getGeneralApiParams } from "../utils/GeneralVariables";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {
+	displayErrorToast,
+	displaySuccessToast,
+	getGeneralApiParams,
+} from "../utils/GeneralVariables";
 
 const Login = () => {
-	let noDuplicate = {
-		num: "noNumDuplicate",
-		pw: "noPwDuplicate",
-		success: "noSuccDuplicate",
-		auth: "noAuthDuplicate",
-	};
 	var numberToSend;
 	const [phoneNumber, setPhoneNumber] = useState("3030550832");
 	const [password, setPassword] = useState("9July2000");
@@ -38,46 +34,14 @@ const Login = () => {
 			headers
 		).then((response) => {
 			if (response.data.status === 2) {
-				toast.error(response.data.message, {
-					position: "top-center",
-					autoClose: 1800,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.auth,
-				});
+				displayErrorToast(response.data.message, 1800);
 			} else if (response.status === 200) {
 				response.data.status === 0 &&
-					toast.error(response.data.message, {
-						position: "top-center",
-						autoClose: 1800,
-						hideProgressBar: false,
-						closeOnClick: true,
-						draggable: true,
-						theme: "dark",
-						toastId: noDuplicate.auth,
-					});
+					displayErrorToast(response.data.message, 1800);
 				response.data.status === 1 &&
-					toast.success("Login Successful", {
-						position: "top-center",
-						autoClose: 600,
-						hideProgressBar: false,
-						closeOnClick: true,
-						draggable: true,
-						theme: "dark",
-						toastId: noDuplicate.succ,
-					});
+					displaySuccessToast("Login Successful", 1500);
 			} else {
-				toast.error(response?.data?.err?.response?.data?.message, {
-					position: "top-center",
-					autoClose: 1800,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.auth,
-				});
+				displayErrorToast(response?.data?.err?.response?.data?.message, 1800);
 			}
 		});
 	};

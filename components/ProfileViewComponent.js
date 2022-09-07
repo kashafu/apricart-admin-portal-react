@@ -39,7 +39,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 				<div>+{userData.phoneNumber}</div>
 				<div className="bg-red-300 absolute">
 					<button onClick={() => setProfileDisplay(!profileDisplay)}>
-						<p className="text-[45px]">></p>
+						<p className="text-[45px]">&gt;</p>
 					</button>
 				</div>
 			</div>

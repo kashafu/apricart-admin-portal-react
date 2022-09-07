@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { productPriceUpdatedLast24HoursApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	displayInfoToast,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
@@ -21,17 +22,9 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		productPriceUpdatedLast24HoursApi(baseUrl, time, headers).then(() => {
 			setDisabler(true);
-			toast.info(
+			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
-				{
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: "XD",
-				}
+				5000
 			);
 			setLoading(false);
 			setTimeout(() => {

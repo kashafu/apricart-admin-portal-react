@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import FormData from "form-data";
 import { updateProductCSVApi } from "../../../utils/ApiCalls";
@@ -8,6 +6,7 @@ import CustomInput from "../../Misc/CustomInput";
 import CustomButton from "../../Misc/CustomButton";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
@@ -29,15 +28,7 @@ const UpdateProductCSVAPIComponent = () => {
 		if (verify.type !== "text/csv") {
 			setCsv();
 			updateRen();
-			toast.error("Upload a valid CSV file", {
-				position: "top-left",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: ren,
-			});
+			displayErrorToast("Upload a valid CSV file", 1500, "top-left");
 		} else setCsv(verify);
 	};
 	const handleToken = (e) => {

@@ -22,15 +22,12 @@ export const loginApi = async (
 		username: "92" + phoneNumber,
 		password,
 	};
-	function useRegex(input) {
-		let regex = /Abdullah/i;
-		return regex.test(input);
-	}
+
 	try {
 		let response = await axios.post(url, body, {
 			headers,
 		});
-
+		console.log(response);
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
 				return {
@@ -53,6 +50,17 @@ export const loginApi = async (
 		}
 	} catch (err) {
 		return { data: { err, status: 400 } };
+	}
+};
+
+export const getAllAPIsApi = async (baseUrl, headers) => {
+	const url = baseUrl + `/admin/dashboard`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
 	}
 };
 
@@ -92,11 +100,9 @@ export const resetPasswordApi = async (
 			headers,
 		});
 		if (response.data.status == 1) {
-			// toast.success(response.data.message);
 		}
 	} catch (error) {
 		return error?.response;
-		// toast.error(error?.response?.message);
 	}
 };
 
