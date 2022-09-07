@@ -3,7 +3,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { recommendedUpdateApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 
@@ -28,29 +31,6 @@ const RecommendedUpdateAPIComponent = () => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
 
-	const checkStatus = (res) => {
-		if (res.status === 200)
-			toast.success(res.data.message, {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
-		else if (res.status !== 200)
-			toast.error(res.data.message, {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -62,7 +42,6 @@ const RecommendedUpdateAPIComponent = () => {
 			text,
 			headers
 		).then((response) => {
-			console.log(response);
 			checkStatus(response);
 		});
 	};

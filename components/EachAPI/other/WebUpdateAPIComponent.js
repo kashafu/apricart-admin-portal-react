@@ -35,7 +35,6 @@ const WebUpdateAPIComponent = () => {
 
 		await webUpdateApi(baseUrl, prodType, orderType, city, text, headers).then(
 			(response) => {
-				console.log(response);
 				checkStatus(response);
 			}
 		);

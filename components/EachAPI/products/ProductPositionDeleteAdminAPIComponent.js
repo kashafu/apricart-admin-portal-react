@@ -35,7 +35,6 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 			orderType,
 			headers
 		).then((response) => {
-			console.log(response);
 			checkStatus(response);
 		});
 	};

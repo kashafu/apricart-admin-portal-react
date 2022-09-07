@@ -32,7 +32,6 @@ const GetOrdersReportsAPIComponent = () => {
 			skus,
 			headers
 		).then((response) => {
-			console.log(response);
 			toast.info(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
 				{

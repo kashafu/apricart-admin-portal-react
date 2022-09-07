@@ -66,9 +66,7 @@ export const sendOtpApi = async (baseUrl, phoneNumber, headers) => {
 			headers,
 		});
 		if (response.data.status == 1) {
-			console.log(response.data.message);
 		} else {
-			console.log(response.data.message);
 			console.log("enter a phone number for otp request to reset password");
 		}
 	} catch (e) {
@@ -117,7 +115,7 @@ export const uploadImagesApi = async (baseUrl, images) => {
 export const uploadFilesApi = async (baseUrl, files) => {
 	let url = baseUrl + "/v1/options/files/uploads";
 	try {
-		return await axios.post(url, images, {
+		return await axios.post(url, files, {
 			Accept: "application/json",
 			"Content-Type": "multipart/form-data",
 		});
@@ -163,7 +161,7 @@ export const downloadUsersApi = async (baseUrl, headers) => {
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 
@@ -183,7 +181,7 @@ export const downloadProductsApi = async (baseUrl, headers, summary) => {
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 
@@ -235,7 +233,7 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 
@@ -296,26 +294,22 @@ export const getAllBannersApi = async (baseUrl, headers) => {
 			headers,
 		});
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 
 export const deleteBannerApi = async (baseUrl, id, headers) => {
 	const url = baseUrl + `/offers/banners/remove`;
 	try {
-		return await axios
-			.post(
-				url,
-				{ id },
-				{
-					headers,
-				}
-			)
-			.then((response) => {
-				return response;
-			});
+		return await axios.post(
+			url,
+			{ id },
+			{
+				headers,
+			}
+		);
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 
@@ -344,7 +338,6 @@ export const updateBannersApi = async (baseUrl, newBanner, headers) => {
 				headers,
 			})
 			.then((response) => {
-				console.log(response);
 				return response;
 			});
 	} catch (error) {
@@ -593,7 +586,7 @@ export const productPriceUpdatedLast24HoursApi = async (
 				return blob;
 			});
 	} catch (error) {
-		console.log(error);
+		return error?.response;
 	}
 };
 

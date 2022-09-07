@@ -45,7 +45,6 @@ const UpdateProductPositionCSVAPIComponent = () => {
 		await updateProductPositionCSVApi(baseUrl, file, headers).then(
 			(response) => {
 				setLoading(false);
-				console.log(response);
 				checkStatus(response, "Successfully Submitted updated CSV file");
 			}
 		);

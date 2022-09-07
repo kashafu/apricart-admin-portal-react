@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getGeneralApiParams } from "./../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "./../../../utils/GeneralVariables";
 import { offerSaveApi } from "./../../../utils/ApiCalls";
 import Loading from "./../../../utils/Loading";
 
@@ -26,48 +29,9 @@ const OfferSaveAPIComponent = () => {
 		auth: "noAuthDuplicate",
 	};
 	const handleRadioButton = (e) => {
-		console.log(e.target.value);
 		setInput({ ...input, type: e.target.value });
 	};
-	const checkStatus = (response) => {
-		if (response.status === 200) {
-			toast.success("Offer Saved Successfully", {
-				position: "top-center",
-				autoClose: 850,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: noDuplicate.succ,
-			});
-		}
-		if (response.status !== 200) {
-			if (response.data.error === "Bad Request") {
-				toast.error(
-					"Something went wrong, make sure all the fields filled with correct information",
-					{
-						position: "top-center",
-						autoClose: 850,
-						hideProgressBar: false,
-						closeOnClick: true,
-						draggable: true,
-						theme: "dark",
-						toastId: noDuplicate.bad,
-					}
-				);
-			} else {
-				toast.error(response.data.message, {
-					position: "top-center",
-					autoClose: 850,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: noDuplicate.bad,
-				});
-			}
-		}
-	};
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -93,7 +57,7 @@ const OfferSaveAPIComponent = () => {
 		}
 		const { baseUrl, headers } = getGeneralApiParams();
 		await offerSaveApi(baseUrl, newInput, headers).then((response) => {
-			console.log(response), setLoading(false), checkStatus(response);
+			setLoading(false), checkStatus(response);
 		});
 	};
 	return (

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import FormData from "form-data";
 
 import { saveBannersApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 
@@ -42,39 +43,6 @@ const SaveBannersAPIComponent = () => {
 		bannerData.append("level", level);
 		bannerData.append("city", city);
 		bannerData.append("lang", "en");
-	};
-
-	const checkStatus = (res) => {
-		if (res.status === 400)
-			toast.error("Please Fill all the fields with valid data", {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
-		else if (res.status !== 200)
-			toast.error(res.data.message, {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
-		else if (res.status === 200)
-			toast.success(res.data.message, {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
 	};
 
 	const submitHandler = async (e) => {

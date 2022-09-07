@@ -10,7 +10,6 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 		userId: "Loading",
 	});
 	function getUserData() {
-		console.log("Funct called");
 		cookies.get("cookies-token");
 		setUserData({
 			...userData,

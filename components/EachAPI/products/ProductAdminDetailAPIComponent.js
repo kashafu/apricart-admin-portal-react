@@ -73,7 +73,6 @@ const ProductAdminDetailAPIComponent = () => {
 
 			<section>
 				{detail?.map((each) => {
-					console.log(each);
 					return (
 						<div key={each.sku} className="flex w-full">
 							<div className="w-1/3">

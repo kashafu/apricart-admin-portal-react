@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import FormData from "form-data";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
@@ -52,31 +55,6 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 		file.append("files", csv);
 	};
 
-	const checkStatus = (res) => {
-		console.log(res);
-		if (res.status === 200) {
-			toast.success("File Uploaded", {
-				position: "top-left",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: ren,
-			});
-		} else {
-			toast.error(res.data.message, {
-				position: "top-left",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: ren,
-			});
-		}
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -85,7 +63,7 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 		await addUpdateProductCSVApi(baseUrl, apiToken, file, headers).then(
 			(response) => {
 				setLoading(false);
-				checkStatus(response);
+				checkStatus(response, "File Upload Successful");
 			}
 		);
 	};

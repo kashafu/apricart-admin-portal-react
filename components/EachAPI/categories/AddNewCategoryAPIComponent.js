@@ -32,7 +32,6 @@ const AddNewCategoryAPIComponent = () => {
 	};
 	const handleImage = (e) => {
 		const { files } = e.target;
-		console.log(files);
 		setInputs({ ...inputs, categoryImage: files[0] });
 	};
 	const fillFormData = () => {

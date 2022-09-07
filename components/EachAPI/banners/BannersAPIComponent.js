@@ -6,32 +6,22 @@ import { useRouter } from "next/router";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import { getAllBannersApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import EachBannerRenderComponent from "./EachBannerRenderComponent";
 const BannersAPIComponent = () => {
 	const [banners, setBanners] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
-	const checkStatus = (res) => {
-		if (res.status === 200) setBanners(res.data.data);
-		else if (res.status !== 200)
-			toast.error(res.data.message, {
-				position: "top-center",
-				autoClose: 1800,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: "errorId",
-			});
-	};
-
 	const fetchBannerData = async () => {
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllBannersApi(baseUrl, headers).then((response) => {
-			checkStatus(response);
+			let status = checkStatus(response);
+			status && setBanners(response.data.data);
 			setLoading(false);
 		});
 	};

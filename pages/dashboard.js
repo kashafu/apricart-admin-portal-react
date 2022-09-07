@@ -16,10 +16,10 @@ const Dashboard = () => {
 	return (
 		<div className="flex">
 			<SideBar apiList={apiList} setApiList={setApiList} />
-			<CustomButton onClick={handleApiList} width={"1/4"}>
+			<CustomButton onClick={handleApiList} width={"1/3"}>
 				Display API List
 			</CustomButton>
-			<CustomButton onClick={handleDisplay} width={"1/4"}>
+			<CustomButton onClick={handleDisplay} width={"1/3"}>
 				Display Profile
 			</CustomButton>
 			<ProfileViewComponent

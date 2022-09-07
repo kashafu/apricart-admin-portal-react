@@ -49,7 +49,6 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 
 	const handleResponse = (response) => {
-		console.log(response);
 		setDetail(response.data.data);
 		getPagination(response.data.total, size);
 		setLoading(false);
@@ -78,22 +77,10 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 
 	const handlePageClick = (event) => {
-		const newOffset = (event.selected * size) % detail.length;
-		console.log(detail.length);
-		console.log(
-			`User requested page number ${event.selected}, which is offset ${newOffset}`
-		);
 		handlePage(event.selected + 1);
 		searchProduct(term, event.selected + 1);
 	};
 
-	useEffect(() => {
-		// Fetch items from another resources.
-		const endOffset = itemOffset + size;
-		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-	}, [itemOffset, size]);
-
-	console.log(totalPages);
 	return (
 		<section>
 			<ReactPaginate

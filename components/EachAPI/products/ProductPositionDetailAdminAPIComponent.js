@@ -43,7 +43,6 @@ const ProductPositionDetailAdminAPIComponent = () => {
 			type,
 			headers
 		).then((response) => {
-			console.log(response);
 			let status = checkStatus(response, "Product Position Detail Fetched");
 			status
 				? setDetail(response.data.data)
@@ -51,7 +50,6 @@ const ProductPositionDetailAdminAPIComponent = () => {
 			setLoading(false);
 		});
 	};
-	console.log(detail);
 	return (
 		<div>
 			<Loading loading={loading} />

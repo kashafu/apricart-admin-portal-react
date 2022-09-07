@@ -6,14 +6,17 @@ import FormData from "form-data";
 import { updateProductCSVApi } from "../../../utils/ApiCalls";
 import CustomInput from "../../Misc/CustomInput";
 import CustomButton from "../../Misc/CustomButton";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 
 const UpdateProductCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
 	const [ren, setRen] = useState("");
 	const [apiToken, setApiToken] = useState("");
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	var file = new FormData();
 
 	// updating the ren state causes the input tag to re render and delete whatever file was given to it
@@ -45,31 +48,6 @@ const UpdateProductCSVAPIComponent = () => {
 		file.append("files", csv);
 	};
 
-	const checkStatus = (res) => {
-		console.log(res);
-		if (res.status === 200) {
-			toast.success("File Uploaded", {
-				position: "top-left",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: ren,
-			});
-		} else {
-			toast.error(res.data.message, {
-				position: "top-left",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				draggable: true,
-				theme: "dark",
-				toastId: ren,
-			});
-		}
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -79,7 +57,7 @@ const UpdateProductCSVAPIComponent = () => {
 		await updateProductCSVApi(baseUrl, apiToken, file, headers).then(
 			(response) => {
 				setLoading(false);
-				checkStatus(response);
+				checkStatus(response, "File Upload Successful");
 			}
 		);
 	};
