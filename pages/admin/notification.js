@@ -1,5 +1,5 @@
 import React from "react";
-import NewNotificationSendAPIComponent from "../components/EachAPI/other/NewNotificationSendAPIComponent";
+import NewNotificationSendAPIComponent from "../../components/EachAPI/other/NewNotificationSendAPIComponent";
 const SendNotification = () => {
 	return (
 		<div>

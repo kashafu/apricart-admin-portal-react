@@ -1,5 +1,5 @@
 import React from "react";
-import AddnUpdateProductPositionCSVAPIComponent from "../../../components/EachAPI/products/AddnUpdateProductPositionCSVAPIComponent";
+import AddnUpdateProductPositionCSVAPIComponent from "../../../../components/EachAPI/products/AddnUpdateProductPositionCSVAPIComponent";
 const AddnUpdateProductCSV = () => {
 	return (
 		<div>

@@ -1,5 +1,5 @@
 import React from "react";
-import WebUpdateAPIComponent from "../../components/EachAPI/other/WebUpdateAPIComponent";
+import WebUpdateAPIComponent from "../../../components/EachAPI/other/WebUpdateAPIComponent";
 
 const UpdateWeb = () => {
 	return (

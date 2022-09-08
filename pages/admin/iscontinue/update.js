@@ -1,5 +1,5 @@
 import React from "react";
-import IsContinueAPIComponent from "../../components/EachAPI/other/IsContinueAPIComponent";
+import IsContinueAPIComponent from "../../../components/EachAPI/other/IsContinueAPIComponent";
 
 const IsContinue = () => {
 	return (

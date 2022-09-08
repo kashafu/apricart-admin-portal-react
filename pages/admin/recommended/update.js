@@ -1,5 +1,5 @@
 import React from "react";
-import RecommendedUpdateAPIComponent from "../../components/EachAPI/other/RecommendedUpdateAPIComponent";
+import RecommendedUpdateAPIComponent from "../../../components/EachAPI/other/RecommendedUpdateAPIComponent";
 
 const UpdateRecommended = () => {
 	return (
