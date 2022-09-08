@@ -243,6 +243,26 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 	}
 };
 
+export const downloadOutOfStockApi = async (baseUrl, summary, headers) => {
+	const url =
+		baseUrl + `/admin/download/products/outofstock?summary=${summary}`;
+	const dateString1 = moment(Date.now()).format("YYYY-MM-DD");
+	try {
+		axios
+			.get(url, {
+				headers: { ...headers, "Content-Type": "text/csv" },
+				responseType: "blob",
+			})
+			.then((blob) => {
+				// fileDownload(blob.data, `User_Report_${dateString1}.csv`);
+				FileSaver.saveAs(blob.data, `Products_Out_Of_Stock_${dateString1}.csv`);
+				return blob;
+			});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
 export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
 	let entries = file.entries().next();
 	const { value } = entries;
@@ -287,6 +307,25 @@ export const addUpdateProductCSVApi = async (
 		return await axios.post(url, file, {
 			...headers,
 			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const productIsActiveApi = async (
+	baseUrl,
+	sku,
+	state,
+	warehouseId,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/admin/products/activeinactive?sku=${sku}&state=${state}&warehouse_ids=${warehouseId}`;
+	try {
+		return await axios.get(url, {
+			headers,
 		});
 	} catch (error) {
 		return error?.response;
