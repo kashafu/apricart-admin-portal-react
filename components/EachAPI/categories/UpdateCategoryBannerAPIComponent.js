@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import CustomInput from "../../Misc/CustomInput";
 import FormData from "form-data";
 
-import {
-	saveBannersApi,
-	updateCategoryBannerApi,
-} from "../../../utils/ApiCalls";
+import { updateCategoryBannerApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,

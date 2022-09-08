@@ -1,5 +1,5 @@
 import React from "react";
-import ProductAdminDetailAPIComponent from "../components/EachAPI/products/ProductAdminDetailAPIComponent";
+import ProductAdminDetailAPIComponent from "../../components/EachAPI/products/ProductAdminDetailAPIComponent";
 
 const ProductAdminDetail = () => {
 	return (

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const SideBar = ({ apiList, setApiList, allApis }) => {
@@ -27,7 +28,9 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 							key={i}
 							className="font-bold py-2 cursor-pointer hover:bg-main-blue hover:text-white hover:rounded-xl duration-300 transition-all"
 						>
-							{api.name}
+							<Link href={api.endpoint}>
+								<a>{api.name}</a>
+							</Link>
 						</div>
 					))}
 				</div>
