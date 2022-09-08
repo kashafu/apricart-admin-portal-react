@@ -15,8 +15,8 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
-		prodType: "",
-		city: "",
+		prodType: "cus",
+		city: "karachi",
 		type: "offer",
 		value: 0,
 	});
@@ -44,14 +44,12 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	const submitHandler = async (e) => {
 		setLoading(true);
 		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl } = getGeneralApiParams();
 		await fillFormData();
-		await popupRedirectionUpdateApi(baseUrl, bannerData, headers).then(
-			(response) => {
-				checkStatus(response);
-				setLoading(false);
-			}
-		);
+		await popupRedirectionUpdateApi(baseUrl, bannerData).then((response) => {
+			checkStatus(response);
+			setLoading(false);
+		});
 	};
 	return (
 		<section>

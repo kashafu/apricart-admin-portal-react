@@ -530,7 +530,7 @@ export const productAdminDetailApi = async (
 	}
 };
 
-export const popupRedirectionUpdateApi = async (baseUrl, banner, headers) => {
+export const popupRedirectionUpdateApi = async (baseUrl, banner) => {
 	let url = baseUrl + "/admin/popup/redirection/update";
 	try {
 		return await axios.post(url, banner, {
