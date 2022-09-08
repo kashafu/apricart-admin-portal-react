@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateCategoryBannerAPIComponent from "../components/EachAPI/categories/UpdateCategoryBannerAPIComponent";
+import UpdateCategoryBannerAPIComponent from "../../../../components/EachAPI/categories/UpdateCategoryBannerAPIComponent";
 
 const UpdateCategoryBanner = () => {
 	return (

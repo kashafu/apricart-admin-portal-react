@@ -1,5 +1,5 @@
 import React from "react";
-import OfferSaveAPIComponent from "../components/EachAPI/other/OfferSaveAPIComponent";
+import OfferSaveAPIComponent from "../../components/EachAPI/other/OfferSaveAPIComponent";
 
 const OfferSave = () => {
 	return (

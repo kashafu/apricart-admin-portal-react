@@ -1,5 +1,5 @@
 import React from "react";
-import GetAbundantCartReportsAPIComponent from "../components/EachAPI/downloads/GetAbundantCartReportsAPIComponent";
+import GetAbundantCartReportsAPIComponent from "../../components/EachAPI/downloads/GetAbundantCartReportsAPIComponent";
 
 const AbundantReports = () => {
 	return (

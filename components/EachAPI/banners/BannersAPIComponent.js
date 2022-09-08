@@ -25,7 +25,7 @@ const BannersAPIComponent = () => {
 	};
 
 	const handleAddBanner = () => {
-		router.push("/addbanner");
+		router.push("/offer/banners/save");
 	};
 
 	useEffect(() => {
