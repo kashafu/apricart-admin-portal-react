@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Router from "next/router";
 
 export const getGeneralApiParams = () => {
 	const cookies = new Cookies();
@@ -77,7 +78,6 @@ export const checkStatus = (
 ) => {
 	if (res.status === 200) {
 		if (successMessage === "") return true;
-
 		toast.success(successMessage || res.data.message, {
 			position: "top-center",
 			autoClose: successTimer || 1500,
@@ -116,6 +116,18 @@ export const checkStatus = (
 				toastId: "errorId",
 			}
 		);
+		return false;
+	} else if (res.status === 401 || res.status === 406) {
+		toast.error(errorMessage || "You are unauthorized to access this feature", {
+			position: "top-center",
+			autoClose: errorTimer || 1500,
+			hideProgressBar: false,
+			closeOnClick: true,
+			draggable: true,
+			theme: "dark",
+			toastId: "errorId",
+		});
+		Router.push("/login");
 		return false;
 	} else if (res.status !== 200) {
 		toast.error(errorMessage || res.data.message, {

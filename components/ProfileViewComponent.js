@@ -29,7 +29,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 			<div
 				className={
 					profileDisplay
-						? "bg-orange-500 w-80 relative text-center h-screen rounded-tl-xl p-2"
+						? "bg-gray-100 w-80 relative text-center h-screen rounded-tl-xl p-2"
 						: "hidden"
 				}
 			>
@@ -37,7 +37,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 				<h2>{userData.userName}</h2>
 				<div>{userData.email}</div>
 				<div>+{userData.phoneNumber}</div>
-				<div className="bg-red-300 absolute">
+				<div className="top-0 absolute">
 					<button onClick={() => setProfileDisplay(!profileDisplay)}>
 						<p className="text-[45px]">&gt;</p>
 					</button>

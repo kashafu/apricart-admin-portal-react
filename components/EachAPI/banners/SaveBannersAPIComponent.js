@@ -9,7 +9,20 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 
-const SaveBannersAPIComponent = () => {
+export async function getServerSideProps({ params, req }) {
+	const post = await githubCms.getPost(params.slug);
+	const referer = req.headers.referer || null;
+
+	console.log("referer");
+	return {
+		props: {
+			post,
+			referer,
+		},
+	};
+}
+
+const SaveBannersAPIComponent = ({ post, referer }) => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
@@ -84,14 +97,22 @@ const SaveBannersAPIComponent = () => {
 					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
 					placeholder="Offer ID"
 				/>
-				<input
-					value={level}
-					onChange={(e) => setInput({ ...input, level: e.target.value })}
-					type="number"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
-					placeholder="Level"
-				/>
+				<select
+					onChange={(e) => {
+						setInput({ ...input, level: e.target.value });
+					}}
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+				>
+					<option disabled value="">
+						Level
+					</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
 				<select
 					onChange={(e) => {
 						setInput({ ...input, city: e.target.value });

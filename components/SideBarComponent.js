@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 const SideBar = ({ apiList, setApiList, allApis }) => {
+	const router = useRouter();
+
+	const handleRoute = (endpoint) => {
+		router.push(endpoint);
+	};
+
 	return (
-		<section className="fixed h-full overflow-y-auto overflow-x-hidden left-0 bg-orange-500">
-			<div className="bg-red-300 absolute right-0 z-10">
+		<section className="fixed h-screen overflow-y-auto overflow-x-hidden left-0 bg-gray-100">
+			<div className=" absolute right-8 z-10">
 				<button onClick={() => setApiList(!apiList)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +25,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 			<div
 				className={
 					apiList
-						? " w-80 relative text-center h-screen rounded-tr-xl p-2"
+						? " w-80 relative text-center h-screen rounded-tr-xl p-2 overflow-y-auto"
 						: "hidden"
 				}
 			>
@@ -26,11 +33,11 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 					{allApis.map((api, i) => (
 						<div
 							key={i}
-							className="font-bold py-2 cursor-pointer hover:bg-main-blue hover:text-white hover:rounded-xl duration-300 transition-all"
+							className="font-bold py-2 cursor-pointer hover:bg-main-blue hover:text-white hover:rounded-xl duration-300 transition-all flex overflow-y-auto"
+							onClick={() => handleRoute(api.endpoint)}
 						>
-							<Link href={api.endpoint}>
-								<a>{api.name}</a>
-							</Link>
+							<p>{i + 1 + " "}</p>
+							<p>{api.name}</p>
 						</div>
 					))}
 				</div>
