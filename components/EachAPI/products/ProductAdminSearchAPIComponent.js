@@ -129,11 +129,7 @@ const ProductAdminSearchAPIComponent = () => {
 				/>
 			</form>
 			<div className="rounded-none my-2">
-				{loading && <p className="text-black">Searching...</p>}
-				{/* {pagination.map((each) => {
-					return each;
-				})} */}
-				{}
+				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
 			<section>
 				<div></div>
@@ -144,14 +140,6 @@ const ProductAdminSearchAPIComponent = () => {
 								key={each.id}
 								className="flex w-full p-1 border-2 border-main-blue rounded-xl my-2"
 							>
-								<div className="p-2">
-									<Image
-										src={each.productImageUrl}
-										alt={"Image Thumbnail"}
-										width={"450px"}
-										height={"450px"}
-									/>
-								</div>
 								<div className="w-1/3">
 									<div className="font-bold font-nunito py-1">Id:</div>
 									<div className="font-bold font-nunito py-1">SKU:</div>
@@ -183,6 +171,14 @@ const ProductAdminSearchAPIComponent = () => {
 									<div className="py-1"> {each.categoryleafName || "-"}</div>
 									<div className="py-1"> {each.currentPrice || "-"}</div>
 									<div className="py-1"> {each.inStock ? "Yes" : "No"}</div>
+								</div>
+								<div className="p-2">
+									<Image
+										src={each.productImageUrl}
+										alt={"Image Thumbnail"}
+										width={"450px"}
+										height={"450px"}
+									/>
 								</div>
 							</div>
 						);

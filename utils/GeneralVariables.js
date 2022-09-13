@@ -117,7 +117,7 @@ export const checkStatus = (
 			}
 		);
 		return false;
-	} else if (res.status === 401 || res.status === 406) {
+	} else if (res.status === 401) {
 		console.log(res);
 		toast.error(errorMessage || "You are unauthorized to access this feature", {
 			position: "top-center",

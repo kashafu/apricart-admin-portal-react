@@ -752,3 +752,15 @@ export const updateWelcomeVideoApi = async (baseUrl, link, headers) => {
 		return error.response;
 	}
 };
+
+export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
+	let url = baseUrl + "/admin/thankyou/image";
+	try {
+		return await axios.post(url, thankyouData, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
