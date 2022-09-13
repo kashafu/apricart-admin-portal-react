@@ -741,3 +741,14 @@ export const updateCategoryImageApi = async (baseUrl, banner) => {
 		return error?.response;
 	}
 };
+
+export const updateWelcomeVideoApi = async (baseUrl, link, headers) => {
+	const url = baseUrl + `/admin/video/welcome/update?url=${link}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error.response;
+	}
+};

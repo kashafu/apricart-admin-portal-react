@@ -20,6 +20,7 @@ const Dashboard = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
+			status && console.log(response);
 			status && setAllApis(response.data.data.apis);
 		});
 	};
