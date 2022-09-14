@@ -27,7 +27,6 @@ export const loginApi = async (
 		let response = await axios.post(url, body, {
 			headers,
 		});
-		console.log(response);
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
 				return {
@@ -37,11 +36,13 @@ export const loginApi = async (
 					},
 				};
 			}
-			cookies.set("cookies-token", response.data.data.token);
-			cookies.set("cookies-name", response.data.data.name);
-			cookies.set("cookies-email", response.data.data.email);
-			cookies.set("cookies-phoneNumber", response.data.data.phoneNumber);
-			cookies.set("cookies-userId", response.data.data.userId);
+			cookies.set("cookies-token", response.data.data.token, { path: "/" });
+			cookies.set("cookies-name", response.data.data.name, { path: "/" });
+			cookies.set("cookies-email", response.data.data.email, { path: "/" });
+			cookies.set("cookies-phoneNumber", response.data.data.phoneNumber, {
+				path: "/",
+			});
+			cookies.set("cookies-userId", response.data.data.userId, { path: "/" });
 			setErrorMessage("");
 			router.push("/dashboard");
 			return response;

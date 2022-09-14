@@ -14,8 +14,8 @@ function CustomButton({ onClick, width, position, children, disabled }) {
 				type="submit"
 				className={
 					disabled
-						? `my-2 w-${width} py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-gray-300 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue`
-						: `my-2 w-${width} py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue`
+						? `my-2 w-${width} py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-gray-300 duration-300 transition-all`
+						: `my-2 w-${width} py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all`
 				}
 				onClick={(e) => onClick(e)}
 				disabled={disabled}

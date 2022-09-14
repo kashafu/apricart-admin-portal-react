@@ -118,7 +118,6 @@ export const checkStatus = (
 		);
 		return false;
 	} else if (res.status === 401) {
-		console.log(res);
 		toast.error(errorMessage || "You are unauthorized to access this feature", {
 			position: "top-center",
 			autoClose: errorTimer || 1500,
@@ -177,3 +176,19 @@ export function displayInfoToast(message, timer, position) {
 		toastId: "genInfoId",
 	});
 }
+
+function removeCookie(name) {
+	const cookies = new Cookies();
+	cookies.remove(name, { path: "/" });
+}
+
+export const logOutRemoveCookies = () => {
+	removeCookie("cookies-token");
+	removeCookie("cookies-userId");
+	removeCookie("cookies-name");
+	removeCookie("cookies-phoneNumber");
+	removeCookie("cookies-email");
+	removeCookie("user-initialized");
+
+	localStorage.clear();
+};
