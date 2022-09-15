@@ -1,21 +1,13 @@
 import React from "react";
 
-function CustomInput({
-	type,
+const CustomSingleImageInput = ({
+	heading,
+	name,
 	onChange,
-	value,
+	ren,
 	width,
 	position,
-	min,
-	max,
-	required,
-	placeholder,
-	name,
-	accept,
-	disabled,
-	heading,
-}) {
-	// give parent width in 1/2 -> 1/6
+}) => {
 	let className;
 	// position types create rounded border based on the position of the input field
 	width ? width : (width = "full");
@@ -31,26 +23,26 @@ function CustomInput({
 	}
 
 	return (
-		<div className="w-full flex justify-center items-center">
-			<div className={`w-${width} flex flex-col`}>
-				<div>
-					<p className="ml-2 font-nunito">{heading}</p>
+		<div>
+			<div className="w-full flex justify-center items-center">
+				<div className={`w-${width} flex flex-col`}>
+					<div>
+						<p className="ml-2 font-nunito">{heading}</p>
+					</div>
+					<input
+						placeholder="Category Image"
+						name={name}
+						type={"file"}
+						required
+						className={className}
+						accept="image/png, image/gif, image/jpeg, image/jpg"
+						onChange={onChange}
+						key={ren}
+					/>
 				</div>
-				<input
-					disabled={disabled}
-					placeholder={placeholder}
-					required={required}
-					min={min}
-					max={max}
-					type={type}
-					className={className}
-					onChange={onChange}
-					value={value}
-					name={name}
-				/>
 			</div>
 		</div>
 	);
-}
+};
 
-export default CustomInput;
+export default CustomSingleImageInput;

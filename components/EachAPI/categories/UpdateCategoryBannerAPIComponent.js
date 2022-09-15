@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 import CustomInput from "../../Misc/CustomInput";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 import FormData from "form-data";
-
 import { updateCategoryBannerApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
+	updateRen,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
@@ -14,6 +17,7 @@ import CustomButton from "../../Misc/CustomButton";
 const UpdateCategoryBannerAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
+	const [ren, setRen] = useState(false);
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
@@ -22,13 +26,28 @@ const UpdateCategoryBannerAPIComponent = () => {
 	const { bannerUrlApp, bannerUrlWeb, categoryId } = input;
 
 	const handleWebImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlWeb: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlWeb: [verify] });
+		} else {
+			setInput({ ...input, bannerUrlWeb: "" });
+			updateRen(setRen);
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
-
 	const handleAppImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlApp: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlApp: [verify] });
+		} else {
+			setInput({ ...input, bannerUrlApp: "" });
+			updateRen(setRen);
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 
 	const handleCategoryId = (e) => {
@@ -57,11 +76,24 @@ const UpdateCategoryBannerAPIComponent = () => {
 			<form action="" method="POST">
 				<CustomInput
 					type={"number"}
+					position={"top"}
 					onChange={(e) => handleCategoryId(e)}
 					placeholder={"Category ID"}
+					heading={"Category ID"}
 					value={categoryId}
 				/>
-				<div>
+				<CustomSingleImageInput
+					heading={"Upload Web Banner"}
+					onChange={(e) => handleWebImage(e)}
+					ren={ren}
+				/>
+				<CustomSingleImageInput
+					heading={"Upload App Banner"}
+					onChange={(e) => handleAppImage(e)}
+					position={"bottom"}
+					ren={ren}
+				/>
+				{/* <div>
 					<label htmlFor="img" className="m-4">
 						Upload Web Banner
 					</label>
@@ -84,7 +116,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 						accept="image/png, image/gif, image/jpeg, image/jpg"
 						onChange={(e) => handleAppImage(e)}
 					/>
-				</div>
+				</div> */}
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Update Category Banner

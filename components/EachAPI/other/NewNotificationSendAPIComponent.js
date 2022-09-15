@@ -64,9 +64,10 @@ const NewNotificationSendAPIComponent = () => {
 		});
 	};
 	return (
-		<div>
+		<div className="font-nunito">
 			<form action="" method="POST">
 				<CustomInput
+					heading={"Offer"}
 					position={"top"}
 					type={"text"}
 					value={type}
@@ -75,6 +76,7 @@ const NewNotificationSendAPIComponent = () => {
 					placeholder={"Offer"}
 				/>
 				<CustomInput
+					heading={"Value"}
 					type={"number"}
 					value={value}
 					onChange={handleValue}
@@ -83,6 +85,7 @@ const NewNotificationSendAPIComponent = () => {
 					placeholder={"Value"}
 				/>
 				<CustomInput
+					heading={"Title"}
 					type={"text"}
 					value={title}
 					onChange={handleTitle}
@@ -90,23 +93,28 @@ const NewNotificationSendAPIComponent = () => {
 					placeholder={"Title"}
 				/>
 				<CustomInput
+					heading={"Message"}
 					type={"text"}
 					value={message}
 					onChange={handleMessage}
 					required={true}
 					placeholder={"Message"}
 				/>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					onChange={(e) => handleTo(e)}
-					required={true}
-				>
-					<option value="alldev">All Devices</option>
-					<option value="">Individual</option>
-				</select>
+				<div>
+					<p>Select Recipient Type</p>
+					<select
+						className="appearance-none rounded-none relative block w-full px-3 py-2 border  border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+						onChange={(e) => handleTo(e)}
+						required={true}
+					>
+						<option value="alldev">All Devices</option>
+						<option value="">Individual</option>
+					</select>
+				</div>
 
 				{toState && (
 					<CustomInput
+						heading={"Enter City"}
 						position={"bottom"}
 						type={"text"}
 						value={city}
@@ -117,6 +125,7 @@ const NewNotificationSendAPIComponent = () => {
 				)}
 				{!toState && (
 					<CustomInput
+						heading={"Enter Recipient"}
 						position={"bottom"}
 						type={"text"}
 						value={to}

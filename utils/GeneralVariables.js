@@ -194,3 +194,19 @@ export const logOutRemoveCookies = () => {
 	localStorage.clear();
 	getGeneralApiParams();
 };
+
+export const imgAllowedTypes = [
+	"image/png",
+	"image/gif",
+	"image/jpeg",
+	"image/jpg",
+];
+
+export const validateImage = (image) => {
+	if (image === undefined) return;
+	if (imgAllowedTypes.includes(image.type)) return true;
+	else return false;
+};
+export const updateRen = (setRen) => {
+	setRen(Math.random().toString(36));
+};

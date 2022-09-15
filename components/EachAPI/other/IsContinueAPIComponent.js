@@ -49,24 +49,28 @@ const IsContinueAPIComponent = () => {
 	return (
 		<div>
 			<CustomInput
+				heading={"Enter Text"}
 				position={"top"}
 				type={"text"}
 				value={text}
 				onChange={handleText}
 				required={true}
 			/>
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleProdType(e)}
-			>
-				<option disabled>Product Type</option>
-				<option value="cus">Customer (cus)</option>
-				<option value="b2b">Bulk Buy (b2b)</option>
-			</select>
+			<div>
+				<p className="font-nunito">Product Type</p>
+				<select
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					placeholder="Product Type"
+					onChange={(e) => handleProdType(e)}
+				>
+					<option disabled>Product Type</option>
+					<option value="cus">Customer (cus)</option>
+					<option value="b2b">Bulk Buy (b2b)</option>
+				</select>
+			</div>
 
 			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
 				placeholder="Product Type"
 				onChange={(e) => handleOrderType(e)}
 			>
@@ -78,7 +82,7 @@ const IsContinueAPIComponent = () => {
 			</select>
 
 			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
 				placeholder="Product Type"
 				onChange={(e) => handleCity(e)}
 			>

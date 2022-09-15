@@ -7,6 +7,7 @@ import {
 } from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const WebUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -42,46 +43,56 @@ const WebUpdateAPIComponent = () => {
 
 	return (
 		<div>
+			<Heading>Update Web</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}
 				value={text}
 				onChange={handleText}
 				required={true}
-				placeholder={"Enter SKU's comma separated"}
+				heading={"Enter SKU's comma separated"}
 			/>
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleProdType(e)}
-			>
-				<option disabled defaultChecked>
-					Product Type
-				</option>
-				<option value="cus">Customer (cus)</option>
-				<option value="b2b">Bulk Buy (b2b)</option>
-			</select>
+			<div>
+				<p>Select Product Type</p>
+				<select
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border  border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					placeholder="Product Type"
+					onChange={(e) => handleProdType(e)}
+				>
+					<option disabled defaultChecked>
+						Product Type
+					</option>
+					<option value="cus">Customer (cus)</option>
+					<option value="b2b">Bulk Buy (b2b)</option>
+				</select>
+			</div>
 
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleOrderType(e)}
-			>
-				<option disabled defaultChecked>
-					Order Type
-				</option>
-				<option value="delivery">Delivery</option>
-				<option value="pickup">Pick up</option>
-			</select>
+			<div>
+				<p>Select Order Type</p>
+				<select
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border  border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					placeholder="Product Type"
+					onChange={(e) => handleOrderType(e)}
+				>
+					<option disabled defaultChecked>
+						Order Type
+					</option>
+					<option value="delivery">Delivery</option>
+					<option value="pickup">Pick up</option>
+				</select>
+			</div>
 
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleCity(e)}
-			>
-				<option value="karachi">Karachi</option>
-				<option value="peshawar">Peshawar</option>
-			</select>
+			<div>
+				<p>Select City</p>
+				<select
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-xl border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					placeholder="Product Type"
+					onChange={(e) => handleCity(e)}
+				>
+					<option value="karachi">Karachi</option>
+					<option value="peshawar">Peshawar</option>
+				</select>
+			</div>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Message
 			</CustomButton>

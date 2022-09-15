@@ -7,6 +7,7 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const ProductAdminDetailAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -38,7 +39,7 @@ const ProductAdminDetailAPIComponent = () => {
 				if (status) {
 					setDetail([response.data.data]);
 					setWarehouses(response.data.data.warehouses);
-				}
+				} else setWarehouses();
 				setLoading(false);
 			}
 		);
@@ -47,23 +48,28 @@ const ProductAdminDetailAPIComponent = () => {
 	return (
 		<section>
 			<Loading loading={loading} />
+			<Heading>Product Admin Detail</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}
 				value={id}
 				onChange={handleId}
 				required={true}
-				placeholder={"Enter SKU"}
+				placeholder={"eg. APR-0000-10"}
+				heading={"Enter SKU"}
 			/>
-			<select
-				value={city}
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleCity(e)}
-			>
-				<option value="karachi">Karachi</option>
-				<option value="peshawar">Peshawar</option>
-			</select>
+			<div>
+				<p>Select City</p>
+				<select
+					value={city}
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					placeholder="Product Type"
+					onChange={(e) => handleCity(e)}
+				>
+					<option value="karachi">Karachi</option>
+					<option value="peshawar">Peshawar</option>
+				</select>
+			</div>
 			<CustomInput
 				type={"number"}
 				position={"bottom"}
@@ -71,7 +77,8 @@ const ProductAdminDetailAPIComponent = () => {
 				value={warehouseId}
 				onChange={handleWarehouse}
 				required={true}
-				placeholder={"Warehouse Number"}
+				placeholder={"eg. 9"}
+				heading={"Enter Warehouse Number"}
 			/>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Query
@@ -118,9 +125,9 @@ const ProductAdminDetailAPIComponent = () => {
 				</section>
 				<h1 className="text-center font-bold">Warehouses</h1>
 				<section className="py-2">
-					{warehouses?.map((each) => {
+					{warehouses?.map((each, i) => {
 						return (
-							<>
+							<section key={i}>
 								<h3 className="text-center">
 									Warehouse number : {each.warehouseInfo}
 								</h3>
@@ -166,7 +173,7 @@ const ProductAdminDetailAPIComponent = () => {
 										<div className="py-1"> {each.active ? "Yes" : "No"}</div>
 									</div>
 								</div>
-							</>
+							</section>
 						);
 					})}
 				</section>

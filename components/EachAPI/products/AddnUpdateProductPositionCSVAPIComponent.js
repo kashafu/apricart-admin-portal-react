@@ -14,6 +14,7 @@ import {
 	updateProductPositionCSVApi,
 } from "../../../utils/ApiCalls";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const AddnUpdateProductPositionCSVAPIComponent = () => {
 	const [apiToken, setApiToken] = useState("");
@@ -61,8 +62,10 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 	return (
 		<section>
 			<Loading loading={loading} />
+			<Heading>Add and Update Product Position CSV</Heading>
 			<form action="" method="POST">
 				<CustomInput
+					heading={"Enter API Token"}
 					value={apiToken}
 					onChange={(e) => handleApiToken(e)}
 					position={"top"}

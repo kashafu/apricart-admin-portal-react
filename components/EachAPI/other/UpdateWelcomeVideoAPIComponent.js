@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { updateWelcomeVideoApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
@@ -6,6 +7,7 @@ import {
 } from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const UpdateWelcomeVideoAPIComponent = () => {
 	const [link, setLink] = useState("");
@@ -22,10 +24,10 @@ const UpdateWelcomeVideoAPIComponent = () => {
 
 	return (
 		<div>
-			<h2 className="font-nunito py-2">Update Welcome Video</h2>
+			<Heading>Update Welcome Video</Heading>
 			<CustomInput
-				placeholder={"Enter Video URL"}
-				position={"top"}
+				heading={"Enter Video URL"}
+				placeholder={"eg. http://youtube.com/video-link"}
 				value={link}
 				onChange={(e) => {
 					handleLink(e);

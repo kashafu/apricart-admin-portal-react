@@ -4,14 +4,20 @@ import FormData from "form-data";
 import { addCategoryApi, updateCategoryApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
+	imgAllowedTypes,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
 const AddNewCategoryAPIComponent = () => {
 	var categoryData = new FormData();
+	const [ren, setRen] = useState("");
 	const [inputs, setInputs] = useState({
 		name: "",
 		position: 1,
@@ -30,9 +36,20 @@ const AddNewCategoryAPIComponent = () => {
 	const handleParentId = (e) => {
 		setInputs({ ...inputs, parentId: e.target.value });
 	};
+	const updateRen = () => {
+		setRen(Math.random().toString(36));
+	};
 	const handleImage = (e) => {
-		const { files } = e.target;
-		setInputs({ ...inputs, categoryImage: files[0] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInputs({ ...inputs, categoryImage: verify });
+		} else {
+			setInputs({ ...inputs, categoryImage: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 	const fillFormData = () => {
 		categoryData.append("category_image", categoryImage);
@@ -61,33 +78,40 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<div>
+		<section>
 			<Loading loading={loading} />
+			<Heading>Add New Category</Heading>
 			<form action="" method="POST">
 				<CustomInput
+					heading={"Category Name"}
 					placeholder={"Category Name"}
 					value={name}
 					onChange={(e) => handleName(e)}
 					position={"top"}
 				/>
 				<CustomInput
-					placeholder={"Category Position"}
+					type={"number"}
+					min={0}
+					heading={"Category Position"}
+					placeholder={"Category Position eg. 5"}
 					value={position}
 					onChange={(e) => handlePosition(e)}
 				/>
 				<CustomInput
-					placeholder={"Category's Parent Id"}
+					type={"number"}
+					min={0}
+					placeholder={"Category's Parent Id eg. 5"}
+					heading={"Parent Id"}
 					value={parentId}
 					onChange={(e) => handleParentId(e)}
 				/>
-				<input
-					placeholder="Category Image"
-					name="img"
-					type={"file"}
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					accept="image/png, image/gif, image/jpeg, image/jpg"
-					onChange={(e) => handleImage(e)}
+				<CustomSingleImageInput
+					position={"bottom"}
+					heading={"Category Image"}
+					onChange={(e) => {
+						handleImage(e);
+					}}
+					ren={ren}
 				/>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
@@ -98,7 +122,7 @@ const AddNewCategoryAPIComponent = () => {
 					</CustomButton>
 				</div>
 			</form>
-		</div>
+		</section>
 	);
 };
 
