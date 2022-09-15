@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }) {
 	const [apiList, setApiList] = useState(false);
 	const [allApis, setAllApis] = useState([]);
 	const [loading, setLoading] = useState(true);
+	let token = cookies.get("cookies-token");
 
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -30,8 +31,8 @@ function MyApp({ Component, pageProps }) {
 	};
 
 	useEffect(() => {
-		getSidebarItems();
-	}, []);
+		router.pathname !== "/login" && getSidebarItems();
+	}, [token]);
 	return (
 		<>
 			{router.pathname !== "/login" && <Navbar />}

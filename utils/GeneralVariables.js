@@ -3,13 +3,19 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "next/router";
 
+const updateToken = () => {
+	const cookies = new Cookies();
+	let token = cookies.get("cookies-token");
+	return token;
+};
+
 export const getGeneralApiParams = () => {
 	const cookies = new Cookies();
 	let clientType = "apricart";
 	let prodType = "";
 	let orderType = "";
 	let baseUrl = "https://stag.apricart.pk/v1";
-	let token = cookies.get("cookies-token");
+	let token = updateToken();
 	let city = cookies.get("cities") === null ? "karachi" : cookies.get("cities");
 	let selectedAddress = cookies.get("selected-address");
 	let latitude = 0;
@@ -177,18 +183,14 @@ export function displayInfoToast(message, timer, position) {
 	});
 }
 
-function removeCookie(name) {
-	const cookies = new Cookies();
-	cookies.remove(name, { path: "/" });
-}
-
 export const logOutRemoveCookies = () => {
-	removeCookie("cookies-token");
-	removeCookie("cookies-userId");
-	removeCookie("cookies-name");
-	removeCookie("cookies-phoneNumber");
-	removeCookie("cookies-email");
-	removeCookie("user-initialized");
-
+	const cookies = new Cookies();
+	cookies.remove("cookies-token", { path: "/" });
+	cookies.remove("cookies-userId", { path: "/" });
+	cookies.remove("cookies-name", { path: "/" });
+	cookies.remove("cookies-phoneNumber", { path: "/" });
+	cookies.remove("cookies-email", { path: "/" });
+	cookies.remove("user-initialized", { path: "/" });
 	localStorage.clear();
+	getGeneralApiParams();
 };
