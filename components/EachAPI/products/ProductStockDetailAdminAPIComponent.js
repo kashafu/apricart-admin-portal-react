@@ -7,6 +7,8 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const ProductStockDetailAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -38,23 +40,23 @@ const ProductStockDetailAdminAPIComponent = () => {
 	return (
 		<section>
 			<Loading loading={loading} />
+			<Heading>Product Stock Detail Admin</Heading>
 			<CustomInput
+				heading={"Enter SKU"}
 				position={"top"}
 				type={"text"}
 				value={id}
 				onChange={handleId}
 				required={true}
-				placeholder={"Enter SKU"}
+				placeholder={"eg. APRA-0000-00"}
 			/>
-			<select
-				value={city}
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
+			<CustomSelectInput
+				position={"bottom"}
 				onChange={(e) => handleCity(e)}
-			>
-				<option value="karachi">Karachi</option>
-				<option value="peshawar">Peshawar</option>
-			</select>
+				heading={"Select City"}
+				values={["karachi", "peshawar"]}
+				options={["Karachi", "Peshawar"]}
+			/>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Query
 			</CustomButton>

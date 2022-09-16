@@ -7,6 +7,7 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
 
 const ProductAdminDetailAPIComponent = () => {
@@ -58,18 +59,12 @@ const ProductAdminDetailAPIComponent = () => {
 				placeholder={"eg. APR-0000-10"}
 				heading={"Enter SKU"}
 			/>
-			<div>
-				<p>Select City</p>
-				<select
-					value={city}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleCity(e)}
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
-			</div>
+			<CustomSelectInput
+				onChange={(e) => handleCity(e)}
+				heading={"Select City"}
+				values={["karachi", "peshawar"]}
+				options={["Karachi", "Peshawar"]}
+			/>
 			<CustomInput
 				type={"number"}
 				position={"bottom"}
@@ -93,31 +88,12 @@ const ProductAdminDetailAPIComponent = () => {
 									<div className="font-bold font-nunito py-1">SKU:</div>
 									<div className="font-bold font-nunito py-1">Title:</div>
 									<div className="font-bold font-nunito py-1">Brand:</div>
-									{/* <div className="font-bold font-nunito py-1">Description:</div>
-								<div className="font-bold font-nunito py-1">Quantity:</div>
-								<div className="font-bold font-nunito py-1">
-									Category Id&apos;s:
-								</div>
-								<div className="font-bold font-nunito py-1">
-									Category Leaf Name:
-								</div>
-								<div className="font-bold font-nunito py-1">Current Price:</div>
-								<div className="font-bold font-nunito py-1">
-									Product In Stock:
-								</div> */}
 								</div>
 								<div className="px-4 bg-main-yellow w-full">
 									<div className="py-1"> {each.barcode || "-"}</div>
 									<div className="py-1"> {each.sku || "-"}</div>
 									<div className="py-1"> {each.title || "-"}</div>
 									<div className="py-1"> {each.brand || "-"}</div>
-									{/* <div className="py-1"> {each.description || "-"}</div>
-								<div className="py-1"> {each.qty || "-"}</div>
-								<div className="py-1"> {each.categoryIds || "-"}</div>
-								<div className="py-1"> {each.categoryleafName || "-"}</div>
-								<div className="py-1"> {each.currentPrice || "-"}</div>
-								<div className="py-1"> {each.inStock ? "Yes" : "No"}</div> 
-							*/}
 								</div>
 							</div>
 						);

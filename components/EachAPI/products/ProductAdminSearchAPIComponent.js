@@ -5,6 +5,8 @@ import ReactPaginate from "react-paginate";
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -83,49 +85,37 @@ const ProductAdminSearchAPIComponent = () => {
 
 	return (
 		<section>
-			<ReactPaginate
-				breakLabel=". . ."
-				nextLabel="Next ->"
-				onPageChange={handlePageClick}
-				pageRangeDisplayed={5}
-				pageCount={totalPages}
-				previousLabel="<- Previous"
-				renderOnZeroPageCount={null}
-				pageClassName="px-2"
-				pageLinkClassName="border-2 p-1 bg-gray-200 border-main-blue rounded-md px-3"
-				previousClassName="font-lato font-bold"
-				nextClassName="font-nunito font-bold"
-				breakClassName="font-bold"
-				breakLinkClassName="text-lato"
-				containerClassName="p-4 justify-between flex"
-				activeClassName="bg-main-blue "
-			/>
+			<Heading>Product Admin Search</Heading>
+
 			<form action="" method="POST">
 				<CustomInput
 					position={"top"}
-					placeholder={"Search Product Name or SKU"}
+					heading={"Search Product Name/SKU"}
+					placeholder={"eg. Oil"}
 					required={true}
 					value={term}
 					onChange={handleTerm}
 				/>
 				<CustomInput
-					placeholder={"Size"}
+					heading={"Enter Size"}
+					placeholder={"Number of items on one page"}
 					value={size}
 					onChange={handleSize}
 					required={true}
 				/>
 				<CustomInput
-					placeholder={"Category"}
+					heading={"Enter Category"}
+					placeholder={"eg. Spices"}
 					required={true}
 					value={category}
 					onChange={handleCategory}
 				/>
-				<CustomInput
+				<CustomSelectInput
 					position={"bottom"}
-					placeholder={"City"}
-					required={true}
-					value={city}
-					onChange={handleCity}
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
 				/>
 			</form>
 			<div className="rounded-none my-2">
@@ -186,6 +176,23 @@ const ProductAdminSearchAPIComponent = () => {
 				) : (
 					<h3 className="font-nunito">No Data could be found</h3>
 				)}
+				<ReactPaginate
+					breakLabel=". . ."
+					nextLabel="Next ->"
+					onPageChange={handlePageClick}
+					pageRangeDisplayed={5}
+					pageCount={totalPages}
+					previousLabel="<- Previous"
+					renderOnZeroPageCount={null}
+					pageClassName="px-2"
+					pageLinkClassName="border-2 p-1 bg-gray-200 border-main-blue rounded-md px-3"
+					previousClassName="font-lato font-bold"
+					nextClassName="font-nunito font-bold"
+					breakClassName="font-bold"
+					breakLinkClassName="text-lato"
+					containerClassName="p-4 justify-between flex"
+					activeClassName="bg-main-blue "
+				/>
 			</section>
 		</section>
 	);

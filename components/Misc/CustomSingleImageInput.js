@@ -23,12 +23,12 @@ const CustomSingleImageInput = ({
 	}
 
 	return (
-		<div>
-			<div className="w-full flex justify-center items-center">
-				<div className={`w-${width} flex flex-col`}>
-					<div>
-						<p className="ml-2 font-nunito">{heading}</p>
-					</div>
+		<div className=" flex justify-center items-center my-1">
+			<div className={`w-${width} grid grid-cols-5`}>
+				<div>
+					<p className="col-span-1 ml-2 font-nunito">{heading}</p>
+				</div>
+				<div className="col-span-3 pr-2">
 					<input
 						placeholder="Category Image"
 						name={name}

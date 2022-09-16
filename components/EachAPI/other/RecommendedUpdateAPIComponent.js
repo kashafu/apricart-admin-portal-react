@@ -7,6 +7,8 @@ import {
 } from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const RecommendedUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -46,6 +48,7 @@ const RecommendedUpdateAPIComponent = () => {
 
 	return (
 		<div className="font-nunito">
+			<Heading>Update Recommended</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}
@@ -54,43 +57,25 @@ const RecommendedUpdateAPIComponent = () => {
 				required={true}
 				heading={"Enter SKU's comma separated"}
 			/>
-			<div>
-				<p>Select Product Type</p>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleProdType(e)}
-				>
-					<option value="cus">Customer (cus)</option>
-					<option value="b2b">Bulk Buy (b2b)</option>
-				</select>
-			</div>
-
-			<div>
-				<p>Select Order Type</p>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleOrderType(e)}
-				>
-					<option disabled defaultChecked>
-						Order Type
-					</option>
-					<option value="delivery">Delivery</option>
-					<option value="pickup">Pick up</option>
-				</select>
-			</div>
-			<div>
-				<p>Select City</p>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 rounded-b-xl py-2 border border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleCity(e)}
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
-			</div>
+			<CustomSelectInput
+				onChange={(e) => handleProdType(e)}
+				heading={"Select Product Type"}
+				values={["cus", "b2b"]}
+				options={["Customer (cus)", "Bulk Buy (b2b)"]}
+			/>
+			<CustomSelectInput
+				onChange={(e) => handleOrderType(e)}
+				heading={"Select Order Type"}
+				values={["delivery", "pickup"]}
+				options={["Delivery", "Pick up"]}
+			/>
+			<CustomSelectInput
+				position={"bottom"}
+				onChange={(e) => handleCity(e)}
+				heading={"Select City"}
+				values={["karachi", "peshawar"]}
+				options={["Karachi", "Peshawar"]}
+			/>
 			<CustomButton onClick={handleSubmit} type={"submit"}>
 				Submit Message
 			</CustomButton>

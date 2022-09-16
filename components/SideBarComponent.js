@@ -52,7 +52,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 			<div
 				className={
 					apiList
-						? "animate-dropdown min-w-max transition-all duration-300 fixed bg-main-blue-100 text-center h-screen rounded-tr-xl py-2 overflow-y-auto scroller"
+						? "animate-dropdown w-[15.5rem] transition-all duration-300 fixed bg-main-blue-100 text-center h-screen rounded-tr-xl py-2 overflow-y-auto scroller"
 						: "transition-all duration-300 fixed -translate-x-[100rem]"
 				}
 			>

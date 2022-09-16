@@ -6,6 +6,8 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const TickerUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -47,50 +49,44 @@ const TickerUpdateAPIComponent = () => {
 	};
 	return (
 		<section>
+			<Heading>Update Ticker Text</Heading>
 			<form action="" method="POST">
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
+				<CustomSelectInput
+					position={"top"}
 					onChange={(e) => handleProdType(e)}
-				>
-					<option disabled>Product Type</option>
-					<option value="cus">Customer (cus)</option>
-					<option value="b2b">Bulk Buy (b2b)</option>
-				</select>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleOrderType(e)}
-				>
-					<option disabled defaultChecked>
-						Order Type
-					</option>
-					<option value="delivery">Delivery</option>
-					<option value="pickup">Pick up</option>
-				</select>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Product Type"
-					onChange={(e) => handleCity(e)}
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
-				<textarea
-					required
-					onChange={(e) => handleText(e)}
-					name="ticker"
-					cols="30"
-					rows="10"
-					className="bg-gray-200 w-full h-56 p-1"
-					value={text}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
 				/>
-
-				<CustomButton
-					onClick={(e) => submitHandler(e)}
-					width="1/3"
-					position={"left"}
-				>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+				<div className="grid grid-cols-5 pr-2">
+					<div className="col-span-1">
+						<p className="ml-2 font-nunito">Enter Ticker Text</p>
+					</div>
+					<textarea
+						className="bg-gray-100 w-full h-56 p-1 col-span-3 placeholder:text-gray-500 border-[1px] border-black rounded-b-xl"
+						required
+						placeholder="eg. Hello Customers Avail 10% off on all categories etc."
+						onChange={(e) => handleText(e)}
+						name="ticker"
+						cols="30"
+						rows="10"
+						maxLength={140}
+						value={text}
+					/>
+				</div>
+				<CustomButton onClick={(e) => submitHandler(e)} width="1/3">
 					Update Ticker
 				</CustomButton>
 			</form>
