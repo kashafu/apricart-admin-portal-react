@@ -6,14 +6,16 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
+import Heading from "../../Misc/Heading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const ProductIsActiveAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		id: "APRA-OB05-01",
 		state: "yes",
-		warehouseId: "",
+		warehouseId: "9",
 	});
 	const [loading, setLoading] = useState(false);
 	const { id, state, warehouseId } = inputs;
@@ -40,35 +42,34 @@ const ProductIsActiveAPIComponent = () => {
 
 	return (
 		<section>
-			<h1>Product Active Inactive</h1>
+			<Heading>Product Active Inactive</Heading>
 			<Loading loading={loading} />
 			<CustomInput
 				position={"top"}
 				type={"text"}
 				value={id}
-				onChange={handleId}
+				onChange={(e) => handleId(e)}
 				required={true}
-				placeholder={"Enter SKU"}
+				placeholder={"eg. APRA-0000-00"}
+				heading={"Enter SKU"}
 			/>
-			<select
-				value={state}
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
+			<CustomSelectInput
+				options={["Yes", "No"]}
+				values={["true", "false"]}
+				heading={"Select Status"}
 				onChange={(e) => handleState(e)}
-			>
-				<option value="true">Yes</option>
-				<option value="false">No</option>
-			</select>
+			/>
 			<CustomInput
 				type={"number"}
 				position={"bottom"}
 				min={0}
 				value={warehouseId}
-				onChange={handleWarehouse}
+				onChange={(e) => handleWarehouse(e)}
 				required={true}
-				placeholder={"Warehouse Number"}
+				placeholder={"eg. 9"}
+				heading={"Warehouse Number"}
 			/>
-			<CustomButton onClick={handleSubmit} type={"submit"}>
+			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Query
 			</CustomButton>
 		</section>

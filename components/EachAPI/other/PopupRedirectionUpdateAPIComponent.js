@@ -5,13 +5,19 @@ import Loading from "../../../utils/Loading";
 import {
 	checkStatus,
 	getGeneralApiParams,
+	updateRen,
 } from "../../../utils/GeneralVariables";
 import { popupRedirectionUpdateApi } from "../../../utils/ApiCalls";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import CustomInput from "../../Misc/CustomInput";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
+import Heading from "../../Misc/Heading";
 
 const PopupRedirectionUpdateAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
+	const [ren, setRen] = useState(false);
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
@@ -23,13 +29,29 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	const { bannerUrlApp, bannerUrlWeb, prodType, type, value, city } = input;
 
 	const handleWebImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlWeb: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlWeb: verify });
+		} else {
+			setInput({ ...input, bannerUrlWeb: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 
 	const handleAppImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlApp: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlApp: verify });
+		} else {
+			setInput({ ...input, bannerUrlApp: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 
 	const fillFormData = () => {
@@ -40,7 +62,12 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		bannerData.append("type", type);
 		bannerData.append("value", value);
 	};
-
+	const handleProdType = (e) => {
+		setInputs({ ...inputs, prodType: e.target.value });
+	};
+	const handleCity = (e) => {
+		setInputs({ ...inputs, city: e.target.value });
+	};
 	const submitHandler = async (e) => {
 		setLoading(true);
 		e.preventDefault();
@@ -54,66 +81,47 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	return (
 		<section>
 			{<Loading loading={loading} />}
+			<Heading>Update Popup Redirection</Heading>
 			<form action="" method="POST">
-				<select
-					onChange={(e) => {
-						setInput({ ...input, prodType: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-t-lg"
-				>
-					<option value="cus">cus</option>
-					<option value="b2b">b2b</option>
-				</select>
-				<input
+				<CustomSelectInput
+					position={"top"}
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomInput
 					value={type}
 					onChange={(e) => setInput({ ...input, type: e.target.value })}
 					type="text"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
 					placeholder="Type"
+					heading="Enter Type"
 				/>
-
-				<input
+				<CustomInput
 					value={value}
 					onChange={(e) => setInput({ ...input, value: e.target.value })}
 					type="number"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
 					placeholder="Value"
+					heading="Enter Value"
 				/>
-				<select
-					onChange={(e) => {
-						setInput({ ...input, city: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-b-lg"
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload Web Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleWebImage(e)}
-					/>
-				</div>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload App Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleAppImage(e)}
-					/>
-				</div>
+				<CustomSelectInput
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+				<CustomSingleImageInput
+					heading={"Upload Web Banner"}
+					ren={ren}
+					onChange={handleWebImage}
+				/>
+				<CustomSingleImageInput
+					position={"bottom"}
+					heading={"Upload Web Banner"}
+					ren={ren}
+					onChange={handleAppImage}
+				/>
+
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
 						Update Popup Redirection

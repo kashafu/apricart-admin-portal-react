@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { downloadAbundantCartApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	displayInfoToast,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const GetAbundantCartReportsAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
@@ -19,17 +22,9 @@ const GetAbundantCartReportsAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await downloadAbundantCartApi(baseUrl, horas, headers).then(() => {
 			setLoading(false);
-			toast.info(
+			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
-				{
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: "XD",
-				}
+				5000
 			);
 			setLoading(false);
 			setTimeout(() => {
@@ -40,22 +35,22 @@ const GetAbundantCartReportsAPIComponent = () => {
 
 	return (
 		<section>
+			<Heading>Fetch Abundant Cart Report</Heading>
 			<form>
 				<Loading loading={loading} />
-				<label>Enter Hours</label>
-				<br />
-				<input
-					className="bg-gray-100 font-bold border-[1px] border-main-blue"
-					type="number"
+				<CustomInput
+					heading={"Enter Hours"}
 					value={horas}
-					onChange={(e) => setHoras(e.target.value)}
+					type={"number"}
+					onChange={(e) => {
+						setHoras(e.target.value);
+					}}
 				/>
 				<br />
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}
 					width={"1/3"}
-					position={"left"}
 				>
 					Download Abundant Cart Report
 				</CustomButton>

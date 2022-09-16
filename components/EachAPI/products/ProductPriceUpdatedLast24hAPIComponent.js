@@ -8,6 +8,7 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
+import Heading from "../../Misc/Heading";
 
 const ProductPriceUpdatedLast24hAPIComponent = () => {
 	const [time, setTime] = useState(24);
@@ -33,23 +34,19 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 		});
 	};
 	return (
-		<div>
+		<section>
 			<Loading loading={loading} />
+			<Heading>Product Prices updated in the last {time} hours</Heading>
 			<form action="" method="submit"></form>
 			<CustomInput
+				heading={"Time in hours"}
 				value={time}
 				onChange={(e) => handleTime(e)}
-				position={"top"}
-			/>
-			<CustomInput
-				value={`Products Updated in the last ${time} hours`}
-				disabled={true}
-				position={"bottom"}
 			/>
 			<CustomButton onClick={handleSubmit} width={"1/3"} disabled={disabler}>
 				Fetch Product List
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

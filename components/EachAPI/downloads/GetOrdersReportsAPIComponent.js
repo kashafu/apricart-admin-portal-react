@@ -7,6 +7,7 @@ import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import moment from "moment";
 import CustomButton from "../../Misc/CustomButton";
+import Heading from "../../Misc/Heading";
 
 const GetOrdersReportsAPIComponent = () => {
 	const [disabler, setDisabler] = useState(false);
@@ -52,6 +53,7 @@ const GetOrdersReportsAPIComponent = () => {
 	};
 	return (
 		<section>
+			<Heading>Fetch All Orders Report</Heading>
 			<form>
 				<Loading loading={loading} />
 				<p>Select City</p>

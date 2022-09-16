@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import FormData from "form-data";
 
+import Heading from "../../Misc/Heading";
+import FormData from "form-data";
 import { saveBannersApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,
+	updateRen,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import CustomInput from "../../Misc/CustomInput";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
 export async function getServerSideProps({ params, req }) {
 	const post = await githubCms.getPost(params.slug);
@@ -25,6 +31,7 @@ export async function getServerSideProps({ params, req }) {
 const SaveBannersAPIComponent = ({ post, referer }) => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
+	const [ren, setRen] = useState("");
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
@@ -38,13 +45,36 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 		input;
 
 	const handleWebImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlWeb: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlWeb: verify });
+		} else {
+			setInput({ ...input, bannerUrlWeb: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 
 	const handleAppImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlApp: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlApp: verify });
+		} else {
+			setInput({ ...input, bannerUrlApp: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
+	};
+
+	const handleProdType = (e) => {
+		setInputs({ ...inputs, prodType: e.target.value });
+	};
+	const handleCity = (e) => {
+		setInputs({ ...inputs, city: e.target.value });
 	};
 
 	const fillFormData = () => {
@@ -70,82 +100,53 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 	};
 	return (
 		<section className="relative">
+			<Heading>Add New Banner</Heading>
 			{<Loading loading={loading} />}
 			<form action="" method="POST">
-				<select
-					onChange={(e) => {
-						setInput({ ...input, prodType: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-t-lg"
-				>
-					<option value="cus">cus</option>
-					<option value="b2b">b2b</option>
-				</select>
-				<input
+				<CustomSelectInput
+					position={"top"}
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomInput
 					value={type}
 					onChange={(e) => setInput({ ...input, type: e.target.value })}
 					type="text"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
 					placeholder="Type"
+					heading="Enter Type"
 				/>
-				<input
+				<CustomInput
 					value={offerId}
 					onChange={(e) => setInput({ ...input, offerId: e.target.value })}
-					type="number"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
-					placeholder="Offer ID"
+					type="text"
+					placeholder="Offer Id"
+					heading="Enter Offer Id"
 				/>
-				<select
-					onChange={(e) => {
-						setInput({ ...input, level: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				>
-					<option disabled value="">
-						Level
-					</option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-				<select
-					onChange={(e) => {
-						setInput({ ...input, city: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-b-lg"
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload Web Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleWebImage(e)}
-					/>
-				</div>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload App Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleAppImage(e)}
-					/>
-				</div>
+				<CustomSelectInput
+					onChange={(e) => setInput({ ...input, level: e.target.value })}
+					heading={"Select Level"}
+					values={[0, 1, 2, 3, 4, 5]}
+					options={[0, 1, 2, 3, 4, 5]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+				<CustomSingleImageInput
+					heading={"Upload Web Banner"}
+					ren={ren}
+					onChange={handleWebImage}
+				/>
+				<CustomSingleImageInput
+					position={"bottom"}
+					heading={"Upload Web Banner"}
+					ren={ren}
+					onChange={handleAppImage}
+				/>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Submit New Banner

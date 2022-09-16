@@ -13,6 +13,7 @@ import {
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import Heading from "../../Misc/Heading";
 
 const UpdateCategoryBannerAPIComponent = () => {
 	var bannerData = new FormData();
@@ -72,7 +73,8 @@ const UpdateCategoryBannerAPIComponent = () => {
 	};
 	return (
 		<section className="relative">
-			{<Loading loading={loading} />}
+			<Heading>Update Category Banner</Heading>
+			<Loading loading={loading} />
 			<form action="" method="POST">
 				<CustomInput
 					type={"number"}

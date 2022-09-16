@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Loading from "../utils/Loading";
+import Heading from "../components/Misc/Heading";
 import { getAllAPIsApi } from "../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
 
@@ -21,8 +22,8 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<div className="flex">
-			Welcome to the Dashboard
+		<div className="flex justify-center items-center">
+			<Heading>Welcome to the Dashboard</Heading>
 			<Loading loading={loading} />
 		</div>
 	);

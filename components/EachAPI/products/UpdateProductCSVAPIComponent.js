@@ -8,6 +8,7 @@ import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
+	updateRen,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 
@@ -20,9 +21,7 @@ const UpdateProductCSVAPIComponent = () => {
 
 	// updating the ren state causes the input tag to re render and delete whatever file was given to it
 	// ren given as key to input
-	const updateRen = () => {
-		setRen(Math.random().toString(36));
-	};
+
 	const handleFile = (e) => {
 		let verify = e.target.files[0];
 		if (verify.type !== "text/csv") {

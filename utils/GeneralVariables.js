@@ -172,7 +172,7 @@ export function displaySuccessToast(message, timer, position) {
 	});
 }
 export function displayInfoToast(message, timer, position) {
-	toast.success(message, {
+	toast.info(message, {
 		position: position || "top-center",
 		autoClose: timer || 1500,
 		hideProgressBar: false,

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { downloadUsersApi } from "../../../utils/ApiCalls";
 import { getGeneralApiParams } from "../../../utils/GeneralVariables";
 import CustomButton from "../../Misc/CustomButton";
+import Heading from "../../Misc/Heading";
 import Loading from "../../../utils/Loading";
 
 const GetUsersReportsAPIComponent = () => {
@@ -38,7 +39,7 @@ const GetUsersReportsAPIComponent = () => {
 	return (
 		<section>
 			<Loading loading={loading} />
-
+			<Heading>Fetch All Users Report</Heading>
 			<CustomButton
 				onClick={(e) => fetchReport(e)}
 				disabled={disabler}

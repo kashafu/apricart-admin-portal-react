@@ -9,6 +9,7 @@ import {
 	logOutRemoveCookies,
 } from "../../utils/GeneralVariables";
 import ProfileViewComponent from "../ProfileViewComponent";
+import Heading from "../Misc/Heading";
 
 const Navbar = () => {
 	const router = useRouter();
@@ -30,6 +31,9 @@ const Navbar = () => {
 					layout="responsive"
 					onClick={() => router.push("/")}
 				/>
+			</div>
+			<div>
+				<Heading color={"txt-light"}>CBE Admin Portal</Heading>
 			</div>
 			<div className="px-2 flex justify-center items-center">
 				<CustomButton onClick={handleDisplay}>My Account</CustomButton>

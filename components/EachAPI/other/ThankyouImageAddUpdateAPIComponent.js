@@ -6,9 +6,13 @@ import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import { updateThankYouImageApi } from "../../../utils/ApiCalls";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
+import Heading from "../../Misc/Heading";
 
 const ThankyouImageAddUpdateAPIComponent = () => {
 	var thankyou = new FormData();
@@ -22,7 +26,18 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 		city: "karachi",
 	});
 	const { prodType, thanksImage, orderType, city } = input;
-
+	const handleText = (e) => {
+		setInputs({ ...inputs, text: e.target.value });
+	};
+	const handleProdType = (e) => {
+		setInputs({ ...inputs, prodType: e.target.value });
+	};
+	const handleOrderType = (e) => {
+		setInputs({ ...inputs, orderType: e.target.value });
+	};
+	const handleCity = (e) => {
+		setInputs({ ...inputs, city: e.target.value });
+	};
 	const handleThanksImage = (e) => {
 		const { files } = e.target;
 		let verify = e.target.files[0];
@@ -32,6 +47,18 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 			setInput({ ...input, thanksImage: "" });
 			updateRen();
 			displayErrorToast("Upload a valid image file", 1500, "top-left");
+		}
+	};
+	const handleImage = (e) => {
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, thanksImage: verify });
+		} else {
+			setInput({ ...input, thanksImage: "" });
+			updateRen();
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};
 	const updateRen = () => {
@@ -56,49 +83,37 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 	};
 	return (
 		<section>
+			<Heading>Update Thank You Image</Heading>
 			{<Loading loading={loading} />}
 			<form action="" method="POST">
-				<select
-					onChange={(e) => {
-						setInput({ ...input, prodType: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-t-lg"
-				>
-					<option value="cus">cus</option>
-					<option value="b2b">b2b</option>
-				</select>
-				<select
-					onChange={(e) => {
-						setInput({ ...input, orderType: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark "
-				>
-					<option value="delivery">delivery</option>
-					<option value="pickup">pickup</option>
-				</select>
-				<select
-					onChange={(e) => {
-						setInput({ ...input, city: e.target.value });
-					}}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark rounded-b-lg"
-				>
-					<option value="karachi">Karachi</option>
-					<option value="peshawar">Peshawar</option>
-				</select>
+				<CustomSelectInput
+					position={"top"}
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
 				<div>
-					<label htmlFor="img" className="m-4">
-						Upload Image
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						key={ren || ""}
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleThanksImage(e)}
+					<CustomSingleImageInput
+						position={"bottom"}
+						heading={"Upload New Thank You Image"}
+						onChange={(e) => {
+							handleImage(e);
+						}}
+						ren={ren}
 					/>
-				</div>
-				<div>
 					<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
 						Update Thank you Image
 					</CustomButton>

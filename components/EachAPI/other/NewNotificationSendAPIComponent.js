@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 import CustomInput from "../../Misc/CustomInput";
 import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import { sendNotificationApi } from "../../../utils/ApiCalls";
+import Heading from "../../Misc/Heading";
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -65,6 +67,7 @@ const NewNotificationSendAPIComponent = () => {
 	};
 	return (
 		<div className="font-nunito">
+			<Heading>Send Notification</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					heading={"Offer"}
@@ -100,18 +103,12 @@ const NewNotificationSendAPIComponent = () => {
 					required={true}
 					placeholder={"Message"}
 				/>
-				<div>
-					<p>Select Recipient Type</p>
-					<select
-						className="appearance-none rounded-none relative block w-full px-3 py-2 border  border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-						onChange={(e) => handleTo(e)}
-						required={true}
-					>
-						<option value="alldev">All Devices</option>
-						<option value="">Individual</option>
-					</select>
-				</div>
-
+				<CustomSelectInput
+					onChange={handleTo}
+					options={["All Devices", "Individual Recipient"]}
+					values={["alldev", ""]}
+					heading={"Select Recipient Type"}
+				/>
 				{toState && (
 					<CustomInput
 						heading={"Enter City"}

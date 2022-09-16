@@ -6,6 +6,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 	const router = useRouter();
 
 	const handleRoute = (endpoint) => {
+		setApiList(false);
 		router.push(endpoint);
 	};
 

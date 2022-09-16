@@ -76,7 +76,7 @@ const RecommendedUpdateAPIComponent = () => {
 				values={["karachi", "peshawar"]}
 				options={["Karachi", "Peshawar"]}
 			/>
-			<CustomButton onClick={handleSubmit} type={"submit"}>
+			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Message
 			</CustomButton>
 		</div>

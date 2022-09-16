@@ -4,6 +4,7 @@ import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
+	updateRen,
 } from "../../../utils/GeneralVariables";
 import FormData from "form-data";
 import Loading from "../../../utils/Loading";
@@ -25,9 +26,6 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 
 	// updating the ren state causes the input tag to re render and delete whatever file was given to it
 	// ren given as key to input
-	const updateRen = () => {
-		setRen(Math.random().toString(36));
-	};
 	const handleApiToken = (e) => {
 		setApiToken(e.target.value);
 	};

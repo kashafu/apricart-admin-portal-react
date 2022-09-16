@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "./../../../utils/GeneralVariables";
-import { offerSaveApi } from "./../../../utils/ApiCalls";
-import Loading from "./../../../utils/Loading";
+} from "../../../utils/GeneralVariables";
+import { offerSaveApi } from "../../../utils/ApiCalls";
+import Loading from "../../../utils/Loading";
+import Heading from "../../Misc/Heading";
+import CustomInput from "../../Misc/CustomInput";
+import CustomButton from "../../Misc/CustomButton";
 
 const OfferSaveAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
@@ -62,41 +65,34 @@ const OfferSaveAPIComponent = () => {
 		<div>
 			<div>
 				<section className="rounded-md -space-y-px">
+					<Heading>Save Offer</Heading>
 					<form action="" method="POST">
 						<Loading loading={loading} />
-						<div>
-							<input
-								value={price}
-								onChange={(e) => setInput({ ...input, price: e.target.value })}
-								type="number"
-								required
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-								placeholder="Price eg. 320"
-							/>
-						</div>
-						<div>
-							<input
-								value={buyingCondition}
-								onChange={(e) =>
-									setInput({ ...input, buyingCondition: e.target.value })
-								}
-								type="text"
-								required
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-								placeholder="Buying Condition"
-							/>
-						</div>
-						<div>
-							<input
-								value={expiry}
-								onFocus={(e) => (e.target.type = "date")}
-								onChange={(e) => setInput({ ...input, expiry: e.target.value })}
-								type="text"
-								required
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-								placeholder="Expiry Date"
-							/>
-						</div>
+						<CustomInput
+							value={price}
+							heading={"Enter Price"}
+							onChange={(e) => setInput({ ...input, price: e.target.value })}
+							type="number"
+							placeholder="Price eg. 320"
+							position={"top"}
+						/>
+						<CustomInput
+							value={buyingCondition}
+							onChange={(e) =>
+								setInput({ ...input, buyingCondition: e.target.value })
+							}
+							type="text"
+							placeholder="Buying Condition"
+							heading={"Enter Buying Condition"}
+						/>
+						<CustomInput
+							value={expiry}
+							onChange={(e) => setInput({ ...input, expiry: e.target.value })}
+							type="date"
+							placeholder="Expiry Date"
+							heading={"Enter Expiry date"}
+						/>
+
 						<div className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
 							<input
 								type="radio"
@@ -118,51 +114,41 @@ const OfferSaveAPIComponent = () => {
 							<br />
 						</div>
 						{input.type === "products" && (
-							<div>
-								<input
-									value={products}
-									onChange={(e) =>
-										setInput({ ...input, products: e.target.value })
-									}
-									type="text"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-									placeholder="Products"
-								/>
-							</div>
+							<CustomInput
+								value={products}
+								onChange={(e) =>
+									setInput({ ...input, products: e.target.value })
+								}
+								type="text"
+								placeholder="Products"
+								heading="Enter Products"
+							/>
 						)}
 						{input.type === "categories" && (
-							<div>
-								<input
-									value={categories}
-									onChange={(e) =>
-										setInput({ ...input, categories: e.target.value })
-									}
-									type="text"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-									placeholder="Categories"
-								/>
-							</div>
-						)}
-						<div>
-							<input
-								value={buying}
-								onChange={(e) => setInput({ ...input, buying: e.target.value })}
+							<CustomInput
+								value={categories}
+								onChange={(e) =>
+									setInput({ ...input, categories: e.target.value })
+								}
 								type="text"
-								required
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-								placeholder="Buying"
+								placeholder="Categories"
+								heading="Enter Categories"
 							/>
-						</div>
+						)}
+
+						<CustomInput
+							value={buying}
+							onChange={(e) => setInput({ ...input, buying: e.target.value })}
+							type="text"
+							placeholder="Buying"
+							heading={"Enter Buying"}
+							position={"bottom"}
+						/>
+
 						<br />
-						<button
-							type="submit"
-							onClick={(e) => submitHandler(e)}
-							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-						>
+						<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
 							Save Offer
-						</button>
+						</CustomButton>
 					</form>
 				</section>
 			</div>
