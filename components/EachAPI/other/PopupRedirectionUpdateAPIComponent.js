@@ -56,8 +56,8 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp[0]);
-		bannerData.append("web", bannerUrlWeb[0]);
+		bannerData.append("app", bannerUrlApp);
+		bannerData.append("web", bannerUrlWeb);
 		bannerData.append("prod_type", prodType);
 		bannerData.append("city", city);
 		bannerData.append("type", type);

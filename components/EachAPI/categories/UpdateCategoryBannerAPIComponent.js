@@ -56,8 +56,8 @@ const UpdateCategoryBannerAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp[0]);
-		bannerData.append("web", bannerUrlWeb[0]);
+		bannerData.append("app", bannerUrlApp);
+		bannerData.append("web", bannerUrlWeb);
 		bannerData.append("category_id", categoryId);
 	};
 
