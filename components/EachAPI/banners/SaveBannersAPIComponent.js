@@ -100,7 +100,6 @@ const SaveBannersAPIComponent = () => {
 		});
 	};
 
-	console.log(input);
 	return (
 		<section className="relative">
 			<Heading>Add New Banner</Heading>
@@ -146,7 +145,7 @@ const SaveBannersAPIComponent = () => {
 				/>
 				<CustomSingleImageInput
 					position={"bottom"}
-					heading={"Upload Web Banner"}
+					heading={"Upload App Banner"}
 					ren={ren}
 					onChange={handleAppImage}
 				/>

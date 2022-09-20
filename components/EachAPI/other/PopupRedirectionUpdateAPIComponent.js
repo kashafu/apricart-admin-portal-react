@@ -118,7 +118,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 				/>
 				<CustomSingleImageInput
 					position={"bottom"}
-					heading={"Upload Web Banner"}
+					heading={"Upload App Banner"}
 					ren={ren}
 					onChange={handleAppImage}
 				/>
