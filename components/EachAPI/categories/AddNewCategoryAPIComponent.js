@@ -6,7 +6,6 @@ import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
-	imgAllowedTypes,
 	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
@@ -78,8 +77,10 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section>
-			<Loading loading={loading} />
+		<section className="relative">
+			<div className="overflow-hidden">
+				<Loading loading={loading} />
+			</div>
 			<Heading>Add New Category</Heading>
 			<form action="" method="POST">
 				<CustomInput

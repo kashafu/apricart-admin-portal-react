@@ -44,7 +44,7 @@ const Login = () => {
 		});
 	};
 	const callOTPApi = async () => {
-		numberToSend = prompt("Please Enter Your phone number", "3030000151");
+		numberToSend = prompt("Please Enter Your phone number", "eg. 3030000151");
 		await sendOtpApi(baseUrl, numberToSend, headers);
 	};
 	const resetPasswordFunc = () => {
