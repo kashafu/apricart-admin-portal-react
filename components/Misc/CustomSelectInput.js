@@ -23,7 +23,6 @@ function CustomSelectInput({
 		className =
 			"appearance-none rounded-none relative block w-full px-3 py-2 border  border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark";
 	}
-	console.log(options);
 	return (
 		<div className="flex justify-center items-center my-1">
 			<div className={`w-${width} grid grid-cols-5`}>

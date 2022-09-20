@@ -45,7 +45,7 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 			setInput({ ...input, thanksImage: [files[0]] });
 		} else {
 			setInput({ ...input, thanksImage: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid image file", 1500, "top-left");
 		}
 	};
@@ -57,7 +57,7 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 			setInput({ ...input, thanksImage: verify });
 		} else {
 			setInput({ ...input, thanksImage: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};

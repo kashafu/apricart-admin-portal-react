@@ -24,7 +24,7 @@ const UpdateProductPositionCSVAPIComponent = () => {
 		let verify = e.target.files[0];
 		if (verify.type !== "text/csv") {
 			setCsv();
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Only Upload CSV files", 1500);
 		} else setCsv(verify);
 	};

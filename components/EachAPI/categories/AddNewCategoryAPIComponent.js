@@ -47,7 +47,7 @@ const AddNewCategoryAPIComponent = () => {
 			setInputs({ ...inputs, categoryImage: verify });
 		} else {
 			setInputs({ ...inputs, categoryImage: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};

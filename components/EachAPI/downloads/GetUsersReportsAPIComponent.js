@@ -44,7 +44,6 @@ const GetUsersReportsAPIComponent = () => {
 				onClick={(e) => fetchReport(e)}
 				disabled={disabler}
 				width={"1/3"}
-				position={"left"}
 			>
 				Download User Report
 			</CustomButton>

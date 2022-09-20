@@ -81,6 +81,7 @@ const OfferSaveAPIComponent = () => {
 							onChange={(e) =>
 								setInput({ ...input, buyingCondition: e.target.value })
 							}
+							x
 							type="text"
 							placeholder="Buying Condition"
 							heading={"Enter Buying Condition"}

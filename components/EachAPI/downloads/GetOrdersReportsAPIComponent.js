@@ -101,7 +101,6 @@ const GetOrdersReportsAPIComponent = () => {
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}
 					width={"1/3"}
-					position={"left"}
 				>
 					Download Orders Report
 				</CustomButton>

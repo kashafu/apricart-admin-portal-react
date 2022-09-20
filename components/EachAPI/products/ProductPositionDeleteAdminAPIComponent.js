@@ -6,6 +6,8 @@ import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const ProductPositionDeleteAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -40,40 +42,35 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 	};
 	return (
 		<div>
-			<CustomInput
-				placeholder={"Id"}
-				position={"top"}
-				type={"number"}
-				min={0}
-				value={id}
-				onChange={handleId}
-				required={true}
-			/>
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleProdType(e)}
-			>
-				<option disabled>Product Type</option>
-				<option value="cus">Customer (cus)</option>
-				<option value="b2b">Bulk Buy (b2b)</option>
-			</select>
+			<form action="" method="submit">
+				<Heading>Product Position Delete</Heading>
+				<CustomInput
+					heading={"Enter Id"}
+					placeholder={"Id"}
+					position={"top"}
+					type={"number"}
+					min={0}
+					value={id}
+					onChange={handleId}
+					required={true}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
+				/>
 
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				placeholder="Product Type"
-				onChange={(e) => handleOrderType(e)}
-			>
-				<option disabled defaultChecked>
-					Order Type
-				</option>
-				<option value="delivery">Delivery</option>
-				<option value="pickup">Pick up</option>
-			</select>
-
-			<CustomButton onClick={handleSubmit} type={"submit"}>
-				Submit Message
-			</CustomButton>
+				<CustomButton onClick={handleSubmit} type={"submit"}>
+					Submit Message
+				</CustomButton>
+			</form>
 		</div>
 	);
 };

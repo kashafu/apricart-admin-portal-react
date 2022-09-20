@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
 import CustomInput from "../../Misc/CustomInput";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
+import Heading from "../../Misc/Heading";
 import FormData from "form-data";
-
-import {
-	saveBannersApi,
-	updateCategoryBannerApi,
-	updateCategoryImageApi,
-} from "../../../utils/ApiCalls";
+import { updateCategoryImageApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
+	updateRen,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
@@ -18,6 +18,7 @@ import CustomButton from "../../Misc/CustomButton";
 const UpdateCategoryImageAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
+	const [ren, setRen] = useState("");
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		categoryId: 0,
@@ -25,8 +26,16 @@ const UpdateCategoryImageAPIComponent = () => {
 	const { bannerUrlApp, categoryId } = input;
 
 	const handleAppImage = (e) => {
-		const { files } = e.target;
-		setInput({ ...input, bannerUrlApp: [files[0]] });
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			setInput({ ...input, bannerUrlApp: verify });
+		} else {
+			setInput({ ...input, bannerUrlApp: "" });
+			updateRen(setRen);
+			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+		}
 	};
 
 	const handleCategoryId = (e) => {
@@ -51,25 +60,20 @@ const UpdateCategoryImageAPIComponent = () => {
 	return (
 		<section className="relative">
 			{<Loading loading={loading} />}
+			<Heading>Update Category Image</Heading>
 			<form action="" method="POST">
 				<CustomInput
+					heading={"Enter Category Id"}
 					type={"number"}
 					onChange={(e) => handleCategoryId(e)}
 					placeholder={"Category ID"}
 					value={categoryId}
 				/>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload New Category Image
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleAppImage(e)}
-					/>
-				</div>
+				<CustomSingleImageInput
+					heading={"Upload New Category Image"}
+					ren={ren}
+					onChange={handleAppImage}
+				/>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Update Category Image

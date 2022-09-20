@@ -3,9 +3,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { downloadProductsApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	displayInfoToast,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const GetProductReportsAPIComponent = () => {
 	const [disabler, setDisabler] = useState(false);
@@ -19,17 +23,9 @@ const GetProductReportsAPIComponent = () => {
 		await downloadProductsApi(baseUrl, headers, summary).then(() => {
 			setDisabler(true);
 			setLoading(false);
-			toast.info(
+			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
-				{
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: "XD",
-				}
+				8000
 			);
 			setLoading(false);
 			setTimeout(() => {
@@ -42,17 +38,17 @@ const GetProductReportsAPIComponent = () => {
 		<section>
 			<form>
 				<Loading loading={loading} />
-				<p>Summary Version</p>
-				<label htmlFor="summary">Yes</label>
-				<input type={"radio"} value="yes" name="summary" defaultChecked />
-				<label htmlFor="summary">No</label>
-				<input type={"radio"} value="no" name="summary" />
+				<CustomSelectInput
+					options={["Yes", "No"]}
+					values={["true", "false"]}
+					heading={"Summary Version?"}
+					onChange={(e) => handleState(e)}
+				/>
 
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}
 					width={"1/3"}
-					position={"left"}
 				>
 					Download Product Report
 				</CustomButton>

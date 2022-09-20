@@ -4,6 +4,7 @@ import FormData from "form-data";
 import Loading from "../../../utils/Loading";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
 	updateRen,
 } from "../../../utils/GeneralVariables";
@@ -36,7 +37,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 			setInput({ ...input, bannerUrlWeb: verify });
 		} else {
 			setInput({ ...input, bannerUrlWeb: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};
@@ -49,7 +50,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 			setInput({ ...input, bannerUrlApp: verify });
 		} else {
 			setInput({ ...input, bannerUrlApp: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};

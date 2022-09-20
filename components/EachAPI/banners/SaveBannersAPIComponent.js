@@ -5,6 +5,7 @@ import FormData from "form-data";
 import { saveBannersApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
 	updateRen,
 	validateImage,
@@ -28,7 +29,7 @@ export async function getServerSideProps({ params, req }) {
 	};
 }
 
-const SaveBannersAPIComponent = ({ post, referer }) => {
+const SaveBannersAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
 	const [ren, setRen] = useState("");
@@ -52,7 +53,7 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 			setInput({ ...input, bannerUrlWeb: verify });
 		} else {
 			setInput({ ...input, bannerUrlWeb: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};
@@ -65,7 +66,7 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 			setInput({ ...input, bannerUrlApp: verify });
 		} else {
 			setInput({ ...input, bannerUrlApp: "" });
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid Image file", 1500, "top-left");
 		}
 	};
@@ -78,8 +79,8 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 	};
 
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp[0]);
-		bannerData.append("web", bannerUrlWeb[0]);
+		bannerData.append("app", bannerUrlApp);
+		bannerData.append("web", bannerUrlWeb);
 		bannerData.append("prod_type", prodType);
 		bannerData.append("type", type);
 		bannerData.append("offer_id", offerId);
@@ -98,6 +99,8 @@ const SaveBannersAPIComponent = ({ post, referer }) => {
 			checkStatus(response);
 		});
 	};
+
+	console.log(input);
 	return (
 		<section className="relative">
 			<Heading>Add New Banner</Heading>

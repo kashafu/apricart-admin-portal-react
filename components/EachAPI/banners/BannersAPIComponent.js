@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import Heading from "../../Misc/Heading";
 import { getAllBannersApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
@@ -34,6 +35,7 @@ const BannersAPIComponent = () => {
 
 	return (
 		<div>
+			<Heading>Banners</Heading>
 			<Loading loading={loading} />
 			{banners?.map((banner) => (
 				<div key={banner.id}>

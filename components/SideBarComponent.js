@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -31,43 +30,53 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 						{!apiList && (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 384 512"
-								className="w-9 z-50 hover:brightness-[40%] fill-white animate-swing"
+								className="w-7 ml-[.35rem] z-50 hover:brightness-[40%] fill-white rounded-r-lg animate-swing"
+								viewBox="0 0 448 512"
 							>
-								<path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+								<path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
 							</svg>
 						)}
 						{apiList && (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 384 512"
-								className="w-9 z-50 hover:fill-gray-700 fill-black animate-swing"
+								className="p-1 w-10 z-50 hover:fill-gray-700 fill-black animate-swing"
+								viewBox="0 0 448 512"
 							>
-								<path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+								<path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
 							</svg>
 						)}
 					</button>
 				</div>
 			</div>
 			{/* API List */}
-			<div
-				className={
-					apiList
-						? "animate-dropdown w-[15.5rem] transition-all duration-300 fixed bg-main-blue-100 text-center h-screen rounded-tr-xl py-2 overflow-y-auto scroller"
-						: "transition-all duration-300 fixed -translate-x-[100rem]"
-				}
-			>
-				<div className="">
-					{allApis.map((api, i) => (
-						<div
-							key={i}
-							className="font-bold py-2 px-2 cursor-pointer hover:bg-main-blue hover:text-white duration-300 transition-all flex overflow-y-auto"
-							onClick={() => handleRoute(api.endpoint)}
-						>
-							<p className="font-nunito">{i + 1 + ". " + api.name}</p>
-						</div>
-					))}
+			<div className="w-full">
+				<div
+					className={
+						apiList
+							? "animate-dropdown w-[15.5rem] transition-all duration-300 fixed bg-main-blue-100 text-center h-screen py-2 overflow-y-auto scroller border-r-[#a9a9a9] border-2"
+							: "transition-all duration-300 fixed -translate-x-[100rem]"
+					}
+				>
+					<div className="">
+						{allApis.map((api, i) => (
+							<div
+								key={i}
+								className="font-bold py-2 px-2 cursor-pointer hover:bg-main-blue hover:text-white duration-300 transition-all flex overflow-y-auto"
+								onClick={() => handleRoute(api.endpoint)}
+							>
+								<p className="font-nunito">{i + 1 + ". " + api.name}</p>
+							</div>
+						))}
+					</div>
 				</div>
+				<div
+					onClick={() => setApiList(false)}
+					className={
+						apiList
+							? "animate-dropdown left-[15.5rem] z-10 w-screen transition-all duration-300 fixed text-center h-screen rounded-tr-xl py-2 overflow-y-auto scroller"
+							: "transition-all duration-300 fixed -translate-x-[100rem]"
+					}
+				></div>
 			</div>
 		</section>
 	);

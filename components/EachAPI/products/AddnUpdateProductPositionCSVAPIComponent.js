@@ -33,7 +33,7 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 		let verify = e.target.files[0];
 		if (verify.type !== "text/csv") {
 			setCsv();
-			updateRen();
+			updateRen(setRen);
 			displayErrorToast("Upload a valid CSV file", 1500, "top-left");
 		} else setCsv(verify);
 	};
