@@ -3,11 +3,17 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { downloadOrdersApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	displayInfoToast,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import moment from "moment";
 import CustomButton from "../../Misc/CustomButton";
 import Heading from "../../Misc/Heading";
+import CustomRadioInput from "../../Misc/CustomRadioInput";
+import CustomInput from "../../Misc/CustomInput";
 
 const GetOrdersReportsAPIComponent = () => {
 	const [disabler, setDisabler] = useState(false);
@@ -33,18 +39,13 @@ const GetOrdersReportsAPIComponent = () => {
 			skus,
 			headers
 		).then((response) => {
-			toast.info(
-				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
-				{
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					draggable: true,
-					theme: "dark",
-					toastId: "XD",
-				}
-			);
+			console.log(response);
+			let status = checkStatus(response);
+			status &&
+				displayInfoToast(
+					"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
+					5000
+				);
 			setLoading(false);
 			setTimeout(() => {
 				setDisabler(false);
@@ -56,26 +57,15 @@ const GetOrdersReportsAPIComponent = () => {
 			<Heading>Fetch All Orders Report</Heading>
 			<form>
 				<Loading loading={loading} />
-				<p>Select City</p>
-				<input
-					type={"radio"}
-					value="1"
-					name="city"
-					defaultChecked
+				<CustomRadioInput
+					inputs={["Peshawar", "Karachi"]}
+					values={["4", "1"]}
+					heading={"Select City"}
+					name={"city"}
 					onChange={(e) => setInputs({ ...inputs, cityId: e.target.value })}
 				/>
-				<label>Karachi</label>
-				<input
-					type={"radio"}
-					value="4"
-					name="city"
-					onChange={(e) => setInputs({ ...inputs, cityId: e.target.value })}
-				/>
-				<label>Peshawar</label>
-				<br />
-				<label>From Date: </label>
-				<input
-					type="date"
+				<CustomInput
+					heading={"From Date"}
 					value={fromDate}
 					onChange={(e) =>
 						setInputs({
@@ -83,20 +73,20 @@ const GetOrdersReportsAPIComponent = () => {
 							fromDate: moment(e.target.value).format("YYYY-MM-DD"),
 						})
 					}
-				/>
-				<br />
-				<label>To Date: </label>
-				<input
+					required={true}
 					type="date"
-					value={toDate}
+				/>
+				<CustomInput
+					heading={"To Date"}
 					onChange={(e) =>
 						setInputs({
 							...inputs,
 							toDate: moment(e.target.value).format("YYYY-MM-DD"),
 						})
 					}
+					required={true}
+					type="date"
 				/>
-
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}

@@ -10,7 +10,6 @@ export const loginApi = async (
 	userId,
 	phoneNumber,
 	password,
-	setErrorMessage,
 	router,
 	headers
 ) => {
@@ -43,7 +42,6 @@ export const loginApi = async (
 				path: "/",
 			});
 			cookies.set("cookies-userId", response.data.data.userId, { path: "/" });
-			setErrorMessage("");
 			router.push("/dashboard");
 			return response;
 		} else {

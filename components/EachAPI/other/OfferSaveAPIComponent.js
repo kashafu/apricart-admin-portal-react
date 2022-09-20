@@ -9,6 +9,7 @@ import Loading from "../../../utils/Loading";
 import Heading from "../../Misc/Heading";
 import CustomInput from "../../Misc/CustomInput";
 import CustomButton from "../../Misc/CustomButton";
+import CustomRadioInput from "../../Misc/CustomRadioInput";
 
 const OfferSaveAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
@@ -23,12 +24,7 @@ const OfferSaveAPIComponent = () => {
 	});
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
-	let noDuplicate = {
-		bad: "BadDuplicate",
-		pw: "noPwDuplicate",
-		success: "noSuccDuplicate",
-		auth: "noAuthDuplicate",
-	};
+
 	const handleRadioButton = (e) => {
 		setInput({ ...input, type: e.target.value });
 	};
@@ -61,6 +57,7 @@ const OfferSaveAPIComponent = () => {
 			setLoading(false), checkStatus(response);
 		});
 	};
+	console.log(input);
 	return (
 		<div>
 			<div>
@@ -93,27 +90,13 @@ const OfferSaveAPIComponent = () => {
 							placeholder="Expiry Date"
 							heading={"Enter Expiry date"}
 						/>
-
-						<div className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-							<input
-								type="radio"
-								name="type"
-								value="categories"
-								defaultChecked
-								onChange={(e) => handleRadioButton(e)}
-							/>
-							<label className="pr-4 pl-1">Categories</label>
-							<input
-								type="radio"
-								className="px-4"
-								id="age1"
-								name="type"
-								value="products"
-								onChange={(e) => handleRadioButton(e)}
-							/>
-							<label className="pr-4 pl-1">Products</label>
-							<br />
-						</div>
+						<CustomRadioInput
+							inputs={["Products", "Categories"]}
+							values={["products", "categories"]}
+							name="type"
+							heading={"Select Type"}
+							onChange={(e) => handleRadioButton(e)}
+						/>
 						{input.type === "products" && (
 							<CustomInput
 								value={products}

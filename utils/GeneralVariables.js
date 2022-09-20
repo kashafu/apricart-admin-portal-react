@@ -82,6 +82,10 @@ export const checkStatus = (
 	successTimer,
 	errorTimer
 ) => {
+	if (res === undefined) {
+		displayErrorToast("An Error occured. Contact backend services.", 3000);
+		return false;
+	}
 	if (res.status === 200) {
 		if (successMessage === "") return true;
 		toast.success(successMessage || res.data.message, {

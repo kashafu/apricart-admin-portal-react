@@ -1,7 +1,6 @@
 import React from "react";
 
 const Heading = ({ children, color }) => {
-	console.log(color);
 	return (
 		<h1
 			className={

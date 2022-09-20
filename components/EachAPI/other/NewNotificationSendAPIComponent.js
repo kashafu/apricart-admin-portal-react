@@ -14,8 +14,8 @@ const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		type: "offer",
 		value: 0,
-		title: "Staging- Customers of Fleet Street",
-		message: "Sweeney Todd is back in town",
+		title: "Staging- Notificacione nuevo",
+		message: "Lo Siento Senor",
 		city: "karachi",
 		to: "alldev",
 	});

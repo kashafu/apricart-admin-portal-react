@@ -11,12 +11,11 @@ import {
 
 const Login = () => {
 	var numberToSend;
-	const [phoneNumber, setPhoneNumber] = useState("3030550832");
-	const [password, setPassword] = useState("9July2000");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [password, setPassword] = useState("");
 	const [resetPw, setResetPw] = useState(false);
 	const [OTP, setOTP] = useState("");
 	const [newPW, setNewPW] = useState("");
-	const [errorMessage, setErrorMessage] = useState("");
 	const router = useRouter();
 
 	const { baseUrl, city, userId, headers } = getGeneralApiParams();
@@ -29,7 +28,6 @@ const Login = () => {
 			userId,
 			phoneNumber,
 			password,
-			setErrorMessage,
 			router,
 			headers
 		).then((response) => {
