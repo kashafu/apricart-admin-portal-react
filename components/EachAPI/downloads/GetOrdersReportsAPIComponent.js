@@ -53,7 +53,7 @@ const GetOrdersReportsAPIComponent = () => {
 		});
 	};
 	return (
-		<section>
+		<section className="pl-10">
 			<Heading>Fetch All Orders Report</Heading>
 			<form>
 				<Loading loading={loading} />

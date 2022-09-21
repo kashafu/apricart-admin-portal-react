@@ -101,9 +101,9 @@ const SaveBannersAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative">
+		<section className="relative pl-10">
+			<Loading loading={loading} />
 			<Heading>Add New Banner</Heading>
-			{<Loading loading={loading} />}
 			<form action="" method="POST">
 				<CustomSelectInput
 					position={"top"}

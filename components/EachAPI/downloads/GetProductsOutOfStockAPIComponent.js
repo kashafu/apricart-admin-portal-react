@@ -40,10 +40,10 @@ const GetProductsOutOfStockAPIComponent = () => {
 	};
 
 	return (
-		<section>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Get Products Out Stock</Heading>
 			<form>
-				<Loading loading={loading} />
 				<CustomSelectInput
 					options={["Yes", "No"]}
 					values={["true", "false"]}

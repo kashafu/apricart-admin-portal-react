@@ -53,9 +53,9 @@ const ProductPositionDetailAdminAPIComponent = () => {
 		});
 	};
 	return (
-		<div>
-			<Heading>Product Position Detail</Heading>
+		<section className="pl-10">
 			<Loading loading={loading} />
+			<Heading>Product Position Detail</Heading>
 			<CustomSelectInput
 				position={"top"}
 				onChange={(e) => handleProdType(e)}
@@ -117,7 +117,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 					<h1 className="font-nunito">No Data could be found</h1>
 				)}
 			</section>
-		</div>
+		</section>
 	);
 };
 

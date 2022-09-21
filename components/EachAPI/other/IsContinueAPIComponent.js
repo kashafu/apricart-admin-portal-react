@@ -7,6 +7,7 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import { isContinueUpdateApi } from "../../../utils/ApiCalls";
+import Loading from "../../../utils/Loading";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
 
@@ -18,6 +19,7 @@ const IsContinueAPIComponent = () => {
 		city: "karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
+	const [loading, setLoading] = useState(false);
 
 	const handleText = (e) => {
 		setInputs({ ...inputs, text: e.target.value });
@@ -33,6 +35,7 @@ const IsContinueAPIComponent = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedText = encodeURI(text);
@@ -45,11 +48,13 @@ const IsContinueAPIComponent = () => {
 			encodedText,
 			headers
 		).then((response) => {
+			setLoading(false);
 			checkStatus(response, "isContinue text Updated");
 		});
 	};
 	return (
-		<div>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Is Continue API</Heading>
 			<CustomInput
 				heading={"Enter Text"}
@@ -78,10 +83,10 @@ const IsContinueAPIComponent = () => {
 				values={["karachi", "peshawar"]}
 				options={["Karachi", "Peshawar"]}
 			/>
-			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/4"}>
+			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Message
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

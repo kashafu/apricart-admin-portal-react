@@ -72,9 +72,9 @@ const UpdateCategoryBannerAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="relative">
-			<Heading>Update Category Banner</Heading>
+		<section className="relative pl-10">
 			<Loading loading={loading} />
+			<Heading>Update Category Banner</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					type={"number"}
@@ -95,30 +95,6 @@ const UpdateCategoryBannerAPIComponent = () => {
 					position={"bottom"}
 					ren={ren}
 				/>
-				{/* <div>
-					<label htmlFor="img" className="m-4">
-						Upload Web Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleWebImage(e)}
-					/>
-				</div>
-				<div>
-					<label htmlFor="img" className="m-4">
-						Upload App Banner
-					</label>
-					<input
-						name="img"
-						type={"file"}
-						required
-						accept="image/png, image/gif, image/jpeg, image/jpg"
-						onChange={(e) => handleAppImage(e)}
-					/>
-				</div> */}
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Update Category Banner

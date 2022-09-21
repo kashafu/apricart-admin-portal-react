@@ -77,10 +77,8 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative">
-			<div className="overflow-hidden">
-				<Loading loading={loading} />
-			</div>
+		<section className="relative pl-[2.5rem]">
+			<Loading loading={loading} />
 			<Heading>Add New Category</Heading>
 			<form action="" method="POST">
 				<CustomInput

@@ -1,5 +1,5 @@
 import React from "react";
-import BannersAPIComponent from "../components/EachAPI/banners/BannersAPIComponent";
+import BannersAPIComponent from "../../../components/EachAPI/banners/BannersAPIComponent";
 
 const Banners = () => {
 	return (

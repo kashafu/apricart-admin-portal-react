@@ -37,7 +37,7 @@ const GetUsersReportsAPIComponent = () => {
 	};
 
 	return (
-		<section>
+		<section className="pl-10">
 			<Loading loading={loading} />
 			<Heading>Fetch All Users Report</Heading>
 			<CustomButton

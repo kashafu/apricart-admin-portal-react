@@ -34,9 +34,9 @@ const BannersAPIComponent = () => {
 	}, []);
 
 	return (
-		<div>
-			<Heading>Banners</Heading>
+		<section className="pl-10">
 			<Loading loading={loading} />
+			<Heading>Banners</Heading>
 			{banners?.map((banner) => (
 				<div key={banner.id}>
 					<EachBannerRenderComponent props={banner} />
@@ -45,7 +45,7 @@ const BannersAPIComponent = () => {
 			<CustomButton onClick={handleAddBanner} width="1/3">
 				Add a Banner
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

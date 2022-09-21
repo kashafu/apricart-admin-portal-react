@@ -21,8 +21,6 @@ const ProductAdminSearchAPIComponent = () => {
 	const [detail, setDetail] = useState([]);
 	// Here we use item offsets; we could also use page offsets
 	// following the API or data you're working with.
-	const [itemOffset, setItemOffset] = useState(0);
-	// let pages = [];
 
 	const { term, size, page, category, city } = inputs;
 
@@ -84,7 +82,7 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 
 	return (
-		<section>
+		<section className="pl-10">
 			<Heading>Product Admin Search</Heading>
 
 			<form action="" method="POST">

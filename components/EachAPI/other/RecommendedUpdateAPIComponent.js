@@ -5,6 +5,7 @@ import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
@@ -18,6 +19,7 @@ const RecommendedUpdateAPIComponent = () => {
 		city: "karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
+	const [loading, setLoading] = useState(false);
 	const handleText = (e) => {
 		setInputs({ ...inputs, text: e.target.value });
 	};
@@ -32,6 +34,7 @@ const RecommendedUpdateAPIComponent = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		await recommendedUpdateApi(
@@ -42,12 +45,14 @@ const RecommendedUpdateAPIComponent = () => {
 			text,
 			headers
 		).then((response) => {
+			setLoading(false);
 			checkStatus(response);
 		});
 	};
 
 	return (
-		<div className="font-nunito">
+		<section className="font-nunito pl-10">
+			<Loading loading={loading} />
 			<Heading>Update Recommended</Heading>
 			<CustomInput
 				position={"top"}
@@ -79,7 +84,7 @@ const RecommendedUpdateAPIComponent = () => {
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Message
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

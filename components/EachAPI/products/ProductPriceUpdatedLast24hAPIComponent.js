@@ -34,7 +34,7 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 		});
 	};
 	return (
-		<section>
+		<section className="pl-10">
 			<Loading loading={loading} />
 			<Heading>Product Prices updated in the last {time} hours</Heading>
 			<form action="" method="submit"></form>

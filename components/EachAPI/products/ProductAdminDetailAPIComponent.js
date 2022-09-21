@@ -47,7 +47,7 @@ const ProductAdminDetailAPIComponent = () => {
 	};
 
 	return (
-		<section>
+		<section className="pl-10">
 			<Loading loading={loading} />
 			<Heading>Product Admin Detail</Heading>
 			<CustomInput

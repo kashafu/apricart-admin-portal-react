@@ -4,10 +4,6 @@ import { useRouter } from "next/router";
 
 import Logo from "../../public/logo-white.png";
 import CustomButton from "./CustomButton";
-import {
-	displaySuccessToast,
-	logOutRemoveCookies,
-} from "../../utils/GeneralVariables";
 import ProfileViewComponent from "../ProfileViewComponent";
 import Heading from "../Misc/Heading";
 
@@ -17,11 +13,7 @@ const Navbar = () => {
 	const handleDisplay = () => {
 		setProfileDisplay(!profileDisplay);
 	};
-	const handleLogout = () => {
-		logOutRemoveCookies();
-		displaySuccessToast("Logged Out");
-		router.push("/login");
-	};
+
 	return (
 		<nav className="h-12 bg-main-blue flex justify-between">
 			<div className="w-36 py-2 cursor-pointer">
@@ -41,7 +33,6 @@ const Navbar = () => {
 					profileDisplay={profileDisplay}
 					setProfileDisplay={setProfileDisplay}
 				/>
-				{/* <CustomButton onClick={handleLogout}>Logout</CustomButton> */}
 			</div>
 		</nav>
 	);

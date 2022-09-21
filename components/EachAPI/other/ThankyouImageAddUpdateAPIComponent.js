@@ -82,9 +82,9 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 		});
 	};
 	return (
-		<section>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Update Thank You Image</Heading>
-			{<Loading loading={loading} />}
 			<form action="" method="POST">
 				<CustomSelectInput
 					position={"top"}

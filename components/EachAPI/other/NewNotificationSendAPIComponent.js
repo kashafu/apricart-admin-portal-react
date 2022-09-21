@@ -9,6 +9,7 @@ import {
 } from "../../../utils/GeneralVariables";
 import { sendNotificationApi } from "../../../utils/ApiCalls";
 import Heading from "../../Misc/Heading";
+import Loading from "../../../utils/Loading";
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -19,6 +20,7 @@ const NewNotificationSendAPIComponent = () => {
 		city: "karachi",
 		to: "alldev",
 	});
+	const [loading, setLoading] = useState(false);
 	const [toState, setToState] = useState(true);
 	const { type, value, title, message, city, to } = inputs;
 
@@ -48,6 +50,7 @@ const NewNotificationSendAPIComponent = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedType = encodeURI(type);
@@ -62,11 +65,13 @@ const NewNotificationSendAPIComponent = () => {
 			to,
 			headers
 		).then((response) => {
+			setLoading(false);
 			checkStatus(response, "Notification Sent Successfully");
 		});
 	};
 	return (
-		<div className="font-nunito">
+		<section className="font-nunito pl-10">
+			<Loading loading={loading} />
 			<Heading>Send Notification</Heading>
 			<form action="" method="POST">
 				<CustomInput
@@ -135,7 +140,7 @@ const NewNotificationSendAPIComponent = () => {
 					Send Notification
 				</CustomButton>
 			</form>
-		</div>
+		</section>
 	);
 };
 

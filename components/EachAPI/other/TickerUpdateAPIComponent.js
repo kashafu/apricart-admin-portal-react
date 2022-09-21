@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { updateTickerApi } from "../../../utils/ApiCalls";
+import Loading from "../../../utils/Loading";
 import {
 	checkStatus,
 	getGeneralApiParams,
@@ -16,7 +17,7 @@ const TickerUpdateAPIComponent = () => {
 		orderType: "delivery",
 		city: "karachi",
 	});
-
+	const [loading, setLoading] = useState(false);
 	const { text, prodType, orderType, city } = inputs;
 
 	const handleText = (e) => {
@@ -33,6 +34,7 @@ const TickerUpdateAPIComponent = () => {
 	};
 
 	const submitHandler = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 
@@ -44,11 +46,13 @@ const TickerUpdateAPIComponent = () => {
 			city,
 			headers
 		).then((response) => {
+			setLoading(false);
 			checkStatus(response);
 		});
 	};
 	return (
-		<section>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Update Ticker Text</Heading>
 			<form action="" method="POST">
 				<CustomSelectInput
@@ -75,7 +79,7 @@ const TickerUpdateAPIComponent = () => {
 						<p className="ml-2 font-nunito">Enter Ticker Text</p>
 					</div>
 					<textarea
-						className="bg-gray-100 w-full h-56 p-1 col-span-3 placeholder:text-gray-500 border-[1px] border-black rounded-b-xl"
+						className="bg-gray-100 w-full h-56 p-3 col-span-3 placeholder:text-gray-500 border-[1px] border-black rounded-b-xl"
 						required
 						placeholder="eg. Hello Customers Avail 10% off on all categories etc."
 						onChange={(e) => handleText(e)}

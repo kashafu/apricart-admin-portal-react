@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { webUpdateApi } from "../../../utils/ApiCalls";
+import Loading from "../../../utils/Loading";
 import {
 	checkStatus,
 	getGeneralApiParams,
@@ -18,6 +19,7 @@ const WebUpdateAPIComponent = () => {
 		city: "karachi",
 	});
 	const { text, prodType, orderType, city } = inputs;
+	const [loading, setLoading] = useState(false);
 	const handleText = (e) => {
 		setInputs({ ...inputs, text: e.target.value });
 	};
@@ -32,18 +34,21 @@ const WebUpdateAPIComponent = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 
 		await webUpdateApi(baseUrl, prodType, orderType, city, text, headers).then(
 			(response) => {
+				setLoading(false);
 				checkStatus(response);
 			}
 		);
 	};
 
 	return (
-		<div>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Update Web</Heading>
 			<CustomInput
 				position={"top"}
@@ -75,7 +80,7 @@ const WebUpdateAPIComponent = () => {
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Message
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

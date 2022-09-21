@@ -39,8 +39,7 @@ function MyApp({ Component, pageProps }) {
 			{router.pathname !== "/login" && (
 				<SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
 			)}
-			<section className="pl-[2.6rem]">
-				<div className="w-8 "></div>
+			<section>
 				<Component {...pageProps} />
 			</section>
 			<ToastContainer />

@@ -5,25 +5,30 @@ import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import Heading from "../../Misc/Heading";
 
 const UpdateWelcomeVideoAPIComponent = () => {
 	const [link, setLink] = useState("");
+	const [loading, setLoading] = useState(false);
 	function handleLink(e) {
 		setLink(e.target.value);
 	}
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
-		await updateWelcomeVideoApi(baseUrl, link, headers).then((response) =>
-			checkStatus(response)
-		);
+		await updateWelcomeVideoApi(baseUrl, link, headers).then((response) => {
+			setLoading(false);
+			checkStatus(response);
+		});
 	};
 
 	return (
-		<div>
+		<section className="pl-10">
+			<Loading loading={loading} />
 			<Heading>Update Welcome Video</Heading>
 			<CustomInput
 				heading={"Enter Video URL"}
@@ -36,7 +41,7 @@ const UpdateWelcomeVideoAPIComponent = () => {
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
 				Update Welcome Video
 			</CustomButton>
-		</div>
+		</section>
 	);
 };
 

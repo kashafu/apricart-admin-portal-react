@@ -36,7 +36,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 	}, []);
 
 	return (
-		<section className="fixed right-0 top-[3.05rem] font-nunito z-50">
+		<section className="fixed right-0 top-[3rem] h-[38rem] font-nunito z-50">
 			<div
 				className={
 					profileDisplay
