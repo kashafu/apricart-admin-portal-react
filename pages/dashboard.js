@@ -22,10 +22,12 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<div className="flex justify-center items-center">
-			<Heading>Welcome to the Dashboard</Heading>
+		<>
 			<Loading loading={loading} />
-		</div>
+			<div className="flex justify-center items-center">
+				<Heading>Welcome to the Dashboard</Heading>
+			</div>
+		</>
 	);
 };
 
