@@ -24,7 +24,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<Loading loading={loading} />
-			<div className="flex justify-center items-center">
+			<div className="flex justify-center items-center pl-10">
 				<Heading>Welcome to the Dashboard</Heading>
 			</div>
 		</>

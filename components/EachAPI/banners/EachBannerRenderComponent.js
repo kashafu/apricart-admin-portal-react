@@ -29,7 +29,7 @@ const EachBannerRenderComponent = ({ props }) => {
 	}, [props]);
 
 	return (
-		<section className="flex w-full mb-2 mt-1 ">
+		<section className="flex w-full mb-2 mt-1 justify-center items-center">
 			<div className="w-2/3 p-1">
 				<Image
 					className=""

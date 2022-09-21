@@ -28,6 +28,7 @@ const CustomSingleImageInput = ({
 				<div>
 					<p className="col-span-1 ml-2 font-nunito">{heading}</p>
 				</div>
+				<div className="col-span-1 lg:hidden" />
 				<div className="col-span-3 pr-2">
 					<input
 						placeholder="Category Image"

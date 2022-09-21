@@ -29,6 +29,7 @@ function CustomSelectInput({
 				<div>
 					<p className="ml-2 font-nunito">{heading}</p>
 				</div>
+				<div className="col-span-1 lg:hidden" />
 				<div className="col-span-3 pr-2">
 					<select className={className} onChange={onChange}>
 						{options.map((each, i) => (

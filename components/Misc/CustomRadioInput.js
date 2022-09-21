@@ -29,6 +29,7 @@ function CustomRadioInput({
 				<div>
 					<p className="ml-2 font-nunito">{heading}</p>
 				</div>
+				<div className="col-span-1 lg:hidden" />
 				<div className="col-span-3 pr-2" onChange={onChange}>
 					<div className={className}>
 						{inputs.map((each, i) => (

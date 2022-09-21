@@ -10,7 +10,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 	};
 
 	return (
-		<section className="fixed h-full bg-main-blue-100 z-[9999] ">
+		<section className="fixed top-12 h-full bg-main-blue-100 z-[9999] ">
 			<div
 				className={
 					apiList
@@ -53,7 +53,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 				<div
 					className={
 						apiList
-							? "animate-dropdown w-[15.5rem] transition-all duration-300 fixed bg-main-blue-100 text-center h-[38rem] py-2 overflow-y-scroll scroller border-r-[#a9a9a9] border-2"
+							? "animate-dropdown w-[15.5rem] transition-all duration-300 fixed bg-main-blue-100 text-center py-2 overflow-y-scroll h-full scroller border-r-[#a9a9a9] border-2"
 							: "transition-all duration-300 fixed -translate-x-[100rem]"
 					}
 				>
@@ -61,12 +61,13 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 						{allApis.map((api, i) => (
 							<div
 								key={i}
-								className="font-bold py-2 px-2 cursor-pointer hover:bg-main-blue hover:text-white duration-300 transition-all flex"
+								className="font-bold py-2 pl-1 cursor-pointer hover:bg-main-blue hover:text-white duration-300 transition-all flex"
 								onClick={() => handleRoute(api.endpoint)}
 							>
 								<p className="font-nunito">{i + 1 + ". " + api.name}</p>
 							</div>
 						))}
+						<div className="mb-12"></div>/
 					</div>
 				</div>
 				<div

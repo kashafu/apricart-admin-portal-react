@@ -33,9 +33,10 @@ function MyApp({ Component, pageProps }) {
 	useEffect(() => {
 		router.pathname !== "/login" && getSidebarItems();
 	}, [token]);
+	useEffect(() => {}, []);
 	return (
 		<>
-			{router.pathname !== "/login" && <Navbar />}
+			<div className="pb-12">{router.pathname !== "/login" && <Navbar />}</div>
 			{router.pathname !== "/login" && (
 				<SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
 			)}

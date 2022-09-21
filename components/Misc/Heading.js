@@ -5,7 +5,7 @@ const Heading = ({ children, color }) => {
 		<h1
 			className={
 				color === undefined
-					? `pl-2 font-extrabold font-nunito text-txt-dark border-black`
+					? ` pl-2 font-extrabold font-nunito text-txt-dark border-black`
 					: "pl-2 font-extrabold font-nunito text-txt-light border-black"
 			}
 		>

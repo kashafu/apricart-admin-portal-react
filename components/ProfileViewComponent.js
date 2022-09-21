@@ -5,9 +5,11 @@ import {
 	displaySuccessToast,
 	logOutRemoveCookies,
 } from "../utils/GeneralVariables";
+import Loading from "../utils/Loading";
 import CustomButton from "./Misc/CustomButton";
 
 const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const cookies = new Cookies();
 	const [userData, setUserData] = useState({
@@ -27,6 +29,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 		});
 	}
 	const handleLogout = () => {
+		setLoading(true);
 		logOutRemoveCookies();
 		displaySuccessToast("Logged Out");
 		router.push("/login");
@@ -37,6 +40,7 @@ const ProfileViewComponent = ({ profileDisplay, setProfileDisplay }) => {
 
 	return (
 		<section className="fixed right-0 top-[3rem] h-[38rem] font-nunito z-50">
+			<Loading loading={loading} />
 			<div
 				className={
 					profileDisplay

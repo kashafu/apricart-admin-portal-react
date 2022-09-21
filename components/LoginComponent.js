@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import logoFile from "../public/logo.png";
 import { loginApi, resetPasswordApi, sendOtpApi } from "../utils/ApiCalls";
+import Loading from "../utils/Loading";
 import {
 	displayErrorToast,
 	displaySuccessToast,
@@ -16,11 +17,13 @@ const Login = () => {
 	const [resetPw, setResetPw] = useState(false);
 	const [OTP, setOTP] = useState("");
 	const [newPW, setNewPW] = useState("");
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	const { baseUrl, city, userId, headers } = getGeneralApiParams();
 
 	const submitLogin = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		await loginApi(
 			baseUrl,
@@ -31,6 +34,7 @@ const Login = () => {
 			router,
 			headers
 		).then((response) => {
+			setLoading(false);
 			if (response.data.status === 2) {
 				displayErrorToast(response.data.message, 1800);
 			} else if (response.status === 200) {
@@ -57,6 +61,7 @@ const Login = () => {
 
 	return (
 		<>
+			<Loading loading={loading} />
 			{/* MODAL RESET PASSWORD */}
 			<div
 				className={
