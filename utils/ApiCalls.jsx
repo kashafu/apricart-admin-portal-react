@@ -42,7 +42,7 @@ export const loginApi = async (
 				path: "/",
 			});
 			cookies.set("cookies-userId", response.data.data.userId, { path: "/" });
-			router.push("/dashboard");
+			router.push("/");
 			return response;
 		} else {
 			return response;

@@ -38,7 +38,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 		);
 	};
 	return (
-		<section>
+		<section className="pl-10">
 			<Loading loading={loading} />
 			<Heading>Product Stock Detail Admin</Heading>
 			<CustomInput
@@ -57,7 +57,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 				values={["karachi", "peshawar"]}
 				options={["Karachi", "Peshawar"]}
 			/>
-			<CustomButton onClick={handleSubmit} type={"submit"}>
+			<CustomButton onClick={handleSubmit} width={"1/3"} type={"submit"}>
 				Submit Query
 			</CustomButton>
 

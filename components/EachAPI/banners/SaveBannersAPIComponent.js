@@ -16,19 +16,6 @@ import CustomSelectInput from "../../Misc/CustomSelectInput";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
-export async function getServerSideProps({ params, req }) {
-	const post = await githubCms.getPost(params.slug);
-	const referer = req.headers.referer || null;
-
-	console.log("referer");
-	return {
-		props: {
-			post,
-			referer,
-		},
-	};
-}
-
 const SaveBannersAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);

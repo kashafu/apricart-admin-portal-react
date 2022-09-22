@@ -1,5 +1,5 @@
 import React from "react";
-import GetProductReportsAPIComponent from "../components/EachAPI/downloads/GetProductReportsAPIComponent";
+import GetProductReportsAPIComponent from "../../../components/EachAPI/downloads/GetProductReportsAPIComponent";
 
 const ProductReports = () => {
 	return (

@@ -33,7 +33,6 @@ const ProductIsActiveAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await productIsActiveApi(baseUrl, id, state, warehouseId, headers).then(
 			(response) => {
-				console.log(response);
 				checkStatus(response);
 				setLoading(false);
 			}

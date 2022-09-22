@@ -10,6 +10,7 @@ import {
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
+import Heading from "../../Misc/Heading";
 
 const GetProductReportsAPIComponent = () => {
 	const [disabler, setDisabler] = useState(false);
@@ -35,9 +36,10 @@ const GetProductReportsAPIComponent = () => {
 	};
 
 	return (
-		<section>
+		<section className="pl-10">
+			<Loading loading={loading} />
+			<Heading>Download Product Reports</Heading>
 			<form>
-				<Loading loading={loading} />
 				<CustomSelectInput
 					options={["Yes", "No"]}
 					values={["true", "false"]}

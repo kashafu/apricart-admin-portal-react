@@ -34,7 +34,6 @@ const ProductAdminDetailAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await productAdminDetailApi(baseUrl, id, city, warehouseId, headers).then(
 			(response) => {
-				console.log(response);
 				let status = checkStatus(response, "Product Detail Fetched");
 				status ? setDetail([response.data.data]) : setDetail();
 				if (status) {

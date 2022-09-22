@@ -39,7 +39,6 @@ const GetOrdersReportsAPIComponent = () => {
 			skus,
 			headers
 		).then((response) => {
-			console.log(response);
 			let status = checkStatus(response);
 			status &&
 				displayInfoToast(

@@ -57,7 +57,7 @@ const OfferSaveAPIComponent = () => {
 			setLoading(false), checkStatus(response);
 		});
 	};
-	console.log(input);
+
 	return (
 		<section className="rounded-md -space-y-px pl-10">
 			<Loading loading={loading} />
