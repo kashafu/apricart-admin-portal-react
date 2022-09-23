@@ -7,6 +7,7 @@ import {
 	displayErrorToast,
 	getGeneralApiParams,
 	updateRen,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import { popupRedirectionUpdateApi } from "../../../utils/ApiCalls";
 import CustomButton from "../../Misc/CustomButton";
@@ -20,8 +21,8 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [ren, setRen] = useState(false);
 	const [input, setInput] = useState({
-		bannerUrlApp: [],
-		bannerUrlWeb: [],
+		bannerUrlApp: "",
+		bannerUrlWeb: "",
 		prodType: "cus",
 		city: "karachi",
 		type: "offer",

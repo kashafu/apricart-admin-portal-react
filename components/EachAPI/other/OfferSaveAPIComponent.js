@@ -12,6 +12,7 @@ import CustomButton from "../../Misc/CustomButton";
 import CustomRadioInput from "../../Misc/CustomRadioInput";
 
 const OfferSaveAPIComponent = () => {
+	const [offerId, setOfferId] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
 		price: 0,
@@ -54,10 +55,13 @@ const OfferSaveAPIComponent = () => {
 		}
 		const { baseUrl, headers } = getGeneralApiParams();
 		await offerSaveApi(baseUrl, newInput, headers).then((response) => {
-			setLoading(false), checkStatus(response);
+			console.log(response);
+
+			setLoading(false);
+			let status = checkStatus(response);
+			status && setOfferId(response.data.data.id);
 		});
 	};
-
 	return (
 		<section className="rounded-md -space-y-px pl-10">
 			<Loading loading={loading} />
@@ -129,6 +133,15 @@ const OfferSaveAPIComponent = () => {
 					Save Offer
 				</CustomButton>
 			</form>
+			{console.log(offerId)}
+			{offerId && (
+				<div className="inline-flex animate-dropdown justify-center items-center">
+					<Heading>Your Offer Id = </Heading>
+					<h2 className="text-5xl font-bold font-nunito text-main-blue">
+						{offerId}
+					</h2>
+				</div>
+			)}
 		</section>
 	);
 };

@@ -6,6 +6,7 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import { deleteBannerApi } from "../../../utils/ApiCalls";
+import CustomButton from "../../Misc/CustomButton";
 
 const EachBannerRenderComponent = ({ props }) => {
 	const [propState, setPropState] = useState({
@@ -29,8 +30,8 @@ const EachBannerRenderComponent = ({ props }) => {
 	}, [props]);
 
 	return (
-		<section className="flex w-full mb-2 mt-1 justify-center items-center">
-			<div className="w-2/3 p-1">
+		<section className="flex flex-col w-full mb-2 mt-1 justify-center items-center">
+			<div className="p-1 w-[55%] px-2 ">
 				<Image
 					className=""
 					src={propState?.bannerUrlWeb[0]}
@@ -40,21 +41,18 @@ const EachBannerRenderComponent = ({ props }) => {
 					height="5px"
 				/>
 			</div>
-			<div className="w-1/3">
-				<button
-					type="submit"
-					// onClick={(e) => submitResetPassword(e)}
-					className="my-2 w-full py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-				>
-					Edit Banner
-				</button>
-				<button
-					type="submit"
-					onClick={(e) => deleteThisBanner(propState.id)}
-					className="my-2 w-full py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-				>
-					Delete Banner
-				</button>
+			<div className="flex w-full justify-around px-16">
+				<div className="w-1/5">
+					<CustomButton width={"1/2"}>Edit Banner</CustomButton>
+				</div>
+				<div className="w-1/5">
+					<CustomButton
+						onClick={(e) => deleteThisBanner(propState.id)}
+						width={"1/2"}
+					>
+						Delete Banner
+					</CustomButton>
+				</div>
 			</div>
 		</section>
 	);

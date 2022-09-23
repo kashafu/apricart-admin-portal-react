@@ -8,7 +8,12 @@ import Navbar from "../components/Misc/Navbar";
 import SideBar from "../components/SideBarComponent";
 import { useEffect, useState } from "react";
 import { getAllAPIsApi } from "../utils/ApiCalls";
-import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
+import {
+	checkStatus,
+	displayErrorToast,
+	getGeneralApiParams,
+	logOutRemoveCookies,
+} from "../utils/GeneralVariables";
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();
@@ -25,14 +30,35 @@ function MyApp({ Component, pageProps }) {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
-			status && setAllApis(response.data.data.apis);
-			setLoading(false);
+			status ? getCurrentAddress(response.data.data.apis, status) : "";
 		});
+	};
+
+	const getCurrentAddress = (array, status) => {
+		let path = getPathVariable();
+		if (array.some((e) => e.endpoint === path || path === "/admin")) {
+			/* response contains the element we're looking for */
+			setLoading(false);
+			status && setAllApis(array);
+		} else {
+			displayErrorToast(
+				"Unauthorized to use this feature, You have been logged out"
+			);
+			logOutRemoveCookies();
+			router.push("/login");
+		}
+	};
+
+	const getPathVariable = () => {
+		let path = window.location.pathname;
+		if (path === "/admin") return "/admin";
+		let newPath = path.slice(6);
+		return newPath;
 	};
 
 	useEffect(() => {
 		router.pathname !== "/login" && getSidebarItems();
-	}, [token]);
+	}, [token, router]);
 	useEffect(() => {}, []);
 	return (
 		<>

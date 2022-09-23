@@ -20,8 +20,8 @@ const UpdateCategoryBannerAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [ren, setRen] = useState(false);
 	const [input, setInput] = useState({
-		bannerUrlApp: [],
-		bannerUrlWeb: [],
+		bannerUrlApp: "",
+		bannerUrlWeb: "",
 		categoryId: 0,
 	});
 	const { bannerUrlApp, bannerUrlWeb, categoryId } = input;
@@ -31,7 +31,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
 		let status = validateImage(verify);
 		if (status) {
-			setInput({ ...input, bannerUrlWeb: [verify] });
+			setInput({ ...input, bannerUrlWeb: verify });
 		} else {
 			setInput({ ...input, bannerUrlWeb: "" });
 			updateRen(setRen);
@@ -43,7 +43,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
 		let status = validateImage(verify);
 		if (status) {
-			setInput({ ...input, bannerUrlApp: [verify] });
+			setInput({ ...input, bannerUrlApp: verify });
 		} else {
 			setInput({ ...input, bannerUrlApp: "" });
 			updateRen(setRen);
