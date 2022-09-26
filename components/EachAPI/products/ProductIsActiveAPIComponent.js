@@ -42,7 +42,7 @@ const ProductIsActiveAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Product Active Inactive</Heading>
+			<Heading>Product Enable or Disable</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}

@@ -48,7 +48,7 @@ const ProductAdminDetailAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Product Admin Detail</Heading>
+			<Heading>Products Detail</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}

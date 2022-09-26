@@ -53,7 +53,7 @@ const RecommendedUpdateAPIComponent = () => {
 	return (
 		<section className="font-nunito pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Recommended</Heading>
+			<Heading>Recommended Products Update</Heading>
 			<CustomInput
 				position={"top"}
 				type={"text"}

@@ -29,7 +29,7 @@ const UpdateWelcomeVideoAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Welcome Video</Heading>
+			<Heading>Welcome Video Update</Heading>
 			<CustomInput
 				heading={"Enter Video URL"}
 				placeholder={"eg. http://youtube.com/video-link"}

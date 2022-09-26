@@ -60,6 +60,7 @@ const UpdateCategoryAPIComponent = () => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
+		fillFormData();
 		await updateCategoryApi(baseUrl, categoryData, headers).then((response) => {
 			checkStatus(response);
 			setLoading(false);

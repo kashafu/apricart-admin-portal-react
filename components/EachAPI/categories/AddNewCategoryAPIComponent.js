@@ -79,7 +79,7 @@ const AddNewCategoryAPIComponent = () => {
 	return (
 		<section className="relative pl-[2.5rem]">
 			<Loading loading={loading} />
-			<Heading>Add New Category</Heading>
+			<Heading>Create a new Category</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					heading={"Category Name"}

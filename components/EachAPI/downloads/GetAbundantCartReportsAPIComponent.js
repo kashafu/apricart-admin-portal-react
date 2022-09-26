@@ -35,7 +35,7 @@ const GetAbundantCartReportsAPIComponent = () => {
 
 	return (
 		<section className="pl-10">
-			<Heading>Fetch Abundant Cart Report</Heading>
+			<Heading>Abundant Cart Report</Heading>
 			<form>
 				<Loading loading={loading} />
 				<CustomInput

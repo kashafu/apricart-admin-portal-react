@@ -130,7 +130,7 @@ const OfferSaveAPIComponent = () => {
 
 				<br />
 				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-					Save Offer
+					Offer ID
 				</CustomButton>
 			</form>
 			{console.log(offerId)}

@@ -55,7 +55,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Product Position Detail</Heading>
+			<Heading>Products Detail</Heading>
 			<CustomSelectInput
 				position={"top"}
 				onChange={(e) => handleProdType(e)}
@@ -71,8 +71,8 @@ const ProductPositionDetailAdminAPIComponent = () => {
 			/>
 			<CustomSelectInput
 				position={"bottom"}
-				onChange={(e) => handleOrderType(e)}
-				heading={"Select Order Type"}
+				onChange={(e) => handleType(e)}
+				heading={"Select Type"}
 				values={["brand", "sku"]}
 				options={["Brand", "SKU"]}
 			/>

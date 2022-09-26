@@ -55,7 +55,7 @@ const IsContinueAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Is Continue API</Heading>
+			<Heading>Is Continue</Heading>
 			<CustomInput
 				heading={"Enter Text"}
 				position={"top"}

@@ -72,7 +72,7 @@ const NewNotificationSendAPIComponent = () => {
 	return (
 		<section className="font-nunito pl-10">
 			<Loading loading={loading} />
-			<Heading>Send Notification</Heading>
+			<Heading>Push Notifications</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					heading={"Offer"}

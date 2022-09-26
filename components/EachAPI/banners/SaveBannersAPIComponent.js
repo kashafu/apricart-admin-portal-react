@@ -90,7 +90,7 @@ const SaveBannersAPIComponent = () => {
 	return (
 		<section className="relative pl-10">
 			<Loading loading={loading} />
-			<Heading>Add New Banner</Heading>
+			<Heading>Banner Save</Heading>
 			<form action="" method="POST">
 				<CustomSelectInput
 					position={"top"}

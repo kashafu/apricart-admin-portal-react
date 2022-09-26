@@ -74,7 +74,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 	return (
 		<section className="relative pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Category Banner</Heading>
+			<Heading>Category Banner Update</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					type={"number"}

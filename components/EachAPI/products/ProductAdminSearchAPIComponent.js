@@ -83,7 +83,7 @@ const ProductAdminSearchAPIComponent = () => {
 
 	return (
 		<section className="pl-10">
-			<Heading>Product Admin Search</Heading>
+			<Heading>Products Search</Heading>
 
 			<form action="" method="POST">
 				<CustomInput

@@ -36,7 +36,7 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Product Prices updated in the last {time} hours</Heading>
+			<Heading>Updates in Last {time} Hours</Heading>
 			<form action="" method="submit"></form>
 			<CustomInput
 				heading={"Time in hours"}

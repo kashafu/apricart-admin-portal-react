@@ -53,7 +53,7 @@ const GetOrdersReportsAPIComponent = () => {
 	};
 	return (
 		<section className="pl-10">
-			<Heading>Fetch All Orders Report</Heading>
+			<Heading>Total Orders Report</Heading>
 			<form>
 				<Loading loading={loading} />
 				<CustomRadioInput

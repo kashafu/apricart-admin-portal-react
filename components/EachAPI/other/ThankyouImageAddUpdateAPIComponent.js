@@ -38,17 +38,6 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
-	const handleThanksImage = (e) => {
-		const { files } = e.target;
-		let verify = e.target.files[0];
-		if (allowedTypes.includes(verify.type)) {
-			setInput({ ...input, thanksImage: [files[0]] });
-		} else {
-			setInput({ ...input, thanksImage: "" });
-			updateRen(setRen);
-			displayErrorToast("Upload a valid image file", 1500, "top-left");
-		}
-	};
 	const handleImage = (e) => {
 		let verify = e.target.files[0];
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
@@ -84,7 +73,7 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Thank You Image</Heading>
+			<Heading>Thank You Page Banner Update</Heading>
 			<form action="" method="POST">
 				<CustomSelectInput
 					position={"top"}

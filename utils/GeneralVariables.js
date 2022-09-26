@@ -115,7 +115,8 @@ export const checkStatus = (
 		return false;
 	} else if (res.status === 400) {
 		toast.error(
-			errorMessage || "Make sure all the fields are filled with valid inputs",
+			errorMessage ||
+				"Make sure all the fields are filled. Make sure the values entered are also valid",
 			{
 				position: "top-center",
 				autoClose: errorTimer || 1500,

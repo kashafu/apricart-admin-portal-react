@@ -83,7 +83,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Popup Redirection</Heading>
+			<Heading>Popup Screen Update</Heading>
 			<form action="" method="POST">
 				<CustomSelectInput
 					position={"top"}

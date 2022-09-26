@@ -60,7 +60,7 @@ const UpdateCategoryImageAPIComponent = () => {
 	return (
 		<section className="relative">
 			{<Loading loading={loading} />}
-			<Heading>Update Category Image</Heading>
+			<Heading>Category Image Update</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					heading={"Enter Category Id"}
