@@ -7,10 +7,12 @@ import { getAllAPIsApi } from "../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
 
 const Dashboard = () => {
-	const DynamicReports = dynamic(() =>
-		import("../components/DashboardReports").then(
-			(dashboard) => dashboard.default
-		)
+	const DynamicReports = dynamic(
+		() =>
+			import("../components/DashboardReports").then(
+				(dashboard) => dashboard.default
+			),
+		{ ssr: false, loading: () => <div>Fetching Reports</div> }
 	);
 	const [loading, setLoading] = useState(true);
 
@@ -32,7 +34,7 @@ const Dashboard = () => {
 			<div className="flex justify-center items-center pl-10">
 				<Heading>Welcome to the Dashboard</Heading>
 			</div>
-			<section className="w-full h-full bg-orange-400">
+			<section className="w-full ">
 				<DynamicReports />
 			</section>
 		</>
