@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateCategoryAPIComponent from "../../../components/EachAPI/categories/UpdateCategoryAPIComponent copy";
+import UpdateCategoryAPIComponent from "../../../components/EachAPI/categories/UpdateCategoryAPIComponent";
 
 const UpdateCategory = () => {
 	return (

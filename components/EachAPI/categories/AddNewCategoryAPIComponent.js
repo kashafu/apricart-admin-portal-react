@@ -66,15 +66,6 @@ const AddNewCategoryAPIComponent = () => {
 			setLoading(false);
 		});
 	};
-	const handleEdit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
-		await updateCategoryApi(baseUrl, categoryData, headers).then((response) => {
-			checkStatus(response);
-			setLoading(false);
-		});
-	};
 
 	return (
 		<section className="relative pl-[2.5rem]">
@@ -115,9 +106,6 @@ const AddNewCategoryAPIComponent = () => {
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
 						Add Category
-					</CustomButton>
-					<CustomButton width={"1/3"} onClick={(e) => handleEdit(e)}>
-						Update Category
 					</CustomButton>
 				</div>
 			</form>
