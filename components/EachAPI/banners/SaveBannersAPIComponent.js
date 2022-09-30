@@ -24,13 +24,22 @@ const SaveBannersAPIComponent = () => {
 		bannerUrlApp: [],
 		bannerUrlWeb: [],
 		prodType: "cus",
+		orderType: "delivery",
 		type: "offer",
 		offerId: 0,
 		level: 0,
 		city: "karachi",
 	});
-	const { bannerUrlApp, bannerUrlWeb, prodType, type, offerId, level, city } =
-		input;
+	const {
+		bannerUrlApp,
+		bannerUrlWeb,
+		prodType,
+		orderType,
+		type,
+		offerId,
+		level,
+		city,
+	} = input;
 
 	const handleWebImage = (e) => {
 		let verify = e.target.files[0];
@@ -59,16 +68,20 @@ const SaveBannersAPIComponent = () => {
 	};
 
 	const handleProdType = (e) => {
-		setInputs({ ...inputs, prodType: e.target.value });
+		setInput({ ...input, prodType: e.target.value });
+	};
+	const handleOrderType = (e) => {
+		setInput({ ...input, orderType: e.target.value });
 	};
 	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
+		setInput({ ...input, city: e.target.value });
 	};
 
 	const fillFormData = () => {
 		bannerData.append("app", bannerUrlApp);
 		bannerData.append("web", bannerUrlWeb);
 		bannerData.append("prod_type", prodType);
+		bannerData.append("order_type", orderType);
 		bannerData.append("type", type);
 		bannerData.append("offer_id", offerId);
 		bannerData.append("level", level);
@@ -98,6 +111,12 @@ const SaveBannersAPIComponent = () => {
 					heading={"Select Product Type"}
 					values={["cus", "b2b"]}
 					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
 				/>
 				<CustomInput
 					value={type}

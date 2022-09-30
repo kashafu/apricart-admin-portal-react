@@ -28,7 +28,8 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		type: "offer",
 		value: 0,
 	});
-	const { bannerUrlApp, bannerUrlWeb, prodType, type, value, city } = input;
+	const { bannerUrlApp, bannerUrlWeb, prodType, orderType, type, value, city } =
+		input;
 
 	const handleWebImage = (e) => {
 		let verify = e.target.files[0];
@@ -60,15 +61,19 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		bannerData.append("app", bannerUrlApp);
 		bannerData.append("web", bannerUrlWeb);
 		bannerData.append("prod_type", prodType);
+		bannerData.append("order_type", orderType);
 		bannerData.append("city", city);
 		bannerData.append("type", type);
 		bannerData.append("value", value);
 	};
 	const handleProdType = (e) => {
-		setInputs({ ...inputs, prodType: e.target.value });
+		setInput({ ...input, prodType: e.target.value });
+	};
+	const handleOrderType = (e) => {
+		setInput({ ...input, orderType: e.target.value });
 	};
 	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
+		setInput({ ...input, city: e.target.value });
 	};
 	const submitHandler = async (e) => {
 		setLoading(true);
@@ -91,6 +96,12 @@ const PopupRedirectionUpdateAPIComponent = () => {
 					heading={"Select Product Type"}
 					values={["cus", "b2b"]}
 					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
 				/>
 				<CustomInput
 					value={type}

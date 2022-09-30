@@ -331,8 +331,17 @@ export const productIsActiveApi = async (
 	}
 };
 
-export const getAllBannersApi = async (baseUrl, headers) => {
-	const url = baseUrl + `/offers/banners?city=karachi&lang=en`;
+export const getAllBannersApi = async (
+	baseUrl,
+	prodType,
+	orderType,
+	city,
+	headers
+) => {
+	const url =
+		baseUrl +
+		`/offers/banners?prod_type=${prodType}&order_type=${orderType}&city=${city}&lang=en`;
+
 	try {
 		return await axios.get(url, {
 			headers,

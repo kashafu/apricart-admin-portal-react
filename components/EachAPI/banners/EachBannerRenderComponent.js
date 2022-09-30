@@ -30,18 +30,38 @@ const EachBannerRenderComponent = ({ props }) => {
 	}, [props]);
 
 	return (
-		<section className="flex flex-col w-full mb-2 mt-1 justify-center items-center">
-			<div className="p-1 w-[55%] px-2 ">
+		<section className="font-lato flex flex-col w-full mb-2 mt-1 justify-center items-center">
+			<div className="font-nunito w-full justify-between flex bg-main-blue rounded-lg text-white px-12 font-bold">
+				<h3>Banner Id: {propState.id}</h3>
+				<h3>Banner Level: {propState.level}</h3>
+			</div>
+			<div className="font-lato font-bold p-1 text-center w-[70%] px-2 ">
+				<h3>Website Banner</h3>
+				<div>
+					<Image
+						className=""
+						src={propState?.bannerUrlWeb[0]}
+						alt={"bannerImg"}
+						layout={"responsive"}
+						objectFit={"cover"}
+						width="20px"
+						height="5px"
+					/>
+				</div>
+			</div>
+			<div className="font-lato font-bold p-1 text-center w-[55%] px-2 ">
+				<h3>App Banner</h3>
 				<Image
 					className=""
-					src={propState?.bannerUrlWeb[0]}
+					src={propState?.bannerUrlApp[0]}
 					alt={"bannerImg"}
 					layout={"responsive"}
+					objectFit={"cover"}
 					width="20px"
 					height="5px"
 				/>
 			</div>
-			<div className="flex w-full justify-around px-16">
+			<div className="flex w-full justify-around px-10">
 				<div className="w-1/5">
 					<CustomButton width={"1/2"}>Edit Banner</CustomButton>
 				</div>

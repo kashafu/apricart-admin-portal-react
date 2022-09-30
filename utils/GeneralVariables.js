@@ -95,7 +95,6 @@ export const checkStatus = (
 			closeOnClick: true,
 			draggable: true,
 			theme: "dark",
-			toastId: "successId",
 		});
 		return true;
 	} else if (res.status === 0) {
@@ -109,7 +108,6 @@ export const checkStatus = (
 				closeOnClick: true,
 				draggable: true,
 				theme: "dark",
-				toastId: "errorId",
 			}
 		);
 		return false;
@@ -124,7 +122,6 @@ export const checkStatus = (
 				closeOnClick: true,
 				draggable: true,
 				theme: "dark",
-				toastId: "errorId",
 			}
 		);
 		return false;
@@ -136,7 +133,6 @@ export const checkStatus = (
 			closeOnClick: true,
 			draggable: true,
 			theme: "dark",
-			toastId: "errorId",
 		});
 		Router.push("/login");
 		return false;
@@ -148,7 +144,6 @@ export const checkStatus = (
 			closeOnClick: true,
 			draggable: true,
 			theme: "dark",
-			toastId: "errorId",
 		});
 		return false;
 	}
@@ -162,7 +157,6 @@ export function displayErrorToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "genErrorId",
 	});
 }
 export function displaySuccessToast(message, timer, position) {
@@ -173,7 +167,6 @@ export function displaySuccessToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "genSuccessId",
 	});
 }
 export function displayInfoToast(message, timer, position) {
@@ -184,7 +177,6 @@ export function displayInfoToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
-		toastId: "genInfoId",
 	});
 }
 
