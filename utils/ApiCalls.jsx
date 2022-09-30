@@ -118,7 +118,7 @@ export const uploadImagesApi = async (baseUrl, images) => {
 };
 
 export const uploadFilesApi = async (baseUrl, files) => {
-	let url = baseUrl + "/v1/options/files/uploads";
+	let url = baseUrl + "/options/files/uploads";
 	try {
 		return await axios.post(url, files, {
 			Accept: "application/json",

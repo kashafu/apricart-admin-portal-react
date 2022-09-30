@@ -1,11 +1,12 @@
 import React from "react";
 
-const CustomFileInput = ({ handleChangeValue, index }) => {
+const CustomFileInput = ({ handleChangeValue, index, ren }) => {
 	return (
 		<div className="w-full">
 			<div className="bg-main-blue text-white w-36 h-36 flex flex-col justify-center items-center">
 				<div>
 					<input
+						key={ren}
 						name="img"
 						type={"file"}
 						accept="application/pdf,application/vnd.ms-excel, video/mp4, application/mp4"

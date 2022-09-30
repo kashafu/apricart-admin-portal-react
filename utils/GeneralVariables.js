@@ -82,6 +82,7 @@ export const checkStatus = (
 	successTimer,
 	errorTimer
 ) => {
+	console.log(res);
 	if (res === undefined) {
 		displayErrorToast("An Error occured. Contact backend services.", 3000);
 		return false;
@@ -192,16 +193,18 @@ export const logOutRemoveCookies = () => {
 	getGeneralApiParams();
 };
 
-export const imgAllowedTypes = [
-	"image/png",
-	"image/gif",
-	"image/jpeg",
-	"image/jpg",
-];
+const imgAllowedTypes = ["image/png", "image/gif", "image/jpeg", "image/jpg"];
+
+const fileAllowedTypes = ["application/pdf", "text/csv", "video/mp4"];
 
 export const validateImage = (image) => {
 	if (image === undefined) return;
 	if (imgAllowedTypes.includes(image.type)) return true;
+	else return false;
+};
+export const validateFile = (file) => {
+	if (file === undefined) return;
+	if (fileAllowedTypes.includes(file.type)) return true;
 	else return false;
 };
 export const updateRen = (setRen) => {

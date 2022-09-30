@@ -35,18 +35,18 @@ function MyApp({ Component, pageProps }) {
 	};
 
 	const getCurrentAddress = (array, status) => {
-		let path = getPathVariable();
-		if (array.some((e) => e.endpoint === path || path === "/admin")) {
-			/* response contains the element we're looking for */
-			setLoading(false);
-			status && setAllApis(array);
-		} else {
-			displayErrorToast(
-				"Unauthorized to use this feature, You have been logged out"
-			);
-			logOutRemoveCookies();
-			router.push("/login");
-		}
+		// let path = getPathVariable();
+		// if (array.some((e) => e.endpoint === path || path === "/admin")) {
+		// 	/* response contains the element we're looking for */
+		// 	setLoading(false);
+		// 	status && setAllApis(array);
+		// } else {
+		// 	displayErrorToast(
+		// 		"Unauthorized to use this feature, You have been logged out"
+		// 	);
+		// 	logOutRemoveCookies();
+		// 	router.push("/login");
+		// }
 	};
 
 	const getPathVariable = () => {

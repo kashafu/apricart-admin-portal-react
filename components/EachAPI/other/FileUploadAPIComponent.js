@@ -4,24 +4,47 @@ import React, { useState } from "react";
 import { uploadFilesApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
+	updateRen,
+	validateFile,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomFileInput from "../../Misc/CustomFileInput";
 
 const FileUploadAPIComponent = () => {
-	var images = new FormData();
+	var files = new FormData();
 	const [loading, setLoading] = useState(false);
+	const [ren, setRen] = useState("");
 	const [imageInput, setImageInput] = useState([
 		{
 			file: "",
 		},
 	]);
+	// const handleChangeValue = (e, index) => {
+	// 	const { name, files } = e.target;
+	// 	const list = [...imageInput];
+	// 	list[index][name] = files[0];
+	// 	setImageInput(list);
+	// };
+
 	const handleChangeValue = (e, index) => {
 		const { name, files } = e.target;
 		const list = [...imageInput];
-		list[index][name] = files[0];
-		setImageInput(list);
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateFile(verify);
+		if (status) {
+			list[index][name] = files[0];
+			setImageInput(list);
+		} else {
+			updateRen(setRen);
+			displayErrorToast(
+				"Upload a valid file. eg. .pdf, .csv, .mp4",
+				1500,
+				"top-left"
+			);
+		}
 	};
 
 	const handleInputRemove = (index) => {
@@ -35,13 +58,13 @@ const FileUploadAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		imageInput.forEach((each) => {
-			images.append("files", each);
-		});
+		// imageInput.forEach((each) => {
+		files.append("files", files);
+		// });
 	};
 
 	const checkEmpty = () => {
-		let entries = images.entries().next();
+		let entries = files.entries().next();
 
 		const { value } = entries;
 
@@ -59,9 +82,9 @@ const FileUploadAPIComponent = () => {
 		fillFormData();
 		const { baseUrl } = getGeneralApiParams();
 		checkEmpty();
-		let entries = images.entries().next();
+		// let entries = files.entries().next();
 
-		await uploadFilesApi(baseUrl, images).then((response) => {
+		await uploadFilesApi(baseUrl, files).then((response) => {
 			checkStatus(response);
 		});
 
@@ -69,11 +92,11 @@ const FileUploadAPIComponent = () => {
 	};
 
 	return (
-		<div>
+		<div className="pl-10">
 			{<Loading loading={loading} />}
 			<section className="grid grid-cols-2 gap-2">
 				<form action="" method="POST">
-					{imageInput.map((each, index) => (
+					{imageInput?.map((each, index) => (
 						<div key={index} className="ml-20">
 							<CustomFileInput
 								handleChangeValue={handleChangeValue}
@@ -103,7 +126,7 @@ const FileUploadAPIComponent = () => {
 					))}
 				</form>
 			</section>
-			{/* <button onClick={submitHandler} className="">Submit Images</button> */}
+			{/* <button onClick={submitHandler} className="">Submit files</button> */}
 			<button
 				type="submit"
 				onClick={(e) => submitHandler(e)}
