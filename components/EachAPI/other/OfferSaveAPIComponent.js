@@ -55,8 +55,6 @@ const OfferSaveAPIComponent = () => {
 		}
 		const { baseUrl, headers } = getGeneralApiParams();
 		await offerSaveApi(baseUrl, newInput, headers).then((response) => {
-			console.log(response);
-
 			setLoading(false);
 			let status = checkStatus(response);
 			status && setOfferId(response.data.data.id);
@@ -133,7 +131,7 @@ const OfferSaveAPIComponent = () => {
 					Offer ID
 				</CustomButton>
 			</form>
-			{console.log(offerId)}
+
 			{offerId && (
 				<div className="inline-flex animate-dropdown justify-center items-center">
 					<Heading>Your Offer Id = </Heading>

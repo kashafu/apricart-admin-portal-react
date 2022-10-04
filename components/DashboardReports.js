@@ -25,18 +25,18 @@ const DashboardReports = () => {
 				}}
 				eventHandlers={
 					new Map([
-						[
-							"loaded",
-							function () {
-								console.log("Report loaded");
-							},
-						],
-						[
-							"rendered",
-							function () {
-								console.log("Report rendered");
-							},
-						],
+						// [
+						// 	"loaded",
+						// 	function () {
+						// 		console.log("Report loaded");
+						// 	},
+						// ],
+						// [
+						// 	"rendered",
+						// 	function () {
+						// 		console.log("Report rendered");
+						// 	},
+						// ],
 						[
 							"error",
 							function (event) {

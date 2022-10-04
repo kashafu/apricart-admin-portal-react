@@ -40,7 +40,6 @@ const BannersAPIComponent = () => {
 				let status = checkStatus(response);
 				status && setBanners(response.data.data);
 				setLoading(false);
-				console.log(response);
 			}
 		);
 	};

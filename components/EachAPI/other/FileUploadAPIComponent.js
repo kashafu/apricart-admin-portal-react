@@ -10,12 +10,12 @@ import {
 	validateFile,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
+import CustomButton from "../../Misc/CustomButton";
 import CustomFileInput from "../../Misc/CustomFileInput";
 
 const FileUploadAPIComponent = () => {
 	var files = new FormData();
 	const [loading, setLoading] = useState(false);
-	const [ren, setRen] = useState("");
 	const [imageInput, setImageInput] = useState([
 		{
 			file: "",
@@ -38,7 +38,6 @@ const FileUploadAPIComponent = () => {
 			list[index][name] = files[0];
 			setImageInput(list);
 		} else {
-			updateRen(setRen);
 			displayErrorToast(
 				"Upload a valid file. eg. .pdf, .csv, .mp4",
 				1500,
@@ -47,10 +46,11 @@ const FileUploadAPIComponent = () => {
 		}
 	};
 
-	const handleInputRemove = (index) => {
+	const handleInputRemove = (index, e) => {
 		const list = [...imageInput];
 		list.splice(index, 1);
 		setImageInput(list);
+		e.preventDefault();
 	};
 
 	const handleInputAdd = () => {
@@ -94,7 +94,7 @@ const FileUploadAPIComponent = () => {
 	return (
 		<div className="pl-10">
 			{<Loading loading={loading} />}
-			<section className="grid grid-cols-2 gap-2">
+			<section className="grid grid-cols-1 bg-green-300">
 				<form action="" method="POST">
 					{imageInput?.map((each, index) => (
 						<div key={index} className="ml-20">
@@ -103,37 +103,27 @@ const FileUploadAPIComponent = () => {
 								index={index}
 							/>
 							{imageInput.length - 1 === index && imageInput.length && (
-								<button
-									type="button"
-									className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
-									onClick={handleInputAdd}
-								>
-									<span>Add another File</span>
-								</button>
+								<CustomButton onClick={handleInputAdd} width={"1/3"}>
+									Add another File
+								</CustomButton>
 							)}
 							<div className="">
 								{imageInput.length !== 1 && (
-									<button
-										type="button"
-										className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue my-2"
-										onClick={() => handleInputRemove(index)}
+									<CustomButton
+										onClick={(e) => handleInputRemove(index, e)}
+										width={"1/3"}
 									>
-										<span>Remove</span>
-									</button>
+										Remove
+									</CustomButton>
 								)}
 							</div>
 						</div>
 					))}
 				</form>
 			</section>
-			{/* <button onClick={submitHandler} className="">Submit files</button> */}
-			<button
-				type="submit"
-				onClick={(e) => submitHandler(e)}
-				className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-			>
+			<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
 				Submit Files
-			</button>
+			</CustomButton>
 		</div>
 	);
 };

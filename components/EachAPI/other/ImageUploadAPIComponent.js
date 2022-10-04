@@ -35,11 +35,9 @@ const ImageUploadAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		// imageInput.forEach((each) => {
-		// 	images.append("files", each);
-		// });
-		images.append("files", imageInput[0]);
-		images.append("files", imageInput[1]);
+		imageInput.forEach((each) => {
+			images.append("files", each);
+		});
 	};
 
 	const checkEmpty = () => {

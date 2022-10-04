@@ -82,7 +82,7 @@ export const checkStatus = (
 	successTimer,
 	errorTimer
 ) => {
-	console.log(res);
+	// console.log(res);
 	if (res === undefined) {
 		displayErrorToast("An Error occured. Contact backend services.", 3000);
 		return false;
@@ -134,6 +134,7 @@ export const checkStatus = (
 			closeOnClick: true,
 			draggable: true,
 			theme: "dark",
+			toastId: "UnAuth001202",
 		});
 		Router.push("/login");
 		return false;
@@ -150,7 +151,7 @@ export const checkStatus = (
 	}
 };
 
-export function displayErrorToast(message, timer, position) {
+export function displayErrorToast(message, timer, position, toastId) {
 	toast.error(message || "An Error Occured", {
 		position: position || "top-center",
 		autoClose: timer || 1500,
@@ -158,9 +159,10 @@ export function displayErrorToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
+		toastId: toastId || null,
 	});
 }
-export function displaySuccessToast(message, timer, position) {
+export function displaySuccessToast(message, timer, position, toastId) {
 	toast.success(message || "Success", {
 		position: position || "top-center",
 		autoClose: timer || 1500,
@@ -168,9 +170,10 @@ export function displaySuccessToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
+		toastId: toastId || null,
 	});
 }
-export function displayInfoToast(message, timer, position) {
+export function displayInfoToast(message, timer, position, toastId) {
 	toast.info(message, {
 		position: position || "top-center",
 		autoClose: timer || 1500,
@@ -178,6 +181,7 @@ export function displayInfoToast(message, timer, position) {
 		closeOnClick: true,
 		draggable: true,
 		theme: "dark",
+		toastId: toastId || null,
 	});
 }
 
