@@ -16,27 +16,21 @@ import CustomFileInput from "../../Misc/CustomFileInput";
 const FileUploadAPIComponent = () => {
 	var files = new FormData();
 	const [loading, setLoading] = useState(false);
-	const [imageInput, setImageInput] = useState([
+	const [fileInput, setFileInput] = useState([
 		{
 			file: "",
 		},
 	]);
-	// const handleChangeValue = (e, index) => {
-	// 	const { name, files } = e.target;
-	// 	const list = [...imageInput];
-	// 	list[index][name] = files[0];
-	// 	setImageInput(list);
-	// };
 
 	const handleChangeValue = (e, index) => {
 		const { name, files } = e.target;
-		const list = [...imageInput];
+		const list = [...fileInput];
 		let verify = e.target.files[0];
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
 		let status = validateFile(verify);
 		if (status) {
 			list[index][name] = files[0];
-			setImageInput(list);
+			setFileInput(list);
 		} else {
 			displayErrorToast(
 				"Upload a valid file. eg. .pdf, .csv, .mp4",
@@ -47,20 +41,20 @@ const FileUploadAPIComponent = () => {
 	};
 
 	const handleInputRemove = (index, e) => {
-		const list = [...imageInput];
+		const list = [...fileInput];
 		list.splice(index, 1);
-		setImageInput(list);
+		setFileInput(list);
 		e.preventDefault();
 	};
 
 	const handleInputAdd = () => {
-		setImageInput([...imageInput, { file: "" }]);
+		setFileInput([...fileInput, { file: "" }]);
 	};
 
 	const fillFormData = () => {
-		// imageInput.forEach((each) => {
-		files.append("files", files);
-		// });
+		fileInput.forEach((each) => {
+			files.append("files", each.file);
+		});
 	};
 
 	const checkEmpty = () => {
@@ -85,6 +79,7 @@ const FileUploadAPIComponent = () => {
 		// let entries = files.entries().next();
 
 		await uploadFilesApi(baseUrl, files).then((response) => {
+			console.log(response);
 			checkStatus(response);
 		});
 
@@ -96,19 +91,19 @@ const FileUploadAPIComponent = () => {
 			{<Loading loading={loading} />}
 			<section className="grid grid-cols-1 bg-green-300">
 				<form action="" method="POST">
-					{imageInput?.map((each, index) => (
+					{fileInput?.map((each, index) => (
 						<div key={index} className="ml-20">
 							<CustomFileInput
 								handleChangeValue={handleChangeValue}
 								index={index}
 							/>
-							{imageInput.length - 1 === index && imageInput.length && (
+							{fileInput.length - 1 === index && fileInput.length && (
 								<CustomButton onClick={handleInputAdd} width={"1/3"}>
 									Add another File
 								</CustomButton>
 							)}
 							<div className="">
-								{imageInput.length !== 1 && (
+								{fileInput.length !== 1 && (
 									<CustomButton
 										onClick={(e) => handleInputRemove(index, e)}
 										width={"1/3"}

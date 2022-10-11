@@ -13,10 +13,10 @@ import Loading from "../../../utils/Loading";
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		type: "offer",
-		value: 0,
-		title: "Staging- Notificacione nuevo",
-		message: "Lo Siento Senor",
+		type: "product",
+		value: "",
+		title: "",
+		message: "",
 		city: "karachi",
 		to: "alldev",
 	});
@@ -38,6 +38,15 @@ const NewNotificationSendAPIComponent = () => {
 	};
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
+	};
+	const handleSKU = (e) => {
+		setInputs({ ...inputs, sku: e.target.value });
+	};
+	const handleCategory = (e) => {
+		setInputs({ ...inputs, category: e.target.value });
+	};
+	const handleSubCategory = (e) => {
+		setInputs({ ...inputs, subcategory: e.target.value });
 	};
 	const handleTo = (e) => {
 		if (e.target.value !== "alldev") {
@@ -69,36 +78,71 @@ const NewNotificationSendAPIComponent = () => {
 			checkStatus(response, "Notification Sent Successfully");
 		});
 	};
+	console.log(inputs);
 	return (
 		<section className="font-nunito pl-10">
 			<Loading loading={loading} />
 			<Heading>Push Notifications</Heading>
 			<form action="" method="POST">
-				<CustomInput
-					heading={"Offer"}
-					position={"top"}
-					type={"text"}
-					value={type}
+				<CustomSelectInput
+					values={["product", "category", "subcategory", "offer"]}
+					options={["Product", "Category", "Subcategory", "Offer"]}
 					onChange={handleOffer}
-					required={true}
-					placeholder={"Offer"}
+					position={"top"}
+					heading={"Notification Type"}
 				/>
-				<CustomInput
-					heading={"Value"}
-					type={"number"}
-					value={value}
-					onChange={handleValue}
-					required={true}
-					min={0}
-					placeholder={"Value"}
-				/>
+				{type === "offer" && (
+					<CustomInput
+						heading={"Value"}
+						type={"number"}
+						value={value}
+						onChange={handleValue}
+						required={true}
+						min={0}
+						placeholder={"Enter Value"}
+					/>
+				)}
+				{type === "category" && (
+					<CustomInput
+						heading={"Category"}
+						type={"text"}
+						value={value}
+						onChange={handleValue}
+						required={true}
+						min={0}
+						placeholder={"Enter Category"}
+					/>
+				)}
+				{type === "subcategory" && (
+					<CustomInput
+						heading={"Sub Category"}
+						type={"text"}
+						value={value}
+						onChange={handleValue}
+						required={true}
+						min={0}
+						placeholder={"Enter Category"}
+					/>
+				)}
+				{type === "product" && (
+					<CustomInput
+						heading={"SKU"}
+						type={"text"}
+						value={value}
+						onChange={handleValue}
+						required={true}
+						min={0}
+						placeholder={"Enter SKU"}
+					/>
+				)}
+
 				<CustomInput
 					heading={"Title"}
 					type={"text"}
 					value={title}
 					onChange={handleTitle}
 					required={true}
-					placeholder={"Title"}
+					placeholder={"Enter Title"}
 				/>
 				<CustomInput
 					heading={"Message"}
@@ -106,7 +150,7 @@ const NewNotificationSendAPIComponent = () => {
 					value={message}
 					onChange={handleMessage}
 					required={true}
-					placeholder={"Message"}
+					placeholder={"Enter Message"}
 				/>
 				<CustomSelectInput
 					onChange={handleTo}
@@ -115,16 +159,16 @@ const NewNotificationSendAPIComponent = () => {
 					heading={"Select Recipient Type"}
 				/>
 				{toState && (
-					<CustomInput
-						heading={"Enter City"}
+					<CustomSelectInput
 						position={"bottom"}
-						type={"text"}
-						value={city}
-						onChange={handleCity}
-						required={true}
-						placeholder={"City"}
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
 					/>
 				)}
+				{/* if staging, alldev,
+				on live, all */}
 				{!toState && (
 					<CustomInput
 						heading={"Enter Recipient"}
@@ -133,7 +177,7 @@ const NewNotificationSendAPIComponent = () => {
 						value={to}
 						onChange={handleTo}
 						required={true}
-						placeholder={"Send To Who"}
+						placeholder={"Enter Topic"}
 					/>
 				)}
 				<CustomButton width={"1/3"} onClick={handleSubmit} type={"submit"}>

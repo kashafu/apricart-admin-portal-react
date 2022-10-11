@@ -5,6 +5,7 @@ import { uploadImagesApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,
+	validateImage,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomImageInput from "../../Misc/CustomImageInput";
@@ -17,11 +18,23 @@ const ImageUploadAPIComponent = () => {
 			img: "",
 		},
 	]);
+
 	const handleChangeValue = (e, index) => {
 		const { name, files } = e.target;
 		const list = [...imageInput];
-		list[index][name] = files[0];
-		setImageInput(list);
+		let verify = e.target.files[0];
+		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
+		let status = validateImage(verify);
+		if (status) {
+			list[index][name] = files[0];
+			setImageInput(list);
+		} else {
+			displayErrorToast(
+				"Upload a valid image. eg. .jpg, .jpeg, .png, .gif",
+				1500,
+				"top-left"
+			);
+		}
 	};
 
 	const handleInputRemove = (index) => {
@@ -35,9 +48,11 @@ const ImageUploadAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
+		console.log(imageInput);
 		imageInput.forEach((each) => {
 			images.append("files", each);
 		});
+		images.append("primary", false);
 	};
 
 	const checkEmpty = () => {
@@ -60,6 +75,7 @@ const ImageUploadAPIComponent = () => {
 		let entries = images.entries().next();
 
 		await uploadImagesApi(baseUrl, images).then((response) => {
+			console.log(response);
 			checkStatus(response);
 		});
 
@@ -67,7 +83,7 @@ const ImageUploadAPIComponent = () => {
 	};
 
 	return (
-		<div>
+		<section className="pl-10">
 			{<Loading loading={loading} />}
 			<section className="grid grid-cols-2 gap-2">
 				<form action="" method="POST">
@@ -109,7 +125,7 @@ const ImageUploadAPIComponent = () => {
 			>
 				Submit Images
 			</button>
-		</div>
+		</section>
 	);
 };
 
