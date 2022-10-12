@@ -62,13 +62,13 @@ const NewNotificationSendAPIComponent = () => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		var encodedType = encodeURI(type);
+		var encodedTitle = encodeURI(title);
 		var encodedMessage = encodeURI(message);
 		await sendNotificationApi(
 			baseUrl,
 			type,
 			value,
-			encodedType,
+			encodedTitle,
 			encodedMessage,
 			city,
 			to,
