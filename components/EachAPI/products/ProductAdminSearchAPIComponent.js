@@ -19,8 +19,6 @@ const ProductAdminSearchAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [totalPages, setTotalPages] = useState(0);
 	const [detail, setDetail] = useState([]);
-	// Here we use item offsets; we could also use page offsets
-	// following the API or data you're working with.
 
 	const { term, size, page, category, city } = inputs;
 
@@ -36,13 +34,14 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 	const handleSize = (e) => {
 		setInputs({ ...inputs, size: e.target.value });
-		searchProduct(term, page, e.target.value);
+		searchProduct(term, page, e.target.value, category);
 	};
 	const handlePage = (newPage) => {
 		setInputs({ ...inputs, page: newPage });
 	};
 	const handleCategory = (e) => {
 		setInputs({ ...inputs, category: e.target.value });
+		searchProduct(term, 1, size, e.target.value);
 	};
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
@@ -58,7 +57,7 @@ const ProductAdminSearchAPIComponent = () => {
 		let tot = Math.ceil(calc);
 		setTotalPages(tot);
 	};
-	const searchProduct = async (text, newPage, newSize) => {
+	const searchProduct = async (text, newPage, newSize, newCategory) => {
 		setLoading(true);
 		const { baseUrl, userId, headers } = getGeneralApiParams();
 
@@ -67,7 +66,7 @@ const ProductAdminSearchAPIComponent = () => {
 			(page = newPage || 1),
 			(size = newSize || size),
 			text,
-			category,
+			(category = newCategory || category),
 			city,
 			userId,
 			headers
@@ -175,21 +174,21 @@ const ProductAdminSearchAPIComponent = () => {
 					<h3 className="font-nunito">No Data could be found</h3>
 				)}
 				<ReactPaginate
-					breakLabel=". . ."
+					breakLabel="o o o"
 					nextLabel="Next ->"
 					onPageChange={handlePageClick}
 					pageRangeDisplayed={5}
 					pageCount={totalPages}
 					previousLabel="<- Previous"
 					renderOnZeroPageCount={null}
-					pageClassName="px-2"
-					pageLinkClassName="border-2 p-1 bg-gray-200 border-main-blue rounded-md px-3"
-					previousClassName="font-lato font-bold"
-					nextClassName="font-nunito font-bold"
-					breakClassName="font-bold"
+					pageClassName=""
+					pageLinkClassName="border-[1px] p-1 mx-1 active:bg-main-blue active:text-white border-main-blue rounded-md px-3"
+					previousClassName="mr-8 font-nunito font-bold"
+					nextClassName="ml-8 font-nunito font-bold"
+					breakClassName=""
 					breakLinkClassName="text-lato"
-					containerClassName="p-4 justify-between flex"
-					activeClassName="bg-main-blue "
+					containerClassName="p-4 flex justify-center items-center"
+					activeClassName="bg-main-blue text-white rounded-xl py-1 border-0"
 				/>
 			</section>
 		</section>

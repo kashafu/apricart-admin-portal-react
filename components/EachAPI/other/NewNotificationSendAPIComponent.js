@@ -60,7 +60,7 @@ const NewNotificationSendAPIComponent = () => {
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
-		e.preventDefault();
+		e.preventDefault();~
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedTitle = encodeURI(title);
 		var encodedMessage = encodeURI(message);
