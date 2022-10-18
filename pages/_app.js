@@ -30,7 +30,8 @@ function MyApp({ Component, pageProps }) {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
-			status ? getCurrentAddress(response.data.data.apis, status) : "";
+			// status ? getCurrentAddress(response.data.data.apis, status) : "";
+			status && setAllApis(response.data.data.apis);
 		});
 	};
 

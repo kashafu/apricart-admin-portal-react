@@ -54,6 +54,7 @@ export const loginApi = async (
 
 export const getAllAPIsApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/admin/dashboard`;
+	// const url = baseUrl + `/adminUser/dashboard`;
 	try {
 		return await axios.get(url, {
 			headers,
@@ -768,6 +769,148 @@ export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
 		return await axios.post(url, thankyouData, {
 			Accept: "application/json",
 			"Content-Type": "multipart/form-data",
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+// New APIs
+
+export const createAndUpdateRoleApi = async (
+	baseUrl,
+	name,
+	active,
+	id,
+	headers
+) => {
+	let body;
+	let url = baseUrl + "/adminUser/role/saveOrUpdate";
+	if (id.length === 0) {
+		body = { name, active };
+	} else {
+		body = {
+			id,
+			name,
+			active,
+		};
+	}
+	try {
+		return await axios.post(url, body, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const createAndUpdatePermsissionApi = async (
+	baseUrl,
+	id,
+	apiName,
+	apiURL,
+	active,
+	headers
+) => {
+	let body;
+	let url = baseUrl + "/adminUser/permission/saveOrUpdate";
+	if (id.length === 0) {
+		body = { apiName, apiURL, active };
+	} else {
+		body = {
+			id,
+			apiName,
+			apiURL,
+			active,
+		};
+	}
+	try {
+		return await axios.post(url, body, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const linkRoleAndPermissionApi = async (
+	baseUrl,
+	roleId,
+	permissionId,
+	headers
+) => {
+	let body = { roleId, permissionId };
+	let url = baseUrl + "/adminUser/rolePermission/saveOrUpdate";
+
+	try {
+		return await axios.post(url, body, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getAllRolesApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/role/getAll";
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getAllPermissionsApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/permission/getAll";
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getPermissionByRoleApi = async (baseUrl, roleId, headers) => {
+	let url = baseUrl + `/adminUser/rolePermission/getByRoleId?roleId=${roleId}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getCurrentRolePermissionsDetailsApi = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/rolePermission/getAll`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getActiveRoles = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/role/getAllActive`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getActivePermissions = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/permission/getAllActive`;
+	try {
+		return await axios.get(url, {
+			headers,
 		});
 	} catch (error) {
 		return error?.response;
