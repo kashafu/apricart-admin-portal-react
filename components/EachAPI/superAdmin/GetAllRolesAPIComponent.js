@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { getAllRolesApi } from "../../../utils/ApiCalls";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import Heading from "../../Misc/Heading";
 
-const GetAllPermissions = () => {
+const GetAllRolesAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const handleSubmit = async () => {
 		setLoading(true);
@@ -15,7 +15,7 @@ const GetAllPermissions = () => {
 		});
 	};
 	return (
-		<section>
+		<section className="pl-10">
 			<Loading loading={loading}></Loading>
 			<Heading>Get All Roles</Heading>
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
@@ -25,4 +25,4 @@ const GetAllPermissions = () => {
 	);
 };
 
-export default GetAllPermissions;
+export default GetAllRolesAPIComponent;

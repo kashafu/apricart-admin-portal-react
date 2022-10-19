@@ -53,8 +53,8 @@ export const loginApi = async (
 };
 
 export const getAllAPIsApi = async (baseUrl, headers) => {
-	const url = baseUrl + `/admin/dashboard`;
-	// const url = baseUrl + `/adminUser/dashboard`;
+	// const url = baseUrl + `/admin/dashboard`;
+	const url = baseUrl + `/adminUser/dashboard`;
 	try {
 		return await axios.get(url, {
 			headers,
@@ -895,7 +895,7 @@ export const getCurrentRolePermissionsDetailsApi = async (baseUrl, headers) => {
 	}
 };
 
-export const getActiveRoles = async (baseUrl, headers) => {
+export const getActiveRolesApi = async (baseUrl, headers) => {
 	let url = baseUrl + `/adminUser/role/getAllActive`;
 	try {
 		return await axios.get(url, {
@@ -906,10 +906,23 @@ export const getActiveRoles = async (baseUrl, headers) => {
 	}
 };
 
-export const getActivePermissions = async (baseUrl, headers) => {
+export const getActivePermissionsApi = async (baseUrl, headers) => {
 	let url = baseUrl + `/adminUser/permission/getAllActive`;
 	try {
 		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const assignRoleApi = async (baseUrl, phoneNumber, roleId, headers) => {
+	let body = { phoneNumber, roleId };
+	let url = baseUrl + "/adminUser/linkRole";
+
+	try {
+		return await axios.post(url, body, {
 			headers,
 		});
 	} catch (error) {
