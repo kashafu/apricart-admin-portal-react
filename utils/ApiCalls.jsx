@@ -918,7 +918,8 @@ export const getActivePermissionsApi = async (baseUrl, headers) => {
 };
 
 export const assignRoleApi = async (baseUrl, phoneNumber, roleId, headers) => {
-	let body = { phoneNumber, roleId };
+	let newNumber = "92" + phoneNumber;
+	let body = { phoneNumber: newNumber, roleId };
 	let url = baseUrl + "/adminUser/linkRole";
 
 	try {

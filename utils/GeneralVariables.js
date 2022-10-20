@@ -15,7 +15,7 @@ export const getGeneralApiParams = () => {
 	let prodType = "";
 	let orderType = "";
 	// let baseUrl = "https://stag.apricart.pk/v1";
-	let baseUrl = "http://192.168.30.54:8080/v1";
+	let baseUrl = "http://192.168.30.78:8080/v1";
 	let token = updateToken();
 	let city = cookies.get("cities") === null ? "karachi" : cookies.get("cities");
 	let selectedAddress = cookies.get("selected-address");

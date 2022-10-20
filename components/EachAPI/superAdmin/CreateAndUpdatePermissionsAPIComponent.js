@@ -1,52 +1,65 @@
 import React, { useState } from "react";
-import { createAndUpdateRoleApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	createAndUpdatePermsissionApi,
+	createAndUpdateRoleApi,
+} from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
 
-const CreateAndUpdateRolesAPIComponent = () => {
-	// create update as well
-	// create update as well
-	// create update as well
-	// create update as well
-	// create update as well
-	// create update as well
-	// create update as well
-	// create update as well
-
+const CreateAndUpdatePermissionsAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
 	const [name, setName] = useState("");
+	const [url, setUrl] = useState("");
 	const [active, setActive] = useState("Y");
 
 	const handleName = (e) => {
 		setName(e.target.value);
+	};
+	const handleUrl = (e) => {
+		setUrl(e.target.value);
 	};
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await createAndUpdateRoleApi(baseUrl, name, active, "", headers).then(
-			(response) => {
-				console.log(response);
-				setLoading(false);
-			}
-		);
+		await createAndUpdatePermsissionApi(
+			baseUrl,
+			"",
+			name,
+			url,
+			active,
+			headers
+		).then((response) => {
+			console.log(response);
+			checkStatus(response, "New Permission Created");
+			setLoading(false);
+		});
 	};
 	console.log(name, active);
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Create a Role</Heading>
+			<Heading>Create a New Permission</Heading>
 			<form action="" method="POST">
 				<CustomInput
 					heading={"Name"}
-					placeholder={"Enter Role Name"}
+					placeholder={"Enter Permission Name"}
 					value={name}
 					onChange={(e) => handleName(e)}
+				/>
+				<CustomInput
+					heading={"URL"}
+					placeholder={"Enter API Url"}
+					value={url}
+					onChange={(e) => handleUrl(e)}
 				/>
 				<CustomSelectInput
 					onChange={(e) => setActive(e.target.value)}
@@ -55,11 +68,11 @@ const CreateAndUpdateRolesAPIComponent = () => {
 					options={["Yes", "No"]}
 				/>
 				<CustomButton width={"1/3"} onClick={handleSubmit}>
-					Create Role
+					Create New Permission
 				</CustomButton>
 			</form>
 		</section>
 	);
 };
 
-export default CreateAndUpdateRolesAPIComponent;
+export default CreateAndUpdatePermissionsAPIComponent;
