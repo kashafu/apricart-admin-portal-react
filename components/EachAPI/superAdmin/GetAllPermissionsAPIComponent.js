@@ -3,6 +3,7 @@ import { getAllPermissionsApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,
+	sortAscending,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
@@ -17,7 +18,8 @@ const GetAllPermissionsAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllPermissionsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
-			status && setDetails(response.data.data);
+
+			status && setDetails(sortAscending(response.data.data));
 			setLoading(false);
 		});
 	};

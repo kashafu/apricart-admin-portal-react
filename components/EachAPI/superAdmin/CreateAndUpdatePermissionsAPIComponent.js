@@ -70,6 +70,28 @@ const CreateAndUpdatePermissionsAPIComponent = () => {
 				<CustomButton width={"1/3"} onClick={handleSubmit}>
 					Create New Permission
 				</CustomButton>
+
+				{/* {details?.map((each) => (
+				<section
+					key={each.id}
+					className="flex my-4 items-center justify-center mb-4"
+				>
+					<div className="px-4 text-lg font-medium font-lato">
+						ID: {each.id}
+					</div>
+					<div className="px-8 font-nunito font-bold">
+						<div>API Name</div>
+						<div>API Endpoint</div>
+						<div>Active</div>
+					</div>
+
+					<div className="px-8 font-nunito">
+						<div>{each.apiName}</div>
+						<div>{each.apiURL}</div>
+						<div>{each.active}</div>
+					</div>
+				</section>
+			))} */}
 			</form>
 		</section>
 	);

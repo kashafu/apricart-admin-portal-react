@@ -784,6 +784,7 @@ export const createAndUpdateRoleApi = async (
 	id,
 	headers
 ) => {
+	console.log(id);
 	let body;
 	let url = baseUrl + "/adminUser/role/saveOrUpdate";
 	if (id.length === 0) {

@@ -15,7 +15,7 @@ export const getGeneralApiParams = () => {
 	let prodType = "";
 	let orderType = "";
 	// let baseUrl = "https://stag.apricart.pk/v1";
-	let baseUrl = "http://192.168.30.78:8080/v1";
+	let baseUrl = "http://192.168.30.56:8080/v1";
 	let token = updateToken();
 	let city = cookies.get("cities") === null ? "karachi" : cookies.get("cities");
 	let selectedAddress = cookies.get("selected-address");
@@ -214,4 +214,8 @@ export const validateFile = (file) => {
 };
 export const updateRen = (setRen) => {
 	setRen(Math.random().toString(36));
+};
+export const sortAscending = (array) => {
+	let newArray = array.sort((a, b) => a.id - b.id);
+	return newArray;
 };
