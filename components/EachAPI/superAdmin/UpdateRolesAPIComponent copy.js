@@ -26,8 +26,9 @@ const UpdateRolesAPIComponent = () => {
 	]);
 
 	const handleRoleId = (e) => {
-		console.log(e.target.value);
 		setRoleId(e.target.value);
+		const requiredObject = roleArray.find((each) => each.id == e.target.value);
+		setName(requiredObject?.name);
 	};
 
 	const handleName = (e) => {
@@ -52,8 +53,8 @@ const UpdateRolesAPIComponent = () => {
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			console.log(response);
 			let status = checkStatus(response, "");
-
 			status && setRoleArray(sortAscending(response.data.data));
+			setName(response.data.data[0].name);
 			setLoading(false);
 		});
 	};
@@ -65,16 +66,17 @@ const UpdateRolesAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
-			<Heading>Update Role</Heading>
+			<Heading>Update a Role</Heading>
 			<form action="" method="POST">
 				<CustomSelectInput
+					position={"top"}
 					onChange={(e) => handleRoleId(e)}
 					heading={"Role"}
 					values={roleArray.map((each) => each.id)}
 					options={roleArray.map((each) => each.name)}
 				/>
 				<CustomInput
-					heading={"Name"}
+					heading={"New Name"}
 					placeholder={"Enter New Name"}
 					value={name}
 					onChange={(e) => handleName(e)}
@@ -84,6 +86,7 @@ const UpdateRolesAPIComponent = () => {
 					heading={"Active/Inactive"}
 					values={["Y", "N"]}
 					options={["Yes", "No"]}
+					position={"bottom"}
 				/>
 				<CustomButton width={"1/3"} onClick={handleSubmit}>
 					Update Role

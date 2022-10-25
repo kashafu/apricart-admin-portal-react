@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-	assignRoleApi,
 	getAllPermissionsApi,
 	getAllRolesApi,
+	linkRoleAndPermissionApi,
 } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
@@ -22,21 +22,13 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		},
 	]);
 	const [permissionArray, setPermissionArray] = useState([]);
+	const [linked, setLinked] = useState([]);
 	const [number, setNumber] = useState("");
-	const [roleId, setRoleId] = useState(1);
+	const [roleId, setRoleId] = useState("");
 
 	const handleRoleId = (e) => {
 		console.log(e.target.value);
 		setRoleId(e.target.value);
-	};
-
-	const handleSubmit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
-		await assignRoleApi(baseUrl, number, roleId, headers).then((response) => {
-			console.log(response);
-		});
 	};
 
 	const getAllPermissions = async () => {
@@ -54,15 +46,42 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
 			status && setRoleArray(response.data.data);
-			setLoading(false);
+			setRoleId(response.data.data[0].id);
 			setLoading(false);
 		});
+	};
+
+	const handleCheck = (e) => {
+		let id = e.target.value;
+		let checked = e.target.checked;
+		if (checked) {
+			setLinked([...linked, e.target.value]);
+		} else {
+			let killIndex = linked.findIndex((each) => each === id);
+			console.log("Kill Index", killIndex);
+			let newLinked = linked;
+			newLinked.splice(killIndex, 1);
+			setLinked(newLinked);
+		}
+	};
+
+	const handleSubmit = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const { baseUrl, headers } = getGeneralApiParams();
+		await linkRoleAndPermissionApi(baseUrl, roleId, linked, headers).then(
+			(response) => {
+				console.log(response);
+				setLoading(false);
+			}
+		);
 	};
 
 	useEffect(() => {
 		getAllRoles();
 		getAllPermissions();
 	}, []);
+
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
@@ -74,7 +93,7 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 					values={roleArray.map((each) => each.id)}
 					options={roleArray.map((each) => each.name)}
 				/>
-				{permissionArray?.map((each) => (
+				{permissionArray?.map((each, index) => (
 					<section
 						key={each.id}
 						className="flex my-4 mb-4 items-center justify-center bg-main-blue-100 border-x-8 border-main-blue"
@@ -94,7 +113,12 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 							<div>{each.active}</div>
 						</div>
 						<div className="px-4 w-1/4">
-							<input type="checkbox" className="w-5 h-5" />
+							<input
+								type="checkbox"
+								className="w-5 h-5"
+								onChange={(e) => handleCheck(e)}
+								value={each.id}
+							/>
 						</div>
 					</section>
 				))}
