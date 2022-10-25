@@ -34,6 +34,7 @@ const AssignUserRoleAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await assignRoleApi(baseUrl, number, roleId, headers).then((response) => {
 			console.log(response);
+			setLoading(false);
 		});
 	};
 
@@ -42,7 +43,6 @@ const AssignUserRoleAPIComponent = () => {
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
 			status && setRoleArray(response.data.data);
-			setLoading(false);
 			setLoading(false);
 		});
 	};

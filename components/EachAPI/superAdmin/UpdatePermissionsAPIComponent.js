@@ -62,7 +62,7 @@ const UpdatePermissionsAPIComponent = () => {
 			status && setPermissionsArray(response.data.data);
 			setPermissionId(response.data.data[0].id);
 			setUrl(response.data.data[0].apiURL);
-			setName(requiredObject?.apiName);
+			setName(response.data.data[0].apiName);
 			setLoading(false);
 		});
 	};
