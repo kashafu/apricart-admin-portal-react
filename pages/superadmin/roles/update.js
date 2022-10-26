@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateRolesAPIComponent from "../components/EachAPI/superAdmin/UpdateRolesAPIComponent copy";
+import UpdateRolesAPIComponent from "../../../components/EachAPI/superAdmin/UpdateRolesAPIComponent copy";
 
 const UpdateRoles = () => {
 	return (

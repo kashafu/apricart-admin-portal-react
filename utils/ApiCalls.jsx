@@ -843,6 +843,7 @@ export const linkRoleAndPermissionApi = async (
 	let body = { roleId, permissionId };
 	let url = baseUrl + "/adminUser/rolePermission/saveOrUpdate";
 
+	console.log(body);
 	try {
 		return await axios.post(url, body, {
 			headers,

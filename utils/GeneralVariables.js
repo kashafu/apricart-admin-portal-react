@@ -219,3 +219,7 @@ export const sortAscending = (array) => {
 	let newArray = array.sort((a, b) => a.id - b.id);
 	return newArray;
 };
+export const sortDescending = (array) => {
+	let newArray = array.sort((a, b) => b.id - a.id);
+	return newArray;
+};

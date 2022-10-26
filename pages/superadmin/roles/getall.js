@@ -1,5 +1,5 @@
 import React from "react";
-import GetAllRolesAPIComponent from "../components/EachAPI/superAdmin/GetAllRolesAPIComponent";
+import GetAllRolesAPIComponent from "../../../components/EachAPI/superAdmin/GetAllRolesAPIComponent";
 
 const GetAllRoles = () => {
 	return (

@@ -1,5 +1,5 @@
 import React from "react";
-import CreateAndUpdatePermissionsAPIComponent from "../components/EachAPI/superAdmin/CreateAndUpdatePermissionsAPIComponent";
+import CreateAndUpdatePermissionsAPIComponent from "../../../components/EachAPI/superAdmin/CreateAndUpdatePermissionsAPIComponent";
 
 const CreatePermissions = () => {
 	return (

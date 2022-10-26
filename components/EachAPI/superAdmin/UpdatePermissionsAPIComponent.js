@@ -42,14 +42,14 @@ const UpdatePermissionsAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await createAndUpdatePermsissionApi(
 			baseUrl,
-			"",
+			permissionId,
 			name,
 			url,
 			active,
 			headers
 		).then((response) => {
-			console.log(response);
-			checkStatus(response, "New Permission Created");
+			checkStatus(response, "Permission Updated");
+			getAllPermissions();
 			setLoading(false);
 		});
 	};
@@ -60,9 +60,10 @@ const UpdatePermissionsAPIComponent = () => {
 			console.log(response);
 			let status = checkStatus(response, "");
 			status && setPermissionsArray(response.data.data);
-			setPermissionId(response.data.data[0].id);
-			setUrl(response.data.data[0].apiURL);
-			setName(response.data.data[0].apiName);
+			let lastIndex = response.data.data.length - 1;
+			setPermissionId(response.data.data[lastIndex].id);
+			setUrl(response.data.data[lastIndex].apiURL);
+			setName(response.data.data[lastIndex].apiName);
 			setLoading(false);
 		});
 	};
@@ -79,7 +80,12 @@ const UpdatePermissionsAPIComponent = () => {
 					onChange={(e) => handlePermissionId(e)}
 					heading={"Permission Name"}
 					values={permissionsArray.map((each) => each.id)}
-					options={permissionsArray.map((each) => each.apiName)}
+					options={permissionsArray.map(
+						(each) =>
+							`${each.apiName} || status: ${
+								each.active === "Y" ? "Active" : "Inactive"
+							}`
+					)}
 					position="top"
 				/>
 				<CustomInput
@@ -96,13 +102,13 @@ const UpdatePermissionsAPIComponent = () => {
 				/>
 				<CustomSelectInput
 					onChange={(e) => setActive(e.target.value)}
-					heading={"Active/Inactive"}
+					heading={"Set Active"}
 					values={["Y", "N"]}
 					options={["Yes", "No"]}
 					position="bottom"
 				/>
 				<CustomButton width={"1/3"} onClick={handleSubmit}>
-					Create New Permission
+					Update Permission
 				</CustomButton>
 
 				{/* {details?.map((each) => (

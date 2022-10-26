@@ -1,5 +1,5 @@
 import React from "react";
-import GetAllPermissionsByRoleAPIComponent from "../components/EachAPI/superAdmin/GetAllPermissionsByRoleAPIComponent";
+import GetAllPermissionsByRoleAPIComponent from "../../../components/EachAPI/superAdmin/GetAllPermissionsByRoleAPIComponent";
 
 const GetPermissionsByRole = () => {
 	return (
