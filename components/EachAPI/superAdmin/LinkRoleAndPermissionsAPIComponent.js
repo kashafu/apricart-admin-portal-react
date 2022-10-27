@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { MultiSelect } from "react-multi-select-component";
 
 import {
 	getActivePermissionsApi,
@@ -9,6 +10,7 @@ import {
 import {
 	checkStatus,
 	getGeneralApiParams,
+	sortAscending,
 	updateRen,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
@@ -24,6 +26,7 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 			name: "Loading...",
 		},
 	]);
+
 	const [permissionArray, setPermissionArray] = useState([]);
 	// Array to contain permissions for this role
 	const [linked, setLinked] = useState([]);
@@ -36,11 +39,22 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		setLinked([]);
 	};
 
+	const fitIntoMultiArray = (array) => {
+		let tempArr = [];
+		array.map((each) => {
+			tempArr.push({ label: each.apiName, value: each.id });
+		});
+		setPermissionArray(tempArr);
+	};
+
 	const getAllPermissions = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getActivePermissionsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
-			status && setPermissionArray(response.data.data);
+			status && setPermissionArray(sortAscending(response.data.data));
+			// sets up all permissions into the linked
+			status && fitIntoMultiArray(response.data.data);
+
 			setLoading(false);
 		});
 	};
@@ -56,9 +70,16 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 	};
 
 	const addPermsToLinked = (array) => {
-		// add already checked permissions to tne linked array
+		// add already added permissions to tne linked array
 		let newArray = [];
-		array?.map((each) => newArray.push(each.id));
+		let sorted = sortAscending(array);
+		sorted?.map((each) => {
+			newArray.push({
+				label: each.permission.apiName,
+				value: each.permission.id,
+			});
+		});
+
 		return newArray;
 	};
 
@@ -70,27 +91,37 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		});
 	};
 
-	const handleCheck = (e) => {
-		// if target checked, add to the linked array
-		// if not checked, delete from linked array
-		let id = e.target.value;
-		let checked = e.target.checked;
-		if (checked) {
-			setLinked([...linked, e.target.value]);
-		} else {
-			let killIndex = linked.findIndex((each) => each === id);
-			console.log("Kill Index", killIndex);
-			let newLinked = linked;
-			newLinked.splice(killIndex, 1);
-			setLinked(newLinked);
-		}
+	// const handleCheck = (e) => {
+	// 	// if target checked, add to the linked array
+	// 	// if not checked, delete from linked array
+	// 	let id = e.target.value;
+	// 	let checked = e.target.checked;
+	// 	if (checked) {
+	// 		setLinked([...linked, e.target.value]);
+	// 	} else {
+	// 		let killIndex = linked.findIndex((each) => each === id);
+	// 		console.log("Kill Index", killIndex);
+	// 		let newLinked = linked;
+	// 		newLinked.splice(killIndex, 1);
+	// 		setLinked(newLinked);
+	// 	}
+	// };
+
+	const submitIdsOnly = (array) => {
+		let tempArr = [];
+		array.map((each) => {
+			tempArr.push(each.value);
+		});
+
+		return tempArr;
 	};
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await linkRoleAndPermissionApi(baseUrl, roleId, linked, headers).then(
+		let newPerms = submitIdsOnly(linked);
+		await linkRoleAndPermissionApi(baseUrl, roleId, newPerms, headers).then(
 			(response) => {
 				checkStatus(response, "Permissions Assigned Successfully");
 				setLoading(false);
@@ -103,7 +134,6 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		getAllPermissions();
 	}, []);
 
-	console.log(linked);
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />
@@ -111,28 +141,24 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 			<form action="" method="POST">
 				<CustomSelectInput
 					onChange={(e) => handleRoleId(e)}
-					heading={"Role Id"}
+					heading={"Role Name"}
 					values={roleArray.map((each) => each.id)}
 					options={roleArray.map((each) => each.name)}
 				/>
-				{permissionArray?.map((each, index) => (
+				{/* {permissionArray?.map((each, index) => (
 					<section
 						key={each.id}
-						className="flex my-4 mb-4 items-center justify-center bg-main-blue-100 border-x-8 border-main-blue"
+						className="flex my-4 mb-4 items-center justify-center "
 					>
 						<div className="px-4 text-lg font-medium font-lato">
 							ID: {each.id}
 						</div>
 						<div className="px-8 font-nunito font-bold w-1/4">
 							<div>API Name</div>
-							<div>API Endpoint</div>
-							<div>Active</div>
 						</div>
 
 						<div className="px-8 font-nunito w-1/4">
-							<div>{each.apiName}</div>
-							<div>{each.apiURL}</div>
-							<div>{each.active}</div>
+							<div>{each.label}</div>
 						</div>
 						<div className="px-4 w-1/4">
 							<input
@@ -145,9 +171,43 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 							/>
 						</div>
 					</section>
-				))}
-				{}
-				<CustomButton width={"1/3"} onClick={handleSubmit}>
+				))} */}
+
+				<div className="flex">
+					{/* <div className="grid grid-cols-5">
+						<div className="col-span-1 bg-red-500">
+							<p className="ml-2 font-nunito">Permissions</p>
+						</div>
+
+						<MultiSelect
+							className="col-span-2"
+							options={permissionArray}
+							value={linked}
+							onChange={setLinked}
+							labelledBy="Select"
+						/>
+					</div> */}
+					<div className={`w-full grid grid-cols-5`}>
+						<div>
+							<p className="ml-2 font-nunito">Permissions</p>
+						</div>
+						<div className="col-span-1 lg:hidden" />
+						<div className="col-span-3 relative pr-2">
+							<MultiSelect
+								className="col-span-2 border-[1px] border-gray-800"
+								options={permissionArray}
+								value={linked}
+								onChange={setLinked}
+								labelledBy="Select"
+							/>
+						</div>
+					</div>
+				</div>
+				<CustomButton
+					className="col-span-1"
+					width={"1/3"}
+					onClick={handleSubmit}
+				>
 					Assign Roles
 				</CustomButton>
 			</form>

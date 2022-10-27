@@ -216,10 +216,10 @@ export const updateRen = (setRen) => {
 	setRen(Math.random().toString(36));
 };
 export const sortAscending = (array) => {
-	let newArray = array.sort((a, b) => a.id - b.id);
+	let newArray = array?.sort((a, b) => a.id - b.id);
 	return newArray;
 };
 export const sortDescending = (array) => {
-	let newArray = array.sort((a, b) => b.id - a.id);
+	let newArray = array?.sort((a, b) => b.id - a.id);
 	return newArray;
 };
