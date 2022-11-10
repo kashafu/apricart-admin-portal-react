@@ -29,24 +29,21 @@ const GetAllPermissionsAPIComponent = () => {
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
 				Get All Permissions
 			</CustomButton>
-			{details?.map((each) => (
-				<section key={each.id} className=" my-4 grid grid-cols-8 mb-4">
-					<div className="col-span-2" />
-					<div className="px-4 text-lg col-span-1 font-medium font-lato">
-						ID: {each.id}
-					</div>
-					<div className="px-8 font-nunito col-span-1 font-bold">
-						<div>API Name</div>
-						<div>API Endpoint</div>
-						<div>Active</div>
-					</div>
 
-					<div className="px-8 col-span-4 font-nunito">
-						<div>{each.apiName}</div>
-						<div>{each.apiURL}</div>
-						<div>{each.active}</div>
-					</div>
-					<div className="" />
+			<div className="grid grid-cols-6 border-b-[1px] w-full bg-white border-main-blue">
+				<div></div>
+				<div>ID</div>
+				<div>API Name</div>
+				<div className="col-span-2">API Endpoint</div>
+				<div>Active</div>
+			</div>
+			{details?.map((each) => (
+				<section key={each.id} className="grid grid-cols-6 border">
+					<div></div>
+					<div>{each.id}</div>
+					<div>{each.apiName || "-"}</div>
+					<div className="col-span-2 text-ellipsis">{each.apiURL}</div>
+					<div>{each.active}</div>
 				</section>
 			))}
 		</section>

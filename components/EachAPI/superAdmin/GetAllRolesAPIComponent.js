@@ -28,26 +28,19 @@ const GetAllRolesAPIComponent = () => {
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
 				Get All Roles
 			</CustomButton>
+			<div className="grid grid-cols-4 border-b-[1px] border-main-blue">
+				<div></div>
+				<div>ID</div>
+				<div>API Name</div>
+				<div>Active</div>
+			</div>
 			{roleArray?.map((each) => (
-				<section
-					key={each.id}
-					className="grid grid-cols-9 w-full my-4 items-center justify-center mb-4"
-				>
-					<div className="col-span-3" />
-					<div className="col-span-1 px-8 text-lg font-medium font-lato">
-						ID: {each.id}
-					</div>
-					<div className="col-span-1 px-8 font-nunito font-bold">
-						<div>API Id</div>
-						<div>API Name</div>
-						<div>Active</div>
-					</div>
+				<section key={each.id} className="grid grid-cols-4 border">
+					<div></div>
+					<div>{each.id}</div>
+					<div>{each.name || "-"}</div>
+					<div>{each.active}</div>
 
-					<div className="col-span-1 px-8 font-nunito">
-						<div>{each.id}</div>
-						<div>{each.name || "-"}</div>
-						<div>{each.active}</div>
-					</div>
 					<div className="col-span-2" />
 				</section>
 			))}

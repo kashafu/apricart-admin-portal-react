@@ -29,6 +29,7 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 			console.log(response);
 			let status = checkStatus(response);
 			status && setDetails(response.data.data);
+			!status && setDetails([]);
 			setLoading(false);
 		});
 	};
@@ -43,7 +44,6 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
 			status && setRoleArray(response.data.data);
-			setLoading(false);
 			setLoading(false);
 		});
 	};
@@ -64,20 +64,22 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
 				Get All Permissions
 			</CustomButton>
+			<div className="grid grid-cols-6 border-b-[1px] w-full bg-white border-main-blue">
+				<div></div>
+				<div>ID</div>
+				<div>API Name</div>
+				<div className="col-span-2">API Endpoint</div>
+				<div>Active</div>
+			</div>
 			{details?.map((each) => (
-				<section key={each.id} className="flex my-4 mb-4">
-					<div className="px-4 text-xl font-semibold font-lato">{each.id}</div>
-					<div className="px-8 font-nunito font-bold">
-						<div>API Name</div>
-						<div>API Endpoint</div>
-						<div>Active</div>
+				<section key={each.id} className="grid grid-cols-6 border">
+					<div></div>
+					<div>{each.permission.id}</div>
+					<div>{each.permission.apiName || "-"}</div>
+					<div className="col-span-2 text-ellipsis">
+						{each.permission.apiURL}
 					</div>
-
-					<div className="px-8 font-nunito">
-						<div>{each.permission.apiName}</div>
-						<div>{each.permission.apiURL}</div>
-						<div>{each.permission.active}</div>
-					</div>
+					<div>{each.permission.active}</div>
 				</section>
 			))}
 		</section>
