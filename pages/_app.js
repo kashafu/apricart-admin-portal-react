@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
 	useEffect(() => {
 		router.pathname !== "/login" && getSidebarItems();
 	}, [token, router]);
-	useEffect(() => { }, []);
+
 	return (
 		<div className="min-h-screen w-screen flex">
 			{router.pathname !== "/login" &&
