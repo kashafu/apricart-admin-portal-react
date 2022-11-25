@@ -14,6 +14,7 @@ import {
 	getGeneralApiParams,
 	logOutRemoveCookies,
 } from "../utils/GeneralVariables";
+import SideBarNewComponent from "../components/SideBarNewComponent";
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();
@@ -64,7 +65,12 @@ function MyApp({ Component, pageProps }) {
 		<>
 			<div className="pb-12">{router.pathname !== "/login" && <Navbar />}</div>
 			{router.pathname !== "/login" && (
-				<SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
+				// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
+				<SideBarNewComponent
+					apiList={apiList}
+					setApiList={setApiList}
+					allApis={allApis}
+				/>
 			)}
 			<section>
 				<Component {...pageProps} />
