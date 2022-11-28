@@ -63,20 +63,22 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 		<div className="min-h-screen w-screen flex">
-			{router.pathname !== "/login" &&
+			{router.pathname !== "/login" && (
 				<div className="pb-12">
 					<Navbar />
 				</div>
-			}
+			)}
 			{router.pathname !== "/login" && (
 				// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
-				<SideBarNewComponent
-					apiList={apiList}
-					setApiList={setApiList}
-					allApis={allApis}
-				/>
+				<section className="z-10">
+					<SideBarNewComponent
+						apiList={apiList}
+						setApiList={setApiList}
+						allApis={allApis}
+					/>
+				</section>
 			)}
-			<section className="grow">
+			<section className="grow pt-12 pl-6">
 				<Component {...pageProps} />
 			</section>
 			<ToastContainer />

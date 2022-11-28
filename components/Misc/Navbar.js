@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Logo from "../../public/logo-white.png";
 import ProfileViewComponent from "../ProfileViewComponent";
 import Heading from "../Misc/Heading";
+import ProfileViewNewComponent from "../ProfileViewNewComponent";
 
 const Navbar = () => {
 	const router = useRouter();
@@ -35,10 +36,14 @@ const Navbar = () => {
 					</h2>
 				</div>
 				<div className="px-2 flex justify-center items-center">
-					<div className="text-txt-light font-nunito text-xs lg:text-base hover:bg-main-blue-100 hover:text-txt-dark p-4 rounded-xl  transition-all duration-300 hover:cursor-pointer">
+					<div className="text-txt-light font-nunito text-xs lg:text-base hover:bg-slate-900 p-4 rounded-xl  transition-all duration-300 hover:cursor-pointer">
 						<button onClick={handleDisplay}>My Account</button>
 					</div>
-					<ProfileViewComponent
+					{/* <ProfileViewComponent
+						profileDisplay={profileDisplay}
+						setProfileDisplay={setProfileDisplay}
+					/> */}
+					<ProfileViewNewComponent
 						profileDisplay={profileDisplay}
 						setProfileDisplay={setProfileDisplay}
 					/>
