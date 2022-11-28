@@ -60,10 +60,14 @@ function MyApp({ Component, pageProps }) {
 	useEffect(() => {
 		router.pathname !== "/login" && getSidebarItems();
 	}, [token, router]);
-	useEffect(() => {}, []);
+
 	return (
-		<>
-			<div className="pb-12">{router.pathname !== "/login" && <Navbar />}</div>
+		<div className="min-h-screen w-screen flex">
+			{router.pathname !== "/login" &&
+				<div className="pb-12">
+					<Navbar />
+				</div>
+			}
 			{router.pathname !== "/login" && (
 				// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
 				<SideBarNewComponent
@@ -72,11 +76,11 @@ function MyApp({ Component, pageProps }) {
 					allApis={allApis}
 				/>
 			)}
-			<section>
+			<section className="grow">
 				<Component {...pageProps} />
 			</section>
 			<ToastContainer />
-		</>
+		</div>
 	);
 }
 
