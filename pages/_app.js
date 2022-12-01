@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import { useRouter } from "next/router";
 
 import Navbar from "../components/Misc/Navbar";
+import { Provider } from "react-redux";
 import SideBar from "../components/SideBarComponent";
 import { useEffect, useState } from "react";
 import { getAllAPIsApi } from "../utils/ApiCalls";
@@ -15,6 +16,8 @@ import {
 	logOutRemoveCookies,
 } from "../utils/GeneralVariables";
 import SideBarNewComponent from "../components/SideBarNewComponent";
+import { store } from "../Redux/store";
+import { ConfigProvider } from "react-avatar";
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();
@@ -26,6 +29,7 @@ function MyApp({ Component, pageProps }) {
 	const [allApis, setAllApis] = useState([]);
 	const [loading, setLoading] = useState(true);
 	let token = cookies.get("cookies-token");
+	let name = cookies.get("cookies-name");
 
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -62,27 +66,31 @@ function MyApp({ Component, pageProps }) {
 	}, [token, router]);
 
 	return (
-		<div className="min-h-screen w-screen flex">
-			{router.pathname !== "/login" && (
-				<div className="pb-12">
-					<Navbar />
+		<Provider store={store}>
+			<ConfigProvider colors={["red", "green", "gray", "yellow"]}>
+				<div className="min-h-screen w-screen flex">
+					{router.pathname !== "/login" && (
+						<div className="pb-12">
+							<Navbar name={name} />
+						</div>
+					)}
+					{router.pathname !== "/login" && (
+						// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
+						<section className="z-50">
+							<SideBarNewComponent
+								apiList={apiList}
+								setApiList={setApiList}
+								allApis={allApis}
+							/>
+						</section>
+					)}
+					<section className="grow pt-12 pl-6">
+						<Component {...pageProps} />
+					</section>
+					<ToastContainer />
 				</div>
-			)}
-			{router.pathname !== "/login" && (
-				// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
-				<section className="z-10">
-					<SideBarNewComponent
-						apiList={apiList}
-						setApiList={setApiList}
-						allApis={allApis}
-					/>
-				</section>
-			)}
-			<section className="grow pt-12 pl-6">
-				<Component {...pageProps} />
-			</section>
-			<ToastContainer />
-		</div>
+			</ConfigProvider>
+		</Provider>
 	);
 }
 

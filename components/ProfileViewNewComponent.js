@@ -33,6 +33,7 @@ const ProfileViewNewComponent = ({ profileDisplay, setProfileDisplay }) => {
 		displaySuccessToast("Logged Out");
 		router.push("/login");
 	};
+
 	useEffect(() => {
 		getUserData();
 	}, []);
@@ -44,24 +45,26 @@ const ProfileViewNewComponent = ({ profileDisplay, setProfileDisplay }) => {
 			onClick={() => setProfileDisplay(false)}
 			className={
 				profileDisplay
-					? "fixed w-screen h-screen bg-transparent -z-10 top-12 -right-48"
+					? "fixed w-screen h-screen bg-transparent -z-10 top-12 left-0"
 					: "hidden"
 			}
 		>
-			<aside className="fixed w-60 h-48 bg-slate-200 shadow-xl right-6 top-16 rounded-sm p-2 font-nunito text-center text-txt-dark">
-				<div className="font-lato border-b-[1px] border-black p-0 bg-gray-900 text-txt-light">
-					Account Information
+			<aside className="fixed w-60 min-h-min bg-white shadow-xl right-6 top-16 rounded-sm p-2 font-nunito text-left text-txt-dark">
+				<div className="font-nunito border-black px-2 text-txt-dark font-semibold">
+					<h4 className="text-base">ACCOUNT</h4>
 				</div>
 				<div className="relative">
-					<div>{userName}</div>
-					<div>{email}</div>
-					<div className="grid grid-cols-3 grid-rows-4">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div>
-							<CustomButton onClick={handleLogout}>Logout</CustomButton>
+					<div className="p-2">
+						<p className="text-base">{userName}</p>
+					</div>
+
+					<div
+						onClick={handleLogout}
+						className="border-t-[1px] border-gray-300 hover:bg-gray-300 cursor-pointer"
+					>
+						<div className="text-txt-dark w-full p-2">
+							{/* <CustomButton onClick={handleLogout}>Logout</CustomButton> */}
+							<button className="text-base">Sign Out</button>
 						</div>
 					</div>
 				</div>

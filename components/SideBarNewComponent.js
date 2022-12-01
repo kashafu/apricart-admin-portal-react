@@ -9,7 +9,7 @@ const SideBarNewComponent = ({ apiList, setApiList, allApis }) => {
 	const handleUserRoute = () => router.push("/home/user");
 
 	return (
-		<section className="fixed w-16 bg-gray-900 hover:w-min h-screen pt-16">
+		<section className="fixed w-16 bg-gray-900 hover:w-min duration-300 h-screen pt-16">
 			<div className="flex flex-col justify-between ">
 				<div
 					onClick={handleProductRoute}
@@ -18,7 +18,7 @@ const SideBarNewComponent = ({ apiList, setApiList, allApis }) => {
 					<div className="pr-4">
 						<AiFillApi size={24} />
 					</div>
-					<a className="overflow-x-hidden">Product APIs</a>
+					<a className="overflow-x-hidden">Product Management</a>
 				</div>
 				<div
 					onClick={handleUserRoute}
@@ -27,7 +27,7 @@ const SideBarNewComponent = ({ apiList, setApiList, allApis }) => {
 					<div className="pr-4">
 						<AiOutlineUser size={24} />
 					</div>
-					<a className="overflow-x-hidden">User APIs</a>
+					<a className="overflow-x-hidden">User Management</a>
 				</div>
 			</div>
 		</section>

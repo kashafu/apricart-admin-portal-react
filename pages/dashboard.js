@@ -19,6 +19,7 @@ const Dashboard = () => {
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
+			console.log(response);
 			let status = checkStatus(response, "");
 			status && setLoading(false);
 		});
@@ -32,7 +33,7 @@ const Dashboard = () => {
 		<>
 			<Loading loading={loading} />
 			<div className="flex justify-center items-center pl-10">
-				<Heading>Welcome to the Dashboard</Heading>
+				{/* <Heading>Welcome to the Dashboard</Heading> */}
 			</div>
 			<section className="w-full ">{/* <DynamicReports /> */}</section>
 		</>
