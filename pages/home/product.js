@@ -2,7 +2,7 @@ import CustomButton from "../../components/Misc/CustomButton";
 import Heading from "../../components/Misc/Heading";
 import { getAllAPIsApi } from "../../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../../utils/GeneralVariables";
-import { addToRecent } from "../../Redux/Recents/recentsSlice";
+import { addToRecent, selectTabs } from "../../Redux/Recents/recentsSlice";
 
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -35,13 +35,17 @@ const ProductAPIPage = () => {
 	};
 
 	const handleRoute = (each) => {
+		console.log(each);
 		dispatch(addToRecent(each));
+		let tabs = allApis?.filter((each) => each.category === selected);
+		dispatch(selectTabs(tabs));
 		router.push(`/tabs/${selected.toLowerCase()}`);
 	};
 
 	useEffect(() => {
 		getAPIs();
 	}, []);
+
 	return (
 		<section className="pl-10 font-nunito my-6">
 			<section className="flex w-[99%] h-full">

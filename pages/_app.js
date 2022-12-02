@@ -70,13 +70,13 @@ function MyApp({ Component, pageProps }) {
 			<ConfigProvider colors={["red", "green", "gray", "yellow"]}>
 				<div className="min-h-screen w-screen flex">
 					{router.pathname !== "/login" && (
-						<div className="pb-12">
+						<div className="pb-12 z-50">
 							<Navbar name={name} />
 						</div>
 					)}
 					{router.pathname !== "/login" && (
 						// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
-						<section className="z-50">
+						<section className="z-40">
 							<SideBarNewComponent
 								apiList={apiList}
 								setApiList={setApiList}

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	recents: [],
+	tabs: [],
 };
 
 export const recentsSlice = createSlice({
@@ -15,10 +16,14 @@ export const recentsSlice = createSlice({
 			}
 			recents.unshift(action.payload);
 		},
+		selectTabs: (state, action) => {
+			state.tabs = action.payload;
+			console.log(state.tabs);
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { addToRecent } = recentsSlice.actions;
+export const { addToRecent, selectTabs } = recentsSlice.actions;
 
 export default recentsSlice.reducer;
