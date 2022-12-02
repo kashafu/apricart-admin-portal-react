@@ -84,7 +84,7 @@ function MyApp({ Component, pageProps }) {
 							/>
 						</section>
 					)}
-					<section className={router.pathname === "/login" ? "grow" : "grow ml-16 mt-12 p-2"}>
+					<section className={router.pathname === "/login" ? "grow" : "grow ml-16 mt-12"}>
 						<Component {...pageProps} />
 					</section>
 					<ToastContainer />
