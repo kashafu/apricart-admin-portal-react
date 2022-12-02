@@ -11,6 +11,7 @@ import {
 } from "../../../utils/GeneralVariables";
 import EachBannerRenderComponent from "./EachBannerRenderComponent";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
+
 const BannersAPIComponent = () => {
 	const [banners, setBanners] = useState([]);
 	const [loading, setLoading] = useState(false);
