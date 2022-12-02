@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar";
 import Cookies from "universal-cookie";
+import CustomButton2 from "../../components/Misc/CustomButton2";
 import FloatingLabelInput from "../../components/Misc/CustomFloatingInput";
 
 const UserAPIPage = () => {
@@ -66,8 +67,13 @@ const UserAPIPage = () => {
 								/>
 							</div>
 						</div>
+						<div className="w-full flex justify-end">
+							<CustomButton2
+								text="Save Details"
+								className="w-fit"
+							/>
+						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
