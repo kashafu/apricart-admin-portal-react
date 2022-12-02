@@ -11,6 +11,7 @@ import {
 } from "../utils/GeneralVariables";
 
 import logoFile from "../public/logo.png";
+// import backgroundVideo from "../public/warehouseVideo.mp4"
 import backgroundImage from "../public/warehouse.jpg"
 
 const Login = () => {
@@ -68,7 +69,8 @@ const Login = () => {
 
 			{/* MAIN DIV */}
 			<div className="w-full h-full flex">
-				{/* IMAGE DIV */}
+				{/* VIDEO DIV */}
+				{/* <video autoPlay muted loop src="../public/warehouseVideo.mp4" /> */}
 				<div className="hidden lg:flex lg:w-3/5 2xl:w-3/4 h-full relative bg-blue-400">
 					<Image
 						alt="background image"
