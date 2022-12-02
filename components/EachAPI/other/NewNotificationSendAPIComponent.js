@@ -60,7 +60,7 @@ const NewNotificationSendAPIComponent = () => {
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
-		e.preventDefault();~
+		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		var encodedTitle = encodeURI(title);
 		var encodedMessage = encodeURI(message);
@@ -80,7 +80,7 @@ const NewNotificationSendAPIComponent = () => {
 	};
 	console.log(inputs);
 	return (
-		<section className="font-nunito pl-10">
+		<section className="font-nunito">
 			<Loading loading={loading} />
 			<Heading>Push Notifications</Heading>
 			<form action="" method="POST">
