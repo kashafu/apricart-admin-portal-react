@@ -30,12 +30,10 @@ const ProductAPIPage = () => {
 			status ? setSelected(unique[0]) : "";
 			status ? setCategories(unique) : "";
 			status ? setAllApis(response.data.data.apis, status) : "";
-			// console.log(recents);
 		});
 	};
 
 	const handleRoute = (each) => {
-		console.log(each);
 		dispatch(addToRecent(each));
 		let tabs = allApis?.filter((each) => each.category === selected);
 		dispatch(selectTabs(tabs));

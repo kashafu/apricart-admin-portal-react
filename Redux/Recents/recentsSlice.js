@@ -11,14 +11,20 @@ export const recentsSlice = createSlice({
 	reducers: {
 		addToRecent: (state, action) => {
 			const { recents } = state;
+			let isExistIndex = recents.findIndex((each) => each.name === action.payload.name)
+
+			if (isExistIndex !== -1) {
+				recents.splice(isExistIndex)
+			}
+
 			if (recents.length === 6) {
 				recents.splice(-1);
 			}
 			recents.unshift(action.payload);
+
 		},
 		selectTabs: (state, action) => {
 			state.tabs = action.payload;
-			console.log(state.tabs);
 		},
 	},
 });
