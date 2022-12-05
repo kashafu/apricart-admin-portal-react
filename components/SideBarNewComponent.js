@@ -1,25 +1,91 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { AiFillApi } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
+import { getAllAPIsApi } from "../utils/ApiCalls";
+import { FiChevronRight } from "react-icons/fi";
+import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
+import { addToRecent, selectTabs } from "../Redux/Recents/recentsSlice";
+import { useDispatch } from "react-redux";
 
-const SideBarNewComponent = ({ apiList, setApiList, allApis }) => {
+const SideBarNewComponent = ({ allApis, setAllApis }) => {
+	const dispatch = useDispatch();
 	const router = useRouter();
 	const handleProductRoute = () => router.push("/home/product");
 	const handleUserRoute = () => router.push("/home/user");
+	const [categories, setCategories] = useState([]);
+	const [show, setShow] = useState(false);
+	const [selected, setSelected] = useState("");
+
+	const getCategories = async () => {
+		const { baseUrl, headers } = getGeneralApiParams();
+		await getAllAPIsApi(baseUrl, headers).then((response) => {
+			let status = checkStatus(response, "");
+			// to get the unique category names from all the apis
+			const unique = [
+				...new Set(response?.data?.data?.apis?.map((each) => each.category)),
+			];
+			status ? setCategories(unique) : "";
+			status ? setAllApis(response.data.data.apis, status) : "";
+		});
+	};
+
+	const handleCategorySelect = (each) => {
+		console.log(each);
+		dispatch(addToRecent(each));
+		let tabs = allApis?.filter((each) => each.category === selected);
+		dispatch(selectTabs(tabs));
+		router.push(`/tabs/${selected.toLowerCase()}`);
+	};
+
+	useEffect(() => {
+		getCategories();
+	}, []);
 
 	return (
-		<section className="fixed w-16 bg-gray-900 hover:w-min duration-300 h-screen pt-16">
-			<div className="flex flex-col justify-between ">
+		<section className="fixed w-16 bg-slate-900 hover:w-min duration-300 h-screen pt-16">
+			<div className="flex flex-col w-full relative justify-between">
 				<div
 					onClick={handleProductRoute}
 					className="hover:brightness-200 cursor-pointer font-nunito text-lg text-main-grey whitespace-nowrap z-10 inline-flex px-6 items-center py-2"
+					onMouseEnter={() => setShow(true)}
+					onMouseLeave={() => setShow(false)}
 				>
 					<div className="pr-4">
 						<AiFillApi size={24} />
 					</div>
 					<a className="overflow-x-hidden">Product Management</a>
 				</div>
+				{/* Side DropDown */}
+				{/* Side DropDown */}
+				{/* Side DropDown */}
+				{/* Side DropDown */}
+				<section
+					onMouseEnter={() => setShow(true)}
+					onMouseLeave={() => setShow(false)}
+					className={
+						show
+							? "bg-slate-900 font-nunito text-main-grey text-base flex py-1 flex-col absolute top-0 right-0 translate-x-[100%] w-[260px] duration-200"
+							: "-z-40 -left-[500px] fixed duration-300 text-slate-900"
+					}
+				>
+					<div>
+						{categories.map((each) => (
+							<section
+								key={each}
+								className="flex justify-between items-center cursor-pointer hover:brightness-150 hover:scale-x- transition-all"
+								onClick={() => handleCategorySelect(each)}
+							>
+								<div className="p-2 ">{each}</div>
+								<div className="cursor-pointer  relative">
+									<FiChevronRight size={24} className="" />
+									{/* <div>Go to</div> */}
+								</div>
+							</section>
+						))}
+					</div>
+				</section>
 				<div
 					onClick={handleUserRoute}
 					className="hover:brightness-200 cursor-pointer font-nunito text-lg text-main-grey whitespace-nowrap z-10 inline-flex px-6 items-center py-2"

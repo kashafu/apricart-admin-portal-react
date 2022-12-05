@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiChevronRight } from "react-icons/fi";
 import { IoNavigate } from "react-icons/io5";
-import removeWhitespace from "remove-whitespace";
 
 const ProductAPIPage = () => {
 	const router = useRouter();
@@ -19,6 +18,7 @@ const ProductAPIPage = () => {
 	const [allApis, setAllApis] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [selected, setSelected] = useState("");
+
 	const getAPIs = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
@@ -35,7 +35,6 @@ const ProductAPIPage = () => {
 	};
 
 	const handleRoute = (each) => {
-		console.log(each);
 		dispatch(addToRecent(each));
 		let tabs = allApis?.filter((each) => each.category === selected);
 		dispatch(selectTabs(tabs));

@@ -18,16 +18,16 @@ const Navbar = ({ name }) => {
 
 	return (
 		<nav className="bg-white fixed w-screen z-50 border-b-[1px] border-gray-300">
-			<div
-				className="cursor-pointer h-12 flex justify-between items-center overflow-hidden"
-				onClick={() => router.push("/")}
-			>
-				<div className="flex min-w-min items-center">
+			<div className="cursor-pointer h-12 flex justify-between items-center overflow-hidden">
+				<div
+					className="flex min-w-min items-center"
+					onClick={() => router.push("/")}
+				>
 					<div className="ml-6 w-20 mx-2">
 						<Image src={Logo} alt="Logo" layout="responsive" />
 					</div>
-					<h5 className="truncate font-lato text-base font-semibold mx-2">
-						CBE Admin Portal
+					<h5 className="truncate font-nunito text-base font-bold mx-2">
+						Apricart APM
 					</h5>
 				</div>
 

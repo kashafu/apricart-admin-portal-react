@@ -25,7 +25,9 @@ function MyApp({ Component, pageProps }) {
 	axios.defaults.headers.common["Authorization"] =
 		"Bearer " + cookies.get("cookies-token");
 
+	// trigger to show api list
 	const [apiList, setApiList] = useState(false);
+	// allApis are the fetched apis
 	const [allApis, setAllApis] = useState([]);
 	const [loading, setLoading] = useState(true);
 	let token = cookies.get("cookies-token");
@@ -81,10 +83,15 @@ function MyApp({ Component, pageProps }) {
 								apiList={apiList}
 								setApiList={setApiList}
 								allApis={allApis}
+								setAllApis={setAllApis}
 							/>
 						</section>
 					)}
-					<section className={router.pathname === "/login" ? "grow" : "grow ml-16 mt-12"}>
+					<section
+						className={
+							router.pathname === "/login" ? "grow" : "grow ml-16 mt-12"
+						}
+					>
 						<Component {...pageProps} />
 					</section>
 					<ToastContainer />
