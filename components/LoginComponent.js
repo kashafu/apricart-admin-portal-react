@@ -11,6 +11,7 @@ import {
 } from "../utils/GeneralVariables";
 
 import logoFile from "../public/logo.png";
+// import backgroundVideo from "../public/warehouseVideo.mp4"
 import backgroundImage from "../public/warehouse.jpg"
 
 const Login = () => {
@@ -68,124 +69,124 @@ const Login = () => {
 
 			{/* MAIN DIV */}
 			<div className="w-full h-full flex">
+				{/* LOGIN AND RESET PASSWORD DIV */}
+				<div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-gray-50">
+					<div className="w-1/2">
+						{/* LOGIN */}
+						{viewState === 'login' && (
+							<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
+								<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
+									WELCOME TO APRICART ADMIN PORTAL
+								</p>
+								<div className="w-1/2">
+									<Image
+										src={logoFile}
+										alt={"apricart logo"}
+										layout="responsive"
+									/>
+								</div>
+								<form className="space-y-4 w-full flex flex-col" action="#" method="submit">
+									<div className="rounded-md -space-y-px">
+										<input
+											value={phoneNumber}
+											onChange={(e) => setPhoneNumber(e.target.value)}
+											type="number"
+											required
+											className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+											placeholder="Phone Number eg. 3030110220"
+										/>
+										<input
+											value={password}
+											onChange={(e) => setPassword(e.target.value)}
+											type="password"
+											required
+											className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+											placeholder="Password"
+										/>
+									</div>
+									<div className="w-full text-right">
+										<button
+											className="font-medium text-sm text-main-blue hover:text-main-blue"
+											onClick={() => {
+												resetPasswordFunc()
+												setViewState('forgot')
+											}}
+										>
+											Reset your password
+										</button>
+									</div>
+									<button
+										type="submit"
+										onClick={(e) => submitLogin(e)}
+										className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
+									>
+										Sign in
+									</button>
+								</form>
+							</div>
+						)}
+						{/* RESET PASSWORD */}
+						{viewState === 'forgot' && (
+							<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
+								<div className="w-1/2">
+									<Image
+										src={logoFile}
+										alt={"apricart logo"}
+										layout="responsive"
+									/>
+								</div>
+								<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
+									RESET PASSWORD
+								</p>
+								<form className="space-y-6 flex flex-col w-full" action="#">
+									<div className="rounded-md -space-y-px">
+										<input
+											value={OTP}
+											onChange={(e) => setOTP(e.target.value)}
+											type="number"
+											required
+											className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+											placeholder="OTP"
+										/>
+										<input
+											value={newPW}
+											onChange={(e) => setNewPW(e.target.value)}
+											type="password"
+											required
+											className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+											placeholder="New Password"
+										/>
+									</div>
+									<div className="w-full text-right">
+										<button
+											className="font-medium text-sm text-main-blue hover:text-main-blue"
+											onClick={() => {
+												setViewState('login')
+											}}
+										>
+											Go back to login
+										</button>
+									</div>
+									<button
+										type="submit"
+										onClick={(e) => submitResetPassword(e)}
+										className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
+									>
+										Reset Password
+									</button>
+								</form>
+							</div>
+						)}
+					</div>
+				</div>
 				{/* IMAGE DIV */}
-				<div className="hidden lg:flex lg:w-3/5 2xl:w-3/4 h-full relative bg-blue-400">
+				<div className="hidden lg:flex lg:w-1/2 h-full relative bg-blue-400">
 					<Image
 						alt="background image"
 						src={backgroundImage}
 						layout='fill'
 						objectFit="cover"
 					/>
-				</div>
-
-				{/* LOGIN AND RESET PASSWORD DIV */}
-				<div className="w-full lg:w-2/5 2xl:w-1/4 h-full flex flex-col items-center justify-center bg-slate-100">
-					{/* LOGIN */}
-					{viewState === 'login' && (
-						<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
-							<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
-								WELCOME TO APRICART ADMIN PORTAL
-							</p>
-							<div className="w-1/2">
-								<Image
-									src={logoFile}
-									alt={"apricart logo"}
-									layout="responsive"
-								/>
-							</div>
-							<form className="space-y-4 w-full flex flex-col" action="#" method="submit">
-								<div className="rounded-md -space-y-px">
-									<input
-										value={phoneNumber}
-										onChange={(e) => setPhoneNumber(e.target.value)}
-										type="number"
-										required
-										className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-										placeholder="Phone Number eg. 3030110220"
-									/>
-									<input
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
-										type="password"
-										required
-										className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-										placeholder="Password"
-									/>
-								</div>
-								<div className="w-full text-right">
-									<button
-										className="font-medium text-sm text-main-blue hover:text-main-blue"
-										onClick={() => {
-											resetPasswordFunc()
-											setViewState('forgot')
-										}}
-									>
-										Reset your password
-									</button>
-								</div>
-								<button
-									type="submit"
-									onClick={(e) => submitLogin(e)}
-									className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-								>
-									Sign in
-								</button>
-							</form>
-						</div>
-					)}
-
-					{/* RESET PASSWORD */}
-					{viewState === 'forgot' && (
-						<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
-							<div className="w-1/2">
-								<Image
-									src={logoFile}
-									alt={"apricart logo"}
-									layout="responsive"
-								/>
-							</div>
-							<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
-								RESET PASSWORD
-							</p>
-							<form className="space-y-6 flex flex-col w-full" action="#">
-								<div className="rounded-md -space-y-px">
-									<input
-										value={OTP}
-										onChange={(e) => setOTP(e.target.value)}
-										type="number"
-										required
-										className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-t-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-										placeholder="OTP"
-									/>
-									<input
-										value={newPW}
-										onChange={(e) => setNewPW(e.target.value)}
-										type="password"
-										required
-										className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-										placeholder="New Password"
-									/>
-								</div>
-								<div className="w-full text-right">
-									<button
-										className="font-medium text-sm text-main-blue hover:text-main-blue"
-										onClick={() => {
-											setViewState('login')
-										}}
-									>
-										Go back to login
-									</button>
-								</div>
-								<button
-									type="submit"
-									onClick={(e) => submitResetPassword(e)}
-									className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-								>
-									Reset Password
-								</button>
-							</form>
-						</div>
-					)}
 				</div>
 			</div>
 		</>
