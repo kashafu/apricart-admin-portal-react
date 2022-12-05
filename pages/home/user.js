@@ -21,8 +21,9 @@ const UserAPIPage = () => {
 				<p className="text-3xl font-bold">
 					Account
 				</p>
-				<div className="flex flex-row w-full space-x-10">
-					<div className="w-1/3 h-fit p-4 bg-white rounded-xl flex flex-col items-center space-y-4">
+				<div className="flex flex-col lg:flex-row w-full space-y-10 lg:space-y-0 lg:space-x-10">
+					{/* PROFILE PIC and NAME */}
+					<div className="w-full lg:w-1/3 h-fit p-4 bg-white rounded-xl flex flex-col items-center space-y-4">
 						<Avatar
 							title={name}
 							name={name}
@@ -34,7 +35,8 @@ const UserAPIPage = () => {
 							{name}
 						</p>
 					</div>
-					<div className="w-2/3 h-fit p-4 bg-white rounded-xl flex flex-col space-y-4">
+					{/* PERSONAL INFORMATION UPDATE */}
+					<div className="w-full lg:w-2/3 h-fit p-4 bg-white rounded-xl flex flex-col space-y-4">
 						<div>
 							<p className="text-xl font-medium">
 								Profile
