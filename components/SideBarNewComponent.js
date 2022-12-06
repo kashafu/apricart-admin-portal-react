@@ -32,11 +32,11 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 	};
 
 	const handleCategorySelect = (each) => {
-		console.log(each);
-		dispatch(addToRecent(each));
-		let tabs = allApis?.filter((each) => each.category === selected);
+		setSelected(each);
+		let tabs = allApis?.filter((item) => item.category === each);
+		dispatch(addToRecent(tabs[0]));
 		dispatch(selectTabs(tabs));
-		router.push(`/tabs/${selected.toLowerCase()}`);
+		router.push(`/tabs/${each.toLowerCase()}`);
 	};
 
 	useEffect(() => {

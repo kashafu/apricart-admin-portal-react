@@ -28,7 +28,7 @@ const MainTabComponent = () => {
 	const tabs = useSelector((state) => state.recent.tabs);
 	const each = useSelector((state) => state.recent.recents);
 	const [allTabs, setAllTabs] = useState(tabs);
-	const [selected, setSelected] = useState(each[0]?.name);
+	const [selected, setSelected] = useState(each[0]?.name || allTabs[0]?.name);
 
 	const handleSelect = (each) => {
 		setSelected(each.name);

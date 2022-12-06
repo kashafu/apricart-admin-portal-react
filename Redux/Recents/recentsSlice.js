@@ -18,7 +18,6 @@ export const recentsSlice = createSlice({
 		},
 		selectTabs: (state, action) => {
 			state.tabs = action.payload;
-			console.log(state.tabs);
 		},
 	},
 });

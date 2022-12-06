@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import CustomButton from "../../components/Misc/CustomButton";
 import CustomButton2 from "../../components/Misc/CustomButton2";
 import FloatingLabelInput from "../../components/Misc/CustomFloatingInput";
+import FloatingLabelInputNew from "../../components/Misc/CustomFloatingInputNew";
 
 const UserAPIPage = () => {
 	const cookies = new Cookies();
@@ -66,7 +67,7 @@ const UserAPIPage = () => {
 							{/* Test Input */}
 							{/* Test Input */}
 							{/* Test Input */}
-							<div className="relative">
+							{/* <div className="relative">
 								<input
 									type="text"
 									id="floating_outlined"
@@ -76,7 +77,8 @@ const UserAPIPage = () => {
 								<label className="select-none absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-main-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
 									Address
 								</label>
-							</div>
+							</div> */}
+							<FloatingLabelInputNew>Address</FloatingLabelInputNew>
 						</div>
 						{/* Test Input */}
 						{/* Test Input */}
