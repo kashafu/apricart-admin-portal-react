@@ -1,6 +1,10 @@
 import { getAllAPIsApi } from "../../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../../utils/GeneralVariables";
-import { addToRecent, selectTabs } from "../../Redux/Recents/recentsSlice";
+import {
+	addToRecent,
+	deleteEntry,
+	selectTabs,
+} from "../../Redux/Recents/recentsSlice";
 
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -38,6 +42,13 @@ const ProductAPIPage = () => {
 		router.push(`/tabs/${selected.toLowerCase()}`);
 	};
 
+	const handleRecent = (each) => {
+		dispatch(addToRecent(each));
+		let tabs = allApis?.filter((item) => item.category === each.category);
+		dispatch(selectTabs(tabs));
+		router.push(`/tabs/${selected.toLowerCase()}`);
+	};
+
 	useEffect(() => {
 		getAPIs();
 	}, []);
@@ -50,23 +61,27 @@ const ProductAPIPage = () => {
 						Recent APIs
 					</h3>
 					<div className="overflow-y-hidden h-96">
-						{recents?.map((each) => (
-							<section
-								key={each.endpoint}
-								className="flex flex-row w-full justify-between items-center pr-4 hover:bg-gray-300 cursor-pointer duration-200 animate-dropdown"
-								onClick={() => {
-									handleRoute(each);
-								}}
-							>
-								<div className="col-span-7 overflow-y-auto py-4 px-2 duration-300 ">
-									<p className="select-none px-4">{each.name}</p>
-								</div>
-								<div className="flex space-x-4">
-									<div className="cursor-pointer relative">
-										<IoNavigate size={24} />
+						{recents?.map((each, index) => (
+							<section className="flex items-center" key={each.endpoint}>
+								<div
+									className="flex flex-row w-full justify-between items-center pr-4 cursor-pointer hover:bg-gray-300 hover:underline transition-all duration-300 animate-dropdown"
+									onClick={() => {
+										handleRecent(each);
+									}}
+								>
+									<div className="col-span-7 overflow-y-auto py-4 px-2 duration-300 ">
+										<p className="select-none px-4">{each.name}</p>
 									</div>
+								</div>
+								<div
+									className="flex space-x-4 p-2 group"
+									onClick={() => dispatch(deleteEntry(index))}
+								>
 									<div className="cursor-pointer relative">
-										<MdDelete size={24} color="red" />
+										<MdDelete
+											size={24}
+											className="fill-slate-900 group-hover:fill-red-700 transition-all"
+										/>
 									</div>
 								</div>
 							</section>
