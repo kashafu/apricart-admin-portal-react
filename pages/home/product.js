@@ -30,7 +30,6 @@ const ProductAPIPage = () => {
 			status ? setSelected(unique[0]) : "";
 			status ? setCategories(unique) : "";
 			status ? setAllApis(response.data.data.apis, status) : "";
-			// console.log(recents);
 		});
 	};
 
