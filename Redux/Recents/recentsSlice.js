@@ -14,7 +14,7 @@ export const recentsSlice = createSlice({
 			let isExistIndex = recents.findIndex((each) => each.name === action.payload.name)
 
 			if (isExistIndex !== -1) {
-				recents.splice(isExistIndex)
+				recents.splice(isExistIndex, 1)
 			}
 
 			if (recents.length === 6) {
