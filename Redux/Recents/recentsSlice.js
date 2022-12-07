@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getItemLocalStorage, setItemLocalStorage } from "../../helpers/Storage"
+import {
+	getItemLocalStorage,
+	setItemLocalStorage,
+} from "../../helpers/Storage";
 
 const initialState = {
-	recents: getItemLocalStorage("recents") ? JSON.parse(getItemLocalStorage("recents")) : [],
-	tabs: getItemLocalStorage("tabs") ? JSON.parse(getItemLocalStorage("tabs")) : [],
+	recents: getItemLocalStorage("recents")
+		? JSON.parse(getItemLocalStorage("recents"))
+		: [],
+	tabs: getItemLocalStorage("tabs")
+		? JSON.parse(getItemLocalStorage("tabs"))
+		: [],
 };
 
 export const recentsSlice = createSlice({
@@ -25,15 +32,16 @@ export const recentsSlice = createSlice({
 				recents.splice(-1);
 			}
 			recents.unshift(action.payload);
-			setItemLocalStorage("recents", JSON.stringify(recents))
+			setItemLocalStorage("recents", JSON.stringify(recents));
 		},
 		selectTabs: (state, action) => {
 			state.tabs = action.payload;
-			setItemLocalStorage("tabs", JSON.stringify(state.tabs))
+			setItemLocalStorage("tabs", JSON.stringify(state.tabs));
 		},
 		deleteEntry: (state, action) => {
 			const { recents } = state;
 			recents.splice(action.payload, 1);
+			setItemLocalStorage("recents", JSON.stringify(recents));
 		},
 	},
 });
