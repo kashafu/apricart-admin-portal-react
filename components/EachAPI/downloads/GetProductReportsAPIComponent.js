@@ -36,10 +36,10 @@ const GetProductReportsAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Download Product Reports</Heading>
-			<form>
+			<form className="grid grid-cols-2">
 				<CustomSelectInput
 					options={["Yes", "No"]}
 					values={["true", "false"]}

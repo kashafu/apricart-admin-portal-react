@@ -54,29 +54,31 @@ const BannersAPIComponent = () => {
 	}, [inputs]);
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Banners</Heading>
-			<CustomSelectInput
-				position={"top"}
-				onChange={(e) => handleProdType(e)}
-				heading={"Select Product Type"}
-				values={["cus", "b2b"]}
-				options={["Customer (cus)", "Bulk Buy (b2b)"]}
-			/>
-			<CustomSelectInput
-				onChange={(e) => handleOrderType(e)}
-				heading={"Select Order Type"}
-				values={["delivery", "pickup"]}
-				options={["Delivery", "Pick up"]}
-			/>
-			<CustomSelectInput
-				position={"bottom"}
-				onChange={(e) => handleCity(e)}
-				heading={"Select City"}
-				values={["karachi", "peshawar"]}
-				options={["Karachi", "Peshawar"]}
-			/>
+			<form className="grid grid-cols-2">
+				<CustomSelectInput
+					position={"top"}
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
+				/>
+				<CustomSelectInput
+					position={"bottom"}
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+			</form>
 			<div className="divide-y-[1px] divide-main-blue">
 				{banners.length > 0 ? (
 					banners?.map((banner) => (

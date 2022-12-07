@@ -51,37 +51,36 @@ const TickerUpdateAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Ticker Update</Heading>
-			<form action="" method="POST">
-				<CustomSelectInput
-					position={"top"}
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-				<div className="grid grid-cols-5 pr-2">
-					<div className="col-span-1">
-						<p className="ml-2 font-nunito">Enter Ticker Text</p>
-					</div>
+			<form>
+				<section className="grid grid-cols-2">
+					<CustomSelectInput
+						position={"top"}
+						onChange={(e) => handleProdType(e)}
+						heading={"Select Product Type"}
+						values={["cus", "b2b"]}
+						options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleOrderType(e)}
+						heading={"Select Order Type"}
+						values={["delivery", "pickup"]}
+						options={["Delivery", "Pick up"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
+				</section>
+				<div className="relative m-2">
 					<textarea
-						className="bg-gray-100 w-full h-56 p-3 col-span-3 placeholder:text-gray-500 border-[1px] border-black rounded-b-xl"
+						className="z-20 block px-2.5 pb-2.5 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-md border-[1.5px] appearance-none border-slate-300 focus:outline-none focus:ring-0 focus:border-main-blue peer"
 						required
-						placeholder="eg. Hello Customers Avail 10% off on all categories etc."
+						placeholder=" "
 						onChange={(e) => handleText(e)}
 						name="ticker"
 						cols="30"
@@ -89,6 +88,9 @@ const TickerUpdateAPIComponent = () => {
 						maxLength={140}
 						value={text}
 					/>
+					<label className="select-none flex absolute text-xl text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-main-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+						Enter Ticker Text
+					</label>
 				</div>
 				<CustomButton onClick={(e) => submitHandler(e)} width="1/3">
 					Update Ticker

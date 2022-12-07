@@ -13,14 +13,15 @@ import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import Heading from "../../Misc/Heading";
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
+import CustomFloatingInputNew from "../../Misc/CustomFloatingInputNew";
 
 const AddNewCategoryAPIComponent = () => {
 	var categoryData = new FormData();
 	const [ren, setRen] = useState("");
 	const [inputs, setInputs] = useState({
 		name: "",
-		position: 1,
-		parentId: "20",
+		position: "",
+		parentId: "",
 		categoryImage: "",
 	});
 	const [loading, setLoading] = useState(false);
@@ -68,41 +69,54 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative pl-[2.5rem]">
+		<section className="relative px-10">
 			<Loading loading={loading} />
 			<Heading>Create a new Category</Heading>
 			<form action="" method="POST">
-				<CustomInput
-					heading={"Category Name"}
-					placeholder={"Category Name"}
-					value={name}
-					onChange={(e) => handleName(e)}
-					position={"top"}
-				/>
-				<CustomInput
-					type={"number"}
-					min={0}
-					heading={"Category Position"}
-					placeholder={"Category Position eg. 5"}
-					value={position}
-					onChange={(e) => handlePosition(e)}
-				/>
-				<CustomInput
-					type={"number"}
-					min={0}
-					placeholder={"Category's Parent Id eg. 5"}
-					heading={"Parent Id"}
-					value={parentId}
-					onChange={(e) => handleParentId(e)}
-				/>
-				<CustomSingleImageInput
-					position={"bottom"}
-					heading={"Category Image"}
-					onChange={(e) => {
-						handleImage(e);
-					}}
-					ren={ren}
-				/>
+				{/* <section>
+					<div className="grid grid-cols-2">
+						<CustomFloatingInputNew>Category Name</CustomFloatingInputNew>
+						<CustomFloatingInputNew>Category Position</CustomFloatingInputNew>
+					</div>
+					<div className="grid grid-cols-2">
+						<CustomFloatingInputNew>Category Parent Id</CustomFloatingInputNew>
+						<CustomFloatingInputNew>Category Image</CustomFloatingInputNew>
+					</div>
+				</section> */}
+				<section className="grid grid-cols-2">
+					<CustomInput
+						heading={"Category Name"}
+						placeholder={"Category Name"}
+						value={name}
+						onChange={(e) => handleName(e)}
+						position={"top"}
+					/>
+					<CustomInput
+						type={"number"}
+						min={0}
+						heading={"Category Position"}
+						placeholder={"Category Position eg. 5"}
+						value={position}
+						onChange={(e) => handlePosition(e)}
+					/>
+
+					<CustomInput
+						type={"number"}
+						min={0}
+						placeholder={"Category's Parent Id eg. 5"}
+						heading={"Parent Id"}
+						value={parentId}
+						onChange={(e) => handleParentId(e)}
+					/>
+					<CustomSingleImageInput
+						position={"bottom"}
+						heading={"Category Image"}
+						onChange={(e) => {
+							handleImage(e);
+						}}
+						ren={ren}
+					/>
+				</section>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
 						Add Category

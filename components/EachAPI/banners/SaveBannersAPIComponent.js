@@ -25,9 +25,9 @@ const SaveBannersAPIComponent = () => {
 		bannerUrlWeb: [],
 		prodType: "cus",
 		orderType: "delivery",
-		type: "offer",
-		offerId: 0,
-		level: 0,
+		type: "",
+		offerId: "",
+		level: "",
 		city: "karachi",
 	});
 	const {
@@ -101,60 +101,62 @@ const SaveBannersAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative pl-10">
+		<section className="relative px-10">
 			<Loading loading={loading} />
 			<Heading>Banner Save</Heading>
 			<form action="" method="POST">
-				<CustomSelectInput
-					position={"top"}
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomInput
-					value={type}
-					onChange={(e) => setInput({ ...input, type: e.target.value })}
-					type="text"
-					placeholder="Type"
-					heading="Enter Type"
-				/>
-				<CustomInput
-					value={offerId}
-					onChange={(e) => setInput({ ...input, offerId: e.target.value })}
-					type="text"
-					placeholder="Offer Id"
-					heading="Enter Offer Id"
-				/>
-				<CustomSelectInput
-					onChange={(e) => setInput({ ...input, level: e.target.value })}
-					heading={"Select Level"}
-					values={[0, 1, 2, 3, 4, 5]}
-					options={[0, 1, 2, 3, 4, 5]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-				<CustomSingleImageInput
-					heading={"Upload Web Banner"}
-					ren={ren}
-					onChange={handleWebImage}
-				/>
-				<CustomSingleImageInput
-					position={"bottom"}
-					heading={"Upload App Banner"}
-					ren={ren}
-					onChange={handleAppImage}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomSelectInput
+						position={"top"}
+						onChange={(e) => handleProdType(e)}
+						heading={"Select Product Type"}
+						values={["cus", "b2b"]}
+						options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleOrderType(e)}
+						heading={"Select Order Type"}
+						values={["delivery", "pickup"]}
+						options={["Delivery", "Pick up"]}
+					/>
+					<CustomInput
+						value={type}
+						onChange={(e) => setInput({ ...input, type: e.target.value })}
+						type="text"
+						placeholder="Type"
+						heading="Enter Type"
+					/>
+					<CustomInput
+						value={offerId}
+						onChange={(e) => setInput({ ...input, offerId: e.target.value })}
+						type="text"
+						placeholder="Offer Id"
+						heading="Enter Offer Id"
+					/>
+					<CustomSelectInput
+						onChange={(e) => setInput({ ...input, level: e.target.value })}
+						heading={"Select Level"}
+						values={[0, 1, 2, 3, 4, 5]}
+						options={[0, 1, 2, 3, 4, 5]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
+					<CustomSingleImageInput
+						heading={"Upload Web Banner"}
+						ren={ren}
+						onChange={handleWebImage}
+					/>
+					<CustomSingleImageInput
+						position={"bottom"}
+						heading={"Upload App Banner"}
+						ren={ren}
+						onChange={handleAppImage}
+					/>
+				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Submit New Banner

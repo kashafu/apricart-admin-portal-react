@@ -18,6 +18,7 @@ import {
 import SideBarNewComponent from "../components/SideBarNewComponent";
 import { store } from "../Redux/store";
 import { ConfigProvider } from "react-avatar";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();

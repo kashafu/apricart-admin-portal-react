@@ -15,13 +15,13 @@ const OfferSaveAPIComponent = () => {
 	const [offerId, setOfferId] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
-		price: 0,
-		buying: "Bolivia",
-		buyingCondition: "Bolivia",
+		price: "",
+		buying: "",
+		buyingCondition: "",
 		expiry: "",
-		products: "APRA-HSI09-01,APRA-HSI09-02,APRA-HSI10-02",
+		products: "",
 		categories: "",
-		type: "categories",
+		type: "",
 	});
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
@@ -61,72 +61,73 @@ const OfferSaveAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="rounded-md -space-y-px pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Save Offer</Heading>
-			<form action="" method="POST">
-				<Loading loading={loading} />
-				<CustomInput
-					value={price}
-					heading={"Enter Price"}
-					onChange={(e) => setInput({ ...input, price: e.target.value })}
-					type="number"
-					placeholder="Price eg. 320"
-					position={"top"}
-				/>
-				<CustomInput
-					value={buyingCondition}
-					onChange={(e) =>
-						setInput({ ...input, buyingCondition: e.target.value })
-					}
-					x
-					type="text"
-					placeholder="Buying Condition"
-					heading={"Enter Buying Condition"}
-				/>
-				<CustomInput
-					value={expiry}
-					onChange={(e) => setInput({ ...input, expiry: e.target.value })}
-					type="date"
-					placeholder="Expiry Date"
-					heading={"Enter Expiry date"}
-				/>
-				<CustomRadioInput
-					inputs={["Products", "Categories"]}
-					values={["products", "categories"]}
-					name="type"
-					heading={"Select Type"}
-					onChange={(e) => handleRadioButton(e)}
-				/>
-				{input.type === "products" && (
+			<form>
+				<section className="grid grid-cols-2">
 					<CustomInput
-						value={products}
-						onChange={(e) => setInput({ ...input, products: e.target.value })}
-						type="text"
-						placeholder="Products"
-						heading="Enter Products"
+						value={price}
+						heading={"Enter Price"}
+						onChange={(e) => setInput({ ...input, price: e.target.value })}
+						type="number"
+						placeholder="Price eg. 320"
+						position={"top"}
 					/>
-				)}
-				{input.type === "categories" && (
 					<CustomInput
-						value={categories}
-						onChange={(e) => setInput({ ...input, categories: e.target.value })}
+						value={buyingCondition}
+						onChange={(e) =>
+							setInput({ ...input, buyingCondition: e.target.value })
+						}
+						x
 						type="text"
-						placeholder="Categories"
-						heading="Enter Categories"
+						placeholder="Buying Condition"
+						heading={"Enter Buying Condition"}
 					/>
-				)}
+					<CustomInput
+						value={expiry}
+						onChange={(e) => setInput({ ...input, expiry: e.target.value })}
+						type="date"
+						placeholder="Expiry Date"
+						heading={"Enter Expiry date"}
+					/>
+					<CustomRadioInput
+						inputs={["Products", "Categories"]}
+						values={["products", "categories"]}
+						name="type"
+						heading={"Select Type"}
+						onChange={(e) => handleRadioButton(e)}
+					/>
+					{input.type === "products" && (
+						<CustomInput
+							value={products}
+							onChange={(e) => setInput({ ...input, products: e.target.value })}
+							type="text"
+							placeholder="Products"
+							heading="Enter Products"
+						/>
+					)}
+					{input.type === "categories" && (
+						<CustomInput
+							value={categories}
+							onChange={(e) =>
+								setInput({ ...input, categories: e.target.value })
+							}
+							type="text"
+							placeholder="Categories"
+							heading="Enter Categories"
+						/>
+					)}
 
-				<CustomInput
-					value={buying}
-					onChange={(e) => setInput({ ...input, buying: e.target.value })}
-					type="text"
-					placeholder="Buying"
-					heading={"Enter Buying"}
-					position={"bottom"}
-				/>
-
-				<br />
+					<CustomInput
+						value={buying}
+						onChange={(e) => setInput({ ...input, buying: e.target.value })}
+						type="text"
+						placeholder="Buying"
+						heading={"Enter Buying"}
+						position={"bottom"}
+					/>
+				</section>
 				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
 					Offer ID
 				</CustomButton>

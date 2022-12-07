@@ -13,7 +13,7 @@ import Heading from "../../Misc/Heading";
 
 const IsContinueAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		text: "Free delivery on orders above Rs.500. Same Day Delivery on orders placed till 6:00pm",
+		text: "",
 		prodType: "cus",
 		orderType: "delivery",
 		city: "karachi",
@@ -53,36 +53,38 @@ const IsContinueAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Is Continue</Heading>
-			<CustomInput
-				heading={"Enter Text"}
-				position={"top"}
-				type={"text"}
-				value={text}
-				onChange={handleText}
-				required={true}
-			/>
-			<CustomSelectInput
-				onChange={(e) => handleProdType(e)}
-				heading={"Select Product Type"}
-				values={["cus", "b2b"]}
-				options={["Customer (cus)", "Bulk Buy (b2b)"]}
-			/>
-			<CustomSelectInput
-				onChange={(e) => handleOrderType(e)}
-				heading={"Select Order Type"}
-				values={["delivery", "pickup"]}
-				options={["Delivery", "Pick up"]}
-			/>
-			<CustomSelectInput
-				position={"bottom"}
-				onChange={(e) => handleCity(e)}
-				heading={"Select City"}
-				values={["karachi", "peshawar"]}
-				options={["Karachi", "Peshawar"]}
-			/>
+			<form className="grid grid-cols-2">
+				<CustomInput
+					heading={"Enter Text"}
+					position={"top"}
+					type={"text"}
+					value={text}
+					onChange={handleText}
+					required={true}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOrderType(e)}
+					heading={"Select Order Type"}
+					values={["delivery", "pickup"]}
+					options={["Delivery", "Pick up"]}
+				/>
+				<CustomSelectInput
+					position={"bottom"}
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+			</form>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Message
 			</CustomButton>

@@ -3,8 +3,7 @@ import MainTabComponent from "./main";
 
 const ProductsTabPage = () => {
 	return (
-		<section className="pl-12 mt-4">
-			{/* <div>ProductsTabPage</div> */}
+		<section className="">
 			<div>
 				<MainTabComponent />
 			</div>

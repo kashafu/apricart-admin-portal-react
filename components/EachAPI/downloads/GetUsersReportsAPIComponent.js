@@ -37,16 +37,18 @@ const GetUsersReportsAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Total Users Report</Heading>
-			<CustomButton
-				onClick={(e) => fetchReport(e)}
-				disabled={disabler}
-				width={"1/3"}
-			>
-				Download User Report
-			</CustomButton>
+			<form className="grid grid-cols-2" action="">
+				<Heading>Total Users Report</Heading>
+				<CustomButton
+					onClick={(e) => fetchReport(e)}
+					disabled={disabler}
+					width={"1/3"}
+				>
+					Download User Report
+				</CustomButton>
+			</form>
 		</section>
 	);
 };

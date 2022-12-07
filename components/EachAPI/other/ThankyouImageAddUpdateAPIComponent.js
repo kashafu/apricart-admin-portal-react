@@ -16,7 +16,6 @@ import Heading from "../../Misc/Heading";
 
 const ThankyouImageAddUpdateAPIComponent = () => {
 	var thankyou = new FormData();
-	var allowedTypes = ["image/png", "image/gif", "image/jpeg", "image/jpg"];
 	const [loading, setLoading] = useState(false);
 	const [ren, setRen] = useState("");
 	const [input, setInput] = useState({
@@ -71,30 +70,30 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Thank You Page Banner Update</Heading>
 			<form action="" method="POST">
-				<CustomSelectInput
-					position={"top"}
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-				<div>
+				<section className="grid grid-cols-2">
+					<CustomSelectInput
+						position={"top"}
+						onChange={(e) => handleProdType(e)}
+						heading={"Select Product Type"}
+						values={["cus", "b2b"]}
+						options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleOrderType(e)}
+						heading={"Select Order Type"}
+						values={["delivery", "pickup"]}
+						options={["Delivery", "Pick up"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
 					<CustomSingleImageInput
 						position={"bottom"}
 						heading={"Upload New Thank You Image"}
@@ -103,10 +102,10 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 						}}
 						ren={ren}
 					/>
-					<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-						Update Thank you Image
-					</CustomButton>
-				</div>
+				</section>
+				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
+					Update Thank you Image
+				</CustomButton>
 			</form>
 		</section>
 	);

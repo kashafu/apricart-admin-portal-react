@@ -22,7 +22,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 	const [input, setInput] = useState({
 		bannerUrlApp: "",
 		bannerUrlWeb: "",
-		categoryId: 0,
+		categoryId: "",
 	});
 	const { bannerUrlApp, bannerUrlWeb, categoryId } = input;
 
@@ -72,29 +72,31 @@ const UpdateCategoryBannerAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="relative pl-10">
+		<section className="relative px-10">
 			<Loading loading={loading} />
 			<Heading>Category Banner Update</Heading>
 			<form action="" method="POST">
-				<CustomInput
-					type={"number"}
-					position={"top"}
-					onChange={(e) => handleCategoryId(e)}
-					placeholder={"Category ID"}
-					heading={"Category ID"}
-					value={categoryId}
-				/>
-				<CustomSingleImageInput
-					heading={"Upload Web Banner"}
-					onChange={(e) => handleWebImage(e)}
-					ren={ren}
-				/>
-				<CustomSingleImageInput
-					heading={"Upload App Banner"}
-					onChange={(e) => handleAppImage(e)}
-					position={"bottom"}
-					ren={ren}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomInput
+						type={"number"}
+						position={"top"}
+						onChange={(e) => handleCategoryId(e)}
+						placeholder={"Category ID"}
+						heading={"Category ID"}
+						value={categoryId}
+					/>
+					<CustomSingleImageInput
+						heading={"Upload Web Banner"}
+						onChange={(e) => handleWebImage(e)}
+						ren={ren}
+					/>
+					<CustomSingleImageInput
+						heading={"Upload App Banner"}
+						onChange={(e) => handleAppImage(e)}
+						position={"bottom"}
+						ren={ren}
+					/>
+				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Update Category Banner

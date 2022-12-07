@@ -34,10 +34,10 @@ const GetAbundantCartReportsAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Heading>Abundant Cart Report</Heading>
-			<form>
-				<Loading loading={loading} />
+			<Loading loading={loading} />
+			<form className="grid grid-cols-2">
 				<CustomInput
 					heading={"Enter Hours"}
 					value={horas}
@@ -46,7 +46,6 @@ const GetAbundantCartReportsAPIComponent = () => {
 						setHoras(e.target.value);
 					}}
 				/>
-				<br />
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}

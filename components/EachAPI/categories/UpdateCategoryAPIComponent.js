@@ -19,8 +19,8 @@ const UpdateCategoryAPIComponent = () => {
 	const [ren, setRen] = useState("");
 	const [inputs, setInputs] = useState({
 		name: "",
-		position: 1,
-		parentId: "20",
+		position: "",
+		parentId: "",
 		categoryImage: "",
 	});
 	const [loading, setLoading] = useState(false);
@@ -68,41 +68,44 @@ const UpdateCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative pl-[2.5rem]">
+		<section className="relative px-10">
 			<Loading loading={loading} />
 			<Heading>Update Category</Heading>
 			<form action="" method="POST">
-				<CustomInput
-					heading={"Category Name"}
-					placeholder={"Category Name"}
-					value={name}
-					onChange={(e) => handleName(e)}
-					position={"top"}
-				/>
-				<CustomInput
-					type={"number"}
-					min={0}
-					heading={"Category Position"}
-					placeholder={"Category Position eg. 5"}
-					value={position}
-					onChange={(e) => handlePosition(e)}
-				/>
-				<CustomInput
-					type={"number"}
-					min={0}
-					placeholder={"Category's Parent Id eg. 5"}
-					heading={"Parent Id"}
-					value={parentId}
-					onChange={(e) => handleParentId(e)}
-				/>
-				<CustomSingleImageInput
-					position={"bottom"}
-					heading={"Category Image"}
-					onChange={(e) => {
-						handleImage(e);
-					}}
-					ren={ren}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomInput
+						heading={"Category Name"}
+						placeholder={"Category Name"}
+						value={name}
+						onChange={(e) => handleName(e)}
+						position={"top"}
+					/>
+					<CustomInput
+						type={"number"}
+						min={0}
+						heading={"Category Position"}
+						placeholder={"Category Position eg. 5"}
+						value={position}
+						onChange={(e) => handlePosition(e)}
+					/>
+
+					<CustomInput
+						type={"number"}
+						min={0}
+						placeholder={"Category's Parent Id eg. 5"}
+						heading={"Parent Id"}
+						value={parentId}
+						onChange={(e) => handleParentId(e)}
+					/>
+					<CustomSingleImageInput
+						position={"bottom"}
+						heading={"Category Image"}
+						onChange={(e) => {
+							handleImage(e);
+						}}
+						ren={ren}
+					/>
+				</section>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleEdit(e)}>
 						Update Category

@@ -25,8 +25,8 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		bannerUrlWeb: "",
 		prodType: "cus",
 		city: "karachi",
-		type: "offer",
-		value: 0,
+		type: "",
+		value: "",
 	});
 	const { bannerUrlApp, bannerUrlWeb, prodType, orderType, type, value, city } =
 		input;
@@ -86,60 +86,60 @@ const PopupRedirectionUpdateAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Popup Screen Update</Heading>
 			<form action="" method="POST">
-				<CustomSelectInput
-					position={"top"}
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomInput
-					value={type}
-					onChange={(e) => setInput({ ...input, type: e.target.value })}
-					type="text"
-					placeholder="Type"
-					heading="Enter Type"
-				/>
-				<CustomInput
-					value={value}
-					onChange={(e) => setInput({ ...input, value: e.target.value })}
-					type="number"
-					placeholder="Value"
-					heading="Enter Value"
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-				<CustomSingleImageInput
-					heading={"Upload Web Banner"}
-					ren={ren}
-					onChange={handleWebImage}
-				/>
-				<CustomSingleImageInput
-					position={"bottom"}
-					heading={"Upload App Banner"}
-					ren={ren}
-					onChange={handleAppImage}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomSelectInput
+						position={"top"}
+						onChange={(e) => handleProdType(e)}
+						heading={"Select Product Type"}
+						values={["cus", "b2b"]}
+						options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleOrderType(e)}
+						heading={"Select Order Type"}
+						values={["delivery", "pickup"]}
+						options={["Delivery", "Pick up"]}
+					/>
+					<CustomInput
+						value={type}
+						onChange={(e) => setInput({ ...input, type: e.target.value })}
+						type="text"
+						placeholder="Type"
+						heading="Enter Type"
+					/>
+					<CustomInput
+						value={value}
+						onChange={(e) => setInput({ ...input, value: e.target.value })}
+						type="number"
+						placeholder="Value"
+						heading="Enter Value"
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
+					<CustomSingleImageInput
+						heading={"Upload Web Banner"}
+						ren={ren}
+						onChange={handleWebImage}
+					/>
+					<CustomSingleImageInput
+						position={"bottom"}
+						heading={"Upload App Banner"}
+						ren={ren}
+						onChange={handleAppImage}
+					/>
+				</section>
 
-				<div>
-					<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-						Update Popup Redirection
-					</CustomButton>
-				</div>
+				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
+					Update Popup Redirection
+				</CustomButton>
 			</form>
 		</section>
 	);

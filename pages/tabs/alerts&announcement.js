@@ -3,7 +3,7 @@ import MainTabComponent from "./main";
 
 const AlertsAndAnnouncementsTabPage = () => {
 	return (
-		<section className="pl-12 mt-4">
+		<section>
 			<div>
 				<MainTabComponent />
 			</div>

@@ -11,8 +11,8 @@ import Heading from "../../Misc/Heading";
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		term: "",
-		size: "20",
-		page: "1",
+		size: "",
+		page: "",
 		category: "",
 		city: "karachi",
 	});
@@ -81,45 +81,46 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Heading>Products Search</Heading>
-
 			<form action="" method="POST">
-				<CustomInput
-					position={"top"}
-					heading={"Search Product Name/SKU"}
-					placeholder={"eg. Oil"}
-					required={true}
-					value={term}
-					onChange={handleTerm}
-				/>
-				<CustomInput
-					heading={"Enter Size"}
-					placeholder={"Number of items on one page"}
-					value={size}
-					onChange={handleSize}
-					required={true}
-				/>
-				<CustomInput
-					heading={"Enter Category"}
-					placeholder={"eg. Spices"}
-					required={true}
-					value={category}
-					onChange={handleCategory}
-				/>
-				<CustomSelectInput
-					position={"bottom"}
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomInput
+						position={"top"}
+						heading={"Search Product Name/SKU"}
+						placeholder={"eg. Oil"}
+						required={true}
+						value={term}
+						onChange={handleTerm}
+					/>
+					<CustomInput
+						heading={"Enter Size"}
+						placeholder={"Number of items on one page"}
+						value={size}
+						onChange={handleSize}
+						required={true}
+					/>
+
+					<CustomInput
+						heading={"Enter Category"}
+						placeholder={"eg. Spices"}
+						required={true}
+						value={category}
+						onChange={handleCategory}
+					/>
+					<CustomSelectInput
+						position={"bottom"}
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
+				</section>
 			</form>
 			<div className="rounded-none my-2">
 				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
 			<section>
-				<div></div>
 				{detail.length > 0 ? (
 					detail?.map((each) => {
 						return (

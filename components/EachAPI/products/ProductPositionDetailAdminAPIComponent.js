@@ -53,7 +53,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Products Detail</Heading>
 			<CustomSelectInput

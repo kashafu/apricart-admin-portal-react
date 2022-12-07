@@ -27,20 +27,22 @@ const UpdateWelcomeVideoAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Welcome Video Update</Heading>
-			<CustomInput
-				heading={"Enter Video URL"}
-				placeholder={"eg. http://youtube.com/video-link"}
-				value={link}
-				onChange={(e) => {
-					handleLink(e);
-				}}
-			/>
-			<CustomButton width={"1/3"} onClick={handleSubmit}>
-				Update Welcome Video
-			</CustomButton>
+			<form className="grid grid-cols-2">
+				<CustomInput
+					heading={"Enter Video URL"}
+					placeholder={"eg. http://youtube.com/video-link"}
+					value={link}
+					onChange={(e) => {
+						handleLink(e);
+					}}
+				/>
+				<CustomButton width={"1/3"} onClick={handleSubmit}>
+					Update Welcome Video
+				</CustomButton>
+			</form>
 		</section>
 	);
 };

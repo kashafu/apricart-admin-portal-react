@@ -21,7 +21,7 @@ const UpdateCategoryImageAPIComponent = () => {
 	const [ren, setRen] = useState("");
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
-		categoryId: 0,
+		categoryId: "",
 	});
 	const { bannerUrlApp, categoryId } = input;
 
@@ -58,22 +58,24 @@ const UpdateCategoryImageAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="relative">
+		<section className="px-10">
 			{<Loading loading={loading} />}
 			<Heading>Category Image Update</Heading>
 			<form action="" method="POST">
-				<CustomInput
-					heading={"Enter Category Id"}
-					type={"number"}
-					onChange={(e) => handleCategoryId(e)}
-					placeholder={"Category ID"}
-					value={categoryId}
-				/>
-				<CustomSingleImageInput
-					heading={"Upload New Category Image"}
-					ren={ren}
-					onChange={handleAppImage}
-				/>
+				<section className="grid grid-cols-2">
+					<CustomInput
+						heading={"Enter Category Id"}
+						type={"number"}
+						onChange={(e) => handleCategoryId(e)}
+						placeholder={"Category ID"}
+						value={categoryId}
+					/>
+					<CustomSingleImageInput
+						heading={"Upload New Category Image"}
+						ren={ren}
+						onChange={handleAppImage}
+					/>
+				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
 						Update Category Image

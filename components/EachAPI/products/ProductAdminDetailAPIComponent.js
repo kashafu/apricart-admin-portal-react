@@ -12,7 +12,7 @@ import Heading from "../../Misc/Heading";
 
 const ProductAdminDetailAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		id: "APRA-OB05-01",
+		id: "",
 		city: "karachi",
 		warehouseId: "",
 	});
@@ -46,7 +46,7 @@ const ProductAdminDetailAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Products Detail</Heading>
 			<CustomInput
@@ -56,7 +56,7 @@ const ProductAdminDetailAPIComponent = () => {
 				onChange={handleId}
 				required={true}
 				placeholder={"eg. APR-0000-10"}
-				heading={"Enter SKU"}
+				heading={"SKU"}
 			/>
 			<CustomSelectInput
 				onChange={(e) => handleCity(e)}
@@ -72,7 +72,7 @@ const ProductAdminDetailAPIComponent = () => {
 				onChange={handleWarehouse}
 				required={true}
 				placeholder={"eg. 9"}
-				heading={"Enter Warehouse Number"}
+				heading={"Warehouse Number"}
 			/>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Submit Query

@@ -52,40 +52,42 @@ const GetOrdersReportsAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Heading>Total Orders Report</Heading>
+			<Loading loading={loading} />
 			<form>
-				<Loading loading={loading} />
-				<CustomRadioInput
-					inputs={["Peshawar", "Karachi"]}
-					values={["4", "1"]}
-					heading={"Select City"}
-					name={"city"}
-					onChange={(e) => setInputs({ ...inputs, cityId: e.target.value })}
-				/>
-				<CustomInput
-					heading={"From Date"}
-					value={fromDate}
-					onChange={(e) =>
-						setInputs({
-							...inputs,
-							fromDate: moment(e.target.value).format("YYYY-MM-DD"),
-						})
-					}
-					required={true}
-					type="date"
-				/>
-				<CustomInput
-					heading={"To Date"}
-					onChange={(e) =>
-						setInputs({
-							...inputs,
-							toDate: moment(e.target.value).format("YYYY-MM-DD"),
-						})
-					}
-					required={true}
-					type="date"
-				/>
+				<section className="grid grid-cols-2">
+					<CustomRadioInput
+						inputs={["Peshawar", "Karachi"]}
+						values={["4", "1"]}
+						heading={"Select City"}
+						name={"city"}
+						onChange={(e) => setInputs({ ...inputs, cityId: e.target.value })}
+					/>
+					<CustomInput
+						heading={"From Date"}
+						value={fromDate}
+						onChange={(e) =>
+							setInputs({
+								...inputs,
+								fromDate: moment(e.target.value).format("YYYY-MM-DD"),
+							})
+						}
+						required={true}
+						type="date"
+					/>
+					<CustomInput
+						heading={"To Date"}
+						onChange={(e) =>
+							setInputs({
+								...inputs,
+								toDate: moment(e.target.value).format("YYYY-MM-DD"),
+							})
+						}
+						required={true}
+						type="date"
+					/>
+				</section>
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}

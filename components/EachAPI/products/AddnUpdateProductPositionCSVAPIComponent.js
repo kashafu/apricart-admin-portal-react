@@ -16,6 +16,7 @@ import {
 } from "../../../utils/ApiCalls";
 import CustomInput from "../../Misc/CustomInput";
 import Heading from "../../Misc/Heading";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
 const AddnUpdateProductPositionCSVAPIComponent = () => {
 	const [apiToken, setApiToken] = useState("");
@@ -58,29 +59,43 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 		);
 	};
 	return (
-		<section>
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Product Position CSV</Heading>
-			<form action="" method="POST">
-				<CustomInput
-					heading={"Enter API Token"}
-					value={apiToken}
-					onChange={(e) => handleApiToken(e)}
-					position={"top"}
-					placeholder={"API Token"}
-				/>
-				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-b-0 border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-					Select Updated File
-				</label>
-				<input
-					type={"file"}
-					accept={".csv"}
-					key={ren || ""}
-					onChange={(e) => handleFile(e)}
-					required={true}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				/>
-				<CustomButton onClick={handleSubmit}>Submit Updated File</CustomButton>
+			<form>
+				<section className="grid grid-cols-2">
+					<CustomInput
+						heading={"Enter API Token"}
+						value={apiToken}
+						onChange={(e) => handleApiToken(e)}
+						position={"top"}
+						placeholder={"API Token"}
+					/>
+					<CustomSingleImageInput
+						heading={"Select Updated File"}
+						accept={".csv"}
+						onChange={(e) => {
+							handleFile(e);
+						}}
+						ren={ren}
+					/>
+					{/* <div>
+						<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-b-0 border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
+							Select Updated File
+						</label>
+						<input
+							type={"file"}
+							accept={".csv"}
+							key={ren || ""}
+							onChange={(e) => handleFile(e)}
+							required={true}
+							className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+						/>
+					</div> */}
+				</section>
+				<CustomButton onClick={handleSubmit} width={"1/3"}>
+					Submit Updated File
+				</CustomButton>
 			</form>
 		</section>
 	);

@@ -12,7 +12,7 @@ import Heading from "../../Misc/Heading";
 
 const ProductStockDetailAdminAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		id: "APRA-BD02-01",
+		id: "",
 		city: "karachi",
 	});
 	const [loading, setLoading] = useState(false);
@@ -38,11 +38,11 @@ const ProductStockDetailAdminAPIComponent = () => {
 		);
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Product Stock Detail Admin</Heading>
 			<CustomInput
-				heading={"Enter SKU"}
+				heading={"SKU"}
 				position={"top"}
 				type={"text"}
 				value={id}

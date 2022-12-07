@@ -79,106 +79,108 @@ const NewNotificationSendAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="font-nunito">
+		<section className="px-10">
 			<Loading loading={loading} />
 			<Heading>Push Notifications</Heading>
 			<form action="" method="POST">
-				<CustomSelectInput
-					values={["product", "category", "subcategory", "offer"]}
-					options={["Product", "Category", "Subcategory", "Offer"]}
-					onChange={handleOffer}
-					position={"top"}
-					heading={"Notification Type"}
-				/>
-				{type === "offer" && (
-					<CustomInput
-						heading={"Value"}
-						type={"number"}
-						value={value}
-						onChange={handleValue}
-						required={true}
-						min={0}
-						placeholder={"Enter Value"}
-					/>
-				)}
-				{type === "category" && (
-					<CustomInput
-						heading={"Category"}
-						type={"text"}
-						value={value}
-						onChange={handleValue}
-						required={true}
-						min={0}
-						placeholder={"Enter Category"}
-					/>
-				)}
-				{type === "subcategory" && (
-					<CustomInput
-						heading={"Sub Category"}
-						type={"text"}
-						value={value}
-						onChange={handleValue}
-						required={true}
-						min={0}
-						placeholder={"Enter Category"}
-					/>
-				)}
-				{type === "product" && (
-					<CustomInput
-						heading={"SKU"}
-						type={"text"}
-						value={value}
-						onChange={handleValue}
-						required={true}
-						min={0}
-						placeholder={"Enter SKU"}
-					/>
-				)}
-
-				<CustomInput
-					heading={"Title"}
-					type={"text"}
-					value={title}
-					onChange={handleTitle}
-					required={true}
-					placeholder={"Enter Title"}
-				/>
-				<CustomInput
-					heading={"Message"}
-					type={"text"}
-					value={message}
-					onChange={handleMessage}
-					required={true}
-					placeholder={"Enter Message"}
-				/>
-				<CustomSelectInput
-					onChange={handleTo}
-					options={["All Devices", "Individual Recipient"]}
-					values={["alldev", ""]}
-					heading={"Select Recipient Type"}
-				/>
-				{toState && (
+				<section className="grid grid-cols-2">
 					<CustomSelectInput
-						position={"bottom"}
-						onChange={(e) => handleCity(e)}
-						heading={"Select City"}
-						values={["karachi", "peshawar"]}
-						options={["Karachi", "Peshawar"]}
+						values={["product", "category", "subcategory", "offer"]}
+						options={["Product", "Category", "Subcategory", "Offer"]}
+						onChange={handleOffer}
+						position={"top"}
+						heading={"Notification Type"}
 					/>
-				)}
-				{/* if staging, alldev,
-				on live, all */}
-				{!toState && (
+					{type === "offer" && (
+						<CustomInput
+							heading={"Value"}
+							type={"number"}
+							value={value}
+							onChange={handleValue}
+							required={true}
+							min={0}
+							placeholder={"Enter Value"}
+						/>
+					)}
+					{type === "category" && (
+						<CustomInput
+							heading={"Category"}
+							type={"text"}
+							value={value}
+							onChange={handleCategory}
+							required={true}
+							min={0}
+							placeholder={"Enter Category"}
+						/>
+					)}
+					{type === "subcategory" && (
+						<CustomInput
+							heading={"Sub Category"}
+							type={"text"}
+							value={value}
+							onChange={handleSubCategory}
+							required={true}
+							min={0}
+							placeholder={"Enter Category"}
+						/>
+					)}
+					{type === "product" && (
+						<CustomInput
+							heading={"SKU"}
+							type={"text"}
+							value={value}
+							onChange={handleSKU}
+							required={true}
+							min={0}
+							placeholder={"Enter SKU"}
+						/>
+					)}
+
 					<CustomInput
-						heading={"Enter Recipient"}
-						position={"bottom"}
+						heading={"Title"}
 						type={"text"}
-						value={to}
-						onChange={handleTo}
+						value={title}
+						onChange={handleTitle}
 						required={true}
-						placeholder={"Enter Topic"}
+						placeholder={"Enter Title"}
 					/>
-				)}
+					<CustomInput
+						heading={"Message"}
+						type={"text"}
+						value={message}
+						onChange={handleMessage}
+						required={true}
+						placeholder={"Enter Message"}
+					/>
+					<CustomSelectInput
+						onChange={handleTo}
+						options={["All Devices", "Individual Recipient"]}
+						values={["alldev", ""]}
+						heading={"Select Recipient Type"}
+					/>
+					{toState && (
+						<CustomSelectInput
+							position={"bottom"}
+							onChange={(e) => handleCity(e)}
+							heading={"Select City"}
+							values={["karachi", "peshawar"]}
+							options={["Karachi", "Peshawar"]}
+						/>
+					)}
+					{/* if staging, alldev,
+				on live, all */}
+					{!toState && (
+						<CustomInput
+							heading={"Enter Recipient"}
+							position={"bottom"}
+							type={"text"}
+							value={to}
+							onChange={handleTo}
+							required={true}
+							placeholder={"Enter Topic"}
+						/>
+					)}
+				</section>
 				<CustomButton width={"1/3"} onClick={handleSubmit} type={"submit"}>
 					Send Notification
 				</CustomButton>

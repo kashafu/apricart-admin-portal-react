@@ -34,18 +34,19 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pl-10">
+		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Updates in Last {time} Hours</Heading>
-			<form action="" method="submit"></form>
-			<CustomInput
-				heading={"Time in hours"}
-				value={time}
-				onChange={(e) => handleTime(e)}
-			/>
-			<CustomButton onClick={handleSubmit} width={"1/3"} disabled={disabler}>
-				Fetch Product Updates
-			</CustomButton>
+			<Heading>Updated in Last {time} Hours</Heading>
+			<form className="grid grid-cols-2">
+				<CustomInput
+					heading={"Time in hours"}
+					value={time}
+					onChange={(e) => handleTime(e)}
+				/>
+				<CustomButton onClick={handleSubmit} width={"1/3"} disabled={disabler}>
+					Fetch Product Updates
+				</CustomButton>
+			</form>
 		</section>
 	);
 };
