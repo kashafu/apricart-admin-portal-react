@@ -12,7 +12,7 @@ import {
 
 import logoFile from "../public/logo.png";
 // import backgroundVideo from "../public/warehouseVideo.mp4"
-import backgroundImage from "../public/warehouse.jpg"
+import backgroundImage from "../public/forklift-loop.gif"
 
 const Login = () => {
 	var numberToSend;
