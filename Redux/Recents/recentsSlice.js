@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { getItemLocalStorage, setItemLocalStorage } from "../../helpers/Storage"
+
 const initialState = {
-	recents: [],
-	tabs: [],
+	recents: getItemLocalStorage("recents") ? JSON.parse(getItemLocalStorage("recents")) : [],
+	tabs: getItemLocalStorage("tabs") ? JSON.parse(getItemLocalStorage("tabs")) : [],
 };
 
 export const recentsSlice = createSlice({
@@ -23,9 +25,11 @@ export const recentsSlice = createSlice({
 				recents.splice(-1);
 			}
 			recents.unshift(action.payload);
+			setItemLocalStorage("recents", JSON.stringify(recents))
 		},
 		selectTabs: (state, action) => {
 			state.tabs = action.payload;
+			setItemLocalStorage("tabs", JSON.stringify(state.tabs))
 		},
 		deleteEntry: (state, action) => {
 			const { recents } = state;
