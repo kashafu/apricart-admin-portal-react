@@ -50,17 +50,8 @@ const ProductAPIPage = () => {
 		router.push(`/tabs/${selected.toLowerCase()}`);
 	};
 
-	const remover = () => {
-		const stripped = "    My String With A    Lot Whitespace  ".replace(
-			/\s+/g,
-			""
-		);
-		console.log(stripped);
-	};
-
 	useEffect(() => {
 		getAPIs();
-		remover();
 	}, []);
 
 	return (
@@ -84,10 +75,10 @@ const ProductAPIPage = () => {
 									</div>
 								</div>
 								<div
-									className="flex space-x-4 p-2 group"
+									className="cursor-pointer flex space-x-4 p-4 group hover:bg-slate-200"
 									onClick={() => dispatch(deleteEntry(index))}
 								>
-									<div className="cursor-pointer relative">
+									<div className="relative">
 										<MdDelete
 											size={24}
 											className="fill-slate-900 group-hover:fill-red-700 transition-all"
