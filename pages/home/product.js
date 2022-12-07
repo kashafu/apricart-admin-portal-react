@@ -39,7 +39,8 @@ const ProductAPIPage = () => {
 		dispatch(addToRecent(each));
 		let tabs = allApis?.filter((each) => each.category === selected);
 		dispatch(selectTabs(tabs));
-		router.push(`/tabs/${selected.toLowerCase()}`);
+		const stripped = selected.replace(/\s+/g, "");
+		router.push(`/tabs/${stripped.toLowerCase()}`);
 	};
 
 	const handleRecent = (each) => {
@@ -49,8 +50,17 @@ const ProductAPIPage = () => {
 		router.push(`/tabs/${selected.toLowerCase()}`);
 	};
 
+	const remover = () => {
+		const stripped = "    My String With A    Lot Whitespace  ".replace(
+			/\s+/g,
+			""
+		);
+		console.log(stripped);
+	};
+
 	useEffect(() => {
 		getAPIs();
+		remover();
 	}, []);
 
 	return (

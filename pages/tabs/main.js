@@ -18,6 +18,13 @@ import ProductPriceUpdatedLast24hAPIComponent from "../../components/EachAPI/pro
 import AddnUpdateCouponAPIComponent from "../../components/EachAPI/other/AddnUpdateCouponAPIComponent";
 import OfferSaveAPIComponent from "../../components/EachAPI/other/OfferSaveAPIComponent";
 import ThankyouImageAddUpdateAPIComponent from "../../components/EachAPI/other/ThankyouImageAddUpdateAPIComponent";
+import UpdateWelcomeVideoAPIComponent from "../../components/EachAPI/other/UpdateWelcomeVideoAPIComponent";
+import PopupRedirectionUpdateAPIComponent from "../../components/EachAPI/other/PopupRedirectionUpdateAPIComponent";
+import WebUpdateAPIComponent from "../../components/EachAPI/other/WebUpdateAPIComponent";
+import RecommendedUpdateAPIComponent from "../../components/EachAPI/other/RecommendedUpdateAPIComponent";
+import IsContinueAPIComponent from "../../components/EachAPI/other/IsContinueAPIComponent";
+import TickerUpdateAPIComponent from "../../components/EachAPI/other/TickerUpdateAPIComponent";
+import NewNotificationSendAPIComponent from "../../components/EachAPI/other/NewNotificationSendAPIComponent";
 import UpdateCategoryImageAPIComponent from "../../components/EachAPI/categories/UpdateCategoryImageAPIComponent";
 import UpdateCategoryBannerAPIComponent from "../../components/EachAPI/categories/UpdateCategoryBannerAPIComponent";
 import SaveBannersAPIComponent from "../../components/EachAPI/banners/SaveBannersAPIComponent";
@@ -96,6 +103,19 @@ const MainTabComponent = () => {
 				)}
 				{selected === "Banner Save" && <SaveBannersAPIComponent />}
 				{selected === "Banner Remove" && <BannersAPIComponent />}
+				{selected === "Push Notification" && (
+					<NewNotificationSendAPIComponent />
+				)}
+				{selected === "Ticker Update" && <TickerUpdateAPIComponent />}
+				{selected === "Is Continue" && <IsContinueAPIComponent />}
+				{selected === "Recommended" && <RecommendedUpdateAPIComponent />}
+				{selected === "Web" && <WebUpdateAPIComponent />}
+				{selected === "Popup Screen Update" && (
+					<PopupRedirectionUpdateAPIComponent />
+				)}
+				{selected === "Welcome Video Update" && (
+					<UpdateWelcomeVideoAPIComponent />
+				)}
 			</section>
 		</section>
 	);

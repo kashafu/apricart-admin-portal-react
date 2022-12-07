@@ -36,7 +36,8 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 		let tabs = allApis?.filter((item) => item.category === each);
 		dispatch(addToRecent(tabs[0]));
 		dispatch(selectTabs(tabs));
-		router.push(`/tabs/${each.toLowerCase()}`);
+		const stripped = each.replace(/\s+/g, "");
+		router.push(`/tabs/${stripped.toLowerCase()}`);
 	};
 
 	useEffect(() => {

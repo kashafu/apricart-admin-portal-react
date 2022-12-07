@@ -78,7 +78,6 @@ const NewNotificationSendAPIComponent = () => {
 			checkStatus(response, "Notification Sent Successfully");
 		});
 	};
-	console.log(inputs);
 	return (
 		<section className="font-nunito">
 			<Loading loading={loading} />
