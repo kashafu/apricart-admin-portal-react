@@ -68,9 +68,9 @@ const Login = () => {
 			<Loading loading={loading} />
 
 			{/* MAIN DIV */}
-			<div className="w-full h-full flex">
+			<div className="w-full h-full flex flex-row-reverse">
 				{/* LOGIN AND RESET PASSWORD DIV */}
-				<div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-gray-50">
+				<div className="w-full lg:w-1/3 h-full flex flex-col items-center justify-center bg-gray-50">
 					<div className="w-1/2">
 						{/* LOGIN */}
 						{viewState === 'login' && (
@@ -180,7 +180,7 @@ const Login = () => {
 					</div>
 				</div>
 				{/* IMAGE DIV */}
-				<div className="hidden lg:flex lg:w-1/2 h-full relative bg-blue-400">
+				<div className="hidden lg:flex lg:w-2/3 h-full relative bg-blue-400">
 					<Image
 						alt="background image"
 						src={backgroundImage}
