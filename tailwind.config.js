@@ -28,12 +28,17 @@ module.exports = {
 					"50%": { transform: "rotate(10deg);" },
 					"100%": { transform: "rotate(0deg);" },
 				},
+				"fade-in": {
+					"0%": { opacity: 0 },
+					"100%": { opacity: 100 },
+				},
 			},
 			animation: {
 				dangle: "dangle infinite 3s ease-in",
 				dropdown: "dropdown 0.25s ease-in-out",
 				hideup: "hideup 0.25s ease-out",
 				swing: "swing 0.35s ease-out",
+				"fade-in": "fade-in 0.25s ease-in",
 			},
 			colors: {
 				"main-yellow": {
@@ -42,6 +47,7 @@ module.exports = {
 				"main-blue": {
 					DEFAULT: "#08185A",
 					100: "#CFD4FF",
+					200: "#08185A"
 				},
 				"main-red": {
 					DEFAULT: "#FF1100",

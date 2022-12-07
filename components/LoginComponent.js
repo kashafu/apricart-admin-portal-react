@@ -12,7 +12,7 @@ import {
 
 import logoFile from "../public/logo.png";
 // import backgroundVideo from "../public/warehouseVideo.mp4"
-import backgroundImage from "../public/warehouse.jpg"
+import backgroundImage from "../public/forklift-loop.gif"
 
 const Login = () => {
 	var numberToSend;
@@ -68,13 +68,13 @@ const Login = () => {
 			<Loading loading={loading} />
 
 			{/* MAIN DIV */}
-			<div className="w-full h-full flex">
+			<div className="w-full h-full flex flex-row-reverse">
 				{/* LOGIN AND RESET PASSWORD DIV */}
-				<div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-gray-50">
-					<div className="w-1/2">
+				<div className="w-full lg:w-1/3 h-full flex flex-col items-center justify-center bg-gray-50">
+					<div className="w-3/4">
 						{/* LOGIN */}
 						{viewState === 'login' && (
-							<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
+							<div className="animate-dropdown w-full flex flex-col justify-center items-center space-y-8">
 								<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
 									WELCOME TO APRICART ADMIN PORTAL
 								</p>
@@ -127,7 +127,7 @@ const Login = () => {
 						)}
 						{/* RESET PASSWORD */}
 						{viewState === 'forgot' && (
-							<div className="animate-dropdown w-full flex flex-col justify-center items-center p-8 space-y-8">
+							<div className="animate-dropdown w-full flex flex-col justify-center items-center space-y-8">
 								<div className="w-1/2">
 									<Image
 										src={logoFile}
@@ -180,7 +180,7 @@ const Login = () => {
 					</div>
 				</div>
 				{/* IMAGE DIV */}
-				<div className="hidden lg:flex lg:w-1/2 h-full relative bg-blue-400">
+				<div className="hidden lg:flex lg:w-2/3 h-full relative bg-blue-400">
 					<Image
 						alt="background image"
 						src={backgroundImage}
