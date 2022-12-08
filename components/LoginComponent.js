@@ -104,6 +104,13 @@ const Login = () => {
 											placeholder="Password"
 										/>
 									</div>
+									<button
+										type="submit"
+										onClick={(e) => submitLogin(e)}
+										className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
+									>
+										Sign in
+									</button>
 									<div className="w-full text-right">
 										<button
 											className="font-medium text-sm text-main-blue hover:text-main-blue"
@@ -115,13 +122,6 @@ const Login = () => {
 											Reset your password
 										</button>
 									</div>
-									<button
-										type="submit"
-										onClick={(e) => submitLogin(e)}
-										className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
-									>
-										Sign in
-									</button>
 								</form>
 							</div>
 						)}
