@@ -21,7 +21,8 @@ function CustomRadioInput({
 								type="radio"
 								name={name}
 								value={values[i]}
-								defaultChecked
+
+								// defaultChecked
 							/>
 							<p className="font-nunito pr-4 pl-1">{each}</p>
 						</div>

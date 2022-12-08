@@ -45,7 +45,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 			type,
 			headers
 		).then((response) => {
-			let status = checkStatus(response, "Product Position Detail Fetched");
+			let status = checkStatus(response, "");
 			status
 				? setDetail(response.data.data)
 				: displayErrorToast("No Data Found", 1800, "top-left");
@@ -55,7 +55,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Products Detail</Heading>
+			<Heading>Product Position Detail</Heading>
 			<CustomSelectInput
 				position={"top"}
 				onChange={(e) => handleProdType(e)}
@@ -77,7 +77,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 				options={["Brand", "SKU"]}
 			/>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Get Product Position Detail
+				Search
 			</CustomButton>
 
 			<section>

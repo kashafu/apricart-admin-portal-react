@@ -43,7 +43,7 @@ const GetOrdersReportsAPIComponent = () => {
 			status &&
 				displayInfoToast(
 					"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
-					5000
+					6000
 				);
 			setLoading(false);
 			setTimeout(() => {

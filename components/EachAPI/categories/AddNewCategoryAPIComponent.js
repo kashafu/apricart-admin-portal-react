@@ -69,9 +69,9 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative px-10">
+		<section className="relative px-10 pt-6">
 			<Loading loading={loading} />
-			<Heading>Create a new Category</Heading>
+			{/* <Heading>Create a new Category</Heading> */}
 			<form action="" method="POST">
 				{/* <section>
 					<div className="grid grid-cols-2">
@@ -104,7 +104,7 @@ const AddNewCategoryAPIComponent = () => {
 						type={"number"}
 						min={0}
 						placeholder={"Category's Parent Id eg. 5"}
-						heading={"Parent Id"}
+						heading={"Category's Parent Id"}
 						value={parentId}
 						onChange={(e) => handleParentId(e)}
 					/>

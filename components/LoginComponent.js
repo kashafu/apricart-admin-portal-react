@@ -12,7 +12,7 @@ import {
 
 import logoFile from "../public/logo.png";
 // import backgroundVideo from "../public/warehouseVideo.mp4"
-import backgroundImage from "../public/forklift-loop.gif"
+import backgroundImage from "../public/forklift-loop.gif";
 
 const Login = () => {
 	var numberToSend;
@@ -23,7 +23,7 @@ const Login = () => {
 	const [OTP, setOTP] = useState("");
 	const [newPW, setNewPW] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [viewState, setViewState] = useState('login')
+	const [viewState, setViewState] = useState("login");
 
 	const { baseUrl, city, userId, headers } = getGeneralApiParams();
 
@@ -45,8 +45,8 @@ const Login = () => {
 			} else if (response.status === 200) {
 				response.data.status === 0 &&
 					displayErrorToast(response.data.message, 1800);
-				response.data.status === 1 &&
-					displaySuccessToast("Login Successful", 1500);
+				// response.data.status === 1 &&
+				// 	displaySuccessToast("Login Successful", 1500);
 			} else {
 				displayErrorToast(response?.data?.err?.response?.data?.message, 1800);
 			}
@@ -73,11 +73,8 @@ const Login = () => {
 				<div className="w-full lg:w-1/3 h-full flex flex-col items-center justify-center bg-gray-50">
 					<div className="w-3/4">
 						{/* LOGIN */}
-						{viewState === 'login' && (
+						{viewState === "login" && (
 							<div className="animate-dropdown w-full flex flex-col justify-center items-center space-y-8">
-								<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
-									WELCOME TO APRICART ADMIN PORTAL
-								</p>
 								<div className="w-1/2">
 									<Image
 										src={logoFile}
@@ -85,7 +82,14 @@ const Login = () => {
 										layout="responsive"
 									/>
 								</div>
-								<form className="space-y-4 w-full flex flex-col" action="#" method="submit">
+								<p className="text-2xl font-nunito font-extrabold text-center text-gray-900">
+									Welcome to Apricart APM
+								</p>
+								<form
+									className="space-y-4 w-full flex flex-col"
+									action="#"
+									method="submit"
+								>
 									<div className="rounded-md -space-y-px">
 										<input
 											value={phoneNumber}
@@ -108,8 +112,8 @@ const Login = () => {
 										<button
 											className="font-medium text-sm text-main-blue hover:text-main-blue"
 											onClick={() => {
-												resetPasswordFunc()
-												setViewState('forgot')
+												resetPasswordFunc();
+												setViewState("forgot");
 											}}
 										>
 											Reset your password
@@ -126,7 +130,7 @@ const Login = () => {
 							</div>
 						)}
 						{/* RESET PASSWORD */}
-						{viewState === 'forgot' && (
+						{viewState === "forgot" && (
 							<div className="animate-dropdown w-full flex flex-col justify-center items-center space-y-8">
 								<div className="w-1/2">
 									<Image
@@ -161,7 +165,7 @@ const Login = () => {
 										<button
 											className="font-medium text-sm text-main-blue hover:text-main-blue"
 											onClick={() => {
-												setViewState('login')
+												setViewState("login");
 											}}
 										>
 											Go back to login
@@ -184,14 +188,13 @@ const Login = () => {
 					<Image
 						alt="background image"
 						src={backgroundImage}
-						layout='fill'
+						layout="fill"
 						objectFit="cover"
 					/>
 				</div>
 			</div>
 		</>
 	);
-
 };
 
 export default Login;

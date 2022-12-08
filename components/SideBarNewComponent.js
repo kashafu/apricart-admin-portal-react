@@ -5,6 +5,8 @@ import { AiFillApi } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import { getAllAPIsApi } from "../utils/ApiCalls";
 import { FiChevronRight } from "react-icons/fi";
+import { TbApi } from "react-icons/tb";
+
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
 import { addToRecent, selectTabs } from "../Redux/Recents/recentsSlice";
 import { useDispatch } from "react-redux";
@@ -54,9 +56,9 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 					onMouseLeave={() => setShow(false)}
 				>
 					<div className="pr-4">
-						<AiFillApi size={24} />
+						<TbApi size={24} />
 					</div>
-					<a className="overflow-x-hidden">Product Management</a>
+					<a className="overflow-x-hidden">API Management</a>
 				</div>
 				{/* Side DropDown */}
 				{/* Side DropDown */}
@@ -79,10 +81,10 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 								onClick={() => handleCategorySelect(each)}
 							>
 								<div className="p-2 ">{each}</div>
-								<div className="cursor-pointer  relative">
+								{/* <div className="cursor-pointer  relative">
 									<FiChevronRight size={24} className="" />
-									{/* <div>Go to</div> */}
-								</div>
+									
+								</div> */}
 							</section>
 						))}
 					</div>

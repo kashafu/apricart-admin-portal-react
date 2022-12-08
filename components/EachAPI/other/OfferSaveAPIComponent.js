@@ -21,7 +21,7 @@ const OfferSaveAPIComponent = () => {
 		expiry: "",
 		products: "",
 		categories: "",
-		type: "",
+		type: "products",
 	});
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input;
@@ -60,6 +60,7 @@ const OfferSaveAPIComponent = () => {
 			status && setOfferId(response.data.data.id);
 		});
 	};
+	console.log(input);
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
@@ -68,7 +69,7 @@ const OfferSaveAPIComponent = () => {
 				<section className="grid grid-cols-2">
 					<CustomInput
 						value={price}
-						heading={"Enter Price"}
+						heading={"Price"}
 						onChange={(e) => setInput({ ...input, price: e.target.value })}
 						type="number"
 						placeholder="Price eg. 320"
@@ -82,14 +83,14 @@ const OfferSaveAPIComponent = () => {
 						x
 						type="text"
 						placeholder="Buying Condition"
-						heading={"Enter Buying Condition"}
+						heading={"Buying Condition"}
 					/>
 					<CustomInput
 						value={expiry}
 						onChange={(e) => setInput({ ...input, expiry: e.target.value })}
 						type="date"
 						placeholder="Expiry Date"
-						heading={"Enter Expiry date"}
+						heading={"Expiry date"}
 					/>
 					<CustomRadioInput
 						inputs={["Products", "Categories"]}
@@ -104,7 +105,7 @@ const OfferSaveAPIComponent = () => {
 							onChange={(e) => setInput({ ...input, products: e.target.value })}
 							type="text"
 							placeholder="Products"
-							heading="Enter Products"
+							heading="Products"
 						/>
 					)}
 					{input.type === "categories" && (
@@ -115,7 +116,7 @@ const OfferSaveAPIComponent = () => {
 							}
 							type="text"
 							placeholder="Categories"
-							heading="Enter Categories"
+							heading="Categories"
 						/>
 					)}
 
@@ -124,12 +125,12 @@ const OfferSaveAPIComponent = () => {
 						onChange={(e) => setInput({ ...input, buying: e.target.value })}
 						type="text"
 						placeholder="Buying"
-						heading={"Enter Buying"}
+						heading={"Buying"}
 						position={"bottom"}
 					/>
 				</section>
 				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-					Offer ID
+					Create a new Offer
 				</CustomButton>
 			</form>
 

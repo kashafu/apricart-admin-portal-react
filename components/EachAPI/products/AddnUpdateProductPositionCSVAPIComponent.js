@@ -53,8 +53,8 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await addUpdateProductCSVApi(baseUrl, apiToken, file, headers).then(
 			(response) => {
-				setLoading(false);
 				checkStatus(response, "File Upload Successful");
+				setLoading(false);
 			}
 		);
 	};

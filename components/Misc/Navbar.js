@@ -23,12 +23,12 @@ const Navbar = ({ name }) => {
 					className="flex min-w-min items-center"
 					onClick={() => router.push("/")}
 				>
-					<div className="ml-6 w-20 mx-2">
+					<div className="ml-6 w-28 mx-2">
 						<Image src={Logo} alt="Logo" layout="responsive" />
 					</div>
-					<h5 className="truncate font-nunito text-base font-bold mx-2">
+					{/* <h5 className="truncate font-nunito text-base font-bold mx-2">
 						Apricart APM
-					</h5>
+					</h5> */}
 				</div>
 
 				<div className="px-2 flex justify-center items-center">

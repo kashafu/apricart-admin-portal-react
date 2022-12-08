@@ -61,7 +61,7 @@ const RecommendedUpdateAPIComponent = () => {
 					value={text}
 					onChange={handleText}
 					required={true}
-					heading={"Enter SKU's comma separated"}
+					heading={"Enter SKU's comma separated (2 or more)"}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleProdType(e)}

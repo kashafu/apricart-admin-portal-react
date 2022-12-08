@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 		<Provider store={store}>
-			<ConfigProvider colors={["red", "green", "gray", "yellow"]}>
+			<ConfigProvider colors={["blue", "mediumblue", "darkblue", "navy"]}>
 				<div className="min-h-screen w-screen flex">
 					{router.pathname !== "/login" && (
 						<div className="pb-12 z-50">

@@ -18,6 +18,7 @@ const UpdateWelcomeVideoAPIComponent = () => {
 	}
 
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
 		await updateWelcomeVideoApi(baseUrl, link, headers).then((response) => {
@@ -39,9 +40,11 @@ const UpdateWelcomeVideoAPIComponent = () => {
 						handleLink(e);
 					}}
 				/>
-				<CustomButton width={"1/3"} onClick={handleSubmit}>
-					Update Welcome Video
-				</CustomButton>
+				<div className="truncate">
+					<CustomButton width={"1/3"} onClick={handleSubmit}>
+						Update Welcome Video
+					</CustomButton>
+				</div>
 			</form>
 		</section>
 	);

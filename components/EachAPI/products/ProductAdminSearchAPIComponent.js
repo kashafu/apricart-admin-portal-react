@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
@@ -48,6 +51,7 @@ const ProductAdminSearchAPIComponent = () => {
 	};
 
 	const handleResponse = (response) => {
+		console.log(response);
 		setDetail(response.data.data);
 		getPagination(response.data.total, size);
 		setLoading(false);
@@ -71,7 +75,8 @@ const ProductAdminSearchAPIComponent = () => {
 			userId,
 			headers
 		).then((response) => {
-			handleResponse(response, text);
+			let status = checkStatus(response, "");
+			status && handleResponse(response, text);
 		});
 	};
 
@@ -121,6 +126,7 @@ const ProductAdminSearchAPIComponent = () => {
 				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
 			<section>
+				{console.log(detail)}
 				{detail.length > 0 ? (
 					detail?.map((each) => {
 						return (
