@@ -52,7 +52,7 @@ const MainTabComponent = () => {
 					</span>
 				</h1>
 			</div>
-			<section className="w-full flex cursor-pointer border-b-slate-300 border-b-[1px] truncate overflow-x-auto">
+			<section className="w-full flex cursor-pointer border-b-slate-300 border-b-[1px] overflow-x-auto">
 				{allTabs.map((each) => (
 					<div
 						key={each.endpoint}
