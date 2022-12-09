@@ -53,10 +53,10 @@ const GetOrdersReportsAPIComponent = () => {
 	};
 	return (
 		<section className="px-10">
-			<Heading>Total Orders Report</Heading>
+			{/* <Heading>Total Orders Report</Heading> */}
 			<Loading loading={loading} />
 			<form>
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomRadioInput
 						inputs={["Peshawar", "Karachi"]}
 						values={["4", "1"]}

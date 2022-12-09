@@ -35,9 +35,9 @@ const GetAbundantCartReportsAPIComponent = () => {
 
 	return (
 		<section className="px-10">
-			<Heading>Abundant Cart Report</Heading>
+			{/* <Heading>Abundant Cart Report</Heading> */}
 			<Loading loading={loading} />
-			<form className="grid grid-cols-2">
+			<form className="grid grid-cols-2 pt-6">
 				<CustomInput
 					heading={"Enter Hours"}
 					value={horas}

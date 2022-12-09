@@ -74,9 +74,9 @@ const UpdateCategoryBannerAPIComponent = () => {
 	return (
 		<section className="relative px-10">
 			<Loading loading={loading} />
-			<Heading>Category Banner Update</Heading>
+			{/* <Heading>Category Banner Update</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						type={"number"}
 						position={"top"}

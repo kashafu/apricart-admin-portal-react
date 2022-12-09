@@ -39,8 +39,8 @@ const GetUsersReportsAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<form className="grid grid-cols-2" action="">
-				<Heading>Total Users Report</Heading>
+			<form className="grid grid-cols-2 pt-6" action="">
+				{/* <Heading>Total Users Report</Heading> */}
 				<CustomButton
 					onClick={(e) => fetchReport(e)}
 					disabled={disabler}

@@ -53,9 +53,9 @@ const ProductPositionDetailAdminAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="px-10">
+		<section className="px-10 pt-6">
 			<Loading loading={loading} />
-			<Heading>Product Position Detail</Heading>
+			{/* <Heading>Product Position Detail</Heading> */}
 			<CustomSelectInput
 				position={"top"}
 				onChange={(e) => handleProdType(e)}

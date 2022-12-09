@@ -107,7 +107,7 @@ const AddnUpdateCouponAPIComponent = () => {
 		});
 	};
 	return (
-		<section>
+		<section className="pt-6">
 			<CustomInput
 				position={"top"}
 				type={"text"}

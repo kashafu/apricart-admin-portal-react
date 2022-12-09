@@ -73,17 +73,7 @@ const AddNewCategoryAPIComponent = () => {
 			<Loading loading={loading} />
 			{/* <Heading>Create a new Category</Heading> */}
 			<form action="" method="POST">
-				{/* <section>
-					<div className="grid grid-cols-2">
-						<CustomFloatingInputNew>Category Name</CustomFloatingInputNew>
-						<CustomFloatingInputNew>Category Position</CustomFloatingInputNew>
-					</div>
-					<div className="grid grid-cols-2">
-						<CustomFloatingInputNew>Category Parent Id</CustomFloatingInputNew>
-						<CustomFloatingInputNew>Category Image</CustomFloatingInputNew>
-					</div>
-				</section> */}
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						heading={"Category Name"}
 						placeholder={"Category Name"}

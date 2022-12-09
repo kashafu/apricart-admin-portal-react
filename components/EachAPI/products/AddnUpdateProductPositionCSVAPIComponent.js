@@ -61,9 +61,9 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Product Position CSV</Heading>
+			{/* <Heading>Product Position CSV</Heading> */}
 			<form>
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						heading={"Enter API Token"}
 						value={apiToken}

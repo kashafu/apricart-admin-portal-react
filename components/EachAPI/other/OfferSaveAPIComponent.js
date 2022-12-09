@@ -64,9 +64,9 @@ const OfferSaveAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Save Offer</Heading>
+			{/* <Heading>Save Offer</Heading> */}
 			<form>
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						value={price}
 						heading={"Price"}
@@ -136,7 +136,7 @@ const OfferSaveAPIComponent = () => {
 
 			{offerId && (
 				<div className="inline-flex animate-dropdown justify-center items-center">
-					<Heading>Your Offer Id = </Heading>
+					{/* <Heading>Your Offer Id = </Heading> */}
 					<h2 className="text-5xl font-bold font-nunito text-main-blue">
 						{offerId}
 					</h2>

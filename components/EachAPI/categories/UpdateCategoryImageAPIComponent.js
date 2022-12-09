@@ -60,9 +60,9 @@ const UpdateCategoryImageAPIComponent = () => {
 	return (
 		<section className="px-10">
 			{<Loading loading={loading} />}
-			<Heading>Category Image Update</Heading>
+			{/* <Heading>Category Image Update</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						heading={"Enter Category Id"}
 						type={"number"}

@@ -53,8 +53,8 @@ const RecommendedUpdateAPIComponent = () => {
 	return (
 		<section className="font-nunito px-10">
 			<Loading loading={loading} />
-			<Heading>Recommended Products Update</Heading>
-			<form action="" className="grid grid-cols-2">
+			{/* <Heading>Recommended Products Update</Heading> */}
+			<form action="" className="grid grid-cols-2 pt-6">
 				<CustomInput
 					position={"top"}
 					type={"text"}

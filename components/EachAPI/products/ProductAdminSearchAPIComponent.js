@@ -87,9 +87,9 @@ const ProductAdminSearchAPIComponent = () => {
 
 	return (
 		<section className="px-10">
-			<Heading>Products Search</Heading>
+			{/* <Heading>Products Search</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						position={"top"}
 						heading={"Search Product Name/SKU"}

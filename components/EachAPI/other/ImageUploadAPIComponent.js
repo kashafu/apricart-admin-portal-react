@@ -85,7 +85,7 @@ const ImageUploadAPIComponent = () => {
 	return (
 		<section className="pl-10">
 			{<Loading loading={loading} />}
-			<section className="grid grid-cols-2 gap-2">
+			<section className="grid grid-cols-2 pt-6 gap-2">
 				<form action="" method="POST">
 					{imageInput.map((each, index) => (
 						<div key={index} className="ml-20">
