@@ -55,9 +55,16 @@ export const loginApi = async (
 export const getAllAPIsApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/admin/dashboard`;
 	try {
-		return await axios.get(url, {
+		let response = await axios.get(url, {
 			headers,
-		});
+		})
+		// Hard coded get all categories api
+		response.data.data.apis.push({
+			"name": "View Category",
+			"endpoint": "/admin/category/view",
+			"category": "Category"
+		})
+		return response
 	} catch (error) {
 		return error?.response;
 	}

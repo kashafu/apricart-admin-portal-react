@@ -71,6 +71,7 @@ const MainTabComponent = () => {
 			<section>
 				{selected === "Add Category" && <AddNewCategoryAPIComponent />}
 				{selected === "Update Category" && <UpdateCategoryAPIComponent />}
+				{selected === "View Category" && <GetAllCategories />}
 				{selected === "Products Search" && <ProductAdminSearchAPIComponent />}
 				{selected === "Products Detail" && <ProductAdminDetailAPIComponent />}
 				{selected === "Product Position" && (<ProductPositionDetailAdminAPIComponent />)}
@@ -96,7 +97,6 @@ const MainTabComponent = () => {
 				{selected === "Web" && <WebUpdateAPIComponent />}
 				{selected === "Popup Screen Update" && (<PopupRedirectionUpdateAPIComponent />)}
 				{selected === "Welcome Video Update" && (<UpdateWelcomeVideoAPIComponent />)}
-				{selected === "Get All Categories" && <GetAllCategories />}
 			</section>
 		</section>
 	);

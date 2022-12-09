@@ -69,7 +69,7 @@ const AddNewCategoryAPIComponent = () => {
 	};
 
 	return (
-		<section className="relative px-10 pt-6">
+		<section className="relative px-10">
 			<Loading loading={loading} />
 			{/* <Heading>Create a new Category</Heading> */}
 			<form action="" method="POST">

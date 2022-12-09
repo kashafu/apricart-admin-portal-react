@@ -36,8 +36,8 @@ const Dashboard = () => {
 					onClick={() => router.push("/home/product")}
 				>
 					<div className="p-4 font-nunito ">
-						<p className="text-slate-500 text-sm font-bold">API MANAGEMENT</p>
-						<h1 className="font-nunito font-bold">{count} APIs</h1>
+						<p className="text-slate-500 text-md font-bold">API MANAGEMENT</p>
+						{/* <h1 className="font-nunito font-bold">{count} APIs</h1> */}
 					</div>
 					{/* <div className="h-full w-full bg-red-200"></div> */}
 					<div className="h-full w-full bg-blue-300"></div>

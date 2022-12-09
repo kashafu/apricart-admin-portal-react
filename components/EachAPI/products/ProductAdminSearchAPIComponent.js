@@ -126,7 +126,6 @@ const ProductAdminSearchAPIComponent = () => {
 				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
 			<section>
-				{console.log(detail)}
 				{detail.length > 0 ? (
 					detail?.map((each) => {
 						return (
