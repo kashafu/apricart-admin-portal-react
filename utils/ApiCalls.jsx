@@ -26,6 +26,7 @@ export const loginApi = async (
 		let response = await axios.post(url, body, {
 			headers,
 		});
+		console.log(response);
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
 				return {
@@ -57,14 +58,14 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 	try {
 		let response = await axios.get(url, {
 			headers,
-		})
+		});
 		// Hard coded get all categories api
-		response.data.data.apis.push({
-			"name": "View Category",
-			"endpoint": "/admin/category/view",
-			"category": "Category"
-		})
-		return response
+		response.data.data.apis.unshift({
+			name: "View Category",
+			endpoint: "/admin/category/view",
+			category: "Category",
+		});
+		return response;
 	} catch (error) {
 		return error?.response;
 	}
