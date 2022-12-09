@@ -23,6 +23,7 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();
 	const cookies = new Cookies();
+	// to get header from cookies by default
 	axios.defaults.headers.common["Authorization"] =
 		"Bearer " + cookies.get("cookies-token");
 

@@ -29,7 +29,7 @@ const Dashboard = () => {
 	return (
 		<section className="bg-slate-100 py-12">
 			<Loading loading={loading} />
-			<section className="mt-14 grid grid-cols-3 w-full">
+			<section className="mt-14 px-10 grid grid-cols-3 w-full">
 				{/* Single dashboard square */}
 				<section
 					className="grid grid-cols-2 grid-rows-2 gap-2 h-60 mx-6 bg-white duration-500 cursor-pointer rounded-xl overflow-hidden"
@@ -46,14 +46,15 @@ const Dashboard = () => {
 						<SiQuantconnect className="fill-slate-100 animate-spin" size={60} />
 					</div>
 				</section>
+				{/* empty square */}
+				<section></section>
 				{/* User mgmt square */}
 				<section
 					className="grid grid-cols-2 grid-rows-2 gap-2 h-60 mx-6 bg-white duration-500 cursor-pointer rounded-xl overflow-hidden"
 					onClick={() => router.push("/home/user")}
 				>
 					<div className="p-4 font-nunito ">
-						<p className="text-slate-500 text-sm font-bold">USER MANAGEMENT</p>
-						<h1 className="font-nunito font-bold"></h1>
+						<p className="text-slate-500 text-md font-bold">USER MANAGEMENT</p>
 					</div>
 					{/* <div className="h-full w-full bg-red-200"></div> */}
 					<div className="h-full w-full bg-blue-100"></div>

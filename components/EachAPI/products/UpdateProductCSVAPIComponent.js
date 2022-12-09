@@ -11,6 +11,7 @@ import {
 	updateRen,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
 const UpdateProductCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
@@ -52,34 +53,33 @@ const UpdateProductCSVAPIComponent = () => {
 		);
 	};
 	return (
-		<>
+		<section className="px-10">
 			<Loading loading={loading} />
 			<section>
 				<form action="" method="POST">
-					<CustomInput
-						type={"text"}
-						position={"top"}
-						onChange={handleToken}
-						placeholder={"API Token"}
-						required={true}
-					/>
-					<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-b-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-						Select Updated File
-					</label>
-					<input
-						type={"file"}
-						accept={".csv"}
-						key={ren || ""}
-						onChange={(e) => handleFile(e)}
-						required={true}
-						className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					/>
-					<CustomButton onClick={handleSubmit}>
-						Submit Updated File
+					<section className="grid grid-cols-2 pt-6 ">
+						<CustomInput
+							type={"text"}
+							position={"top"}
+							onChange={handleToken}
+							heading={"API Token"}
+							required={true}
+						/>
+						<CustomSingleImageInput
+							heading={"Select Updated File"}
+							accept={".csv"}
+							onChange={(e) => {
+								handleFile(e);
+							}}
+							ren={ren}
+						/>
+					</section>
+					<CustomButton onClick={handleSubmit} width={"1/3"}>
+						Save
 					</CustomButton>
 				</form>
 			</section>
-		</>
+		</section>
 	);
 };
 

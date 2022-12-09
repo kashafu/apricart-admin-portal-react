@@ -30,6 +30,7 @@ import UpdateCategoryBannerAPIComponent from "../../components/EachAPI/categorie
 import SaveBannersAPIComponent from "../../components/EachAPI/banners/SaveBannersAPIComponent";
 import BannersAPIComponent from "../../components/EachAPI/banners/BannersAPIComponent";
 import GetAllCategories from "../../components/EachAPI/categories/GetAllCategories";
+import UpdateProductCSVAPIComponent from "../../components/EachAPI/products/UpdateProductCSVAPIComponent";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -74,29 +75,52 @@ const MainTabComponent = () => {
 				{selected === "View Category" && <GetAllCategories />}
 				{selected === "Products Search" && <ProductAdminSearchAPIComponent />}
 				{selected === "Products Detail" && <ProductAdminDetailAPIComponent />}
-				{selected === "Product Position" && (<ProductPositionDetailAdminAPIComponent />)}
-				{selected === "Products Stock Detail" && (<ProductStockDetailAdminAPIComponent />)}
-				{selected === "Products Report Download" && (<GetProductReportsAPIComponent />)}
-				{selected === "Products Out of stock Report" && (<GetProductsOutOfStockAPIComponent />)}
-				{selected === "Updated in Last 24 Hours" && (<ProductPriceUpdatedLast24hAPIComponent />)}
-				{selected === "Total Users Report" && <GetUsersReportsAPIComponent />}
-				{selected === "Total Orders Report" && <GetOrdersReportsAPIComponent />}
-				{selected === "Abundant Cart Report" && (<GetAbundantCartReportsAPIComponent />)}
-				{selected === "Product Position CSV" && (<AddnUpdateProductPositionCSVAPIComponent />)}
-				{selected === "Create a new Coupon" && <AddnUpdateCouponAPIComponent />}
+				{selected === "Products Stock Detail" && (
+					<ProductStockDetailAdminAPIComponent />
+				)}
+				{selected === "Product Position Details" && (
+					<ProductPositionDetailAdminAPIComponent />
+				)}
+				{selected === "Products Report" && <GetProductReportsAPIComponent />}
+				{selected === "Products Out Of Stock" && (
+					<GetProductsOutOfStockAPIComponent />
+				)}
+				{selected === "Updates in last 24 Hours" && (
+					<ProductPriceUpdatedLast24hAPIComponent />
+				)}
+				{selected === "Total Users" && <GetUsersReportsAPIComponent />}
+				{selected === "Total Orders" && <GetOrdersReportsAPIComponent />}
+				{selected === "Abundant Cart" && <GetAbundantCartReportsAPIComponent />}
+				{selected === "Product Position" && (
+					<AddnUpdateProductPositionCSVAPIComponent />
+				)}
+				{selected === "Products Save" && <UpdateProductCSVAPIComponent />}
+				{selected === "Add Coupon" && <AddnUpdateCouponAPIComponent />}
 				{selected === "Offer Save" && <OfferSaveAPIComponent />}
-				{selected === "Thank you page Banner update" && (<ThankyouImageAddUpdateAPIComponent />)}
-				{selected === "Category Image Update" && (<UpdateCategoryImageAPIComponent />)}
-				{selected === "Category Banner Update" && (<UpdateCategoryBannerAPIComponent />)}
-				{selected === "Banner Save" && <SaveBannersAPIComponent />}
-				{selected === "Banner Remove" && <BannersAPIComponent />}
-				{selected === "Push Notification" && (<NewNotificationSendAPIComponent />)}
+				{selected === "Thank you page Banner" && (
+					<ThankyouImageAddUpdateAPIComponent />
+				)}
+				{selected === "Category Image Update" && (
+					<UpdateCategoryImageAPIComponent />
+				)}
+				{selected === "Category Banner Update" && (
+					<UpdateCategoryBannerAPIComponent />
+				)}
+				{selected === "Save Banner" && <SaveBannersAPIComponent />}
+				{selected === "Remove Banner" && <BannersAPIComponent />}
+				{selected === "Push Notification" && (
+					<NewNotificationSendAPIComponent />
+				)}
 				{selected === "Ticker Update" && <TickerUpdateAPIComponent />}
 				{selected === "Is Continue" && <IsContinueAPIComponent />}
 				{selected === "Recommended" && <RecommendedUpdateAPIComponent />}
 				{selected === "Web" && <WebUpdateAPIComponent />}
-				{selected === "Popup Screen Update" && (<PopupRedirectionUpdateAPIComponent />)}
-				{selected === "Welcome Video Update" && (<UpdateWelcomeVideoAPIComponent />)}
+				{selected === "Popup Screen Update" && (
+					<PopupRedirectionUpdateAPIComponent />
+				)}
+				{selected === "Welcome Video Update" && (
+					<UpdateWelcomeVideoAPIComponent />
+				)}
 			</section>
 		</section>
 	);

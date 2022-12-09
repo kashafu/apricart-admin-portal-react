@@ -94,7 +94,7 @@ const ProductAPIPage = () => {
 						<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark"></h3>
 						<div>
 							<div className="overflow-y-auto scroller-mini h-96">
-								{categories?.map((each, index) => (
+								{categories?.map((each) => (
 									<section
 										key={each.index}
 										className=" justify-center items-center "
@@ -119,6 +119,11 @@ const ProductAPIPage = () => {
 							</div>
 						</div>
 					</section>
+					{/* Second column */}
+					{/* Second column */}
+					{/* Second column */}
+					{/* Second column */}
+					{/* Second column */}
 					<section className="col-span-2 duration-300 transition-all">
 						<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark"></h3>
 						<div>

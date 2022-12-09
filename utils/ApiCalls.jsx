@@ -784,8 +784,10 @@ export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
 
 export const getAllCategoriesApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/catalog/categories?level=all&userid=abc123`;
+	var instance = axios.create();
+	delete instance.defaults.headers.common["Authorization"];
 	try {
-		return await axios.get(url, {
+		return await instance.get(url, {
 			headers,
 		});
 	} catch (error) {
