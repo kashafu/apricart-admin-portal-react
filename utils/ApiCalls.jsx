@@ -773,3 +773,14 @@ export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
 		return error?.response;
 	}
 };
+
+export const getAllCategoriesApi = async (baseUrl, headers) => {
+	const url = baseUrl + `/catalog/categories?level=all&userid=abc123`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error.response;
+	}
+};
