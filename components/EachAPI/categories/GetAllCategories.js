@@ -39,7 +39,7 @@ const GetAllCategories = () => {
 		<section>
 			<Loading loading={loading} />
 
-			<aside className="grid grid-cols-3 bg-white shadow-xl border-slate-100 border-[1px] mx-2 w-[70%]">
+			<aside className="grid grid-cols-2 bg-white shadow-xl border-slate-100 border-[1px] mx-2 w-[70%]">
 				<section className="col-span-1">
 					<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark">
 						Categories
@@ -55,11 +55,14 @@ const GetAllCategories = () => {
 										className={
 											each === selected
 												? "hover:bg-main-blue-100 bg-gray-300 cursor-pointer duration-200 ease-in  grid items-center grid-cols-8"
-												: "hover:bg-gray-300 cursor-pointer duration-200 ease-in  grid items-center grid-cols-8"
+												: "hover:bg-gray-300 cursor-pointer duration-200 ease-in grid items-center grid-cols-8"
 										}
 										onClick={() => setSelected(each)}
 									>
-										<div className="col-span-7 overflow-y-auto py-4 px-2 duration-300 ">
+										<div className="col-span-2 overflow-x-hidden py-4 px-2 duration-300 ">
+											<p className="select-none px-4">{each.id}</p>
+										</div>
+										<div className="col-span-5 overflow-y-auto py-4 px-2 duration-300 ">
 											<p className="select-none px-4">{each.name}</p>
 										</div>
 										<div className="cursor-pointer  relative">
@@ -76,7 +79,8 @@ const GetAllCategories = () => {
 				{/* Second column */}
 				{/* Second column */}
 				{/* Second column */}
-				<section className="col-span-2 duration-300 transition-all">
+
+				<section className=" duration-300 transition-all">
 					<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark">
 						Sub Categories
 					</h3>
@@ -90,7 +94,10 @@ const GetAllCategories = () => {
 										className="justify-center items-center animate-dropdown"
 									>
 										<div className="hover:bg-gray-300 cursor-pointer duration-200 ease-in  grid items-center grid-cols-8">
-											<div className="col-span-7 overflow-y-auto py-4 px-2 duration-300 ">
+											<div className="col-span-2 overflow-x-hidden py-4 px-2 duration-300 ">
+												<p className="select-none px-4">{each.id}</p>
+											</div>
+											<div className="col-span-6 overflow-y-auto py-4 px-2 duration-300 ">
 												<p className="select-none px-4">{each.name}</p>
 											</div>
 										</div>
