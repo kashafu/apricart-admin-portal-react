@@ -29,6 +29,7 @@ import UpdateCategoryImageAPIComponent from "../../components/EachAPI/categories
 import UpdateCategoryBannerAPIComponent from "../../components/EachAPI/categories/UpdateCategoryBannerAPIComponent";
 import SaveBannersAPIComponent from "../../components/EachAPI/banners/SaveBannersAPIComponent";
 import BannersAPIComponent from "../../components/EachAPI/banners/BannersAPIComponent";
+import GetAllCategories from "../../components/EachAPI/categories/GetAllCategories";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -121,6 +122,7 @@ const MainTabComponent = () => {
 				{selected === "Welcome Video Update" && (
 					<UpdateWelcomeVideoAPIComponent />
 				)}
+				{selected === "Get All Categories" && <GetAllCategories />}
 			</section>
 		</section>
 	);

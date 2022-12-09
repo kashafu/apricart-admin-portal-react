@@ -35,6 +35,7 @@ export const recentsSlice = createSlice({
 			setItemLocalStorage("recents", JSON.stringify(recents));
 		},
 		selectTabs: (state, action) => {
+			console.log(action.payload);
 			state.tabs = action.payload;
 			setItemLocalStorage("tabs", JSON.stringify(state.tabs));
 		},
