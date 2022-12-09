@@ -72,9 +72,9 @@ const ThankyouImageAddUpdateAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Thank You Page Banner Update</Heading>
+			{/* <Heading>Thank You Page Banner Update</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomSelectInput
 						position={"top"}
 						onChange={(e) => handleProdType(e)}

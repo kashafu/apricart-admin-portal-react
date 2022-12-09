@@ -81,9 +81,9 @@ const NewNotificationSendAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Push Notifications</Heading>
+			{/* <Heading>Push Notifications</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomSelectInput
 						values={["product", "category", "subcategory", "offer"]}
 						options={["Product", "Category", "Subcategory", "Offer"]}

@@ -49,8 +49,8 @@ const WebUpdateAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Update Web</Heading>
-			<form action="" className="grid grid-cols-2">
+			{/* <Heading>Update Web</Heading> */}
+			<form action="" className="grid grid-cols-2 pt-6">
 				<CustomInput
 					position={"top"}
 					type={"text"}

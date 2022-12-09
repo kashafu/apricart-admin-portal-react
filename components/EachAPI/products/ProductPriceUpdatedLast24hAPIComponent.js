@@ -36,8 +36,8 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Updated in Last {time} Hours</Heading>
-			<form className="grid grid-cols-2">
+			{/* <Heading>Updated in Last {time} Hours</Heading> */}
+			<form className="grid grid-cols-2 pt-6">
 				<CustomInput
 					heading={"Time in hours"}
 					value={time}

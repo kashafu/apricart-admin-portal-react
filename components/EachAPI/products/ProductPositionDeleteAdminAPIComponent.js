@@ -43,7 +43,7 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 	return (
 		<div>
 			<form action="" method="submit">
-				<Heading>Product Position Delete</Heading>
+				{/* <Heading>Product Position Delete</Heading> */}
 				<CustomInput
 					heading={"Enter Id"}
 					placeholder={"Id"}

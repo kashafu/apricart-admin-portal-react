@@ -70,9 +70,9 @@ const UpdateCategoryAPIComponent = () => {
 	return (
 		<section className="relative px-10">
 			<Loading loading={loading} />
-			<Heading>Update Category</Heading>
+			{/* <Heading>Update Category</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomInput
 						heading={"Category Name"}
 						placeholder={"Category Name"}

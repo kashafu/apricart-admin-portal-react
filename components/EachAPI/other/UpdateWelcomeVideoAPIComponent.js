@@ -30,8 +30,8 @@ const UpdateWelcomeVideoAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Welcome Video Update</Heading>
-			<form className="grid grid-cols-2">
+			{/* <Heading>Welcome Video Update</Heading> */}
+			<form className="grid grid-cols-2 pt-6">
 				<CustomInput
 					heading={"Enter Video URL"}
 					placeholder={"eg. http://youtube.com/video-link"}

@@ -72,55 +72,29 @@ const MainTabComponent = () => {
 				{selected === "Update Category" && <UpdateCategoryAPIComponent />}
 				{selected === "Products Search" && <ProductAdminSearchAPIComponent />}
 				{selected === "Products Detail" && <ProductAdminDetailAPIComponent />}
-				{selected === "Product Position" && (
-					<ProductPositionDetailAdminAPIComponent />
-				)}
-				{selected === "Products Stock Detail" && (
-					<ProductStockDetailAdminAPIComponent />
-				)}
-				{selected === "Products Report Download" && (
-					<GetProductReportsAPIComponent />
-				)}
-				{selected === "Products Out of stock Report" && (
-					<GetProductsOutOfStockAPIComponent />
-				)}
-				{selected === "Updated in Last 24 Hours" && (
-					<ProductPriceUpdatedLast24hAPIComponent />
-				)}
+				{selected === "Product Position" && (<ProductPositionDetailAdminAPIComponent />)}
+				{selected === "Products Stock Detail" && (<ProductStockDetailAdminAPIComponent />)}
+				{selected === "Products Report Download" && (<GetProductReportsAPIComponent />)}
+				{selected === "Products Out of stock Report" && (<GetProductsOutOfStockAPIComponent />)}
+				{selected === "Updated in Last 24 Hours" && (<ProductPriceUpdatedLast24hAPIComponent />)}
 				{selected === "Total Users Report" && <GetUsersReportsAPIComponent />}
 				{selected === "Total Orders Report" && <GetOrdersReportsAPIComponent />}
-				{selected === "Abundant Cart Report" && (
-					<GetAbundantCartReportsAPIComponent />
-				)}
-				{selected === "Product Position CSV" && (
-					<AddnUpdateProductPositionCSVAPIComponent />
-				)}
+				{selected === "Abundant Cart Report" && (<GetAbundantCartReportsAPIComponent />)}
+				{selected === "Product Position CSV" && (<AddnUpdateProductPositionCSVAPIComponent />)}
 				{selected === "Create a new Coupon" && <AddnUpdateCouponAPIComponent />}
 				{selected === "Offer Save" && <OfferSaveAPIComponent />}
-				{selected === "Thank you page Banner update" && (
-					<ThankyouImageAddUpdateAPIComponent />
-				)}
-				{selected === "Category Image Update" && (
-					<UpdateCategoryImageAPIComponent />
-				)}
-				{selected === "Category Banner Update" && (
-					<UpdateCategoryBannerAPIComponent />
-				)}
+				{selected === "Thank you page Banner update" && (<ThankyouImageAddUpdateAPIComponent />)}
+				{selected === "Category Image Update" && (<UpdateCategoryImageAPIComponent />)}
+				{selected === "Category Banner Update" && (<UpdateCategoryBannerAPIComponent />)}
 				{selected === "Banner Save" && <SaveBannersAPIComponent />}
 				{selected === "Banner Remove" && <BannersAPIComponent />}
-				{selected === "Push Notification" && (
-					<NewNotificationSendAPIComponent />
-				)}
+				{selected === "Push Notification" && (<NewNotificationSendAPIComponent />)}
 				{selected === "Ticker Update" && <TickerUpdateAPIComponent />}
 				{selected === "Is Continue" && <IsContinueAPIComponent />}
 				{selected === "Recommended" && <RecommendedUpdateAPIComponent />}
 				{selected === "Web" && <WebUpdateAPIComponent />}
-				{selected === "Popup Screen Update" && (
-					<PopupRedirectionUpdateAPIComponent />
-				)}
-				{selected === "Welcome Video Update" && (
-					<UpdateWelcomeVideoAPIComponent />
-				)}
+				{selected === "Popup Screen Update" && (<PopupRedirectionUpdateAPIComponent />)}
+				{selected === "Welcome Video Update" && (<UpdateWelcomeVideoAPIComponent />)}
 			</section>
 		</section>
 	);

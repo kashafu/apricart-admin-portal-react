@@ -55,8 +55,8 @@ const IsContinueAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Is Continue</Heading>
-			<form className="grid grid-cols-2">
+			{/* <Heading>Is Continue</Heading> */}
+			<form className="grid grid-cols-2 pt-6">
 				<CustomInput
 					heading={"Enter Text"}
 					position={"top"}

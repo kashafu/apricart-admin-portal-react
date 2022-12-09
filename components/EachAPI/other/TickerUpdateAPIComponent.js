@@ -53,9 +53,9 @@ const TickerUpdateAPIComponent = () => {
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
-			<Heading>Ticker Update</Heading>
+			{/* <Heading>Ticker Update</Heading> */}
 			<form>
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomSelectInput
 						position={"top"}
 						onChange={(e) => handleProdType(e)}

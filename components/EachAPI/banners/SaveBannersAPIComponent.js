@@ -103,9 +103,9 @@ const SaveBannersAPIComponent = () => {
 	return (
 		<section className="relative px-10">
 			<Loading loading={loading} />
-			<Heading>Banner Save</Heading>
+			{/* <Heading>Banner Save</Heading> */}
 			<form action="" method="POST">
-				<section className="grid grid-cols-2">
+				<section className="grid grid-cols-2 pt-6">
 					<CustomSelectInput
 						position={"top"}
 						onChange={(e) => handleProdType(e)}
