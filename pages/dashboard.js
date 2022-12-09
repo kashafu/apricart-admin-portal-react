@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import Loading from "../utils/Loading";
-import Heading from "../components/Misc/Heading";
 import { getAllAPIsApi } from "../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
 import { SiQuantconnect } from "react-icons/si";
@@ -27,7 +26,7 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<section className="bg-slate-100 py-12">
+		<section className="bg-slate-100 py-12 h-full w-full">
 			<Loading loading={loading} />
 			<section className="mt-14 px-10 grid grid-cols-3 w-full">
 				{/* Single dashboard square */}

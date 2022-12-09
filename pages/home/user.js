@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Avatar from "react-avatar";
 import Cookies from "universal-cookie";
-import CustomButton from "../../components/Misc/CustomButton";
 import CustomInput from "../../components/Misc/CustomInput";
-import FloatingLabelInput from "../../components/Misc/CustomFloatingInput";
-import FloatingLabelInputNew from "../../components/Misc/CustomFloatingInputNew";
 
 const UserAPIPage = () => {
 	const cookies = new Cookies();
