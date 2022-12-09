@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 
 import Loading from "../utils/Loading";
 import Heading from "../components/Misc/Heading";
 import { getAllAPIsApi } from "../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
+import { SiQuantconnect } from "react-icons/si";
+import { MdManageAccounts } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
-	// const DynamicReports = dynamic(
-	// 	() =>
-	// 		import("../components/DashboardReports").then(
-	// 			(dashboard) => dashboard.default
-	// 		),
-	// 	{ ssr: false, loading: () => <div>Fetching Reports</div> }
-	// );
 	const [loading, setLoading] = useState(true);
+	const [count, setCount] = useState("");
+	const router = useRouter();
 
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
 			status && setLoading(false);
+			setCount(response.data.data.apis.length);
 		});
 	};
 
@@ -29,13 +27,44 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<>
+		<section className="bg-slate-100 py-12">
 			<Loading loading={loading} />
-			<div className="flex justify-center items-center pl-10">
-				{/* <Heading>Welcome to the Dashboard</Heading> */}
-			</div>
+			<section className="mt-14 grid grid-cols-3 w-full">
+				{/* Single dashboard square */}
+				<section
+					className="grid grid-cols-2 grid-rows-2 gap-2 h-60 mx-6 bg-white duration-500 cursor-pointer rounded-xl overflow-hidden"
+					onClick={() => router.push("/home/product")}
+				>
+					<div className="p-4 font-nunito ">
+						<p className="text-slate-500 text-sm font-bold">API MANAGEMENT</p>
+						<h1 className="font-nunito font-bold">{count} APIs</h1>
+					</div>
+					{/* <div className="h-full w-full bg-red-200"></div> */}
+					<div className="h-full w-full bg-blue-300"></div>
+					<div className="h-full w-full bg-blue-300"></div>
+					<div className="h-full w-full bg-blue-500 flex justify-center items-center">
+						<SiQuantconnect className="fill-slate-100 animate-spin" size={60} />
+					</div>
+				</section>
+				{/* User mgmt square */}
+				<section
+					className="grid grid-cols-2 grid-rows-2 gap-2 h-60 mx-6 bg-white duration-500 cursor-pointer rounded-xl overflow-hidden"
+					onClick={() => router.push("/home/user")}
+				>
+					<div className="p-4 font-nunito ">
+						<p className="text-slate-500 text-sm font-bold">USER MANAGEMENT</p>
+						<h1 className="font-nunito font-bold"></h1>
+					</div>
+					{/* <div className="h-full w-full bg-red-200"></div> */}
+					<div className="h-full w-full bg-blue-100"></div>
+					<div className="h-full w-full bg-blue-100"></div>
+					<div className="h-full w-full bg-blue-300 flex justify-center items-center">
+						<MdManageAccounts className="fill-slate-900" size={60} />
+					</div>
+				</section>
+			</section>
 			<section className="w-full ">{/* <DynamicReports /> */}</section>
-		</>
+		</section>
 	);
 };
 

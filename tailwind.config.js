@@ -38,7 +38,8 @@ module.exports = {
 				dropdown: "dropdown 0.25s ease-in-out",
 				hideup: "hideup 0.25s ease-out",
 				swing: "swing 0.35s ease-out",
-				"fade-in": "fade-in 0.25s ease-in",
+				spin: "spin infinite 6s",
+				// "fade-in: "fade-in 0.25s ease-in",
 			},
 			colors: {
 				"main-yellow": {
@@ -47,7 +48,7 @@ module.exports = {
 				"main-blue": {
 					DEFAULT: "#08185A",
 					100: "#CFD4FF",
-					200: "#08185A"
+					200: "#08185A",
 				},
 				"main-red": {
 					DEFAULT: "#FF1100",

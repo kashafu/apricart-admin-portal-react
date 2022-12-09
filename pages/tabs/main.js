@@ -68,11 +68,11 @@ const MainTabComponent = () => {
 				))}
 			</section>
 			<section>
-				{selected === "Create a new Category" && <AddNewCategoryAPIComponent />}
+				{selected === "Add Category" && <AddNewCategoryAPIComponent />}
 				{selected === "Update Category" && <UpdateCategoryAPIComponent />}
 				{selected === "Products Search" && <ProductAdminSearchAPIComponent />}
 				{selected === "Products Detail" && <ProductAdminDetailAPIComponent />}
-				{selected === "Product Position" && (
+				{selected === "Product Position Details" && (
 					<ProductPositionDetailAdminAPIComponent />
 				)}
 				{selected === "Products Stock Detail" && (
