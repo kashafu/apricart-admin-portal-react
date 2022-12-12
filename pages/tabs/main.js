@@ -78,7 +78,7 @@ const MainTabComponent = () => {
 				{selected === "Products Stock Detail" && (
 					<ProductStockDetailAdminAPIComponent />
 				)}
-				{selected === "Product Position Details" && (
+				{selected === "Position Details" && (
 					<ProductPositionDetailAdminAPIComponent />
 				)}
 				{selected === "Products Report" && <GetProductReportsAPIComponent />}
@@ -91,10 +91,10 @@ const MainTabComponent = () => {
 				{selected === "Total Users" && <GetUsersReportsAPIComponent />}
 				{selected === "Total Orders" && <GetOrdersReportsAPIComponent />}
 				{selected === "Abundant Cart" && <GetAbundantCartReportsAPIComponent />}
-				{selected === "Product Position" && (
+				{selected === "Product Position -CSV" && (
 					<AddnUpdateProductPositionCSVAPIComponent />
 				)}
-				{selected === "Products Save" && <UpdateProductCSVAPIComponent />}
+				{selected === "Products Save - CSV" && <UpdateProductCSVAPIComponent />}
 				{selected === "Add Coupon" && <AddnUpdateCouponAPIComponent />}
 				{selected === "Offer Save" && <OfferSaveAPIComponent />}
 				{selected === "Thank you page Banner" && (

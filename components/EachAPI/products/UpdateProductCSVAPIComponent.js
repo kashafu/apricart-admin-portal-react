@@ -58,13 +58,13 @@ const UpdateProductCSVAPIComponent = () => {
 			<section>
 				<form action="" method="POST">
 					<section className="grid grid-cols-2 pt-6 ">
-						<CustomInput
+						{/* <CustomInput
 							type={"text"}
 							position={"top"}
 							onChange={handleToken}
 							heading={"API Token"}
 							required={true}
-						/>
+						/> */}
 						<CustomSingleImageInput
 							heading={"Select Updated File"}
 							accept={".csv"}
@@ -73,10 +73,10 @@ const UpdateProductCSVAPIComponent = () => {
 							}}
 							ren={ren}
 						/>
+						<CustomButton onClick={handleSubmit} width={"1/3"}>
+							Save
+						</CustomButton>
 					</section>
-					<CustomButton onClick={handleSubmit} width={"1/3"}>
-						Save
-					</CustomButton>
 				</form>
 			</section>
 		</section>
