@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
+
 import { productAdminDetailApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
@@ -8,7 +10,6 @@ import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
 
 const ProductAdminDetailAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -20,15 +21,15 @@ const ProductAdminDetailAPIComponent = () => {
 	const [detail, setDetail] = useState([]);
 	const [warehouses, setWarehouses] = useState([]);
 	const { id, city, warehouseId } = inputs;
+
 	const handleId = (e) => {
 		setInputs({ ...inputs, id: e.target.value });
 	};
+
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
-	// const handleWarehouse = (e) => {
-	// 	setInputs({ ...inputs, warehouseId: e.target.value });
-	// };
+
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -48,7 +49,6 @@ const ProductAdminDetailAPIComponent = () => {
 	return (
 		<section className="px-10 pt-6">
 			<Loading loading={loading} />
-			{/* <Heading>Products Detail</Heading> */}
 			<CustomInput
 				position={"top"}
 				type={"text"}
@@ -64,16 +64,6 @@ const ProductAdminDetailAPIComponent = () => {
 				values={["karachi", "peshawar"]}
 				options={["Karachi", "Peshawar"]}
 			/>
-			{/* <CustomInput
-				type={"number"}
-				position={"bottom"}
-				min={0}
-				value={warehouseId}
-				onChange={handleWarehouse}
-				required={true}
-				placeholder={"eg. 9"}
-				heading={"Warehouse Number"} */}
-
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Search
 			</CustomButton>
@@ -83,28 +73,39 @@ const ProductAdminDetailAPIComponent = () => {
 					{detail?.length > 0 &&
 						detail?.map((each) => {
 							return (
-								<div key={each.sku} className="flex w-full">
-									<div className="w-1/3">
-										<div className="font-bold font-nunito py-1">Barcode:</div>
-										<div className="font-bold font-nunito py-1">SKU:</div>
-										<div className="font-bold font-nunito py-1">Title:</div>
-										<div className="font-bold font-nunito py-1">Brand:</div>
+								<div key={each.sku} className="w-full grid grid-cols-2 items-center bg-slate-50 p-2 rounded-xl">
+									<div className="w-full flex">
+										<div className="w-1/3">
+											<div className="font-bold font-nunito py-1">Barcode:</div>
+											<div className="font-bold font-nunito py-1">SKU:</div>
+											<div className="font-bold font-nunito py-1">Title:</div>
+											<div className="font-bold font-nunito py-1">Brand:</div>
+										</div>
+										<div className="px-4 w-full">
+											<div className="py-1"> {each.barcode || "-"}</div>
+											<div className="py-1"> {each.sku || "-"}</div>
+											<div className="py-1"> {each.title || "-"}</div>
+											<div className="py-1"> {each.brand || "-"}</div>
+										</div>
 									</div>
-									<div className="px-4 w-full">
-										<div className="py-1"> {each.barcode || "-"}</div>
-										<div className="py-1"> {each.sku || "-"}</div>
-										<div className="py-1"> {each.title || "-"}</div>
-										<div className="py-1"> {each.brand || "-"}</div>
+									<div className="relative w-1/3 aspect-square justify-center place-self-center">
+										<Image
+											src={each.productImageUrl}
+											width={100}
+											height={100}
+											layout={'fill'}
+											alt="Product image"
+										/>
 									</div>
 								</div>
 							);
 						})}
 				</section>
 
-				<section className="py-2">
+				<section className="py-2 space-y-1">
 					{warehouses?.map((each, i) => {
 						return (
-							<section key={i}>
+							<section key={i} className="p-2 bg-slate-50 rounded-xl">
 								<h3 className="text-center">
 									Warehouse number : {each.warehouseInfo}
 								</h3>
