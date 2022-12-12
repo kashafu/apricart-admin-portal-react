@@ -38,14 +38,13 @@ const MainTabComponent = () => {
 	const tabs = useSelector((state) => state.recent.tabs);
 	const each = useSelector((state) => state.recent.recents);
 	const [allTabs, setAllTabs] = useState(tabs);
-	const [selected, setSelected] = useState(each[0]?.name || allTabs[0]?.name);
+	const [selected, setSelected] = useState(each[0]?.id || allTabs[0]?.id);
 
 	const handleSelect = (each) => {
-		setSelected(each.name);
+		setSelected(each.id);
 		dispatch(addToRecent(each));
 	};
 
-	console.log(selected);
 	return (
 		<section className="w-full">
 			<div className="m-4">
@@ -59,9 +58,9 @@ const MainTabComponent = () => {
 			<section className="w-full flex cursor-pointer border-b-slate-300 border-b-[1px] overflow-x-auto">
 				{allTabs.map((each) => (
 					<div
-						key={each.endpoint}
+						key={each.id}
 						className={
-							selected === each.name
+							selected === each.id
 								? "p-2 mx-2 border-b-main-blue border-b-[1px] text-main-blue shadow-inner duration-200 rounded-t-2xl"
 								: "p-2 mx-2 duration-200 rounded-t-2xl"
 						}
@@ -72,58 +71,49 @@ const MainTabComponent = () => {
 				))}
 			</section>
 			<section>
-				{selected === "Add Category" && <AddNewCategoryAPIComponent />}
-				{selected === "Update Category" && <UpdateCategoryAPIComponent />}
-				{selected === "View Category" && <GetAllCategories />}
-				{selected === "Products Search" && <ProductAdminSearchAPIComponent />}
-				{selected === "Products Detail" && <ProductAdminDetailAPIComponent />}
-				{selected === "Products Stock Detail" && (
-					<ProductStockDetailAdminAPIComponent />
-				)}
-				{selected === "Position Details" && (
-					<ProductPositionDetailAdminAPIComponent />
-				)}
-				{selected === "Products Report" && <GetProductReportsAPIComponent />}
-				{selected === "Products out Of Stock" && (
-					<GetProductsOutOfStockAPIComponent />
-				)}
-				{selected === "Prices in last 24 Hours" && (
-					<ProductPriceUpdatedLast24hAPIComponent />
-				)}
-				{selected === "Total Users" && <GetUsersReportsAPIComponent />}
-				{selected === "Total Orders" && <GetOrdersReportsAPIComponent />}
-				{selected === "Abundant Cart" && <GetAbundantCartReportsAPIComponent />}
-				{selected === "Product Position -CSV" && (
-					<AddnUpdateProductPositionCSVAPIComponent />
-				)}
-				{selected === "Products Save - CSV" && <UpdateProductCSVAPIComponent />}
-				{selected === "Add Coupons" && <AddnUpdateCouponAPIComponent />}
-				{selected === "Add Offers" && <OfferSaveAPIComponent />}
-				{selected === "Remove Offers" && <OfferRemoveAPIComponent />}
-				{selected === "Thank you page Banner" && (
-					<ThankyouImageAddUpdateAPIComponent />
-				)}
-				{selected === "Category Image Update" && (
-					<UpdateCategoryImageAPIComponent />
-				)}
-				{selected === "Category Banner Update" && (
-					<UpdateCategoryBannerAPIComponent />
-				)}
-				{selected === "Add Banner" && <SaveBannersAPIComponent />}
-				{selected === "Remove Banner" && <BannersAPIComponent />}
-				{selected === "Push Notification" && (
-					<NewNotificationSendAPIComponent />
-				)}
-				{selected === "Ticker Update" && <TickerUpdateAPIComponent />}
-				{selected === "Order Alert" && <IsContinueAPIComponent />}
-				{selected === "Recommendation" && <RecommendedUpdateAPIComponent />}
-				{selected === "Web Update" && <WebUpdateAPIComponent />}
-				{selected === "Popup Screen Update" && (
-					<PopupRedirectionUpdateAPIComponent />
-				)}
-				{selected === "Welcome Video Update" && (
-					<UpdateWelcomeVideoAPIComponent />
-				)}
+				{/* CATEGORY */}
+				{selected === 0 && <GetAllCategories />}
+				{selected === 21 && <AddNewCategoryAPIComponent />}
+				{selected === 22 && <UpdateCategoryAPIComponent />}
+				{selected === 25 && <UpdateCategoryImageAPIComponent />}
+				{selected === 26 && <UpdateCategoryBannerAPIComponent />}
+
+				{/* PRODUCTS */}
+				{selected === 1 && <ProductAdminSearchAPIComponent />}
+				{selected === 2 && <ProductAdminDetailAPIComponent />}
+				{selected === 3 && <ProductStockDetailAdminAPIComponent />}
+				{selected === 5 && <UpdateProductCSVAPIComponent />}
+				{selected === 8 && <ProductPositionDetailAdminAPIComponent />}
+				{selected === 9 && <AddnUpdateProductPositionCSVAPIComponent />}
+
+				{/* REPORTS */}
+				{selected === 4 && <GetProductReportsAPIComponent />}
+				{selected === 10 && <GetProductsOutOfStockAPIComponent />}
+				{selected === 11 && <ProductPriceUpdatedLast24hAPIComponent />}
+				{selected === 13 && <GetUsersReportsAPIComponent />}
+				{selected === 14 && <GetOrdersReportsAPIComponent />}
+				{selected === 31 && <GetAbundantCartReportsAPIComponent />}
+
+				{/* COUPONS */}
+				{selected === 12 && <AddnUpdateCouponAPIComponent />}
+
+				{/* BANNER */}
+				{selected === 15 && <ThankyouImageAddUpdateAPIComponent />}
+				{selected === 29 && <SaveBannersAPIComponent />}
+				{selected === 30 && <BannersAPIComponent />}
+
+				{/* ALERTS & ANNOUNCEMENT */}
+				{selected === 16 && <NewNotificationSendAPIComponent />}
+				{selected === 17 && <TickerUpdateAPIComponent />}
+				{selected === 18 && <IsContinueAPIComponent />}
+				{selected === 19 && <RecommendedUpdateAPIComponent />}
+				{selected === 20 && <WebUpdateAPIComponent />}
+				{selected === 27 && <PopupRedirectionUpdateAPIComponent />}
+				{selected === 28 && <UpdateWelcomeVideoAPIComponent />}
+
+				{/* OFFERS MANAGEMENT */}
+				{selected === 23 && <OfferSaveAPIComponent />}
+				{selected === 24 && <OfferRemoveAPIComponent />}
 			</section>
 		</section>
 	);

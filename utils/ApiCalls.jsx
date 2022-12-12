@@ -61,6 +61,7 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 		});
 		// Hard coded get all categories api
 		response.data.data.apis.unshift({
+			id: 0,
 			name: "View Category",
 			endpoint: "/admin/category/view",
 			category: "Category",
