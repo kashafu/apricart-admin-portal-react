@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	checkStatus,
 	getGeneralApiParams,
@@ -7,13 +6,10 @@ import {
 import { getAllCategoriesApi } from "../../../utils/ApiCalls";
 import Loading from "../../../utils/Loading";
 import { FiChevronsRight } from "react-icons/fi";
-import { IoNavigate } from "react-icons/io5";
 
 const GetAllCategories = () => {
 	const [loading, setLoading] = useState(false);
 	const [categories, setCategories] = useState([]);
-	const [subCategories, setSubCategories] = useState([]);
-	const [allApis, setAllApis] = useState([]);
 	const [selected, setSelected] = useState("");
 
 	const getCategories = async () => {
@@ -45,6 +41,14 @@ const GetAllCategories = () => {
 						Categories
 					</h3>
 					<div>
+						<div className="grid grid-cols-8 items-center w-full bg-slate-100">
+							<p className="col-span-2 py-4 px-6">
+								ID
+							</p>
+							<p className="col-span-5 py-4 px-6">
+								Name
+							</p>
+						</div>
 						<div className="overflow-y-auto scroller-mini h-96">
 							{categories.map((each) => (
 								<section
@@ -59,11 +63,11 @@ const GetAllCategories = () => {
 										}
 										onClick={() => setSelected(each)}
 									>
-										<div className="col-span-2 overflow-x-hidden py-4 px-2 duration-300 ">
-											<p className="select-none px-4">{each.id}</p>
+										<div className="col-span-2 overflow-x-hidden py-4 px-6 duration-300 ">
+											<p>{each.id}</p>
 										</div>
-										<div className="col-span-5 overflow-y-auto py-4 px-2 duration-300 ">
-											<p className="select-none px-4">{each.name}</p>
+										<div className="col-span-5 overflow-y-auto py-4 px-6 duration-300 ">
+											<p>{each.name}</p>
 										</div>
 										<div className="cursor-pointer  relative">
 											<FiChevronsRight size={24} className="" />
@@ -85,6 +89,14 @@ const GetAllCategories = () => {
 						Sub Categories
 					</h3>
 					<div>
+						<div className="grid grid-cols-8 items-center w-full bg-slate-100">
+							<p className="col-span-2 py-4 px-6">
+								ID
+							</p>
+							<p className="col-span-5 py-4 px-6">
+								Name
+							</p>
+						</div>
 						<div className="overflow-y-auto scroller-mini h-96">
 							{selected.childrenData
 								// ?.filter((each) => each?.parent === selected.id)
@@ -94,11 +106,11 @@ const GetAllCategories = () => {
 										className="justify-center items-center animate-dropdown"
 									>
 										<div className="hover:bg-gray-300 cursor-pointer duration-200 ease-in  grid items-center grid-cols-8">
-											<div className="col-span-2 overflow-x-hidden py-4 px-2 duration-300 ">
-												<p className="select-none px-4">{each.id}</p>
+											<div className="col-span-2 overflow-x-hidden py-4 px-6 duration-300 ">
+												<p>{each.id}</p>
 											</div>
-											<div className="col-span-6 overflow-y-auto py-4 px-2 duration-300 ">
-												<p className="select-none px-4">{each.name}</p>
+											<div className="col-span-6 overflow-y-auto py-4 px-6 duration-300 ">
+												<p>{each.name}</p>
 											</div>
 										</div>
 									</section>
