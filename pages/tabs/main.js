@@ -44,6 +44,7 @@ const MainTabComponent = () => {
 		dispatch(addToRecent(each));
 	};
 
+	console.log(selected);
 	return (
 		<section className="w-full">
 			<div className="m-4">
@@ -82,10 +83,10 @@ const MainTabComponent = () => {
 					<ProductPositionDetailAdminAPIComponent />
 				)}
 				{selected === "Products Report" && <GetProductReportsAPIComponent />}
-				{selected === "Products Out Of Stock" && (
+				{selected === "Products out Of Stock" && (
 					<GetProductsOutOfStockAPIComponent />
 				)}
-				{selected === "Updates in last 24 Hours" && (
+				{selected === "Prices in last 24 Hours" && (
 					<ProductPriceUpdatedLast24hAPIComponent />
 				)}
 				{selected === "Total Users" && <GetUsersReportsAPIComponent />}
@@ -95,8 +96,8 @@ const MainTabComponent = () => {
 					<AddnUpdateProductPositionCSVAPIComponent />
 				)}
 				{selected === "Products Save - CSV" && <UpdateProductCSVAPIComponent />}
-				{selected === "Add Coupon" && <AddnUpdateCouponAPIComponent />}
-				{selected === "Offer Save" && <OfferSaveAPIComponent />}
+				{selected === "Add Coupons" && <AddnUpdateCouponAPIComponent />}
+				{selected === "Add Offers" && <OfferSaveAPIComponent />}
 				{selected === "Thank you page Banner" && (
 					<ThankyouImageAddUpdateAPIComponent />
 				)}
@@ -106,15 +107,15 @@ const MainTabComponent = () => {
 				{selected === "Category Banner Update" && (
 					<UpdateCategoryBannerAPIComponent />
 				)}
-				{selected === "Save Banner" && <SaveBannersAPIComponent />}
+				{selected === "Add Banner" && <SaveBannersAPIComponent />}
 				{selected === "Remove Banner" && <BannersAPIComponent />}
 				{selected === "Push Notification" && (
 					<NewNotificationSendAPIComponent />
 				)}
 				{selected === "Ticker Update" && <TickerUpdateAPIComponent />}
-				{selected === "Is Continue" && <IsContinueAPIComponent />}
-				{selected === "Recommended" && <RecommendedUpdateAPIComponent />}
-				{selected === "Web" && <WebUpdateAPIComponent />}
+				{selected === "Order Alert" && <IsContinueAPIComponent />}
+				{selected === "Recommendation" && <RecommendedUpdateAPIComponent />}
+				{selected === "Web Update" && <WebUpdateAPIComponent />}
 				{selected === "Popup Screen Update" && (
 					<PopupRedirectionUpdateAPIComponent />
 				)}
