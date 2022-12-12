@@ -31,6 +31,7 @@ import SaveBannersAPIComponent from "../../components/EachAPI/banners/SaveBanner
 import BannersAPIComponent from "../../components/EachAPI/banners/BannersAPIComponent";
 import GetAllCategories from "../../components/EachAPI/categories/GetAllCategories";
 import UpdateProductCSVAPIComponent from "../../components/EachAPI/products/UpdateProductCSVAPIComponent";
+import OfferRemoveAPIComponent from "../../components/EachAPI/other/OfferRemoveAPIComponent";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const MainTabComponent = () => {
 				{selected === "Products Save - CSV" && <UpdateProductCSVAPIComponent />}
 				{selected === "Add Coupons" && <AddnUpdateCouponAPIComponent />}
 				{selected === "Add Offers" && <OfferSaveAPIComponent />}
+				{selected === "Remove Offers" && <OfferRemoveAPIComponent />}
 				{selected === "Thank you page Banner" && (
 					<ThankyouImageAddUpdateAPIComponent />
 				)}
