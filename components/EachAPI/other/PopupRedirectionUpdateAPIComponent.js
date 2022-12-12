@@ -96,7 +96,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 						onChange={(e) => handleProdType(e)}
 						heading={"Select Product Type"}
 						values={["cus", "b2b"]}
-						options={["Customer (cus)", "Bulk Buy (b2b)"]}
+						options={["Customer", "Bulk Buy"]}
 					/>
 					<CustomSelectInput
 						onChange={(e) => handleOrderType(e)}
@@ -138,7 +138,7 @@ const PopupRedirectionUpdateAPIComponent = () => {
 				</section>
 
 				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-					Update Popup Redirection
+					Update
 				</CustomButton>
 			</form>
 		</section>

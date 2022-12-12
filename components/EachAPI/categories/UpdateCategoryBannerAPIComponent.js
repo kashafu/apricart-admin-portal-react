@@ -99,7 +99,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
-						Update Category Banner
+						Update
 					</CustomButton>
 				</div>
 			</form>

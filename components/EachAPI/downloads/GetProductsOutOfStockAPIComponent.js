@@ -55,7 +55,7 @@ const GetProductsOutOfStockAPIComponent = () => {
 					disabled={disabler}
 					width={"1/3"}
 				>
-					Download Out of Stock Report
+					Download
 				</CustomButton>
 			</form>
 		</section>

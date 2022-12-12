@@ -5,8 +5,10 @@ import ReactPaginate from "react-paginate";
 import { productsAdminSearchApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
+	displayErrorToast,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
+import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
@@ -14,7 +16,7 @@ import Heading from "../../Misc/Heading";
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		term: "",
-		size: "",
+		size: 20,
 		page: "",
 		category: "",
 		city: "karachi",
@@ -27,24 +29,24 @@ const ProductAdminSearchAPIComponent = () => {
 
 	const handleTerm = (e) => {
 		setInputs({ ...inputs, term: e.target.value });
-		if (e.target.value.length > 2) {
-			searchProduct(e.target.value);
-		} else if (e.target.value.length === 0) {
-			setDetail([]);
-		} else {
-			setDetail([]);
-		}
+		// if (e.target.value.length > 2) {
+		// 	searchProduct(e.target.value);
+		// } else if (e.target.value.length === 0) {
+		// 	setDetail([]);
+		// } else {
+		// 	setDetail([]);
+		// }
 	};
 	const handleSize = (e) => {
 		setInputs({ ...inputs, size: e.target.value });
-		searchProduct(term, page, e.target.value, category);
+		// searchProduct(term, page, e.target.value, category);
 	};
 	const handlePage = (newPage) => {
 		setInputs({ ...inputs, page: newPage });
 	};
 	const handleCategory = (e) => {
 		setInputs({ ...inputs, category: e.target.value });
-		searchProduct(term, 1, size, e.target.value);
+		// searchProduct(term, 1, size, e.target.value);
 	};
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
@@ -52,10 +54,18 @@ const ProductAdminSearchAPIComponent = () => {
 
 	const handleResponse = (response) => {
 		console.log(response);
-		setDetail(response.data.data);
+		response.data.data.length > 0
+			? setDetail(response.data.data)
+			: emptyDetail();
 		getPagination(response.data.total, size);
 		setLoading(false);
 	};
+
+	const emptyDetail = () => {
+		setDetail([]);
+		displayErrorToast("No Data Could be Found");
+	};
+
 	const getPagination = (items, perPage) => {
 		let calc = +items / +perPage;
 		let tot = Math.ceil(calc);
@@ -64,7 +74,6 @@ const ProductAdminSearchAPIComponent = () => {
 	const searchProduct = async (text, newPage, newSize, newCategory) => {
 		setLoading(true);
 		const { baseUrl, userId, headers } = getGeneralApiParams();
-
 		await productsAdminSearchApi(
 			baseUrl,
 			(page = newPage || 1),
@@ -88,45 +97,43 @@ const ProductAdminSearchAPIComponent = () => {
 	return (
 		<section className="px-10">
 			{/* <Heading>Products Search</Heading> */}
-			<form action="" method="POST">
-				<section className="grid grid-cols-2 pt-6">
+
+			<section className="grid grid-cols-2 pt-6">
+				<div className="col-span-2">
 					<CustomInput
 						position={"top"}
 						heading={"Search Product Name/SKU"}
-						placeholder={"eg. Oil"}
-						required={true}
 						value={term}
 						onChange={handleTerm}
 					/>
-					<CustomInput
-						heading={"Enter Size"}
-						placeholder={"Number of items on one page"}
-						value={size}
-						onChange={handleSize}
-						required={true}
-					/>
+				</div>
+				<CustomInput
+					heading={"Items on Page"}
+					value={size}
+					onChange={handleSize}
+				/>
+				<CustomInput
+					heading={"Enter Category"}
+					value={category}
+					onChange={handleCategory}
+				/>
+				<CustomSelectInput
+					position={"bottom"}
+					onChange={(e) => handleCity(e)}
+					heading={"Select City"}
+					values={["karachi", "peshawar"]}
+					options={["Karachi", "Peshawar"]}
+				/>
+			</section>
+			<CustomButton width={"1/3"} onClick={(e) => searchProduct(term)}>
+				Search
+			</CustomButton>
 
-					<CustomInput
-						heading={"Enter Category"}
-						placeholder={"eg. Spices"}
-						required={true}
-						value={category}
-						onChange={handleCategory}
-					/>
-					<CustomSelectInput
-						position={"bottom"}
-						onChange={(e) => handleCity(e)}
-						heading={"Select City"}
-						values={["karachi", "peshawar"]}
-						options={["Karachi", "Peshawar"]}
-					/>
-				</section>
-			</form>
 			<div className="rounded-none my-2">
 				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
 			<section>
-				{detail.length > 0 ? (
+				{detail.length > 0 &&
 					detail?.map((each) => {
 						return (
 							<div
@@ -175,10 +182,7 @@ const ProductAdminSearchAPIComponent = () => {
 								</div>
 							</div>
 						);
-					})
-				) : (
-					<h3 className="font-nunito">No Data could be found</h3>
-				)}
+					})}
 				<ReactPaginate
 					breakLabel="o o o"
 					nextLabel="Next ->"

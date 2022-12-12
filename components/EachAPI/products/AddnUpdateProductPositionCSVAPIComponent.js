@@ -94,7 +94,7 @@ const AddnUpdateProductPositionCSVAPIComponent = () => {
 					</div> */}
 				</section>
 				<CustomButton onClick={handleSubmit} width={"1/3"}>
-					Submit Updated File
+					Submit
 				</CustomButton>
 			</form>
 		</section>

@@ -46,7 +46,7 @@ const GetUsersReportsAPIComponent = () => {
 					disabled={disabler}
 					width={"1/3"}
 				>
-					Download User Report
+					Download
 				</CustomButton>
 			</form>
 		</section>

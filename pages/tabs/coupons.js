@@ -3,7 +3,7 @@ import MainTabComponent from "./main";
 
 const CouponsTabPage = () => {
 	return (
-		<section className="pl-12 mt-4">
+		<section className="">
 			<div>
 				<MainTabComponent />
 			</div>

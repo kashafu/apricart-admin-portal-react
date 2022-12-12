@@ -130,7 +130,7 @@ const OfferSaveAPIComponent = () => {
 					/>
 				</section>
 				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-					Create a new Offer
+					Create
 				</CustomButton>
 			</form>
 

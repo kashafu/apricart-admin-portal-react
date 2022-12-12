@@ -93,7 +93,7 @@ const GetOrdersReportsAPIComponent = () => {
 					disabled={disabler}
 					width={"1/3"}
 				>
-					Download Orders Report
+					Download
 				</CustomButton>
 			</form>
 		</section>

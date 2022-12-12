@@ -69,7 +69,7 @@ const ProductIsActiveAPIComponent = () => {
 				heading={"Warehouse Number"}
 			/>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Submit Query
+				Submit
 			</CustomButton>
 		</section>
 	);

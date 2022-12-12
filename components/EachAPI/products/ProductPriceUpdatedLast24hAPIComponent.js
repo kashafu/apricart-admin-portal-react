@@ -44,7 +44,7 @@ const ProductPriceUpdatedLast24hAPIComponent = () => {
 					onChange={(e) => handleTime(e)}
 				/>
 				<CustomButton onClick={handleSubmit} width={"1/3"} disabled={disabler}>
-					Fetch Product Updates
+					Search
 				</CustomButton>
 			</form>
 		</section>

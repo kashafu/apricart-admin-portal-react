@@ -35,7 +35,7 @@ const GetAllCategories = () => {
 		<section>
 			<Loading loading={loading} />
 
-			<aside className="grid grid-cols-2 bg-white shadow-xl border-slate-100 border-[1px] mx-2 w-[70%]">
+			<aside className="overflow-hidden grid grid-cols-2 bg-white shadow-xl border-slate-100 border-[1px] mx-2 w-[70%]">
 				<section className="col-span-1">
 					<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark">
 						Categories

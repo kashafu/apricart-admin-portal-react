@@ -63,7 +63,7 @@ const UpdateProductPositionCSVAPIComponent = () => {
 					required={true}
 					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
 				/>
-				<CustomButton onClick={handleSubmit}>Submit Updated File</CustomButton>
+				<CustomButton onClick={handleSubmit}>Submit</CustomButton>
 			</form>
 		</section>
 	);

@@ -52,7 +52,7 @@ const CsrOrderCompleteAPIComponent = () => {
 				onChange={handleOrderId}
 			/>
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
-				Complete CSR Order
+				Submit
 			</CustomButton>
 		</div>
 	);

@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 
 const Dashboard = () => {
 	const [loading, setLoading] = useState(true);
-	const [count, setCount] = useState("");
 	const router = useRouter();
 
 	const getSidebarItems = async () => {
@@ -17,7 +16,6 @@ const Dashboard = () => {
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "");
 			status && setLoading(false);
-			setCount(response.data.data.apis.length);
 		});
 	};
 

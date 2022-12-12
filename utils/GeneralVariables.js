@@ -2,7 +2,7 @@ import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "next/router";
-import { clearLocalStorage, clearSessionStorage } from "../helpers/Storage"
+import { clearLocalStorage, clearSessionStorage } from "../helpers/Storage";
 
 const updateToken = () => {
 	const cookies = new Cookies();
@@ -85,7 +85,7 @@ export const checkStatus = (
 ) => {
 	// console.log(res);
 	if (res === undefined) {
-		displayErrorToast("An Error occured. Contact backend services.", 3000);
+		displayErrorToast("An error occured. Contact IT Team for support.", 3000);
 		return false;
 	}
 	if (res.status === 200) {
@@ -102,7 +102,7 @@ export const checkStatus = (
 	} else if (res.status === 0) {
 		toast.error(
 			errorMessage ||
-			"An unknown error occured. Please try again later or contact backend services",
+				"An unknown error occured. Please try again later or contact backend services",
 			{
 				position: "top-center",
 				autoClose: errorTimer || 1500,
@@ -116,7 +116,7 @@ export const checkStatus = (
 	} else if (res.status === 400) {
 		toast.error(
 			errorMessage ||
-			"Make sure all the fields are filled. Make sure the values entered are also valid",
+				"Make sure all the fields are filled. Make sure the values entered are also valid",
 			{
 				position: "top-center",
 				autoClose: errorTimer || 1500,
@@ -195,8 +195,8 @@ export const logOutRemoveCookies = () => {
 	cookies.remove("cookies-email", { path: "/" });
 	cookies.remove("user-initialized", { path: "/" });
 	localStorage.clear();
-	clearLocalStorage()
-	clearSessionStorage()
+	clearLocalStorage();
+	clearSessionStorage();
 	getGeneralApiParams();
 };
 

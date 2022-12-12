@@ -117,7 +117,7 @@ const FileUploadAPIComponent = () => {
 				</form>
 			</section>
 			<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-				Submit Files
+				Submit
 			</CustomButton>
 		</div>
 	);

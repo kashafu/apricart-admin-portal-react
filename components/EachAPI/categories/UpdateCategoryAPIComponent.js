@@ -108,7 +108,7 @@ const UpdateCategoryAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleEdit(e)}>
-						Update Category
+						Update
 					</CustomButton>
 				</div>
 			</form>

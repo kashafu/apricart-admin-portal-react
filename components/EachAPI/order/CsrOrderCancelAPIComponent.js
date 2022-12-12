@@ -52,7 +52,7 @@ const CsrOrderCancelAPIComponent = () => {
 				onChange={handleOrderId}
 			/>
 			<CustomButton width={"1/3"} onClick={handleSubmit}>
-				Cancel This Order
+				Cancel
 			</CustomButton>
 		</div>
 	);

@@ -58,7 +58,7 @@ const ProductStockDetailAdminAPIComponent = () => {
 				options={["Karachi", "Peshawar"]}
 			/>
 			<CustomButton onClick={handleSubmit} width={"1/3"} type={"submit"}>
-				Submit Query
+				Search
 			</CustomButton>
 
 			<section>

@@ -61,7 +61,7 @@ const ProductPositionDetailAdminAPIComponent = () => {
 				onChange={(e) => handleProdType(e)}
 				heading={"Select Product Type"}
 				values={["cus", "b2b"]}
-				options={["Customer (cus)", "Bulk Buy (b2b)"]}
+				options={["Customer", "Bulk Buy"]}
 			/>
 			<CustomSelectInput
 				onChange={(e) => handleOrderType(e)}

@@ -78,7 +78,7 @@ const UpdateCategoryImageAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
-						Update Category Image
+						Update
 					</CustomButton>
 				</div>
 			</form>

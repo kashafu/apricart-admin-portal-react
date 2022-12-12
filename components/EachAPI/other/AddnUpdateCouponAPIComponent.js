@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CustomInput from "../../Misc/CustomInput";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const AddnUpdateCouponAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -107,82 +108,82 @@ const AddnUpdateCouponAPIComponent = () => {
 		});
 	};
 	return (
-		<section className="pt-6">
-			<CustomInput
-				position={"top"}
-				type={"text"}
-				value={name}
-				onChange={handleName}
-				required={true}
-				placeholder={"Name"}
-			/>
-			<CustomInput
-				type={"number"}
-				value={discount}
-				onChange={handleDiscount}
-				required={true}
-				placeholder={"Discount"}
-			/>
-			<div>
-				<label className="appearance-none rounded-none relative block w-full px-3 pt-1 border border-t-0 border-b-0 border-black text-gray-900 bg-main-blue-100 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-					Is Percent?
-				</label>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					onChange={(e) => handleIsPercent(e)}
+		<section className="px-10">
+			<section className="pt-6 grid grid-cols-2">
+				<CustomInput
+					position={"top"}
+					type={"text"}
+					value={name}
+					onChange={handleName}
 					required={true}
-				>
-					<option value="true">Yes</option>
-					<option value="false">No</option>
-				</select>
-			</div>
-			<div>
-				<label className="appearance-none rounded-none relative block w-full px-3 pt-1 border border-t-0 border-b-0 border-black text-gray-900 bg-main-blue-100 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-					Active?
-				</label>
-				<select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					onChange={(e) => handleActive(e)}
-					required={true}
-				>
-					<option value="true">Yes</option>
-					<option value="false">No</option>
-				</select>
-			</div>
-			<CustomInput
-				type={"number"}
-				value={usageLimit}
-				onChange={handleUsageLimit}
-				required={true}
-				placeholder={"Usage Limit"}
-			/>
-			<CustomInput
-				type={"number"}
-				value={minSubTotal}
-				onChange={handleMinSubTotal}
-				required={true}
-				placeholder={"Minimum Subtotal"}
-			/>
-			<div>
-				<input
-					value={expiry}
-					onFocus={(e) => (e.target.type = "date")}
-					onChange={(e) => handleExpiry}
-					type="text"
-					required
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-					placeholder="Expiry Date"
+					heading={"Name"}
 				/>
-			</div>
-
-			<select
-				className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
-				onChange={(e) => handleTo(e)}
-				required={true}
-			>
-				<option value="alldev">All Devices</option>
-				<option value="">Individual</option>
-			</select>
+				<CustomInput
+					type={"number"}
+					value={discount}
+					onChange={handleDiscount}
+					required={true}
+					heading={"Discount"}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleIsPercent(e)}
+					heading={"Is Percent?"}
+					values={["yes", "no"]}
+					options={["Yes", "No"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleActive(e)}
+					heading={"Active"}
+					values={["yes", "no"]}
+					options={["Yes", "No"]}
+				/>
+				<CustomInput
+					type={"number"}
+					value={usageLimit}
+					onChange={handleUsageLimit}
+					required={true}
+					heading={"Usage Limit"}
+				/>
+				<CustomInput
+					type={"number"}
+					value={minSubTotal}
+					onChange={handleMinSubTotal}
+					required={true}
+					heading={"Minimum Subtotal"}
+				/>
+				{/* <div>
+					<input
+						value={expiry}
+						onFocus={(e) => (e.target.type = "date")}
+						onChange={(e) => handleExpiry}
+						type="text"
+						required
+						className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm heading-txt-dark"
+						heading="Expiry Date"
+					/>
+				</div> */}
+				<CustomInput
+					value={expiry}
+					onChange={(e) => handleExpiry}
+					type="date"
+					// placeholder="Expiry Date"
+					heading={"Expiry date"}
+				/>
+				{/* <CustomSelectInput
+					onChange={(e) => handleTo(e)}
+					heading={"Recipient"}
+					values={["alldev", ""]}
+					options={["All Devices", "Individual"]}
+				/> */}
+				{/* <select
+					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm heading-txt-dark"
+					onChange={(e) => handleTo(e)}
+					required={true}
+				>
+					<option value="alldev">All Devices</option>
+					<option value="">Individual</option>
+				</select> */}
+			</section>
 		</section>
 	);
 };

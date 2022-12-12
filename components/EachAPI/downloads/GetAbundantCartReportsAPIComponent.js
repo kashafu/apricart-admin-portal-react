@@ -51,7 +51,7 @@ const GetAbundantCartReportsAPIComponent = () => {
 					disabled={disabler}
 					width={"1/3"}
 				>
-					Download Abundant Cart Report
+					Download
 				</CustomButton>
 			</form>
 		</section>

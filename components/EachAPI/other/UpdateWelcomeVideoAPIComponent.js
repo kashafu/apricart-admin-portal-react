@@ -42,7 +42,7 @@ const UpdateWelcomeVideoAPIComponent = () => {
 				/>
 				<div className="truncate">
 					<CustomButton width={"1/3"} onClick={handleSubmit}>
-						Update Welcome Video
+						Update
 					</CustomButton>
 				</div>
 			</form>

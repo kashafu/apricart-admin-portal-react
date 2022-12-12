@@ -24,6 +24,7 @@ const ProductAPIPage = () => {
 	const getAPIs = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
+			console.log(response);
 			let status = checkStatus(response, "");
 			// to get the unique category names from all the apis
 			const unique = [

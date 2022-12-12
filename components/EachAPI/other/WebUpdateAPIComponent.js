@@ -63,7 +63,7 @@ const WebUpdateAPIComponent = () => {
 					onChange={(e) => handleProdType(e)}
 					heading={"Select Product Type"}
 					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					options={["Customer", "Bulk Buy"]}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleOrderType(e)}
@@ -80,7 +80,7 @@ const WebUpdateAPIComponent = () => {
 				/>
 			</form>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Submit Message
+				Submit
 			</CustomButton>
 		</section>
 	);

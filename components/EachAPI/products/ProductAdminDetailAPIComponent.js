@@ -75,7 +75,7 @@ const ProductAdminDetailAPIComponent = () => {
 				heading={"Warehouse Number"}
 			/>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Submit Query
+				Search
 			</CustomButton>
 			<section className="mx-2">
 				<section className="my-2">

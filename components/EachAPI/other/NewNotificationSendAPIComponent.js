@@ -182,7 +182,7 @@ const NewNotificationSendAPIComponent = () => {
 					)}
 				</section>
 				<CustomButton width={"1/3"} onClick={handleSubmit} type={"submit"}>
-					Send Notification
+					Send
 				</CustomButton>
 			</form>
 		</section>

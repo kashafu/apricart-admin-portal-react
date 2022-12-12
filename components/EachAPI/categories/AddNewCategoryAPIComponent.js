@@ -109,7 +109,7 @@ const AddNewCategoryAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
-						Add Category
+						Add
 					</CustomButton>
 				</div>
 			</form>

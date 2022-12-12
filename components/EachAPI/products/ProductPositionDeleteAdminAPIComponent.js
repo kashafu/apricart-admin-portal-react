@@ -58,7 +58,7 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 					onChange={(e) => handleProdType(e)}
 					heading={"Select Product Type"}
 					values={["cus", "b2b"]}
-					options={["Customer (cus)", "Bulk Buy (b2b)"]}
+					options={["Customer", "Bulk Buy"]}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleOrderType(e)}
@@ -68,7 +68,7 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 				/>
 
 				<CustomButton onClick={handleSubmit} type={"submit"}>
-					Submit Message
+					Submit
 				</CustomButton>
 			</form>
 		</div>
