@@ -32,6 +32,8 @@ import BannersAPIComponent from "../../components/EachAPI/banners/BannersAPIComp
 import GetAllCategories from "../../components/EachAPI/categories/GetAllCategories";
 import UpdateProductCSVAPIComponent from "../../components/EachAPI/products/UpdateProductCSVAPIComponent";
 import OfferRemoveAPIComponent from "../../components/EachAPI/other/OfferRemoveAPIComponent";
+import UpdateProductPositionCSVAPIComponent from "../../components/EachAPI/products/UpdateProductPositionCSVAPIComponent";
+import AddnUpdateProductCSVAPIComponent from "../../components/EachAPI/products/AddnUpdateProductCSVAPIComponent";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -84,7 +86,8 @@ const MainTabComponent = () => {
 				{selected === 3 && <ProductStockDetailAdminAPIComponent />}
 				{selected === 5 && <UpdateProductCSVAPIComponent />}
 				{selected === 8 && <ProductPositionDetailAdminAPIComponent />}
-				{selected === 9 && <AddnUpdateProductPositionCSVAPIComponent />}
+				{selected === 9 && <UpdateProductPositionCSVAPIComponent />}
+				{selected === 32 && <AddnUpdateProductCSVAPIComponent />}
 
 				{/* REPORTS */}
 				{selected === 4 && <GetProductReportsAPIComponent />}

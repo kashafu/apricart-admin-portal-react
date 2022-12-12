@@ -10,6 +10,7 @@ import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import { updateProductPositionCSVApi } from "../../../utils/ApiCalls";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 
 const UpdateProductPositionCSVAPIComponent = () => {
 	const [csv, setCsv] = useState();
@@ -49,21 +50,20 @@ const UpdateProductPositionCSVAPIComponent = () => {
 		);
 	};
 	return (
-		<section>
+		<section className="px-10">
 			<Loading loading={loading} />
-			<form action="" method="POST">
-				<label className="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-t-xl border-b-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
-					Select Updated File
-				</label>
-				<input
-					type={"file"}
+			<form action="" method="POST" className="grid grid-cols-2">
+				<CustomSingleImageInput
+					heading={"Select Updated File"}
 					accept={".csv"}
-					key={ren || ""}
-					onChange={(e) => handleFile(e)}
-					required={true}
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black border-t-0 text-gray-900 rounded-b-xl focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark"
+					onChange={(e) => {
+						handleFile(e);
+					}}
+					ren={ren}
 				/>
-				<CustomButton onClick={handleSubmit}>Save</CustomButton>
+				<CustomButton onClick={handleSubmit} width={"1/3"}>
+					Save
+				</CustomButton>
 			</form>
 		</section>
 	);
