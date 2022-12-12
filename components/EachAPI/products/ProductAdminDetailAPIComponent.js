@@ -26,9 +26,9 @@ const ProductAdminDetailAPIComponent = () => {
 	const handleCity = (e) => {
 		setInputs({ ...inputs, city: e.target.value });
 	};
-	const handleWarehouse = (e) => {
-		setInputs({ ...inputs, warehouseId: e.target.value });
-	};
+	// const handleWarehouse = (e) => {
+	// 	setInputs({ ...inputs, warehouseId: e.target.value });
+	// };
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -64,7 +64,7 @@ const ProductAdminDetailAPIComponent = () => {
 				values={["karachi", "peshawar"]}
 				options={["Karachi", "Peshawar"]}
 			/>
-			<CustomInput
+			{/* <CustomInput
 				type={"number"}
 				position={"bottom"}
 				min={0}
@@ -72,33 +72,35 @@ const ProductAdminDetailAPIComponent = () => {
 				onChange={handleWarehouse}
 				required={true}
 				placeholder={"eg. 9"}
-				heading={"Warehouse Number"}
-			/>
+				heading={"Warehouse Number"} */}
+
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Search
 			</CustomButton>
+			{/* WareHouse Render */}
 			<section className="mx-2">
 				<section className="my-2">
-					{detail?.map((each) => {
-						return (
-							<div key={each.sku} className="flex w-full">
-								<div className="w-1/3">
-									<div className="font-bold font-nunito py-1">Barcode:</div>
-									<div className="font-bold font-nunito py-1">SKU:</div>
-									<div className="font-bold font-nunito py-1">Title:</div>
-									<div className="font-bold font-nunito py-1">Brand:</div>
+					{detail?.length > 0 &&
+						detail?.map((each) => {
+							return (
+								<div key={each.sku} className="flex w-full">
+									<div className="w-1/3">
+										<div className="font-bold font-nunito py-1">Barcode:</div>
+										<div className="font-bold font-nunito py-1">SKU:</div>
+										<div className="font-bold font-nunito py-1">Title:</div>
+										<div className="font-bold font-nunito py-1">Brand:</div>
+									</div>
+									<div className="px-4 w-full">
+										<div className="py-1"> {each.barcode || "-"}</div>
+										<div className="py-1"> {each.sku || "-"}</div>
+										<div className="py-1"> {each.title || "-"}</div>
+										<div className="py-1"> {each.brand || "-"}</div>
+									</div>
 								</div>
-								<div className="px-4 bg-main-yellow w-full">
-									<div className="py-1"> {each.barcode || "-"}</div>
-									<div className="py-1"> {each.sku || "-"}</div>
-									<div className="py-1"> {each.title || "-"}</div>
-									<div className="py-1"> {each.brand || "-"}</div>
-								</div>
-							</div>
-						);
-					})}
+							);
+						})}
 				</section>
-				<h1 className="text-center font-bold">Warehouses</h1>
+
 				<section className="py-2">
 					{warehouses?.map((each, i) => {
 						return (
@@ -135,7 +137,7 @@ const ProductAdminDetailAPIComponent = () => {
 										</div>
 										<div className="font-bold font-nunito py-1">Is Active:</div>
 									</div>
-									<div className="px-4 bg-main-blue-100 w-full">
+									<div className="px-4 w-full">
 										<div className="py-1"> {each.categoryIds || "-"}</div>
 										<div className="py-1"> {each.categoryleafName || "-"}</div>
 										<div className="py-1"> {each.description || "-"}</div>

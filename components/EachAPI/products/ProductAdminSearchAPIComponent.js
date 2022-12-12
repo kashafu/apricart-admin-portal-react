@@ -54,7 +54,7 @@ const ProductAdminSearchAPIComponent = () => {
 
 	const handleResponse = (response) => {
 		console.log(response);
-		response.data.data.length > 0
+		response?.data?.data?.length > 0
 			? setDetail(response.data.data)
 			: emptyDetail();
 		getPagination(response.data.total, size);
