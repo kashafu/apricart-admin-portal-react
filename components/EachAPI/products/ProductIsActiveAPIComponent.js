@@ -40,34 +40,36 @@ const ProductIsActiveAPIComponent = () => {
 	};
 
 	return (
-		<section className="pl-10">
+		<section className="px-10 relative">
 			<Loading loading={loading} />
 			{/* <Heading>Product Enable or Disable</Heading> */}
-			<CustomInput
-				position={"top"}
-				type={"text"}
-				value={id}
-				onChange={(e) => handleId(e)}
-				required={true}
-				placeholder={"eg. APRA-0000-00"}
-				heading={"Enter SKU"}
-			/>
-			<CustomSelectInput
-				options={["Yes", "No"]}
-				values={["true", "false"]}
-				heading={"Select Status"}
-				onChange={(e) => handleState(e)}
-			/>
-			<CustomInput
-				type={"number"}
-				position={"bottom"}
-				min={0}
-				value={warehouseId}
-				onChange={(e) => handleWarehouse(e)}
-				required={true}
-				placeholder={"eg. 9"}
-				heading={"Warehouse Number"}
-			/>
+			<form action="" className="grid grid-cols-2 pt-6">
+				<CustomInput
+					position={"top"}
+					type={"text"}
+					value={id}
+					onChange={(e) => handleId(e)}
+					required={true}
+					placeholder={"eg. APRA-0000-00"}
+					heading={"Enter SKU"}
+				/>
+				<CustomSelectInput
+					options={["Yes", "No"]}
+					values={["true", "false"]}
+					heading={"Select Status"}
+					onChange={(e) => handleState(e)}
+				/>
+				<CustomInput
+					type={"number"}
+					position={"bottom"}
+					min={0}
+					value={warehouseId}
+					onChange={(e) => handleWarehouse(e)}
+					required={true}
+					placeholder={"eg. 9"}
+					heading={"Warehouse Number"}
+				/>
+			</form>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
 				Save
 			</CustomButton>

@@ -35,6 +35,7 @@ import OfferRemoveAPIComponent from "../../components/EachAPI/other/OfferRemoveA
 import UpdateProductPositionCSVAPIComponent from "../../components/EachAPI/products/UpdateProductPositionCSVAPIComponent";
 import AddnUpdateProductCSVAPIComponent from "../../components/EachAPI/products/AddnUpdateProductCSVAPIComponent";
 import UploadProductImageAPIComponent from "../../components/EachAPI/products/UploadProductImageAPIComponent";
+import ProductIsActiveAPIComponent from "../../components/EachAPI/products/ProductIsActiveAPIComponent";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const MainTabComponent = () => {
 				{selected === 2 && <ProductAdminDetailAPIComponent />}
 				{selected === 3 && <ProductStockDetailAdminAPIComponent />}
 				{selected === 5 && <UpdateProductCSVAPIComponent />}
+				{selected === 6 && <ProductIsActiveAPIComponent />}
 				{selected === 8 && <ProductPositionDetailAdminAPIComponent />}
 				{selected === 9 && <UpdateProductPositionCSVAPIComponent />}
 				{selected === 32 && <AddnUpdateProductCSVAPIComponent />}

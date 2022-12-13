@@ -59,6 +59,9 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 						<TbApi size={24} />
 					</div>
 					<a className="overflow-x-hidden">API Management</a>
+					<div className="cursor-pointer ml-4 -mr-4 overflow-hidden relative">
+						<FiChevronRight size={24} className="" />
+					</div>
 				</div>
 				{/* Side DropDown */}
 				{/* Side DropDown */}
@@ -81,10 +84,6 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 								onClick={() => handleCategorySelect(each)}
 							>
 								<div className="p-2 ">{each}</div>
-								{/* <div className="cursor-pointer  relative">
-									<FiChevronRight size={24} className="" />
-									
-								</div> */}
 							</section>
 						))}
 					</div>
