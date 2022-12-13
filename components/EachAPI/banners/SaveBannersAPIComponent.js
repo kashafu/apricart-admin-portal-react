@@ -159,7 +159,7 @@ const SaveBannersAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
-						Submit
+						Save
 					</CustomButton>
 				</div>
 			</form>

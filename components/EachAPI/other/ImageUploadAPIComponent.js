@@ -123,7 +123,7 @@ const ImageUploadAPIComponent = () => {
 				onClick={(e) => submitHandler(e)}
 				className="group relative w-full w- flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-main-blue hover:bg-indigo-800 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-blue"
 			>
-				Submit Images
+				Save Images
 			</button>
 		</section>
 	);

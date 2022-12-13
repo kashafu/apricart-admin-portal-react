@@ -68,7 +68,7 @@ const ProductPositionDeleteAdminAPIComponent = () => {
 				/>
 
 				<CustomButton onClick={handleSubmit} type={"submit"}>
-					Submit
+					Save
 				</CustomButton>
 			</form>
 		</div>

@@ -322,6 +322,15 @@ export const addUpdateProductCSVApi = async (
 	}
 };
 
+export const productImageUpdateApi = async (baseUrl, data, headers) => {
+	const url = baseUrl + `/options/images/uploads`;
+	try {
+		return await axios.post(url, data, { headers });
+	} catch (error) {
+		return error?.response;
+	}
+};
+
 export const productIsActiveApi = async (
 	baseUrl,
 	sku,

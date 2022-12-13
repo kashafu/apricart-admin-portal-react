@@ -84,7 +84,7 @@ const RecommendedUpdateAPIComponent = () => {
 				/>
 			</form>
 			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Submit
+				Save
 			</CustomButton>
 		</section>
 	);

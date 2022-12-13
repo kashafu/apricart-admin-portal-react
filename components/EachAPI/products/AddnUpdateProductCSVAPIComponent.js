@@ -80,7 +80,7 @@ const AddnUpdateProductCSVAPIComponent = () => {
 						ren={ren}
 					/>
 					<CustomButton onClick={handleSubmit} width={"1/3"}>
-						Submit
+						Save
 					</CustomButton>
 					{/* <div>
 						<label className="appearance-none rounded-none relative block w-full px-3 py-2 border border-b-0 border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm placeholder-txt-dark">
