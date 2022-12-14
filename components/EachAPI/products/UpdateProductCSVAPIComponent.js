@@ -45,12 +45,11 @@ const UpdateProductCSVAPIComponent = () => {
 		fillFormData();
 		const { baseUrl, headers } = getGeneralApiParams();
 		// if (file.entries().next())
-		await updateProductCSVApi(baseUrl, apiToken, file, headers).then(
-			(response) => {
-				setLoading(false);
-				checkStatus(response, "File Upload Successful");
-			}
-		);
+		await updateProductCSVApi(baseUrl, file, headers).then((response) => {
+			console.log(response);
+			setLoading(false);
+			checkStatus(response, "File Upload Successful");
+		});
 	};
 	return (
 		<section className="px-10">
@@ -66,7 +65,7 @@ const UpdateProductCSVAPIComponent = () => {
 							required={true}
 						/> */}
 						<CustomSingleImageInput
-							heading={"Select Updated File"}
+							heading={"Select File"}
 							accept={".csv"}
 							onChange={(e) => {
 								handleFile(e);

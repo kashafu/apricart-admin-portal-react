@@ -272,8 +272,11 @@ export const downloadOutOfStockApi = async (baseUrl, summary, headers) => {
 	}
 };
 
-export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
+export const addProductCSVApi = async (baseUrl, file, headers) => {
+	updateProductCSVApi;
+	console.log("UPDATIOn");
 	let entries = file.entries().next();
+	console.log(entries);
 	const { value } = entries;
 
 	if (value[1] === "undefined" || value[1] === "") {
@@ -284,7 +287,7 @@ export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
 			},
 		};
 	}
-	let url = baseUrl + `/admin/product/csv/update?apitoken=${apiToken}`;
+	let url = baseUrl + `/admin/product/csv/update?apitoken`;
 	try {
 		return await axios.post(url, file, {
 			...headers,
@@ -295,12 +298,7 @@ export const updateProductCSVApi = async (baseUrl, apiToken, file, headers) => {
 	}
 };
 
-export const addUpdateProductCSVApi = async (
-	baseUrl,
-	apiToken,
-	file,
-	headers
-) => {
+export const updateProductCSVApi = async (baseUrl, file, headers) => {
 	let entries = file.entries().next();
 	const { value } = entries;
 	if (value[1] === "undefined" || value[1] === "") {
@@ -311,7 +309,7 @@ export const addUpdateProductCSVApi = async (
 			},
 		};
 	}
-	let url = baseUrl + `/admin/product/csv/addupdate?apitoken=${apiToken}`;
+	let url = baseUrl + `/admin/product/csv/addupdate?apitoken`;
 	try {
 		return await axios.post(url, file, {
 			...headers,

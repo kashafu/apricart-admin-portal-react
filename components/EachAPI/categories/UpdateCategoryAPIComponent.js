@@ -89,7 +89,6 @@ const UpdateCategoryAPIComponent = () => {
 						value={position}
 						onChange={(e) => handlePosition(e)}
 					/>
-
 					<CustomInput
 						type={"number"}
 						min={0}

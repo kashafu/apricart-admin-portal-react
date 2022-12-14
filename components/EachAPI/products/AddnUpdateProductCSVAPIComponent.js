@@ -11,7 +11,7 @@ import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 
 import {
-	addUpdateProductCSVApi,
+	addProductCSVApi,
 	updateProductPositionCSVApi,
 } from "../../../utils/ApiCalls";
 import CustomInput from "../../Misc/CustomInput";
@@ -51,12 +51,10 @@ const AddnUpdateProductCSVAPIComponent = () => {
 		setLoading(true);
 		fillFormData();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await addUpdateProductCSVApi(baseUrl, apiToken, file, headers).then(
-			(response) => {
-				checkStatus(response, "File Upload Successful");
-				setLoading(false);
-			}
-		);
+		await addProductCSVApi(baseUrl, file, headers).then((response) => {
+			checkStatus(response, "File Upload Successful");
+			setLoading(false);
+		});
 	};
 	return (
 		<section className="px-10">

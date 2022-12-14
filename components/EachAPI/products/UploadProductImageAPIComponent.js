@@ -51,7 +51,7 @@ const UploadProductImageAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await fillFormData();
 		await productImageUpdateApi(baseUrl, data, headers).then((response) => {
-			checkStatus(response);
+			checkStatus(response, "Image Updated Successfully");
 			setLoading(false);
 		});
 	};
