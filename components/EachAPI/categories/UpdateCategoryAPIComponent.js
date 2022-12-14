@@ -52,10 +52,11 @@ const UpdateCategoryAPIComponent = () => {
 	};
 	const fillFormData = () => {
 		categoryData.append("category_image", categoryImage);
-		categoryData.append("parent_id", parentId);
+		categoryData.append("id", parentId);
 		categoryData.append("name", name);
 		categoryData.append("position", position);
 	};
+
 	const handleEdit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
@@ -93,7 +94,7 @@ const UpdateCategoryAPIComponent = () => {
 						type={"number"}
 						min={0}
 						placeholder={"Category's Parent Id eg. 5"}
-						heading={"Parent Id"}
+						heading={"Category Id"}
 						value={parentId}
 						onChange={(e) => handleParentId(e)}
 					/>
