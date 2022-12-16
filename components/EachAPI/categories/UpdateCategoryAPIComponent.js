@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import FormData from "form-data";
 
-import { addCategoryApi, updateCategoryApi } from "../../../utils/ApiCalls";
+import {
+	addCategoryApi,
+	getAllCategoriesApi,
+	updateCategoryApi,
+} from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	displayErrorToast,
@@ -13,10 +17,12 @@ import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import Heading from "../../Misc/Heading";
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
+import { useEffect } from "react";
 
 const UpdateCategoryAPIComponent = () => {
 	var categoryData = new FormData();
 	const [ren, setRen] = useState("");
+	const [categories, setCategories] = useState([]);
 	const [inputs, setInputs] = useState({
 		name: "",
 		position: "",
@@ -67,6 +73,23 @@ const UpdateCategoryAPIComponent = () => {
 			setLoading(false);
 		});
 	};
+
+	const fetchCategoryIds = async () => {
+		const { baseUrl } = getGeneralApiParams();
+		await getAllCategoriesApi(baseUrl, {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		}).then((response) => {
+			setInputs({ ...inputs, parentId: response.data.data[0].id });
+			let status = checkStatus(response, "");
+			status && setCategories(response.data.data);
+			setLoading(false);
+		});
+	};
+
+	useEffect(() => {
+		fetchCategoryIds();
+	}, []);
 
 	return (
 		<section className="relative px-10">

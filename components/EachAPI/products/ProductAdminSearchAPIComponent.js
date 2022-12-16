@@ -138,10 +138,9 @@ const ProductAdminSearchAPIComponent = () => {
 						return (
 							<div
 								key={each.id}
-								className="flex w-full p-1 border-2 border-main-blue rounded-xl my-2"
+								className="flex w-full px-2 border-2 border-main-blue rounded-xl my-2"
 							>
 								<div className="w-1/3">
-									<div className="font-bold font-nunito py-1">Id:</div>
 									<div className="font-bold font-nunito py-1">SKU:</div>
 									<div className="font-bold font-nunito py-1">Title:</div>
 									<div className="font-bold font-nunito py-1">Brand:</div>
@@ -160,8 +159,7 @@ const ProductAdminSearchAPIComponent = () => {
 										Product In Stock:
 									</div>
 								</div>
-								<div className="px-4 text-white bg-main-blue rounded-xl w-full">
-									<div className="py-1"> {each.id || "-"}</div>
+								<div className="px-4 text-white font-nunito bg-main-blue w-full">
 									<div className="py-1"> {each.sku || "-"}</div>
 									<div className="py-1"> {each.title || "-"}</div>
 									<div className="py-1"> {each.brand || "-"}</div>

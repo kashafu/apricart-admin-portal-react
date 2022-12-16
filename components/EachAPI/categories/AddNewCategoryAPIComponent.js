@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormData from "form-data";
 
-import { addCategoryApi, updateCategoryApi } from "../../../utils/ApiCalls";
+import {
+	addCategoryApi,
+	getAllCategoriesApi,
+	updateCategoryApi,
+} from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	displayErrorToast,
@@ -14,10 +18,12 @@ import CustomInput from "../../Misc/CustomInput";
 import Heading from "../../Misc/Heading";
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 import CustomFloatingInputNew from "../../Misc/CustomFloatingInputNew";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const AddNewCategoryAPIComponent = () => {
 	var categoryData = new FormData();
 	const [ren, setRen] = useState("");
+	const [categories, setCategories] = useState([]);
 	const [inputs, setInputs] = useState({
 		name: "",
 		position: "",
@@ -57,6 +63,7 @@ const AddNewCategoryAPIComponent = () => {
 		categoryData.append("name", name);
 		categoryData.append("position", position);
 	};
+
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
@@ -68,6 +75,23 @@ const AddNewCategoryAPIComponent = () => {
 		});
 	};
 
+	const fetchCategoryIds = async () => {
+		const { baseUrl } = getGeneralApiParams();
+		await getAllCategoriesApi(baseUrl, {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		}).then((response) => {
+			setInputs({ ...inputs, parentId: response.data.data[0].id });
+			let status = checkStatus(response, "");
+			status && setCategories(response.data.data);
+			setLoading(false);
+		});
+	};
+
+	useEffect(() => {
+		fetchCategoryIds();
+	}, []);
+	console.log(inputs);
 	return (
 		<section className="relative px-10">
 			<Loading loading={loading} />
@@ -89,13 +113,19 @@ const AddNewCategoryAPIComponent = () => {
 						value={position}
 						onChange={(e) => handlePosition(e)}
 					/>
-					<CustomInput
+					{/* <CustomInput
 						type={"number"}
 						min={0}
-						placeholder={"Category's Parent Id eg. 5"}
 						heading={"Category's Parent Id"}
 						value={parentId}
 						onChange={(e) => handleParentId(e)}
+					/> */}
+
+					<CustomSelectInput
+						onChange={(e) => handleParentId(e)}
+						heading={"Select Parent Category"}
+						values={categories.map((each) => each.id)}
+						options={categories.map((each) => each.name)}
 					/>
 					<CustomSingleImageInput
 						position={"bottom"}
@@ -108,7 +138,7 @@ const AddNewCategoryAPIComponent = () => {
 				</section>
 				<div>
 					<CustomButton width={"1/3"} onClick={(e) => handleSubmit(e)}>
-						Add
+						Save
 					</CustomButton>
 				</div>
 			</form>

@@ -66,28 +66,50 @@ const ProductStockDetailAdminAPIComponent = () => {
 					return (
 						<div key={each.sku} className="flex p-2">
 							<div>
-								<div className="font-bold font-nunito py-1">Hayatabad:</div>
-								<div className="font-bold font-nunito py-1">JoharCC:</div>
-								<div className="font-bold font-nunito py-1">
-									KorangiB2BDarkStore:
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									SKU:
 								</div>
-								<div className="font-bold font-nunito py-1">
-									KorangiDarkStore:
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									Title:
 								</div>
-								<div className="font-bold font-nunito py-1">
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									Hayatabad:
+								</div>
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									Johar CC:
+								</div>
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									Korangi B2B Dark Store:
+								</div>
+								<div className="font-bold font-nunito py-1 border-[1px] border-b-0 border-black p-2">
+									Korangi Dark Store:
+								</div>
+								<div className="font-bold font-nunito py-1 border-[1px] border-black p-2">
 									North Nazimabad:
 								</div>
-								<div className="font-bold font-nunito py-1">SKU:</div>
-								<div className="font-bold font-nunito py-1">Title:</div>
 							</div>
-							<div className="px-4">
-								<div className="py-1"> {each.hayatabad}</div>
-								<div className="py-1"> {each.joharCC}</div>
-								<div className="py-1"> {each.korangiB2BDarkStore}</div>
-								<div className="py-1"> {each.korangiDarkStore}</div>
-								<div className="py-1"> {each.northNazimabad}</div>
-								<div className="py-1"> {each.sku}</div>
-								<div className="py-1"> {each.title}</div>
+							<div className="border-l-0 font-nunito">
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.sku}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.title}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.hayatabad}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.joharCC}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.korangiB2BDarkStore}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0 border-b-0 p-2">
+									{each.korangiDarkStore}
+								</div>
+								<div className="py-1 border-black border-[1px] bg-main-blue text-white border-l-0  p-2 ">
+									{each.northNazimabad}
+								</div>
 							</div>
 						</div>
 					);

@@ -35,6 +35,7 @@ const ProductAdminDetailAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await productAdminDetailApi(baseUrl, id, city, warehouseId, headers).then(
 			(response) => {
+				console.log(response);
 				let status = checkStatus(response, "Product Detail Fetched");
 				status ? setDetail([response.data.data]) : setDetail();
 				if (status) {
@@ -73,7 +74,10 @@ const ProductAdminDetailAPIComponent = () => {
 					{detail?.length > 0 &&
 						detail?.map((each) => {
 							return (
-								<div key={each.sku} className="w-full grid grid-cols-2 items-center bg-slate-50 p-2 rounded-xl">
+								<div
+									key={each.sku}
+									className="w-full grid grid-cols-2 items-center bg-slate-50 p-2 rounded-lg"
+								>
 									<div className="w-full flex">
 										<div className="w-1/3">
 											<div className="font-bold font-nunito py-1">Barcode:</div>
@@ -81,7 +85,7 @@ const ProductAdminDetailAPIComponent = () => {
 											<div className="font-bold font-nunito py-1">Title:</div>
 											<div className="font-bold font-nunito py-1">Brand:</div>
 										</div>
-										<div className="px-4 w-full">
+										<div className="px-4 w-full font-nunito">
 											<div className="py-1"> {each.barcode || "-"}</div>
 											<div className="py-1"> {each.sku || "-"}</div>
 											<div className="py-1"> {each.title || "-"}</div>
@@ -93,7 +97,7 @@ const ProductAdminDetailAPIComponent = () => {
 											src={each.productImageUrl}
 											width={100}
 											height={100}
-											layout={'fill'}
+											layout={"fill"}
 											alt="Product image"
 										/>
 									</div>
@@ -105,12 +109,14 @@ const ProductAdminDetailAPIComponent = () => {
 				<section className="py-2 space-y-1">
 					{warehouses?.map((each, i) => {
 						return (
-							<section key={i} className="p-2 bg-slate-50 rounded-xl">
+							<section key={i} className="p-2 bg-slate-50 rounded-md">
 								<h3 className="text-center">
 									Warehouse number : {each.warehouseInfo}
 								</h3>
-								<div key={each.sku} className="flex w-full my-2">
+								<h3 className="text-center">{each.wareHouseName}</h3>
+								<div key={each.sku} className="flex w-full">
 									<div className="w-1/3">
+										<div className="font-bold font-nunito py-1">Active:</div>
 										<div className="font-bold font-nunito py-1">
 											Category Id&apos;s:
 										</div>
@@ -136,9 +142,9 @@ const ProductAdminDetailAPIComponent = () => {
 										<div className="font-bold font-nunito py-1">
 											Product In Stock:
 										</div>
-										<div className="font-bold font-nunito py-1">Is Active:</div>
 									</div>
-									<div className="px-4 w-full">
+									<div className="px-4 w-full bg-main-blue text-white font-nunito rounded-md">
+										<div className="py-1"> {each.active ? "Yes" : "No"}</div>
 										<div className="py-1"> {each.categoryIds || "-"}</div>
 										<div className="py-1"> {each.categoryleafName || "-"}</div>
 										<div className="py-1"> {each.description || "-"}</div>
@@ -148,7 +154,6 @@ const ProductAdminDetailAPIComponent = () => {
 										<div className="py-1"> {each.maxQty || "-"}</div>
 										<div className="py-1"> {each.minQty || "-"}</div>
 										<div className="py-1"> {each.inStock ? "Yes" : "No"}</div>
-										<div className="py-1"> {each.active ? "Yes" : "No"}</div>
 									</div>
 								</div>
 							</section>

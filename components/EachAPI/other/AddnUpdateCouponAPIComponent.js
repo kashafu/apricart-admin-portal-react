@@ -185,12 +185,8 @@ const AddnUpdateCouponAPIComponent = () => {
 					<option value="">Individual</option>
 				</select> */}
 			</section>
-			<CustomButton
-				onClick={() => {
-
-				}}
-				width={"1/3"}>
-				Add
+			<CustomButton onClick={() => {}} width={"1/3"}>
+				Save
 			</CustomButton>
 		</section>
 	);

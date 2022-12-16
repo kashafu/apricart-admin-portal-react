@@ -29,7 +29,7 @@ import UpdateCategoryImageAPIComponent from "../../components/EachAPI/categories
 import UpdateCategoryBannerAPIComponent from "../../components/EachAPI/categories/UpdateCategoryBannerAPIComponent";
 import SaveBannersAPIComponent from "../../components/EachAPI/banners/SaveBannersAPIComponent";
 import BannersAPIComponent from "../../components/EachAPI/banners/BannersAPIComponent";
-import GetAllCategories from "../../components/EachAPI/categories/GetAllCategories";
+import ViewAllCategories from "../../components/EachAPI/categories/ViewAllCategories";
 import UpdateProductCSVAPIComponent from "../../components/EachAPI/products/UpdateProductCSVAPIComponent";
 import OfferRemoveAPIComponent from "../../components/EachAPI/other/OfferRemoveAPIComponent";
 import UpdateProductPositionCSVAPIComponent from "../../components/EachAPI/products/UpdateProductPositionCSVAPIComponent";
@@ -76,7 +76,7 @@ const MainTabComponent = () => {
 			</section>
 			<section>
 				{/* CATEGORY */}
-				{selected === 0 && <GetAllCategories />}
+				{selected === 0 && <ViewAllCategories />}
 				{selected === 21 && <AddNewCategoryAPIComponent />}
 				{selected === 22 && <UpdateCategoryAPIComponent />}
 				{selected === 25 && <UpdateCategoryImageAPIComponent />}

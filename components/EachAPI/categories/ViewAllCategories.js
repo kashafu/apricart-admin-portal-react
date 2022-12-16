@@ -7,7 +7,7 @@ import { getAllCategoriesApi } from "../../../utils/ApiCalls";
 import Loading from "../../../utils/Loading";
 import { FiChevronsRight } from "react-icons/fi";
 
-const GetAllCategories = () => {
+const ViewAllCategories = () => {
 	const [loading, setLoading] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const [selected, setSelected] = useState("");
@@ -41,13 +41,10 @@ const GetAllCategories = () => {
 						Categories
 					</h3>
 					<div>
-						<div className="grid grid-cols-8 items-center w-full bg-slate-100">
-							<p className="col-span-2 py-4 px-6">
-								ID
-							</p>
-							<p className="col-span-5 py-4 px-6">
-								Name
-							</p>
+						<div className="grid grid-cols-11 items-center w-full bg-slate-100">
+							<p className="col-span-3 py-4 px-6">Parent ID</p>
+							<p className="col-span-4 text-left py-4 px-6">Name</p>
+							<p className="col-span-3 py-4 px-6">Position</p>
 						</div>
 						<div className="overflow-y-auto scroller-mini h-96">
 							{categories.map((each) => (
@@ -58,16 +55,19 @@ const GetAllCategories = () => {
 									<div
 										className={
 											each === selected
-												? "hover:bg-main-blue-100 bg-gray-300 cursor-pointer duration-200 ease-in  grid items-center grid-cols-8"
-												: "hover:bg-gray-300 cursor-pointer duration-200 ease-in grid items-center grid-cols-8"
+												? "hover:bg-main-blue-100 bg-gray-300 cursor-pointer duration-200 ease-in grid items-center grid-cols-10"
+												: "hover:bg-gray-300 cursor-pointer duration-200 ease-in grid items-center grid-cols-10"
 										}
 										onClick={() => setSelected(each)}
 									>
-										<div className="col-span-2 overflow-x-hidden py-4 px-6 duration-300 ">
+										<div className="col-span-3 overflow-x-hidden py-4 px-6 duration-300 ">
 											<p>{each.id}</p>
 										</div>
-										<div className="col-span-5 overflow-y-auto py-4 px-6 duration-300 ">
+										<div className="col-span-4 overflow-y-auto py-4 px-2 duration-300">
 											<p>{each.name}</p>
+										</div>
+										<div className="col-span-2 overflow-y-auto py-4 px-6 duration-300 ">
+											<p>{each.position}</p>
 										</div>
 										<div className="cursor-pointer  relative">
 											<FiChevronsRight size={24} className="" />
@@ -90,12 +90,8 @@ const GetAllCategories = () => {
 					</h3>
 					<div>
 						<div className="grid grid-cols-8 items-center w-full bg-slate-100">
-							<p className="col-span-2 py-4 px-6">
-								ID
-							</p>
-							<p className="col-span-5 py-4 px-6">
-								Name
-							</p>
+							<p className="col-span-2 py-4 px-6">ID</p>
+							<p className="col-span-5 py-4 px-6">Name</p>
 						</div>
 						<div className="overflow-y-auto scroller-mini h-96">
 							{selected.childrenData
@@ -123,4 +119,4 @@ const GetAllCategories = () => {
 	);
 };
 
-export default GetAllCategories;
+export default ViewAllCategories;
