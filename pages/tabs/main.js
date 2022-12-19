@@ -36,6 +36,7 @@ import UpdateProductPositionCSVAPIComponent from "../../components/EachAPI/produ
 import AddnUpdateProductCSVAPIComponent from "../../components/EachAPI/products/AddnUpdateProductCSVAPIComponent";
 import UploadProductImageAPIComponent from "../../components/EachAPI/products/UploadProductImageAPIComponent";
 import ProductIsActiveAPIComponent from "../../components/EachAPI/products/ProductIsActiveAPIComponent";
+import EditBannersAPIComponent from "../../components/EachAPI/banners/EditBannersAPIComponent";
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
@@ -108,6 +109,7 @@ const MainTabComponent = () => {
 				{selected === 15 && <ThankyouImageAddUpdateAPIComponent />}
 				{selected === 29 && <SaveBannersAPIComponent />}
 				{selected === 30 && <BannersAPIComponent />}
+				{/* {selected === 30 && <EditBannersAPIComponent />} */}
 
 				{/* ALERTS & ANNOUNCEMENT */}
 				{selected === 16 && <NewNotificationSendAPIComponent />}

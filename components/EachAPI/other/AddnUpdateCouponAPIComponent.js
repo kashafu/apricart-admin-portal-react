@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addCoupon, getAllCategoriesApi } from "../../../utils/ApiCalls";
+import { addCouponApi, getAllCategoriesApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,
@@ -105,7 +105,7 @@ const AddnUpdateCouponAPIComponent = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		await addCoupon(baseUrl, inputs, headers).then((response) => {
+		await addCouponApi(baseUrl, inputs, headers).then((response) => {
 			console.log(response);
 			checkStatus(response, "Coupon created successfully");
 		});

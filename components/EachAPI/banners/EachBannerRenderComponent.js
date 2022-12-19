@@ -62,14 +62,11 @@ const EachBannerRenderComponent = ({ props }) => {
 				/>
 			</div>
 			<div className="flex w-full justify-around px-10">
-				<div className="w-1/5">
+				{/* <div className="w-1/5">
 					<CustomButton width={"1/2"}>Edit Banner</CustomButton>
-				</div>
-				<div className="w-1/5">
-					<CustomButton
-						onClick={(e) => deleteThisBanner(propState.id)}
-						width={"1/2"}
-					>
+				</div> */}
+				<div className="w-1/5 mt-12">
+					<CustomButton onClick={(e) => deleteThisBanner(propState.id)}>
 						Delete Banner
 					</CustomButton>
 				</div>

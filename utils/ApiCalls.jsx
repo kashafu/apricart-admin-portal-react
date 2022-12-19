@@ -396,20 +396,11 @@ export const saveBannersApi = async (baseUrl, banner) => {
 };
 
 export const updateBannersApi = async (baseUrl, newBanner, headers) => {
-	let url = baseUrl + "/offers/banners/save";
-	let body = {
-		id: newBanner.id,
-		bannerUrlWeb: newBanner.bannerUrlWeb,
-		bannerUrlApp: newBanner.bannerUrlApp,
-	};
+	let url = baseUrl + "/offers/banners/update";
 	try {
-		await axios
-			.post(url, body, {
-				headers,
-			})
-			.then((response) => {
-				return response;
-			});
+		return await axios.post(url, newBanner, {
+			headers,
+		});
 	} catch (error) {
 		return error?.response;
 	}
@@ -803,11 +794,23 @@ export const getAllCategoriesApi = async (baseUrl, headers) => {
 	}
 };
 
-export const addCoupon = async (baseUrl, coupon, headers) => {
+export const addCouponApi = async (baseUrl, coupon, headers) => {
 	let url = baseUrl + "/admin/coupons/save";
 
 	try {
 		return await axios.post(url, coupon, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const editBannerApi = async (baseUrl, banner, headers) => {
+	let url = baseUrl + "/offers/banners/update";
+
+	try {
+		return await axios.post(url, banner, {
 			headers,
 		});
 	} catch (error) {
