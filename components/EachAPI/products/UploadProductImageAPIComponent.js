@@ -66,7 +66,7 @@ const UploadProductImageAPIComponent = () => {
 						onChange={(e) => handlePrimary(e)}
 						heading={"Select Primary"}
 						values={["true", "false"]}
-						options={["Yes", "No"]}
+						options={["True", "False"]}
 					/>
 					<CustomSingleImageInput
 						heading={"Upload New Image"}

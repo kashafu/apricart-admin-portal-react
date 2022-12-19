@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { addCoupon, getAllCategoriesApi } from "../../../utils/ApiCalls";
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables";
+import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const AddnUpdateCouponAPIComponent = () => {
+	const [loading, setLoading] = useState(false);
+	const [displayExpiry, setDisplayExpiry] = useState("");
+
+	const [categories, setCategories] = useState([]);
 	const [inputs, setInputs] = useState({
-		name: "APR-75",
-		discount: 75,
-		isPercent: false,
+		name: "",
+		discount: "",
+		isPercent: true,
 		active: true,
-		usageLimit: 1000,
-		minSubTotal: 750,
-		expiry: "2022-08-31T18:00:00Z",
+		usageLimit: "",
+		minSubTotal: "",
+		expiry: "",
 		productSkus: "",
-		category: "1166",
-		whitelist: false,
+		category: "",
+		whitelist: true,
 		phoneNumber: "",
-		whitelistPhoneNumber: false,
+		whitelistPhoneNumber: true,
 		oncePhoneNumber: true,
 		deliveryOnly: true,
 		prodType: "cus",
@@ -60,7 +70,9 @@ const AddnUpdateCouponAPIComponent = () => {
 		setInputs({ ...inputs, minSubTotal: e.target.value });
 	};
 	const handleExpiry = (e) => {
-		setInputs({ ...inputs, expiry: e.target.value });
+		let newExp = e.target.value.concat("T00:00:00Z");
+		setInputs({ ...inputs, expiry: newExp });
+		setDisplayExpiry(e.target.value);
 	};
 	const handleProductSkus = (e) => {
 		setInputs({ ...inputs, productSkus: e.target.value });
@@ -93,99 +105,139 @@ const AddnUpdateCouponAPIComponent = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
-		var encodedType = encodeURI(type);
-		var encodedMessage = encodeURI(message);
-		await sendNotificationApi(
-			baseUrl,
-			type,
-			value,
-			encodedType,
-			encodedMessage,
-			city,
-			to,
-			headers
-		).then((response) => {
-			checkStatus(response, "Notification Sent Successfully");
+		await addCoupon(baseUrl, inputs, headers).then((response) => {
+			console.log(response);
+			checkStatus(response, "Coupon created successfully");
 		});
 	};
+
+	const fetchCategoryIds = async () => {
+		const { baseUrl } = getGeneralApiParams();
+		await getAllCategoriesApi(baseUrl, {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		}).then((response) => {
+			setInputs({ ...inputs, category: response.data.data[0].id });
+
+			let status = checkStatus(response, "");
+			status && setCategories(response.data.data);
+			setLoading(false);
+		});
+	};
+
+	useEffect(() => {
+		fetchCategoryIds();
+	}, []);
+
+	console.log(inputs);
 	return (
 		<section className="px-10">
+			<Loading loading={loading} />
 			<section className="pt-6 grid grid-cols-2">
 				<CustomInput
-					position={"top"}
 					type={"text"}
 					value={name}
-					onChange={handleName}
+					onChange={(e) => handleName(e)}
 					required={true}
 					heading={"Name"}
 				/>
 				<CustomInput
 					type={"number"}
 					value={discount}
-					onChange={handleDiscount}
+					onChange={(e) => handleDiscount(e)}
 					required={true}
 					heading={"Discount"}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleIsPercent(e)}
 					heading={"Is Percent?"}
-					values={["yes", "no"]}
-					options={["Yes", "No"]}
+					values={["true", "false"]}
+					options={["True", "False"]}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleActive(e)}
 					heading={"Active"}
-					values={["yes", "no"]}
-					options={["Yes", "No"]}
+					values={["true", "false"]}
+					options={["True", "False"]}
 				/>
 				<CustomInput
 					type={"number"}
 					value={usageLimit}
-					onChange={handleUsageLimit}
+					onChange={(e) => handleUsageLimit(e)}
 					required={true}
 					heading={"Usage Limit"}
 				/>
 				<CustomInput
 					type={"number"}
 					value={minSubTotal}
-					onChange={handleMinSubTotal}
+					onChange={(e) => handleMinSubTotal(e)}
 					required={true}
 					heading={"Minimum Subtotal"}
 				/>
-				{/* <div>
-					<input
-						value={expiry}
-						onFocus={(e) => (e.target.type = "date")}
-						onChange={(e) => handleExpiry}
-						type="text"
-						required
-						className="appearance-none rounded-none relative block w-full px-3 py-2 border border-black text-gray-900 focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm heading-txt-dark"
-						heading="Expiry Date"
-					/>
-				</div> */}
 				<CustomInput
-					value={expiry}
-					onChange={(e) => handleExpiry}
+					value={displayExpiry}
+					onChange={(e) => handleExpiry(e)}
 					type="date"
-					// placeholder="Expiry Date"
 					heading={"Expiry date"}
 				/>
-				{/* <CustomSelectInput
-					onChange={(e) => handleTo(e)}
-					heading={"Recipient"}
-					values={["alldev", ""]}
-					options={["All Devices", "Individual"]}
-				/> */}
-				{/* <select
-					className="appearance-none rounded-none relative block w-full px-3 py-2 border border-t-0 border-black text-gray-900  focus:outline-none focus:ring-main-blue focus:border-main-blue focus:z-10 sm:text-sm heading-txt-dark"
-					onChange={(e) => handleTo(e)}
+				<CustomInput
+					type={"text"}
+					value={productSkus}
+					onChange={(e) => handleProductSkus(e)}
 					required={true}
-				>
-					<option value="alldev">All Devices</option>
-					<option value="">Individual</option>
-				</select> */}
+					heading={"Product SKUs"}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleCategory(e)}
+					heading={"Category"}
+					values={categories.map((each) => each.id)}
+					options={categories.map((each) => each.name)}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleWhiteList(e)}
+					heading={"White List"}
+					values={["true", "false"]}
+					options={["True", "False"]}
+				/>
+				<CustomInput
+					type={"text"}
+					value={phoneNumber}
+					onChange={(e) => handlePhoneNumber(e)}
+					required={true}
+					heading={"Phone Number"}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleWhiteListPhoneNumber(e)}
+					heading={"White List Phone Number"}
+					values={["true", "false"]}
+					options={["True", "False"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleOncePhoneNumber(e)}
+					heading={"Phone Number Once?"}
+					values={["true", "false"]}
+					options={["True", "False"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleDeliveryOnly(e)}
+					heading={"Delivery Only?"}
+					values={["true", "false"]}
+					options={["True", "False"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleProdType(e)}
+					heading={"Select Product Type"}
+					values={["cus", "b2b"]}
+					options={["Customer", "Bulk Buy"]}
+				/>
+				<CustomSelectInput
+					onChange={(e) => handleCityInfo(e)}
+					options={["Karachi", "Peshawar"]}
+					values={["1", "4"]}
+					heading={"Select City"}
+				/>
 			</section>
-			<CustomButton onClick={() => {}} width={"1/3"}>
+			<CustomButton onClick={(e) => handleSubmit(e)} width={"1/3"}>
 				Save
 			</CustomButton>
 		</section>

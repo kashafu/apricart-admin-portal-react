@@ -83,7 +83,7 @@ export const checkStatus = (
 	successTimer,
 	errorTimer
 ) => {
-	// console.log(res);
+	console.log(res);
 	if (res === undefined) {
 		displayErrorToast("An error occured. Contact IT Team for support.", 3000);
 		return false;

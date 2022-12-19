@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CustomInput from "../../Misc/CustomInput";
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
 import Heading from "../../Misc/Heading";
 import FormData from "form-data";
-import { updateCategoryImageApi } from "../../../utils/ApiCalls";
+import {
+	getAllCategoriesApi,
+	updateCategoryImageApi,
+} from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	displayErrorToast,
@@ -14,11 +17,13 @@ import {
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
 import CustomButton from "../../Misc/CustomButton";
+import CustomSelectInput from "../../Misc/CustomSelectInput";
 
 const UpdateCategoryImageAPIComponent = () => {
 	var bannerData = new FormData();
 	const [loading, setLoading] = useState(false);
 	const [ren, setRen] = useState("");
+	const [categories, setCategories] = useState([]);
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
 		categoryId: "",
@@ -57,18 +62,42 @@ const UpdateCategoryImageAPIComponent = () => {
 			checkStatus(response);
 		});
 	};
+
+	const fetchCategoryIds = async () => {
+		const { baseUrl } = getGeneralApiParams();
+		await getAllCategoriesApi(baseUrl, {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		}).then((response) => {
+			setInput({ ...input, parentId: response.data.data[0].id });
+			let status = checkStatus(response, "");
+			status && setCategories(response.data.data);
+			setLoading(false);
+		});
+	};
+
+	useEffect(() => {
+		fetchCategoryIds();
+	}, []);
+
 	return (
 		<section className="px-10">
 			{<Loading loading={loading} />}
 			{/* <Heading>Category Image Update</Heading> */}
 			<form action="" method="POST">
 				<section className="grid grid-cols-2 pt-6">
-					<CustomInput
+					{/* <CustomInput
 						heading={"Enter Category Id"}
 						type={"number"}
 						onChange={(e) => handleCategoryId(e)}
 						placeholder={"Category ID"}
 						value={categoryId}
+					/> */}
+					<CustomSelectInput
+						onChange={(e) => handleCategoryId(e)}
+						heading={"Select Category"}
+						values={categories.map((each) => each.id)}
+						options={categories.map((each) => each.name)}
 					/>
 					<CustomSingleImageInput
 						heading={"Upload New Category Image"}

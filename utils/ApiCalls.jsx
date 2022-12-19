@@ -802,3 +802,15 @@ export const getAllCategoriesApi = async (baseUrl, headers) => {
 		return error.response;
 	}
 };
+
+export const addCoupon = async (baseUrl, coupon, headers) => {
+	let url = baseUrl + "/admin/coupons/save";
+
+	try {
+		return await axios.post(url, coupon, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
