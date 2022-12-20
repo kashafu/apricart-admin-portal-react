@@ -62,8 +62,8 @@ const WebUpdateAPIComponent = () => {
 				<CustomSelectInput
 					onChange={(e) => handleProdType(e)}
 					heading={"Select Product Type"}
-					values={["cus", "b2b"]}
-					options={["Customer", "Bulk Buy"]}
+					values={["b2b", "cus"]}
+					options={["Online Delivery", "Customer"]}
 				/>
 				<CustomSelectInput
 					onChange={(e) => handleOrderType(e)}
