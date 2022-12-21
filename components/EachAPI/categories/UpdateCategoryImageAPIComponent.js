@@ -69,7 +69,7 @@ const UpdateCategoryImageAPIComponent = () => {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		}).then((response) => {
-			setInput({ ...input, parentId: response.data.data[0].id });
+			setInput({ ...input, categoryId: response.data.data[0].id });
 			let status = checkStatus(response, "");
 			status && setCategories(response.data.data);
 			setLoading(false);
