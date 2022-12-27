@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { AiFillApi } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
-import { getAllAPIsApi } from "../utils/ApiCalls";
+import { getAllAPIsApi, getAllAPIsPhase2Api } from "../utils/ApiCalls";
 import { FiChevronRight } from "react-icons/fi";
 import { TbApi } from "react-icons/tb";
 
@@ -22,7 +22,9 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 
 	const getCategories = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
-		await getAllAPIsApi(baseUrl, headers).then((response) => {
+		// await getAllAPIsApi(baseUrl, headers).then((response) => {
+		await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
+			console.log("Phase2", response);
 			let status = checkStatus(response, "");
 			// to get the unique category names from all the apis
 			const unique = [

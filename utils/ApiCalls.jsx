@@ -72,6 +72,25 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 	}
 };
 
+export const getAllAPIsPhase2Api = async (baseUrl, headers) => {
+	const url = baseUrl + `/adminUser/dashboard`;
+	try {
+		let response = await axios.get(url, {
+			headers,
+		});
+		// Hard coded get all categories api
+		response.data.data.apis.unshift({
+			id: 0,
+			name: "View Category",
+			endpoint: "/admin/category/view",
+			category: "Category",
+		});
+		return response;
+	} catch (error) {
+		return error?.response;
+	}
+};
+
 export const sendOtpApi = async (baseUrl, phoneNumber, headers) => {
 	const url = baseUrl + "/auth/open/otp";
 	let body = {

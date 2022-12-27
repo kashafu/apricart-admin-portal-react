@@ -1,4 +1,4 @@
-import { getAllAPIsApi } from "../../utils/ApiCalls";
+import { getAllAPIsApi, getAllAPIsPhase2Api } from "../../utils/ApiCalls";
 import { checkStatus, getGeneralApiParams } from "../../utils/GeneralVariables";
 import {
 	addToRecent,
@@ -23,12 +23,12 @@ const ProductAPIPage = () => {
 
 	const getAPIs = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
-		await getAllAPIsApi(baseUrl, headers).then((response) => {
+		await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
 			console.log(response);
 			let status = checkStatus(response, "");
 			// to get the unique category names from all the apis
 			const unique = [
-				...new Set(response?.data?.data?.apis?.map((each) => each.category)),
+				...new Set(response?.data?.data?.apis?.ma p((each) => each.category)),
 			];
 			status ? setSelected(unique[0]) : "";
 			status ? setCategories(unique) : "";
