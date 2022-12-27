@@ -72,7 +72,7 @@ const SideBar = ({ apiList, setApiList, allApis }) => {
 								</div>
 							</div>
 						))}
-						<div className="mb-12"></div>/
+						<div className="mb-12"></div>
 					</div>
 				</div>
 				<div

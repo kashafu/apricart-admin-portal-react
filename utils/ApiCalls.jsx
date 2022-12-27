@@ -54,7 +54,8 @@ export const loginApi = async (
 };
 
 export const getAllAPIsApi = async (baseUrl, headers) => {
-	const url = baseUrl + `/admin/dashboard`;
+	// const url = baseUrl + `/admin/dashboard`;
+	const url = baseUrl + `/adminUser/dashboard`;
 	try {
 		let response = await axios.get(url, {
 			headers,
@@ -813,11 +814,34 @@ export const getAllCategoriesApi = async (baseUrl, headers) => {
 	}
 };
 
-export const addCouponApi = async (baseUrl, coupon, headers) => {
-	let url = baseUrl + "/admin/coupons/save";
+// export const addCouponApi = async (baseUrl, coupon, headers) => {
+// 	let url = baseUrl + "/admin/coupons/save";
 
+// 	try {
+// 		return await axios.post(url, coupon, {
+// New APIs
+
+export const createAndUpdateRoleApi = async (
+	baseUrl,
+	name,
+	active,
+	id,
+	headers
+) => {
+	console.log(id);
+	let body;
+	let url = baseUrl + "/adminUser/role/saveOrUpdate";
+	if (id.length === 0) {
+		body = { name, active };
+	} else {
+		body = {
+			id,
+			name,
+			active,
+		};
+	}
 	try {
-		return await axios.post(url, coupon, {
+		return await axios.post(url, body, {
 			headers,
 		});
 	} catch (error) {
@@ -825,11 +849,132 @@ export const addCouponApi = async (baseUrl, coupon, headers) => {
 	}
 };
 
-export const editBannerApi = async (baseUrl, banner, headers) => {
-	let url = baseUrl + "/offers/banners/update";
+// export const editBannerApi = async (baseUrl, banner, headers) => {
+// 	let url = baseUrl + "/offers/banners/update";
+
+// 	try {
+// 		return await axios.post(url, banner) {}}}
+export const createAndUpdatePermsissionApi = async (
+	baseUrl,
+	id,
+	apiName,
+	apiURL,
+	active,
+	headers
+) => {
+	let body;
+	let url = baseUrl + "/adminUser/permission/saveOrUpdate";
+	if (id.length === 0) {
+		body = { apiName, apiURL, active };
+	} else {
+		body = {
+			id,
+			apiName,
+			apiURL,
+			active,
+		};
+	}
+	try {
+		return await axios.post(url, body, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const linkRoleAndPermissionApi = async (
+	baseUrl,
+	roleId,
+	permissionId,
+	headers
+) => {
+	let body = { roleId, permissionId };
+	let url = baseUrl + "/adminUser/rolePermission/saveOrUpdate";
+
+	console.log(body);
+	try {
+		return await axios.post(url, body, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getAllRolesApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/role/getAll";
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getAllPermissionsApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/permission/getAll";
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getPermissionByRoleApi = async (baseUrl, roleId, headers) => {
+	let url = baseUrl + `/adminUser/rolePermission/getByRoleId?roleId=${roleId}`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getCurrentRolePermissionsDetailsApi = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/rolePermission/getAll`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getActiveRolesApi = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/role/getAllActive`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const getActivePermissionsApi = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/permission/getAllActive`;
+	try {
+		return await axios.get(url, {
+			headers,
+		});
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const assignRoleApi = async (baseUrl, phoneNumber, roleId, headers) => {
+	let newNumber = "92" + phoneNumber;
+	let body = { phoneNumber: newNumber, roleId };
+	let url = baseUrl + "/adminUser/linkRole";
 
 	try {
-		return await axios.post(url, banner, {
+		return await axios.post(url, body, {
 			headers,
 		});
 	} catch (error) {
