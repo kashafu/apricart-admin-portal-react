@@ -44,12 +44,6 @@ const EditBannersAPIComponent = () => {
 		setInput({ ...input, id: e.target.value });
 	};
 
-	// const fillFormData = () => {
-	// 	bannerData.append("app", bannerUrlApp);
-	// 	bannerData.append("web", bannerUrlWeb);
-	// 	bannerData.append("category_id", id);
-	// };
-
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		setLoading(true);

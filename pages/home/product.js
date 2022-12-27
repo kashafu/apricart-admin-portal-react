@@ -28,7 +28,7 @@ const ProductAPIPage = () => {
 			let status = checkStatus(response, "");
 			// to get the unique category names from all the apis
 			const unique = [
-				...new Set(response?.data?.data?.apis?.ma p((each) => each.category)),
+				...new Set(response?.data?.data?.apis?.map((each) => each.category)),
 			];
 			status ? setSelected(unique[0]) : "";
 			status ? setCategories(unique) : "";

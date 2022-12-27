@@ -814,12 +814,29 @@ export const getAllCategoriesApi = async (baseUrl, headers) => {
 	}
 };
 
-// export const addCouponApi = async (baseUrl, coupon, headers) => {
-// 	let url = baseUrl + "/admin/coupons/save";
+export const addCouponApi = async (baseUrl, coupon, headers) => {
+	let url = baseUrl + "/admin/coupons/save";
 
-// 	try {
-// 		return await axios.post(url, coupon, {
-// New APIs
+	try {
+		return await axios.post(url, coupon, { headers });
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+export const editBannerApi = async (baseUrl, banner, headers) => {
+	let url = baseUrl + "/offers/banners/update";
+
+	try {
+		return await axios.post(url, banner, { headers });
+	} catch (error) {
+		return error?.response;
+	}
+};
+
+// New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs
+// New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs
+// New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs New APIs
 
 export const createAndUpdateRoleApi = async (
 	baseUrl,
@@ -849,11 +866,6 @@ export const createAndUpdateRoleApi = async (
 	}
 };
 
-// export const editBannerApi = async (baseUrl, banner, headers) => {
-// 	let url = baseUrl + "/offers/banners/update";
-
-// 	try {
-// 		return await axios.post(url, banner) {}}}
 export const createAndUpdatePermsissionApi = async (
 	baseUrl,
 	id,

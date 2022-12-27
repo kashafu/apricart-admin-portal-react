@@ -16,7 +16,7 @@ const Dashboard = () => {
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			console.log(response);
 			let status = checkStatus(response, "");
-			status && setLoading(false);
+			setLoading(false);
 		});
 	};
 
