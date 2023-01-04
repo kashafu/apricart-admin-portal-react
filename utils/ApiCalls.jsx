@@ -1,8 +1,12 @@
-import FileSaver, { saveAs } from "file-saver";
-
+import FileSaver from "file-saver";
+import { useState } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import moment from "moment";
+
+import { getGeneralApiParams } from "../utils/GeneralVariables"
+
+let { baseUrl, headers } = getGeneralApiParams()
 
 export const loginApi = async (
 	baseUrl,
@@ -53,8 +57,33 @@ export const loginApi = async (
 	}
 };
 
+export const useGetPermissionsByCurrentRole = async () => {
+	const [permissions, setPermissions] = useState(null)
+	const [isLoading, setIsLoading] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
+
+	try {
+		setIsLoading(true)
+
+		let url = baseUrl + "/adminUser/rolePermission/getAll"
+		let response = await axios.get(url, headers)
+
+		setPermissions(response.data.data)
+	} catch (error) {
+		setErrorMessage(error?.data?.message)
+	}
+	finally {
+		setIsLoading(false)
+	}
+
+	return {
+		permissions,
+		isLoading,
+		errorMessage
+	}
+}
+
 export const getAllAPIsApi = async (baseUrl, headers) => {
-	// const url = baseUrl + `/admin/dashboard`;
 	const url = baseUrl + `/adminUser/dashboard`;
 	try {
 		let response = await axios.get(url, {
@@ -67,6 +96,7 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 			endpoint: "/admin/category/view",
 			category: "Category",
 		});
+		console.log(response.data)
 		return response;
 	} catch (error) {
 		return error?.response;
