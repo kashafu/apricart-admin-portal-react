@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { AiFillApi } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
-import { getAllAPIsApi, getAllAPIsPhase2Api } from "../utils/ApiCalls";
+import { getAllAPIsApi, getAllAPIsPhase2Api, useDashboardApi } from "../utils/ApiCalls";
 import { FiChevronRight } from "react-icons/fi";
 import { TbApi } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
 import { addToRecent, selectTabs } from "../Redux/Recents/recentsSlice";
 import { useDispatch } from "react-redux";
 
-const SideBarNewComponent = ({ allApis, setAllApis }) => {
+const SideBar = ({ allApis, setAllApis }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const handleProductRoute = () => router.push("/home/product");
@@ -19,6 +20,8 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 	const [categories, setCategories] = useState([]);
 	const [show, setShow] = useState(false);
 	const [selected, setSelected] = useState("");
+
+	// useDashboardApi()
 
 	const getCategories = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
@@ -103,4 +106,4 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 	);
 };
 
-export default SideBarNewComponent;
+export default SideBar;

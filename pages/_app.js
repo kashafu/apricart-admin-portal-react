@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 import Navbar from "../components/Misc/Navbar";
 import { Provider } from "react-redux";
-import SideBar from "../components/SideBarComponent";
+
 import { useEffect, useState } from "react";
 import { getAllAPIsApi, useDashboardApi } from "../utils/ApiCalls";
 import {
@@ -15,7 +15,7 @@ import {
 	getGeneralApiParams,
 	logOutRemoveCookies,
 } from "../utils/GeneralVariables";
-import SideBarNewComponent from "../components/SideBarNewComponent";
+import SideBar from "../components/SideBar";
 import { store } from "../Redux/store";
 import { ConfigProvider } from "react-avatar";
 import Head from "next/head";
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
 	let name = cookies.get("cookies-name");
 
 
-	const { permissions, isLoading, errorMessage } = useDashboardApi()
+	// const { permissions, isLoading, errorMessage } = useDashboardApi()
 
 
 	const getSidebarItems = async () => {
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }) {
 					{router.pathname !== "/login" && (
 						// <SideBar apiList={apiList} setApiList={setApiList} allApis={allApis} />
 						<section className="z-40">
-							<SideBarNewComponent
+							<SideBar
 								apiList={apiList}
 								setApiList={setApiList}
 								allApis={allApis}

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import moment from "moment";
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import { getGeneralApiParams } from "../utils/GeneralVariables"
 import { initializeApis } from "../Redux/apis.slice";
@@ -107,7 +107,7 @@ export const useDashboardApi = () => {
 				}
 			});
 
-			// dispatch(initializeApis(organizedPermissions))
+			dispatch(initializeApis(organizedPermissions))
 			setApis(organizedPermissions)
 		} catch (error) {
 			setErrorMessage(error?.data?.message)
