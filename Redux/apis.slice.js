@@ -5,7 +5,10 @@ const apisSlice = createSlice({
 	initialState: [],
 	reducers: {
 		initializeApis: (state, action) => {
-			state.categories = action.payload
+			state.splice(0, state.length)
+			action.payload.forEach(element => {
+				state.push(element)
+			});
 		},
 	},
 })

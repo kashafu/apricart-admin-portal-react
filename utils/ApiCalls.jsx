@@ -1,11 +1,13 @@
 import FileSaver from "file-saver";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux"
 
 import { getGeneralApiParams } from "../utils/GeneralVariables"
-import { useEffect } from "react";
+import { initializeApis } from "../Redux/apis.slice";
+
 
 let { baseUrl, headers } = getGeneralApiParams()
 
@@ -59,6 +61,8 @@ export const loginApi = async (
 };
 
 export const useDashboardApi = () => {
+	const dispatch = useDispatch()
+
 	const [apis, setApis] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
@@ -103,8 +107,8 @@ export const useDashboardApi = () => {
 				}
 			});
 
+			// dispatch(initializeApis(organizedPermissions))
 			setApis(organizedPermissions)
-
 		} catch (error) {
 			setErrorMessage(error?.data?.message)
 		}
