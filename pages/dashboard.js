@@ -14,7 +14,6 @@ const Dashboard = () => {
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
-			console.log(response);
 			let status = checkStatus(response, "");
 			setLoading(false);
 		});

@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 
 import { getGeneralApiParams } from "../utils/GeneralVariables"
+import { useEffect } from "react";
 
 let { baseUrl, headers } = getGeneralApiParams()
 
@@ -57,27 +58,63 @@ export const loginApi = async (
 	}
 };
 
-export const useGetPermissionsByCurrentRole = async () => {
-	const [permissions, setPermissions] = useState(null)
+export const useDashboardApi = () => {
+	const [apis, setApis] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
+	let organizedPermissions = []
 
-	try {
-		setIsLoading(true)
+	useEffect(() => {
+		callApi()
+	}, [])
 
-		let url = baseUrl + "/adminUser/rolePermission/getAll"
-		let response = await axios.get(url, headers)
+	let callApi = async () => {
+		try {
+			setIsLoading(true)
 
-		setPermissions(response.data.data)
-	} catch (error) {
-		setErrorMessage(error?.data?.message)
-	}
-	finally {
-		setIsLoading(false)
+			let url = baseUrl + "/adminUser/dashboard"
+			let response = await axios.get(url, headers)
+
+			let sortedArray = response.data.data.apis.sort((a, b) => {
+				a.category - b.category
+			})
+
+			sortedArray.forEach(element => {
+				if (organizedPermissions.length === 0) {
+					organizedPermissions.push({
+						"category": element.category,
+						"apis": [
+							element
+						]
+					})
+				}
+				else {
+					if (organizedPermissions.at(-1).category === element.category) {
+						organizedPermissions.at(-1).apis.push(element)
+					}
+					else {
+						organizedPermissions.push({
+							"category": element.category,
+							"apis": [
+								element
+							]
+						})
+					}
+				}
+			});
+
+			setApis(organizedPermissions)
+
+		} catch (error) {
+			setErrorMessage(error?.data?.message)
+		}
+		finally {
+			setIsLoading(false)
+		}
 	}
 
 	return {
-		permissions,
+		apis,
 		isLoading,
 		errorMessage
 	}
@@ -96,7 +133,6 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 			endpoint: "/admin/category/view",
 			category: "Category",
 		});
-		console.log(response.data)
 		return response;
 	} catch (error) {
 		return error?.response;

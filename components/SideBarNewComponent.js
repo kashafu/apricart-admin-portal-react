@@ -24,7 +24,6 @@ const SideBarNewComponent = ({ allApis, setAllApis }) => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		// await getAllAPIsApi(baseUrl, headers).then((response) => {
 		await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
-			console.log("Phase2", response);
 			let status = checkStatus(response, "");
 			// to get the unique category names from all the apis
 			const unique = [

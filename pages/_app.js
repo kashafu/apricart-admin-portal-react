@@ -8,7 +8,7 @@ import Navbar from "../components/Misc/Navbar";
 import { Provider } from "react-redux";
 import SideBar from "../components/SideBarComponent";
 import { useEffect, useState } from "react";
-import { getAllAPIsApi } from "../utils/ApiCalls";
+import { getAllAPIsApi, useDashboardApi } from "../utils/ApiCalls";
 import {
 	checkStatus,
 	displayErrorToast,
@@ -35,6 +35,10 @@ function MyApp({ Component, pageProps }) {
 	let token = cookies.get("cookies-token");
 	let name = cookies.get("cookies-name");
 
+
+	const { permissions, isLoading, errorMessage } = useDashboardApi()
+
+
 	const getSidebarItems = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
@@ -44,27 +48,27 @@ function MyApp({ Component, pageProps }) {
 		});
 	};
 
-	const getCurrentAddress = (array, status) => {
-		let path = getPathVariable();
-		if (array.some((e) => e.endpoint === path || path === "/admin")) {
-			/* response contains the element we're looking for */
-			setLoading(false);
-			status && setAllApis(array);
-		} else {
-			displayErrorToast(
-				"Unauthorized to use this feature, You have been logged out"
-			);
-			logOutRemoveCookies();
-			router.push("/login");
-		}
-	};
+	// const getCurrentAddress = (array, status) => {
+	// 	let path = getPathVariable();
+	// 	if (array.some((e) => e.endpoint === path || path === "/admin")) {
+	// 		/* response contains the element we're looking for */
+	// 		setLoading(false);
+	// 		status && setAllApis(array);
+	// 	} else {
+	// 		displayErrorToast(
+	// 			"Unauthorized to use this feature, You have been logged out"
+	// 		);
+	// 		logOutRemoveCookies();
+	// 		router.push("/login");
+	// 	}
+	// };
 
-	const getPathVariable = () => {
-		let path = window.location.pathname;
-		if (path === "/admin") return "/admin";
-		let newPath = path.slice(6);
-		return newPath;
-	};
+	// const getPathVariable = () => {
+	// 	let path = window.location.pathname;
+	// 	if (path === "/admin") return "/admin";
+	// 	let newPath = path.slice(6);
+	// 	return newPath;
+	// };
 
 	useEffect(() => {
 		router.pathname !== "/login" && getSidebarItems();
