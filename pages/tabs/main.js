@@ -123,6 +123,9 @@ const MainTabComponent = () => {
 				{/* OFFERS MANAGEMENT */}
 				{selected === 23 && <OfferSaveAPIComponent />}
 				{selected === 24 && <OfferRemoveAPIComponent />}
+
+				{/* ADMIN MANAGEMENT */}
+
 			</section>
 		</section>
 	);
