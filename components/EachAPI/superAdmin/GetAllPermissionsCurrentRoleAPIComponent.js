@@ -16,7 +16,6 @@ const GetAllPermissionsCurrentRoleAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getCurrentRolePermissionsDetailsApi(baseUrl, headers).then(
 			(response) => {
-				console.log(response);
 				let status = checkStatus(response);
 				status && setDetails(response.data.data);
 				setLoading(false);

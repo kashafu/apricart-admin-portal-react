@@ -41,7 +41,6 @@ const UpdateRolesAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await createAndUpdateRoleApi(baseUrl, name, active, roleId, headers).then(
 			(response) => {
-				console.log(response);
 				checkStatus(response, "Role Data Updated");
 				setLoading(false);
 			}
@@ -51,7 +50,6 @@ const UpdateRolesAPIComponent = () => {
 	const getAllRoles = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllRolesApi(baseUrl, headers).then((response) => {
-			console.log(response);
 			let status = checkStatus(response, "");
 			status && setRoleArray(sortAscending(response.data.data));
 			setName(response.data.data[0].name);

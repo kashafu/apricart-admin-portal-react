@@ -60,7 +60,7 @@ const OfferSaveAPIComponent = () => {
 			status && setOfferId(response.data.data.id);
 		});
 	};
-	console.log(input);
+
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />

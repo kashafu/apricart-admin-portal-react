@@ -46,7 +46,6 @@ const UpdateProductCSVAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		// if (file.entries().next())
 		await updateProductCSVApi(baseUrl, file, headers).then((response) => {
-			console.log(response);
 			setLoading(false);
 			checkStatus(response, "File Upload Successful");
 		});

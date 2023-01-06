@@ -33,7 +33,6 @@ export const loginApi = async (
 		let response = await axios.post(url, body, {
 			headers,
 		});
-		console.log(response);
 		if (response.data.status == 1) {
 			if (response.data.data.portal === false) {
 				return {
@@ -156,7 +155,6 @@ export const getAllAPIsPhase2Api = async (baseUrl, headers) => {
 			endpoint: "/v1/category/view",
 			category: "Category",
 		});
-		console.log(response.data)
 		return response;
 	} catch (error) {
 		return error?.response;
@@ -219,8 +217,6 @@ export const uploadImagesApi = async (baseUrl, images) => {
 export const uploadFilesApi = async (baseUrl, files) => {
 	let url = baseUrl + "/options/files/uploads";
 
-	console.log(baseUrl, "baseurl");
-	console.log("FILES", files);
 	try {
 		return await axios.post(url, files, {
 			"Content-Type": "multipart/form-data",
@@ -365,9 +361,7 @@ export const downloadOutOfStockApi = async (baseUrl, summary, headers) => {
 
 export const addProductCSVApi = async (baseUrl, file, headers) => {
 	updateProductCSVApi;
-	console.log("UPDATIOn");
 	let entries = file.entries().next();
-	console.log(entries);
 	const { value } = entries;
 
 	if (value[1] === "undefined" || value[1] === "") {
@@ -916,7 +910,6 @@ export const createAndUpdateRoleApi = async (
 	id,
 	headers
 ) => {
-	console.log(id);
 	let body;
 	let url = baseUrl + "/adminUser/role/saveOrUpdate";
 	if (id.length === 0) {
@@ -975,7 +968,6 @@ export const linkRoleAndPermissionApi = async (
 	let body = { roleId, permissionId };
 	let url = baseUrl + "/adminUser/rolePermission/saveOrUpdate";
 
-	console.log(body);
 	try {
 		return await axios.post(url, body, {
 			headers,

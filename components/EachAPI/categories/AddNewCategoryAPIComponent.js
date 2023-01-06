@@ -91,7 +91,6 @@ const AddNewCategoryAPIComponent = () => {
 	useEffect(() => {
 		fetchCategoryIds();
 	}, []);
-	console.log(inputs);
 	return (
 		<section className="relative px-10">
 			<Loading loading={loading} />

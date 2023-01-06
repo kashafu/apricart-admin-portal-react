@@ -24,7 +24,6 @@ const AssignUserRoleAPIComponent = () => {
 		setNumber(e.target.value);
 	};
 	const handleRoleId = (e) => {
-		console.log(e.target.value);
 		setRoleId(e.target.value);
 	};
 
@@ -33,7 +32,6 @@ const AssignUserRoleAPIComponent = () => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		await assignRoleApi(baseUrl, number, roleId, headers).then((response) => {
-			console.log(response);
 			setLoading(false);
 		});
 	};

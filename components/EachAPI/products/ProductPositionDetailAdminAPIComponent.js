@@ -45,14 +45,12 @@ const ProductPositionDetailAdminAPIComponent = () => {
 			type,
 			headers
 		).then((response) => {
-			console.log(response);
 			let status = checkStatus(response, "");
 			status && handleResponse(response.data.data);
 		});
 	};
 
 	const handleResponse = (response) => {
-		console.log(response);
 		response?.length > 0 ? setDetail(response) : emptyDetail();
 		// getPagination(response.data.total, size);
 		setLoading(false);

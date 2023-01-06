@@ -57,7 +57,6 @@ const UpdatePermissionsAPIComponent = () => {
 	const getAllPermissions = async () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getAllPermissionsApi(baseUrl, headers).then((response) => {
-			console.log(response);
 			let status = checkStatus(response, "");
 			status && setPermissionsArray(response.data.data);
 			let lastIndex = response.data.data.length - 1;
@@ -82,8 +81,7 @@ const UpdatePermissionsAPIComponent = () => {
 					values={permissionsArray.map((each) => each.id)}
 					options={permissionsArray.map(
 						(each) =>
-							`${each.apiName} || status: ${
-								each.active === "Y" ? "Active" : "Inactive"
+							`${each.apiName} || status: ${each.active === "Y" ? "Active" : "Inactive"
 							}`
 					)}
 					position="top"

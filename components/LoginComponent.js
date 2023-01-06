@@ -39,7 +39,6 @@ const Login = () => {
 			router,
 			headers
 		).then((response) => {
-			console.log(response);
 			setLoading(false);
 			if (response.data.status === 2) {
 				displayErrorToast(response.data.message, 1800);

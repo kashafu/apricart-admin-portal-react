@@ -84,7 +84,6 @@ export const checkStatus = (
 	successTimer,
 	errorTimer
 ) => {
-	// console.log(res);
 	if (res === undefined) {
 		displayErrorToast("An error occured. Contact IT Team for support.", 3000);
 		return false;
@@ -103,7 +102,7 @@ export const checkStatus = (
 	} else if (res.status === 0) {
 		toast.error(
 			errorMessage ||
-				"An unknown error occured. Please try again later or contact backend services",
+			"An unknown error occured. Please try again later or contact backend services",
 			{
 				position: "top-center",
 				autoClose: errorTimer || 1500,
@@ -118,7 +117,7 @@ export const checkStatus = (
 	} else if (res.status === 400) {
 		toast.error(
 			errorMessage ||
-				"Make sure all the fields are filled. Make sure the values entered are also valid",
+			"Make sure all the fields are filled. Make sure the values entered are also valid",
 			{
 				position: "top-center",
 				autoClose: errorTimer || 1500,

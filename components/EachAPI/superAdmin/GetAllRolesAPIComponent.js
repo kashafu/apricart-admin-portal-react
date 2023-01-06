@@ -17,7 +17,6 @@ const GetAllRolesAPIComponent = () => {
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response);
 			status && setRoleArray(response.data.data);
-			console.log(response);
 			setLoading(false);
 		});
 	};

@@ -31,12 +31,11 @@ const CreateAndUpdateRolesAPIComponent = () => {
 		const { baseUrl, headers } = getGeneralApiParams();
 		await createAndUpdateRoleApi(baseUrl, name, active, "", headers).then(
 			(response) => {
-				console.log(response);
 				setLoading(false);
 			}
 		);
 	};
-	console.log(name, active);
+
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />

@@ -26,7 +26,6 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 		setLoading(true);
 		const { baseUrl, headers } = getGeneralApiParams();
 		await getPermissionByRoleApi(baseUrl, roleId, headers).then((response) => {
-			console.log(response);
 			let status = checkStatus(response);
 			status && setDetails(response.data.data);
 			!status && setDetails([]);
@@ -35,7 +34,6 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 	};
 
 	const handleRoleId = (e) => {
-		console.log(e.target.value);
 		setRoleId(e.target.value);
 	};
 

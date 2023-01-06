@@ -38,12 +38,11 @@ const CreateAndUpdatePermissionsAPIComponent = () => {
 			active,
 			headers
 		).then((response) => {
-			console.log(response);
 			checkStatus(response, "New Permission Created");
 			setLoading(false);
 		});
 	};
-	console.log(name, active);
+
 	return (
 		<section className="pl-10">
 			<Loading loading={loading} />

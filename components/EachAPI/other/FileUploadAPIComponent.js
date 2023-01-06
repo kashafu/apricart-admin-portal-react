@@ -79,7 +79,6 @@ const FileUploadAPIComponent = () => {
 		// let entries = files.entries().next();
 
 		await uploadFilesApi(baseUrl, files).then((response) => {
-			console.log(response);
 			checkStatus(response);
 		});
 

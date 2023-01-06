@@ -48,7 +48,6 @@ const ImageUploadAPIComponent = () => {
 	};
 
 	const fillFormData = () => {
-		console.log(imageInput);
 		imageInput.forEach((each) => {
 			images.append("files", each);
 		});
@@ -75,7 +74,6 @@ const ImageUploadAPIComponent = () => {
 		let entries = images.entries().next();
 
 		await uploadImagesApi(baseUrl, images).then((response) => {
-			console.log(response);
 			checkStatus(response);
 		});
 

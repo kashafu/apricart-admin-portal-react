@@ -106,7 +106,6 @@ const AddnUpdateCouponAPIComponent = () => {
 		e.preventDefault();
 		const { baseUrl, headers } = getGeneralApiParams();
 		await addCouponApi(baseUrl, inputs, headers).then((response) => {
-			console.log(response);
 			checkStatus(response, "Coupon created successfully");
 		});
 	};
@@ -129,7 +128,6 @@ const AddnUpdateCouponAPIComponent = () => {
 		fetchCategoryIds();
 	}, []);
 
-	console.log(inputs);
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
