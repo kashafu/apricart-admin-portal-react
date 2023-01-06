@@ -38,15 +38,28 @@ import UploadProductImageAPIComponent from "../../components/EachAPI/products/Up
 import ProductIsActiveAPIComponent from "../../components/EachAPI/products/ProductIsActiveAPIComponent";
 import EditBannersAPIComponent from "../../components/EachAPI/banners/EditBannersAPIComponent";
 
+// SUPER ADMIN COMPONENTS
+import CreateAndUpdatePermissionsAPIComponent from "../../components/EachAPI/superAdmin/CreateAndUpdatePermissionsAPIComponent"
+import AssignUserRoleAPIComponent from "../../components/EachAPI/superAdmin/AssignUserRoleAPIComponent"
+import CreateAndUpdateRolesAPIComponent from "../../components/EachAPI/superAdmin/CreateAndUpdateRolesAPIComponent"
+import GetAllActivePermissionsAPIComponent from "../../components/EachAPI/superAdmin/GetAllActivePermissionsAPIComponent"
+import GetAllActiveRolesAPIComponent from "../../components/EachAPI/superAdmin/GetAllActiveRolesAPIComponent"
+import GetAllPermissionsAPIComponent from "../../components/EachAPI/superAdmin/GetAllPermissionsAPIComponent"
+import GetAllPermissionsByRoleAPIComponent from "../../components/EachAPI/superAdmin/GetAllPermissionsByRoleAPIComponent"
+import GetAllPermissionsCurrentRoleAPIComponent from "../../components/EachAPI/superAdmin/GetAllPermissionsCurrentRoleAPIComponent"
+import GetAllRolesAPIComponent from "../../components/EachAPI/superAdmin/GetAllRolesAPIComponent"
+import LinkRoleAndPermissionsAPIComponent from "../../components/EachAPI/superAdmin/LinkRoleAndPermissionsAPIComponent"
+import UpdatePermissionsAPIComponent from "../../components/EachAPI/superAdmin/UpdatePermissionsAPIComponent"
+
 const MainTabComponent = () => {
 	const dispatch = useDispatch();
 	const tabs = useSelector((state) => state.recent.tabs);
 	const each = useSelector((state) => state.recent.recents);
 	const [allTabs, setAllTabs] = useState(tabs);
-	const [selected, setSelected] = useState(each[0]?.id || allTabs[0]?.id);
+	const [selected, setSelected] = useState(each[0]?.endpoint || allTabs[0]?.endpoint);
 
 	const handleSelect = (each) => {
-		setSelected(each.id);
+		setSelected(each.endpoint);
 		dispatch(addToRecent(each));
 	};
 
@@ -63,9 +76,9 @@ const MainTabComponent = () => {
 			<section className="w-full flex cursor-pointer border-b-slate-300 border-b-[1px] overflow-x-auto">
 				{allTabs.map((each) => (
 					<div
-						key={each.id}
+						key={each.endpoint}
 						className={
-							selected === each.id
+							selected === each.endpoint
 								? "p-2 mx-2 border-b-main-blue border-b-[1px] text-main-blue shadow-inner duration-200 rounded-t-2xl"
 								: "p-2 mx-2 duration-200 rounded-t-2xl"
 						}
@@ -77,14 +90,14 @@ const MainTabComponent = () => {
 			</section>
 			<section>
 				{/* CATEGORY */}
-				{selected === 0 && <ViewAllCategories />}
-				{selected === 21 && <AddNewCategoryAPIComponent />}
-				{selected === 22 && <UpdateCategoryAPIComponent />}
-				{selected === 25 && <UpdateCategoryImageAPIComponent />}
-				{selected === 26 && <UpdateCategoryBannerAPIComponent />}
+				{selected === "/v1/category/view" && <ViewAllCategories />}
+				{selected === "/v1/category/add" && <AddNewCategoryAPIComponent />}
+				{selected === "/v1/category/update" && <UpdateCategoryAPIComponent />}
+				{selected === "/v1/category/update/banner" && <UpdateCategoryBannerAPIComponent />}
+				{selected === "/v1/category/update/image" && <UpdateCategoryImageAPIComponent />}
 
 				{/* PRODUCTS */}
-				{selected === 1 && <ProductAdminSearchAPIComponent />}
+				{selected === "/v1/products/search" && <ProductAdminSearchAPIComponent />}
 				{selected === 2 && <ProductAdminDetailAPIComponent />}
 				{selected === 3 && <ProductStockDetailAdminAPIComponent />}
 				{selected === 5 && <UpdateProductCSVAPIComponent />}
@@ -95,37 +108,57 @@ const MainTabComponent = () => {
 				{selected === 33 && <UploadProductImageAPIComponent />}
 
 				{/* REPORTS */}
-				{selected === 4 && <GetProductReportsAPIComponent />}
-				{selected === 10 && <GetProductsOutOfStockAPIComponent />}
-				{selected === 11 && <ProductPriceUpdatedLast24hAPIComponent />}
-				{selected === 13 && <GetUsersReportsAPIComponent />}
-				{selected === 14 && <GetOrdersReportsAPIComponent />}
-				{selected === 31 && <GetAbundantCartReportsAPIComponent />}
+				{selected === "/v1/download/users" && <GetUsersReportsAPIComponent />}
+				{selected === "/v1/download/products" && <GetProductReportsAPIComponent />}
+				{selected === "/v1/download/outofstock" && <GetProductsOutOfStockAPIComponent />}
+				{selected === "/v1/download/products/price/updatedinlast24hours" && <ProductPriceUpdatedLast24hAPIComponent />}
+				{selected === "/v1/download/orders" && <GetOrdersReportsAPIComponent />}
+				{selected === "/v1/download/abundantcart" && <GetAbundantCartReportsAPIComponent />}
 
 				{/* COUPONS */}
-				{selected === 12 && <AddnUpdateCouponAPIComponent />}
+				{selected === "/v1/coupons/add" && <AddnUpdateCouponAPIComponent />}
 
 				{/* BANNER */}
 				{selected === 15 && <ThankyouImageAddUpdateAPIComponent />}
-				{selected === 29 && <SaveBannersAPIComponent />}
+				{selected === "/v1/banners/add" && <SaveBannersAPIComponent />}
 				{selected === 30 && <BannersAPIComponent />}
 				{/* {selected === 30 && <EditBannersAPIComponent />} */}
 
 				{/* ALERTS & ANNOUNCEMENT */}
-				{selected === 16 && <NewNotificationSendAPIComponent />}
-				{selected === 17 && <TickerUpdateAPIComponent />}
-				{selected === 18 && <IsContinueAPIComponent />}
-				{selected === 19 && <RecommendedUpdateAPIComponent />}
+				{selected === "/v1/misc/ticker" && <TickerUpdateAPIComponent />}
+				{selected === "/v1/misc/notification" && <NewNotificationSendAPIComponent />}
+				{selected === "/v1/misc/isContinue" && <IsContinueAPIComponent />}
+				{selected === "/v1/misc/recommended" && <RecommendedUpdateAPIComponent />}
 				{selected === 20 && <WebUpdateAPIComponent />}
 				{selected === 27 && <PopupRedirectionUpdateAPIComponent />}
-				{selected === 28 && <UpdateWelcomeVideoAPIComponent />}
+				{selected === "/v1/misc/welcomevideo" && <UpdateWelcomeVideoAPIComponent />}
+				{selected === "/v1/misc/thankyouimage" && <p></p>}
 
 				{/* OFFERS MANAGEMENT */}
-				{selected === 23 && <OfferSaveAPIComponent />}
-				{selected === 24 && <OfferRemoveAPIComponent />}
+				{selected === "/v1/offers/add" && <OfferSaveAPIComponent />}
+				{selected === "/v1/offers/remove" && <OfferRemoveAPIComponent />}
+				{selected === "/v1/offers/all" && <p></p>}
+				{selected === "/v1/offers/detail" && <p></p>}
 
 				{/* ADMIN MANAGEMENT */}
+				{/* TODO ADd a is update field which will take id if u wanna update */}
+				{selected === "/v1/adminUser/role/saveOrUpdate" && <CreateAndUpdateRolesAPIComponent />}
+				{selected === "/v1/adminUser/linkRole" && <AssignUserRoleAPIComponent />}
+				{selected === "/v1/adminUser/role/getAll" && <GetAllRolesAPIComponent />}
+				{selected === "/v1/adminUser/role/getAllActive" && <GetAllActiveRolesAPIComponent />}
+				{selected === "/v1/adminUser/rolePermission/saveOrUpdate" && <LinkRoleAndPermissionsAPIComponent />}
+				{/* TODO ADd a is update field which will take id if u wanna update */}
+				{selected === "/v1/adminUser/permission/saveOrUpdate" && <CreateAndUpdatePermissionsAPIComponent />}
+				{selected === "/v1/adminUser/rolePermission/getAll" && <GetAllPermissionsCurrentRoleAPIComponent />}
+				{selected === "/v1/adminUser/rolePermission/getByRoleId" && <GetAllPermissionsByRoleAPIComponent />}
+				{selected === "/v1/adminUser/permission/getAll" && <GetAllPermissionsAPIComponent />}
+				{selected === "/v1/adminUser/permission/getAllActive" && <GetAllActivePermissionsAPIComponent />}
 
+				{/* ERP */}
+				{selected === "/v1/erp/category/add" && <p></p>}
+				{selected === "/v1/erp/category/update" && <p></p>}
+				{selected === "/v1/erp/products/add" && <p></p>}
+				{selected === "/v1/erp/products/update" && <p></p>}
 			</section>
 		</section>
 	);

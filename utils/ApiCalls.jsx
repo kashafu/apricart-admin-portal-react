@@ -153,9 +153,10 @@ export const getAllAPIsPhase2Api = async (baseUrl, headers) => {
 		response.data.data.apis.unshift({
 			id: 0,
 			name: "View Category",
-			endpoint: "/admin/category/view",
+			endpoint: "/v1/category/view",
 			category: "Category",
 		});
+		console.log(response.data)
 		return response;
 	} catch (error) {
 		return error?.response;
