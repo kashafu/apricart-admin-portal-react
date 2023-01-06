@@ -9,6 +9,7 @@ import {
 import CustomButton from "../../Misc/CustomButton";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 
 const TickerUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -49,13 +50,16 @@ const TickerUpdateAPIComponent = () => {
 			setLoading(false);
 			checkStatus(response);
 		});
-	};
+	}
+
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Ticker Update</Heading> */}
-			<form>
-				<section className="grid grid-cols-2 pt-6">
+		<SingleAPILayout
+			heading={"Update Ticker"}
+			loading={loading}
+			buttonOnClick={(e) => submitHandler(e)}
+			buttonText={"Update"}
+			gridItems={
+				<>
 					<CustomSelectInput
 						position={"top"}
 						onChange={(e) => handleProdType(e)}
@@ -75,7 +79,9 @@ const TickerUpdateAPIComponent = () => {
 						values={["karachi", "peshawar"]}
 						options={["Karachi", "Peshawar"]}
 					/>
-				</section>
+				</>
+			}
+			rowItems={
 				<div className="relative m-2">
 					<textarea
 						className="z-20 block px-2.5 pb-2.5 py-4 w-full text-sm text-gray-900 bg-transparent rounded-md border-[1.5px] appearance-none border-slate-300 focus:outline-none focus:ring-0 focus:border-main-blue peer"
@@ -92,12 +98,9 @@ const TickerUpdateAPIComponent = () => {
 						Enter Ticker Text
 					</label>
 				</div>
-				<CustomButton onClick={(e) => submitHandler(e)} width="1/3">
-					Update
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
+			}
+		/>
+	)
+}
 
 export default TickerUpdateAPIComponent;
