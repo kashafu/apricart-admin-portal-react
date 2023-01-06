@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 
-import CustomButton from "../../Misc/CustomButton";
 import CustomInput from "../../Misc/CustomInput";
 import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
 import { isContinueUpdateApi } from "../../../utils/ApiCalls";
-import Loading from "../../../utils/Loading";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 
 const IsContinueAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -51,45 +49,47 @@ const IsContinueAPIComponent = () => {
 			setLoading(false);
 			checkStatus(response, "isContinue text Updated");
 		});
-	};
+	}
+
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Is Continue</Heading> */}
-			<form className="grid grid-cols-2 pt-6">
-				<CustomInput
-					heading={"Enter Text"}
-					position={"top"}
-					type={"text"}
-					value={text}
-					onChange={handleText}
-					required={true}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["b2b", "cus"]}
-					options={["Online Delivery", "Customer"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomSelectInput
-					position={"bottom"}
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-			</form>
-			<CustomButton onClick={handleSubmit} type={"submit"} width={"1/3"}>
-				Save
-			</CustomButton>
-		</section>
-	);
+		<SingleAPILayout
+			heading={"Is Continue"}
+			loading={loading}
+			buttonOnClick={(e) => handleSubmit(e)}
+			buttonText={"Save"}
+			gridItems={
+				<>
+					<CustomInput
+						heading={"Enter Text"}
+						position={"top"}
+						type={"text"}
+						value={text}
+						onChange={handleText}
+						required={true}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleProdType(e)}
+						heading={"Select Product Type"}
+						values={["b2b", "cus"]}
+						options={["Online Delivery", "Customer"]}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleOrderType(e)}
+						heading={"Select Order Type"}
+						values={["delivery", "pickup"]}
+						options={["Delivery", "Pick up"]}
+					/>
+					<CustomSelectInput
+						position={"bottom"}
+						onChange={(e) => handleCity(e)}
+						heading={"Select City"}
+						values={["karachi", "peshawar"]}
+						options={["Karachi", "Peshawar"]}
+					/>
+				</>
+			}
+		/>
+	)
 };
 
 export default IsContinueAPIComponent;
