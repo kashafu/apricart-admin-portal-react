@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-	getAllRolesApi,
-	getPermissionByRoleApi,
-} from "../../../utils/ApiCalls";
-import {
-	checkStatus,
-	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
+import { useEffect, useState } from "react";
+
+import { getAllRolesApi, getPermissionByRoleApi } from "../../../utils/ApiCalls";
+import { checkStatus, getGeneralApiParams } from "../../../utils/GeneralVariables";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
 
 const GetAllPermissionsByRoleAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
@@ -20,7 +13,11 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 		{
 			name: "Loading...",
 		},
-	]);
+	])
+
+	useEffect(() => {
+		getAllRoles();
+	}, [])
 
 	const handleSubmit = async () => {
 		setLoading(true);
@@ -46,42 +43,44 @@ const GetAllPermissionsByRoleAPIComponent = () => {
 		});
 	};
 
-	useEffect(() => {
-		getAllRoles();
-	}, []);
 	return (
-		<section className="pl-10">
-			<Loading loading={loading}></Loading>
-			<Heading>Get All Permissions by Role</Heading>
-			<CustomSelectInput
-				onChange={(e) => handleRoleId(e)}
-				heading={"Role Id"}
-				values={roleArray.map((each) => each.id)}
-				options={roleArray.map((each) => each.name)}
+		<>
+			<SingleAPILayout
+				heading={"Get All Permissions by Role"}
+				loading={loading}
+				buttonOnClick={(e) => handleSubmit(e)}
+				buttonText={"Get All Permissions"}
+				rowItems={
+					<CustomSelectInput
+						onChange={(e) => handleRoleId(e)}
+						heading={"Role Id"}
+						values={roleArray.map((each) => each.id)}
+						options={roleArray.map((each) => each.name)}
+					/>
+				}
 			/>
-			<CustomButton width={"1/3"} onClick={handleSubmit}>
-				Get All Permissions
-			</CustomButton>
-			<div className="grid grid-cols-6 border-b-[1px] w-full bg-white border-main-blue">
-				<div></div>
-				<div>ID</div>
-				<div>API Name</div>
-				<div className="col-span-2">API Endpoint</div>
-				<div>Active</div>
-			</div>
-			{details?.map((each) => (
-				<section key={each.id} className="grid grid-cols-6 border">
+			<div>
+				<div className="grid grid-cols-6 border-b-[1px] w-full bg-white border-main-blue">
 					<div></div>
-					<div>{each.permission.id}</div>
-					<div>{each.permission.apiName || "-"}</div>
-					<div className="col-span-2 text-ellipsis">
-						{each.permission.apiURL}
-					</div>
-					<div>{each.permission.active}</div>
-				</section>
-			))}
-		</section>
-	);
-};
+					<div>ID</div>
+					<div>API Name</div>
+					<div className="col-span-2">API Endpoint</div>
+					<div>Active</div>
+				</div>
+				{details?.map((each) => (
+					<section key={each.id} className="grid grid-cols-6 border">
+						<div></div>
+						<div>{each.permission.id}</div>
+						<div>{each.permission.apiName || "-"}</div>
+						<div className="col-span-2 text-ellipsis">
+							{each.permission.apiURL}
+						</div>
+						<div>{each.permission.active}</div>
+					</section>
+				))}
+			</div>
+		</>
+	)
+}
 
-export default GetAllPermissionsByRoleAPIComponent;
+export default GetAllPermissionsByRoleAPIComponent

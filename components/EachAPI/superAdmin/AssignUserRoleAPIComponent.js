@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { assignRoleApi, getAllRolesApi } from "../../../utils/ApiCalls";
 import {
 	checkStatus,
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 import CustomInput from "../../Misc/CustomInput";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
 
 const AssignUserRoleAPIComponent = () => {
 	const [loading, setLoading] = useState(false);
@@ -47,31 +45,33 @@ const AssignUserRoleAPIComponent = () => {
 
 	useEffect(() => {
 		getAllRoles();
-	}, []);
-	return (
-		<section className="pl-10">
-			<Loading loading={loading} />
-			<Heading>Assign Role to User</Heading>
-			<form action="" method="POST">
-				<CustomInput
-					type={"number"}
-					heading={"User Phone Number"}
-					placeholder={"eg. 3331234567"}
-					value={number}
-					onChange={(e) => handleNumber(e)}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleRoleId(e)}
-					heading={"Role Id"}
-					values={roleArray.map((each) => each.id)}
-					options={roleArray.map((each) => each.name)}
-				/>
-				<CustomButton width={"1/3"} onClick={handleSubmit}>
-					Assign Role
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
+	}, [])
 
-export default AssignUserRoleAPIComponent;
+	return (
+		<SingleAPILayout
+			heading={"Assign Role to User"}
+			loading={loading}
+			buttonOnClick={(e) => handleSubmit(e)}
+			buttonText={"Create Role"}
+			rowItems={
+				<>
+					<CustomInput
+						type={"number"}
+						heading={"User Phone Number"}
+						placeholder={"eg. 3331234567"}
+						value={number}
+						onChange={(e) => handleNumber(e)}
+					/>
+					<CustomSelectInput
+						onChange={(e) => handleRoleId(e)}
+						heading={"Role Id"}
+						values={roleArray.map((each) => each.id)}
+						options={roleArray.map((each) => each.name)}
+					/>
+				</>
+			}
+		/>
+	)
+}
+
+export default AssignUserRoleAPIComponent

@@ -146,6 +146,7 @@ const MainTabComponent = () => {
 				{selected === "/v1/adminUser/linkRole" && <AssignUserRoleAPIComponent />}
 				{selected === "/v1/adminUser/role/getAll" && <GetAllRolesAPIComponent />}
 				{selected === "/v1/adminUser/role/getAllActive" && <GetAllActiveRolesAPIComponent />}
+				{/* check this api for formatting */}
 				{selected === "/v1/adminUser/rolePermission/saveOrUpdate" && <LinkRoleAndPermissionsAPIComponent />}
 				{/* TODO ADd a is update field which will take id if u wanna update */}
 				{selected === "/v1/adminUser/permission/saveOrUpdate" && <CreateAndUpdatePermissionsAPIComponent />}
