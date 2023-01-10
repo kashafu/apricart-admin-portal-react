@@ -14,6 +14,7 @@ import {
 	updateRen,
 } from "../../../utils/GeneralVariables";
 import Loading from "../../../utils/Loading";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 import CustomButton from "../../Misc/CustomButton";
 import CustomSelectInput from "../../Misc/CustomSelectInput";
 import Heading from "../../Misc/Heading";
@@ -26,11 +27,15 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 			name: "Loading...",
 		},
 	]);
-
 	const [permissionArray, setPermissionArray] = useState([]);
 	// Array to contain permissions for this role
 	const [linked, setLinked] = useState([]);
 	const [roleId, setRoleId] = useState("");
+
+	useEffect(() => {
+		getAllRoles();
+		getAllPermissions();
+	}, [])
 
 	const handleRoleId = (e) => {
 		getAllPermissionsByRole(e.target.value);
@@ -114,7 +119,7 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		});
 
 		return tempArr;
-	};
+	}
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
@@ -127,17 +132,45 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 				setLoading(false);
 			}
 		);
-	};
+	}
 
-	useEffect(() => {
-		getAllRoles();
-		getAllPermissions();
-	}, []);
+	// return (
+	// 	<SingleAPILayout
+	// 		heading={"Assign Permissions to Role"}
+	// 		loading={loading}
+	// 		buttonOnClick={(e) => handleSubmit(e)}
+	// 		buttonText={"Assign Roles"}
+	// 		rowItems={
+	// 			<CustomSelectInput
+	// 				onChange={(e) => handleRoleId(e)}
+	// 				heading={"Role Name"}
+	// 				values={roleArray.map((each) => each.id)}
+	// 				options={roleArray.map((each) => each.name)}
+	// 			/>
+	// 		}
+	// 	>
+	// 		<div className={`w-full grid grid-cols-5`}>
+	// 			<div>
+	// 				<p className="ml-2 font-nunito">Permissions</p>
+	// 			</div>
+	// 			<div className="col-span-1 lg:hidden" />
+	// 			<div className="col-span-3 relative pr-2">
+	// 				<MultiSelect
+	// 					className="col-span-2 border-[1px] border-gray-800"
+	// 					options={permissionArray}
+	// 					value={linked}
+	// 					onChange={setLinked}
+	// 					labelledBy="Select"
+	// 				/>
+	// 			</div>
+	// 		</div>
+	// 	</SingleAPILayout>
+	// )
 
 	return (
-		<section className="pl-10">
+		<section className="pl-10 pt-6">
 			<Loading loading={loading} />
-			<Heading>Assign Permissions to Role</Heading>
+			{/* <Heading>Assign Permissions to Role</Heading> */}
 			<form action="" method="POST">
 				<CustomSelectInput
 					onChange={(e) => handleRoleId(e)}
