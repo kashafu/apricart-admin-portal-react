@@ -1,52 +1,50 @@
-import { ToastContainer } from "react-toastify";
-import Cookies from "universal-cookie";
-import axios from "axios";
-import "../styles/globals.css";
-import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify"
+import Cookies from "universal-cookie"
+import axios from "axios"
+import "../styles/globals.css"
+import { useRouter } from "next/router"
 
-import Navbar from "../components/Misc/Navbar";
-import { Provider } from "react-redux";
+import Navbar from "../components/Misc/Navbar"
+import { Provider } from "react-redux"
 
-import { useEffect, useState } from "react";
-import { getAllAPIsApi, useDashboardApi } from "../utils/ApiCalls";
+import { useEffect, useState } from "react"
+import { getAllAPIsApi, useDashboardApi } from "../utils/ApiCalls"
 import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
 	logOutRemoveCookies,
-} from "../utils/GeneralVariables";
-import SideBar from "../components/SideBar";
-import { store } from "../Redux/store";
-import { ConfigProvider } from "react-avatar";
-import Head from "next/head";
+} from "../utils/GeneralVariables"
+import SideBar from "../components/SideBar"
+import { store } from "../Redux/store"
+import { ConfigProvider } from "react-avatar"
+import Head from "next/head"
 
 function MyApp({ Component, pageProps }) {
-	const router = useRouter();
-	const cookies = new Cookies();
+	const router = useRouter()
+	const cookies = new Cookies()
 	// to get header from cookies by default
 	axios.defaults.headers.common["Authorization"] =
-		"Bearer " + cookies.get("cookies-token");
+		"Bearer " + cookies.get("cookies-token")
 
 	// trigger to show api list
-	const [apiList, setApiList] = useState(false);
+	const [apiList, setApiList] = useState(false)
 	// allApis are the fetched apis
-	const [allApis, setAllApis] = useState([]);
-	const [loading, setLoading] = useState(true);
-	let token = cookies.get("cookies-token");
-	let name = cookies.get("cookies-name");
-
+	const [allApis, setAllApis] = useState([])
+	const [loading, setLoading] = useState(true)
+	let token = cookies.get("cookies-token")
+	let name = cookies.get("cookies-name")
 
 	// const { permissions, isLoading, errorMessage } = useDashboardApi()
 
-
 	const getSidebarItems = async () => {
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
 		await getAllAPIsApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "");
-			setLoading(false);
+			let status = checkStatus(response, "")
+			setLoading(false)
 			// status ? getCurrentAddress(response.data.data.apis, status) : "";
-		});
-	};
+		})
+	}
 
 	// const getCurrentAddress = (array, status) => {
 	// 	let path = getPathVariable();
@@ -71,8 +69,8 @@ function MyApp({ Component, pageProps }) {
 	// };
 
 	useEffect(() => {
-		router.pathname !== "/login" && getSidebarItems();
-	}, [token, router]);
+		router.pathname !== "/login" && getSidebarItems()
+	}, [token, router])
 
 	return (
 		<Provider store={store}>
@@ -96,7 +94,9 @@ function MyApp({ Component, pageProps }) {
 					)}
 					<section
 						className={
-							router.pathname === "/login" ? "grow" : "grow ml-16 mt-12"
+							router.pathname === "/login"
+								? "grow"
+								: "grow ml-16 mt-12"
 						}
 					>
 						<Component {...pageProps} />
@@ -105,7 +105,7 @@ function MyApp({ Component, pageProps }) {
 				</div>
 			</ConfigProvider>
 		</Provider>
-	);
+	)
 }
 
-export default MyApp;
+export default MyApp

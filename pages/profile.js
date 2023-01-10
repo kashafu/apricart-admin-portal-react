@@ -1,18 +1,19 @@
-import { useState } from "react";
-import Avatar from "react-avatar";
-import Cookies from "universal-cookie";
-import CustomInput from "../../components/Misc/CustomInput";
+import { useState } from "react"
+import Avatar from "react-avatar"
+import Cookies from "universal-cookie"
 
-const UserAPIPage = () => {
-	const cookies = new Cookies();
+import CustomInput from "../components/Misc/CustomInput"
 
-	let name = cookies.get("cookies-name");
-	let email = cookies.get("cookies-email");
-	let phoneNumber = cookies.get("cookies-phoneNumber");
+const ProfilePage = () => {
+	const cookies = new Cookies()
 
-	const [newName, setNewName] = useState(name);
-	const [newEmail, setNewEmail] = useState(email);
-	const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber);
+	let name = cookies.get("cookies-name")
+	let email = cookies.get("cookies-email")
+	let phoneNumber = cookies.get("cookies-phoneNumber")
+
+	const [newName, setNewName] = useState(name)
+	const [newEmail, setNewEmail] = useState(email)
+	const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber)
 
 	return (
 		<div className="w-full h-full bg-slate-100 flex items-center justify-center font-nunito">
@@ -65,7 +66,7 @@ const UserAPIPage = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default UserAPIPage;
+export default ProfilePage
