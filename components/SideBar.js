@@ -1,54 +1,50 @@
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { AiFillApi } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
-import { getAllAPIsApi, getAllAPIsPhase2Api, useDashboardApi } from "../utils/ApiCalls";
-import { FiChevronRight } from "react-icons/fi";
-import { TbApi } from "react-icons/tb";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { AiOutlineUser } from "react-icons/ai"
+import { getAllAPIsPhase2Api } from "../utils/ApiCalls"
+import { FiChevronRight } from "react-icons/fi"
+import { TbApi } from "react-icons/tb"
 
-import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables";
-import { addToRecent, selectTabs } from "../Redux/Recents/recentsSlice";
-import { useDispatch } from "react-redux";
+import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables"
+import { addToRecent, selectTabs } from "../Redux/Recents/recentsSlice"
+import { useDispatch } from "react-redux"
 
 const SideBar = ({ allApis, setAllApis }) => {
-	const dispatch = useDispatch();
-	const router = useRouter();
-	const handleProductRoute = () => router.push("/home/product");
-	const handleUserRoute = () => router.push("/home/user");
-	const [categories, setCategories] = useState([]);
-	const [show, setShow] = useState(false);
-	const [selected, setSelected] = useState("");
-
-	// useDashboardApi()
+	const dispatch = useDispatch()
+	const router = useRouter()
+	const handleProductRoute = () => router.push("/home/product")
+	const handleUserRoute = () => router.push("/home/user")
+	const [categories, setCategories] = useState([])
+	const [show, setShow] = useState(false)
+	const [selected, setSelected] = useState("")
 
 	const getCategories = async () => {
-		const { baseUrl, headers } = getGeneralApiParams();
-		// await getAllAPIsApi(baseUrl, headers).then((response) => {
+		const { baseUrl, headers } = getGeneralApiParams()
 		await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "");
+			let status = checkStatus(response, "")
 			// to get the unique category names from all the apis
 			const unique = [
-				...new Set(response?.data?.data?.apis?.map((each) => each.category)),
-			];
-			status ? setCategories(unique) : "";
-			status ? setAllApis(response.data.data.apis, status) : "";
-		});
-	};
+				...new Set(
+					response?.data?.data?.apis?.map((each) => each.category)
+				),
+			]
+			status ? setCategories(unique) : ""
+			status ? setAllApis(response.data.data.apis, status) : ""
+		})
+	}
 
 	const handleCategorySelect = (each) => {
-		setSelected(each);
-		let tabs = allApis?.filter((item) => item.category === each);
-		dispatch(addToRecent(tabs[0]));
-		dispatch(selectTabs(tabs));
-		const stripped = each.replace(/\s+/g, "");
-		router.push(`/tabs/${stripped.toLowerCase()}`);
-	};
+		setSelected(each)
+		let tabs = allApis?.filter((item) => item.category === each)
+		dispatch(addToRecent(tabs[0]))
+		dispatch(selectTabs(tabs))
+		const stripped = each.replace(/\s+/g, "")
+		router.push(`/tabs/${stripped.toLowerCase()}`)
+	}
 
 	useEffect(() => {
-		getCategories();
-	}, []);
+		getCategories()
+	}, [])
 
 	return (
 		<section className="fixed w-16 bg-slate-900 hover:w-min duration-300 h-screen pt-16">
@@ -103,7 +99,7 @@ const SideBar = ({ allApis, setAllApis }) => {
 				</div>
 			</div>
 		</section>
-	);
-};
+	)
+}
 
-export default SideBar;
+export default SideBar
