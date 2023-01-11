@@ -5,6 +5,7 @@ import CustomSingleImageInput from "../../Misc/CustomSingleImageInput"
 import {
 	getAllCategoriesApi,
 	updateCategoryBannerApi,
+	useCategoriesApi,
 } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
@@ -20,17 +21,27 @@ const UpdateCategoryBannerAPIComponent = () => {
 	var bannerData = new FormData()
 	const [loading, setLoading] = useState(false)
 	const [ren, setRen] = useState(false)
+	const [selectedOrderType, setSelectedOrderType] = useState({
+		name: "Online Delivery",
+		id: {
+			"prodType": "b2b",
+			"orderType": "delivery"
+		}
+	})
 	const [input, setInput] = useState({
 		bannerUrlApp: "",
 		bannerUrlWeb: "",
 		categoryId: "",
+		city: "karachi",
+		prodType: selectedOrderType.id.prodType,
+		orderType: selectedOrderType.id.orderType,
 	})
-	const [categories, setCategories] = useState([])
-	const { bannerUrlApp, bannerUrlWeb, categoryId } = input
+
+	const { categories, setCity, setOrderType, setProdType, isLoading } = useCategoriesApi()
 
 	useEffect(() => {
-		fetchCategoryIds()
-	}, [])
+		setLoading(isLoading)
+	}, [isLoading])
 
 	const handleWebImage = (e) => {
 		let verify = e.target.files[0]
@@ -62,23 +73,29 @@ const UpdateCategoryBannerAPIComponent = () => {
 		setInput({ ...input, categoryId: e.target.value })
 	}
 
-	const fetchCategoryIds = async () => {
-		const { baseUrl } = getGeneralApiParams()
-		await getAllCategoriesApi(baseUrl, {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		}).then((response) => {
-			setInput({ ...input, categoryId: response.data.data[0].id })
-			let status = checkStatus(response, "")
-			status && setCategories(response.data.data)
-			setLoading(false)
-		})
+	const handleCity = (e) => {
+		setCity(e.target.value)
+		setInput({ ...input, city: e.target.value })
+	}
+
+	const handleOrderType = (e) => {
+		let json = JSON.parse(e.target.value)
+		setSelectedOrderType(json)
+
+		setOrderType(json.id.orderType)
+		setInput({ ...input, orderType: json.id.orderType })
+
+		setProdType(json.id.prodType)
+		setInput({ ...input, prodType: json.id.prodType })
 	}
 
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp)
-		bannerData.append("web", bannerUrlWeb)
-		bannerData.append("category_id", categoryId)
+		bannerData.append("app", input.bannerUrlApp)
+		bannerData.append("web", input.bannerUrlWeb)
+		bannerData.append("category_id", input.categoryId)
+		bannerData.append("city", input.city)
+		bannerData.append("order_type", input.orderType)
+		bannerData.append("prod_type", input.prodType)
 	}
 
 	const submitHandler = async (e) => {
@@ -102,10 +119,50 @@ const UpdateCategoryBannerAPIComponent = () => {
 				gridItems={
 					<>
 						<CustomSelectInput
-							onChange={(e) => handleCategoryId(e)}
+							heading={"Select City"}
+							customOnChange={handleCity}
+							value={input.city}
+							options={[
+								{
+									name: "Karachi",
+									id: "karachi"
+								},
+								{
+									name: "Peshawar",
+									id: "peshawar"
+								}]
+							}
+							optionText="name"
+						/>
+						<CustomSelectInput
+							heading={"Select Order Type"}
+							customOnChange={handleOrderType}
+							customValue
+							value={selectedOrderType}
+							options={[
+								{
+									name: "Online Delivery",
+									id: {
+										"prodType": "b2b",
+										"orderType": "delivery"
+									}
+								}, {
+									name: "Click n Collect",
+									id: {
+										"prodType": "cus",
+										"orderType": "pickup"
+									}
+								}
+							]}
+							optionText="name"
+						/>
+						<CustomSelectInput
 							heading={"Select Category"}
-							values={categories.map((each) => each.id)}
-							options={categories.map((each) => each.name)}
+							placeholder="Select Category"
+							customOnChange={handleCategoryId}
+							value={input.categoryId}
+							options={categories}
+							optionText="name"
 						/>
 						<CustomSingleImageInput
 							heading={"Upload Web Banner"}

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 
 import { getGeneralApiParams } from "../utils/GeneralVariables"
 import { initializeApis } from "../Redux/apis.slice"
+import { useRouter } from "next/router"
 
 let { baseUrl, headers } = getGeneralApiParams()
 
@@ -877,6 +878,38 @@ export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
 	} catch (error) {
 		return error?.response
 	}
+}
+
+export const useCategoriesApi = () => {
+	const [city, setCity] = useState("")
+	const [prodType, setProdType] = useState("")
+	const [orderType, setOrderType] = useState("")
+	const [isLoading, setIsLoading] = useState(true)
+	const [categories, setCategories] = useState(null)
+	const [errorMessage, setErrorMessage] = useState("")
+
+	useEffect(() => {
+		callApi()
+	}, [city, prodType, orderType])
+
+	const callApi = async () => {
+		setIsLoading(true)
+		let { headers, baseUrl } = getGeneralApiParams()
+		let url = baseUrl + `/catalog/categories?level=all&city=${city}&userid=abc123&client_type=apricart&prod_type=${prodType}&order_type=${orderType}&lang=en`
+
+		try {
+			let apiResponse = await axios.get(url, {
+				headers: headers,
+			})
+			setCategories(apiResponse.data.data)
+		} catch (error) {
+			setErrorMessage(error?.response?.data?.message)
+		} finally {
+			setIsLoading(false)
+		}
+	}
+
+	return { isLoading, categories, errorMessage, setOrderType, setCity, setProdType }
 }
 
 export const getAllCategoriesApi = async (baseUrl, headers) => {
