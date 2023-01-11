@@ -56,7 +56,7 @@ const UpdateCategoryImageAPIComponent = () => {
 		e.preventDefault();
 		setLoading(true);
 		const { baseUrl } = getGeneralApiParams();
-		await fillFormData();
+		fillFormData();
 		await updateCategoryImageApi(baseUrl, bannerData).then((response) => {
 			setLoading(false);
 			checkStatus(response);

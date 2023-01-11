@@ -1,110 +1,128 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react"
+import FormData from "form-data"
 
-import CustomInput from "../../Misc/CustomInput";
-import CustomSingleImageInput from "../../Misc/CustomSingleImageInput";
-import FormData from "form-data";
-import { updateCategoryBannerApi } from "../../../utils/ApiCalls";
+import CustomSingleImageInput from "../../Misc/CustomSingleImageInput"
+import {
+	getAllCategoriesApi,
+	updateCategoryBannerApi,
+} from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
 	updateRen,
 	validateImage,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const UpdateCategoryBannerAPIComponent = () => {
-	var bannerData = new FormData();
-	const [loading, setLoading] = useState(false);
-	const [ren, setRen] = useState(false);
+	var bannerData = new FormData()
+	const [loading, setLoading] = useState(false)
+	const [ren, setRen] = useState(false)
 	const [input, setInput] = useState({
 		bannerUrlApp: "",
 		bannerUrlWeb: "",
 		categoryId: "",
-	});
-	const { bannerUrlApp, bannerUrlWeb, categoryId } = input;
+	})
+	const [categories, setCategories] = useState([])
+	const { bannerUrlApp, bannerUrlWeb, categoryId } = input
+
+	useEffect(() => {
+		fetchCategoryIds()
+	}, [])
 
 	const handleWebImage = (e) => {
-		let verify = e.target.files[0];
+		let verify = e.target.files[0]
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
-		let status = validateImage(verify);
+		let status = validateImage(verify)
 		if (status) {
-			setInput({ ...input, bannerUrlWeb: verify });
+			setInput({ ...input, bannerUrlWeb: verify })
 		} else {
-			setInput({ ...input, bannerUrlWeb: "" });
-			updateRen(setRen);
-			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+			setInput({ ...input, bannerUrlWeb: "" })
+			updateRen(setRen)
+			displayErrorToast("Upload a valid Image file", 1500, "top-left")
 		}
-	};
+	}
+
 	const handleAppImage = (e) => {
-		let verify = e.target.files[0];
+		let verify = e.target.files[0]
 		// validateImage comes from generalVariables and returns true if it is a valid image file and false otherwise
-		let status = validateImage(verify);
+		let status = validateImage(verify)
 		if (status) {
-			setInput({ ...input, bannerUrlApp: verify });
+			setInput({ ...input, bannerUrlApp: verify })
 		} else {
-			setInput({ ...input, bannerUrlApp: "" });
-			updateRen(setRen);
-			displayErrorToast("Upload a valid Image file", 1500, "top-left");
+			setInput({ ...input, bannerUrlApp: "" })
+			updateRen(setRen)
+			displayErrorToast("Upload a valid Image file", 1500, "top-left")
 		}
-	};
+	}
 
 	const handleCategoryId = (e) => {
-		setInput({ ...input, categoryId: e.target.value });
-	};
+		setInput({ ...input, categoryId: e.target.value })
+	}
+
+	const fetchCategoryIds = async () => {
+		const { baseUrl } = getGeneralApiParams()
+		await getAllCategoriesApi(baseUrl, {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		}).then((response) => {
+			setInput({ ...input, categoryId: response.data.data[0].id })
+			let status = checkStatus(response, "")
+			status && setCategories(response.data.data)
+			setLoading(false)
+		})
+	}
 
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp);
-		bannerData.append("web", bannerUrlWeb);
-		bannerData.append("category_id", categoryId);
-	};
+		bannerData.append("app", bannerUrlApp)
+		bannerData.append("web", bannerUrlWeb)
+		bannerData.append("category_id", categoryId)
+	}
 
 	const submitHandler = async (e) => {
-		e.preventDefault();
-		setLoading(true);
-		const { baseUrl } = getGeneralApiParams();
-		await fillFormData();
+		e.preventDefault()
+		setLoading(true)
+		const { baseUrl } = getGeneralApiParams()
+		fillFormData()
 		await updateCategoryBannerApi(baseUrl, bannerData).then((response) => {
-			setLoading(false);
-			checkStatus(response);
-		});
-	};
-	return (
-		<section className="relative px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Category Banner Update</Heading> */}
-			<form action="" method="POST">
-				<section className="grid grid-cols-2 pt-6">
-					<CustomInput
-						type={"number"}
-						position={"top"}
-						onChange={(e) => handleCategoryId(e)}
-						placeholder={"Category ID"}
-						heading={"Category ID"}
-						value={categoryId}
-					/>
-					<CustomSingleImageInput
-						heading={"Upload Web Banner"}
-						onChange={(e) => handleWebImage(e)}
-						ren={ren}
-					/>
-					<CustomSingleImageInput
-						heading={"Upload App Banner"}
-						onChange={(e) => handleAppImage(e)}
-						position={"bottom"}
-						ren={ren}
-					/>
-				</section>
-				<div>
-					<CustomButton onClick={(e) => submitHandler(e)} width={"1/3"}>
-						Update
-					</CustomButton>
-				</div>
-			</form>
-		</section>
-	);
-};
+			setLoading(false)
+			checkStatus(response)
+		})
+	}
 
-export default UpdateCategoryBannerAPIComponent;
+	return (
+		<>
+			<SingleAPILayout
+				heading={"Category Banner Update"}
+				loading={loading}
+				buttonOnClick={(e) => submitHandler(e)}
+				buttonText={"Update"}
+				gridItems={
+					<>
+						<CustomSelectInput
+							onChange={(e) => handleCategoryId(e)}
+							heading={"Select Category"}
+							values={categories.map((each) => each.id)}
+							options={categories.map((each) => each.name)}
+						/>
+						<CustomSingleImageInput
+							heading={"Upload Web Banner"}
+							onChange={(e) => handleWebImage(e)}
+							ren={ren}
+						/>
+						<CustomSingleImageInput
+							heading={"Upload App Banner"}
+							onChange={(e) => handleAppImage(e)}
+							position={"bottom"}
+							ren={ren}
+						/>
+					</>
+				}
+			/>
+		</>
+	)
+}
+
+export default UpdateCategoryBannerAPIComponent

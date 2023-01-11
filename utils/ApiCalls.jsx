@@ -98,8 +98,7 @@ export const useDashboardApi = () => {
 					})
 				} else {
 					if (
-						organizedPermissions.at(-1).category ===
-						element.category
+						organizedPermissions.at(-1).category === element.category
 					) {
 						organizedPermissions.at(-1).apis.push(element)
 					} else {
@@ -834,7 +833,7 @@ export const updateCategoryApi = async (baseUrl, categoryData, headers) => {
 }
 
 export const updateCategoryBannerApi = async (baseUrl, banner) => {
-	let url = baseUrl + "/admin/category/banner/update"
+	let url = baseUrl + "/category/update/banner"
 	try {
 		return await axios.post(url, banner, {
 			Accept: "application/json",
