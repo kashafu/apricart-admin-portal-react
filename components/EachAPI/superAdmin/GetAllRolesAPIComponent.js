@@ -1,23 +1,24 @@
-import { useState } from "react";
-import { getAllRolesApi } from "../../../utils/ApiCalls";
+import { useState } from "react"
+
+import { getAllRolesApi } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const GetAllRolesAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [roleArray, setRoleArray] = useState([]);
+	const [loading, setLoading] = useState(false)
+	const [roleArray, setRoleArray] = useState([])
 
 	const handleSubmit = async () => {
-		setLoading(true);
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
 		await getAllRolesApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response);
-			status && setRoleArray(response.data.data);
-			setLoading(false);
-		});
+			let status = checkStatus(response)
+			status && setRoleArray(response.data.data)
+			setLoading(false)
+		})
 	}
 
 	return (
