@@ -351,7 +351,7 @@ export const downloadAbundantCartApi = async (baseUrl, horas, headers) => {
 
 export const downloadOutOfStockApi = async (baseUrl, summary, headers) => {
 	const url =
-		baseUrl + `/admin/download/products/outofstock?summary=${summary}`
+		baseUrl + `/download/products/outofstock?summary=${summary}`
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD")
 	try {
 		axios

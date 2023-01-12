@@ -1,65 +1,67 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react"
+import "react-toastify/dist/ReactToastify.css"
 
-import { downloadOutOfStockApi } from "../../../utils/ApiCalls";
+import { downloadOutOfStockApi } from "../../../utils/ApiCalls"
 import {
 	displayInfoToast,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const GetProductsOutOfStockAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [summary, setSummary] = useState(false);
-	const [disabler, setDisabler] = useState(false);
+	const [loading, setLoading] = useState(false)
+	const [summary, setSummary] = useState(false)
+	const [disabler, setDisabler] = useState(false)
 
 	const handleState = (e) => {
-		setSummary(e.target.value);
-	};
+		setSummary(e.target.value)
+	}
 
 	const fetchReport = async (e) => {
-		setDisabler(true);
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		setDisabler(true)
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
 		await downloadOutOfStockApi(baseUrl, summary, headers).then(() => {
-			setLoading(false);
+			setLoading(false)
 			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
 				5000
-			);
-			setLoading(false);
+			)
+			setLoading(false)
 			setTimeout(() => {
-				setDisabler(false);
-			}, 8000);
-		});
-	};
+				setDisabler(false)
+			}, 8000)
+		})
+	}
 
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Out of Stock Report</Heading> */}
-			<form className="grid grid-cols-2 pt-6">
+		<SingleAPILayout
+			heading={"Out of Stock Report"}
+			loading={loading}
+			buttonOnClick={(e) => fetchReport(e)}
+			buttonText={"Download"}
+			rowItems={
 				<CustomSelectInput
-					options={["Yes", "No"]}
-					values={["true", "false"]}
 					heading={"Summary Version?"}
-					onChange={(e) => handleState(e)}
+					onChange={setSummary}
+					value={summary}
+					options={[
+						{
+							name: "Yes",
+							id: true,
+						},
+						{
+							name: "No",
+							id: false,
+						},
+					]}
+					optionText="name"
 				/>
-				<CustomButton
-					onClick={(e) => fetchReport(e)}
-					disabled={disabler}
-					width={"1/3"}
-				>
-					Download
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
+			}
+		/>
+	)
+}
 
-export default GetProductsOutOfStockAPIComponent;
+export default GetProductsOutOfStockAPIComponent
