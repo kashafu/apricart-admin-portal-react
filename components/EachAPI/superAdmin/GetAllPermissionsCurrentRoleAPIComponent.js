@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useState } from "react"
 
-import { getCurrentRolePermissionsDetailsApi } from "../../../utils/ApiCalls";
-import { checkStatus, getGeneralApiParams } from "../../../utils/GeneralVariables";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
+import { getCurrentRolePermissionsDetailsApi } from "../../../utils/ApiCalls"
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const GetAllPermissionsCurrentRoleAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [details, setDetails] = useState([]);
+	const [loading, setLoading] = useState(false)
+	const [details, setDetails] = useState([])
 	const handleSubmit = async () => {
-		setLoading(true);
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
 		await getCurrentRolePermissionsDetailsApi(baseUrl, headers).then(
 			(response) => {
-				let status = checkStatus(response);
-				status && setDetails(response.data.data);
-				setLoading(false);
+				let status = checkStatus(response)
+				status && setDetails(response.data.data)
+				setLoading(false)
 			}
-		);
+		)
 	}
 
 	return (
@@ -30,7 +33,9 @@ const GetAllPermissionsCurrentRoleAPIComponent = () => {
 			<div>
 				{details?.map((each) => (
 					<section key={each.id} className="flex my-4 mb-4">
-						<div className="px-4 text-xl font-semibold font-lato">{each.id}</div>
+						<div className="px-4 text-xl font-semibold font-lato">
+							{each.id}
+						</div>
 						<div className="px-8 font-nunito font-bold">
 							<div>API Name</div>
 							<div>API Endpoint</div>
