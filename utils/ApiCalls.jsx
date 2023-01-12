@@ -482,7 +482,7 @@ export const deleteBannerApi = async (baseUrl, id, headers) => {
 }
 
 export const saveBannersApi = async (baseUrl, banner) => {
-	let url = baseUrl + "/offers/banners/save"
+	let url = baseUrl + "/banners/add"
 	try {
 		return await axios.post(url, banner, {
 			Accept: "application/json",
