@@ -858,7 +858,7 @@ export const updateCategoryImageApi = async (baseUrl, banner) => {
 }
 
 export const updateWelcomeVideoApi = async (baseUrl, link, headers) => {
-	const url = baseUrl + `/admin/video/welcome/update?url=${link}`
+	const url = baseUrl + `/misc/video/welcome/update?url=${link}`
 	try {
 		return await axios.get(url, {
 			headers,
