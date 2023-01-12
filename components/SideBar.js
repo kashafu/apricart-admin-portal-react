@@ -39,8 +39,12 @@ const SideBar = ({ allApis, setAllApis }) => {
 		dispatch(addToRecent(tabs[0]))
 		dispatch(selectTabs(tabs))
 		const stripped = each.replace(/\s+/g, "")
-		router.push("/apis/management")
-		router.reload()
+		if (router.pathname === "/apis/management") {
+			router.reload()
+		}
+		else {
+			router.push("/apis/management")
+		}
 	}
 
 	useEffect(() => {
