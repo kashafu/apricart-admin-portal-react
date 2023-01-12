@@ -711,7 +711,7 @@ export const productsAdminSearchApi = async (
 
 	let url =
 		baseUrl +
-		`/admin/products/search?page=${page}&size=${size}&term=${term}&category=${category}&city=${city}&lang=en&userid=${userId}`
+		`/products/search?page=${page}&size=${size}&term=${term}&category=${category}&city=${city}&lang=en&userid=${userId}`
 	try {
 		return await axios.get(url, {
 			headers,

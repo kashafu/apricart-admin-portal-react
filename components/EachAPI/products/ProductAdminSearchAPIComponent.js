@@ -1,17 +1,18 @@
-import Image from "next/image";
-import React, { useState } from "react";
-import ReactPaginate from "react-paginate";
+import Image from "next/image"
+import { useState } from "react"
+import ReactPaginate from "react-paginate"
 
-import { productsAdminSearchApi } from "../../../utils/ApiCalls";
+import { productsAdminSearchApi } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	displayErrorToast,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import CustomButton from "../../Misc/CustomButton";
-import CustomInput from "../../Misc/CustomInput";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomButton from "../../Misc/CustomButton"
+import CustomInput from "../../Misc/CustomInput"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
+import Heading from "../../Misc/Heading"
 
 const ProductAdminSearchAPIComponent = () => {
 	const [inputs, setInputs] = useState({
@@ -20,15 +21,15 @@ const ProductAdminSearchAPIComponent = () => {
 		page: "",
 		category: "",
 		city: "karachi",
-	});
-	const [loading, setLoading] = useState(false);
-	const [totalPages, setTotalPages] = useState(0);
-	const [detail, setDetail] = useState([]);
+	})
+	const [loading, setLoading] = useState(false)
+	const [totalPages, setTotalPages] = useState(0)
+	const [detail, setDetail] = useState([])
 
-	const { term, size, page, category, city } = inputs;
+	const { term, size, page, category, city } = inputs
 
 	const handleTerm = (e) => {
-		setInputs({ ...inputs, term: e.target.value });
+		setInputs({ ...inputs, term: e.target.value })
 		// if (e.target.value.length > 2) {
 		// 	searchProduct(e.target.value);
 		// } else if (e.target.value.length === 0) {
@@ -36,43 +37,43 @@ const ProductAdminSearchAPIComponent = () => {
 		// } else {
 		// 	setDetail([]);
 		// }
-	};
+	}
 	const handleSize = (e) => {
-		setInputs({ ...inputs, size: e.target.value });
+		setInputs({ ...inputs, size: e.target.value })
 		// searchProduct(term, page, e.target.value, category);
-	};
+	}
 	const handlePage = (newPage) => {
-		setInputs({ ...inputs, page: newPage });
-	};
+		setInputs({ ...inputs, page: newPage })
+	}
 	const handleCategory = (e) => {
-		setInputs({ ...inputs, category: e.target.value });
+		setInputs({ ...inputs, category: e.target.value })
 		// searchProduct(term, 1, size, e.target.value);
-	};
+	}
 	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
-	};
+		setInputs({ ...inputs, city: e.target.value })
+	}
 
 	const handleResponse = (response) => {
 		response?.data?.data?.length > 0
 			? setDetail(response.data.data)
-			: emptyDetail();
-		getPagination(response.data.total, size);
-		setLoading(false);
-	};
+			: emptyDetail()
+		getPagination(response.data.total, size)
+		setLoading(false)
+	}
 
 	const emptyDetail = () => {
-		setDetail([]);
-		displayErrorToast("No Data Could be Found");
-	};
+		setDetail([])
+		displayErrorToast("No Data Could be Found")
+	}
 
 	const getPagination = (items, perPage) => {
-		let calc = +items / +perPage;
-		let tot = Math.ceil(calc);
-		setTotalPages(tot);
-	};
+		let calc = +items / +perPage
+		let tot = Math.ceil(calc)
+		setTotalPages(tot)
+	}
 	const searchProduct = async (text, newPage, newSize, newCategory) => {
-		setLoading(true);
-		const { baseUrl, userId, headers } = getGeneralApiParams();
+		setLoading(true)
+		const { baseUrl, userId, headers } = getGeneralApiParams()
 		await productsAdminSearchApi(
 			baseUrl,
 			(page = newPage || 1),
@@ -83,51 +84,59 @@ const ProductAdminSearchAPIComponent = () => {
 			userId,
 			headers
 		).then((response) => {
-			let status = checkStatus(response, "");
-			status && handleResponse(response, text);
-		});
-	};
+			let status = checkStatus(response, "")
+			status && handleResponse(response, text)
+		})
+	}
 
 	const handlePageClick = (event) => {
-		handlePage(event.selected + 1);
-		searchProduct(term, event.selected + 1);
-	};
+		handlePage(event.selected + 1)
+		searchProduct(term, event.selected + 1)
+	}
 
 	return (
-		<section className="px-10">
-			{/* <Heading>Products Search</Heading> */}
-
-			<section className="grid grid-cols-2 pt-6">
-				<div className="col-span-2">
+		<SingleAPILayout
+			heading={"Products Search"}
+			loading={loading}
+			buttonOnClick={(e) => searchProduct(term)}
+			buttonText={"Save"}
+			gridItems={
+				<>
 					<CustomInput
 						position={"top"}
 						heading={"Search Product Name/SKU"}
 						value={term}
 						onChange={handleTerm}
 					/>
-				</div>
-				<CustomInput
-					heading={"Items on Page"}
-					value={size}
-					onChange={handleSize}
-				/>
-				<CustomInput
-					heading={"Enter Category"}
-					value={category}
-					onChange={handleCategory}
-				/>
-				<CustomSelectInput
-					position={"bottom"}
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-			</section>
-			<CustomButton width={"1/3"} onClick={(e) => searchProduct(term)}>
-				Search
-			</CustomButton>
-
+					<CustomInput
+						heading={"Items on Page"}
+						value={size}
+						onChange={handleSize}
+					/>
+					<CustomInput
+						heading={"Enter Category"}
+						value={category}
+						onChange={handleCategory}
+					/>
+					<CustomSelectInput
+						heading={"Select City"}
+						customOnChange={handleCity}
+						value={inputs.city}
+						options={[
+							{
+								name: "Karachi",
+								id: "karachi"
+							},
+							{
+								name: "Peshawar",
+								id: "peshawar"
+							}]
+						}
+						optionText="name"
+					/>
+				</>
+			}
+		>
 			<div className="rounded-none my-2">
 				{loading && <h2 className="text-black">Searching...</h2>}
 			</div>
@@ -140,11 +149,21 @@ const ProductAdminSearchAPIComponent = () => {
 								className="flex w-full px-2 border-2 border-main-blue rounded-xl my-2"
 							>
 								<div className="w-1/3">
-									<div className="font-bold font-nunito py-1">SKU:</div>
-									<div className="font-bold font-nunito py-1">Title:</div>
-									<div className="font-bold font-nunito py-1">Brand:</div>
-									<div className="font-bold font-nunito py-1">Description:</div>
-									<div className="font-bold font-nunito py-1">Quantity:</div>
+									<div className="font-bold font-nunito py-1">
+										SKU:
+									</div>
+									<div className="font-bold font-nunito py-1">
+										Title:
+									</div>
+									<div className="font-bold font-nunito py-1">
+										Brand:
+									</div>
+									<div className="font-bold font-nunito py-1">
+										Description:
+									</div>
+									<div className="font-bold font-nunito py-1">
+										Quantity:
+									</div>
 									<div className="font-bold font-nunito py-1">
 										Category Id&apos;s:
 									</div>
@@ -159,15 +178,42 @@ const ProductAdminSearchAPIComponent = () => {
 									</div>
 								</div>
 								<div className="px-4 text-white font-nunito bg-main-blue w-full">
-									<div className="py-1"> {each.sku || "-"}</div>
-									<div className="py-1"> {each.title || "-"}</div>
-									<div className="py-1"> {each.brand || "-"}</div>
-									<div className="py-1"> {each.description || "-"}</div>
-									<div className="py-1"> {each.qty || "-"}</div>
-									<div className="py-1"> {each.categoryIds || "-"}</div>
-									<div className="py-1"> {each.categoryleafName || "-"}</div>
-									<div className="py-1"> {each.currentPrice || "-"}</div>
-									<div className="py-1"> {each.inStock ? "Yes" : "No"}</div>
+									<div className="py-1">
+										{" "}
+										{each.sku || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.title || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.brand || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.description || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.qty || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.categoryIds || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.categoryleafName || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.currentPrice || "-"}
+									</div>
+									<div className="py-1">
+										{" "}
+										{each.inStock ? "Yes" : "No"}
+									</div>
 								</div>
 								<div className="p-2">
 									<Image
@@ -178,7 +224,7 @@ const ProductAdminSearchAPIComponent = () => {
 									/>
 								</div>
 							</div>
-						);
+						)
 					})}
 				<ReactPaginate
 					breakLabel="o o o"
@@ -198,8 +244,8 @@ const ProductAdminSearchAPIComponent = () => {
 					activeClassName="bg-main-blue text-white rounded-xl py-1 border-0"
 				/>
 			</section>
-		</section>
-	);
-};
+		</SingleAPILayout>
+	)
+}
 
-export default ProductAdminSearchAPIComponent;
+export default ProductAdminSearchAPIComponent
