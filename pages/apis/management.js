@@ -167,7 +167,7 @@ const MainTabComponent = () => {
 				{selected === "/v1/misc/welcomevideo" && (
 					<UpdateWelcomeVideoAPIComponent />
 				)}
-				{selected === "/v1/misc/thankyouimage" && <p></p>}
+				{selected === "/v1/misc/thankyouimage" && <ThankyouImageAddUpdateAPIComponent />}
 
 				{/* OFFERS MANAGEMENT */}
 				{selected === "/v1/offers/add" && <OfferSaveAPIComponent />}

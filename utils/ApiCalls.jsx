@@ -869,7 +869,7 @@ export const updateWelcomeVideoApi = async (baseUrl, link, headers) => {
 }
 
 export const updateThankYouImageApi = async (baseUrl, thankyouData) => {
-	let url = baseUrl + "/admin/thankyou/image"
+	let url = baseUrl + "/misc/thankyou/image"
 	try {
 		return await axios.post(url, thankyouData, {
 			Accept: "application/json",
