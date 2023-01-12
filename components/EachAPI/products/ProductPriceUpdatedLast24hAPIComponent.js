@@ -1,54 +1,52 @@
-import React, { useState } from "react";
+import { useState } from "react"
 
-import { productPriceUpdatedLast24HoursApi } from "../../../utils/ApiCalls";
+import { productPriceUpdatedLast24HoursApi } from "../../../utils/ApiCalls"
 import {
 	displayInfoToast,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
-import CustomInput from "../../Misc/CustomInput";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomInput from "../../Misc/CustomInput"
 
 const ProductPriceUpdatedLast24hAPIComponent = () => {
-	const [time, setTime] = useState(24);
-	const [disabler, setDisabler] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [time, setTime] = useState(24)
+	const [disabler, setDisabler] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	const handleTime = (e) => {
-		setTime(e.target.value);
-	};
+		setTime(e.target.value)
+	}
 
 	const handleSubmit = () => {
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
 		productPriceUpdatedLast24HoursApi(baseUrl, time, headers).then(() => {
-			setDisabler(true);
+			setDisabler(true)
 			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
 				5000
-			);
-			setLoading(false);
+			)
+			setLoading(false)
 			setTimeout(() => {
-				setDisabler(false);
-			}, 8000);
-		});
-	};
+				setDisabler(false)
+			}, 8000)
+		})
+	}
+
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Updated in Last {time} Hours</Heading> */}
-			<form className="grid grid-cols-2 pt-6">
+		<SingleAPILayout
+			heading={"Updated in Last 24 Hours"}
+			loading={loading}
+			buttonOnClick={(e) => handleSubmit(e)}
+			buttonText={"Download"}
+			rowItems={
 				<CustomInput
 					heading={"Time in hours"}
 					value={time}
 					onChange={(e) => handleTime(e)}
 				/>
-				<CustomButton onClick={handleSubmit} width={"1/3"} disabled={disabler}>
-					Download
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
+			}
+		/>
+	)
+}
 
-export default ProductPriceUpdatedLast24hAPIComponent;
+export default ProductPriceUpdatedLast24hAPIComponent

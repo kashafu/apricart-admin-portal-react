@@ -729,7 +729,7 @@ export const productPriceUpdatedLast24HoursApi = async (
 ) => {
 	const url =
 		baseUrl +
-		`/admin/download/products/price/updatedinlast24hours?interval_in_hours=${time}`
+		`/download/products/price/updatedinlast24hours?interval_in_hours=${time}`
 
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD")
 	try {
