@@ -275,7 +275,7 @@ export const downloadUsersApi = async (baseUrl, headers) => {
 }
 
 export const downloadProductsApi = async (baseUrl, headers, summary) => {
-	const url = baseUrl + `/admin/download/products?summary=${summary}`
+	const url = baseUrl + `/download/products?summary=${summary}`
 
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD")
 	try {

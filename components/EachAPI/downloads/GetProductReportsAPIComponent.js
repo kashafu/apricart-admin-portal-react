@@ -1,62 +1,63 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react"
+import "react-toastify/dist/ReactToastify.css"
 
-import { downloadProductsApi } from "../../../utils/ApiCalls";
+import { downloadProductsApi } from "../../../utils/ApiCalls"
 import {
 	displayInfoToast,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const GetProductReportsAPIComponent = () => {
-	const [disabler, setDisabler] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [summary, setSummary] = useState(false);
+	const [disabler, setDisabler] = useState(false)
+	const [loading, setLoading] = useState(false)
+	const [summary, setSummary] = useState(false)
 
 	const fetchReport = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
 		await downloadProductsApi(baseUrl, headers, summary).then(() => {
-			setDisabler(true);
-			setLoading(false);
+			setDisabler(true)
+			setLoading(false)
 			displayInfoToast(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
 				8000
-			);
-			setLoading(false);
+			)
+			setLoading(false)
 			setTimeout(() => {
-				setDisabler(false);
-			}, 8000);
-		});
-	};
+				setDisabler(false)
+			}, 8000)
+		})
+	}
 
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Download Product Reports</Heading> */}
-			<form className="grid grid-cols-2 pt-6">
+		<SingleAPILayout
+			heading={"Total Users Report"}
+			loading={loading}
+			buttonOnClick={(e) => fetchReport(e)}
+			buttonText={"Download"}
+			rowItems={
 				<CustomSelectInput
-					options={["Yes", "No"]}
-					values={["true", "false"]}
 					heading={"Summary Version?"}
-					onChange={(e) => handleState(e)}
+					onChange={setSummary}
+					value={summary}
+					options={[
+						{
+							name: "Yes",
+							id: true,
+						},
+						{
+							name: "No",
+							id: false,
+						},
+					]}
+					optionText="name"
 				/>
+			}
+		/>
+	)
+}
 
-				<CustomButton
-					onClick={(e) => fetchReport(e)}
-					disabled={disabler}
-					width={"1/3"}
-				>
-					Download
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
-
-export default GetProductReportsAPIComponent;
+export default GetProductReportsAPIComponent
