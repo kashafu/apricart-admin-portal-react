@@ -1,42 +1,42 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import CustomInput from "../../Misc/CustomInput";
+import CustomInput from "../../Misc/CustomInput"
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import { isContinueUpdateApi } from "../../../utils/ApiCalls";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
+} from "../../../utils/GeneralVariables"
+import { isContinueUpdateApi } from "../../../utils/ApiCalls"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const IsContinueAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		text: "",
-		prodType: "cus",
+		prodType: "b2b",
 		orderType: "delivery",
 		city: "karachi",
-	});
-	const { text, prodType, orderType, city } = inputs;
-	const [loading, setLoading] = useState(false);
+	})
+	const { text, prodType, orderType, city } = inputs
+	const [loading, setLoading] = useState(false)
 
 	const handleText = (e) => {
-		setInputs({ ...inputs, text: e.target.value });
-	};
+		setInputs({ ...inputs, text: e.target.value })
+	}
 	const handleProdType = (e) => {
-		setInputs({ ...inputs, prodType: e.target.value });
-	};
+		setInputs({ ...inputs, prodType: e.target.value })
+	}
 	const handleOrderType = (e) => {
-		setInputs({ ...inputs, orderType: e.target.value });
-	};
+		setInputs({ ...inputs, orderType: e.target.value })
+	}
 	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
-	};
+		setInputs({ ...inputs, city: e.target.value })
+	}
 
 	const handleSubmit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
-		var encodedText = encodeURI(text);
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
+		var encodedText = encodeURI(text)
 
 		await isContinueUpdateApi(
 			baseUrl,
@@ -46,9 +46,9 @@ const IsContinueAPIComponent = () => {
 			encodedText,
 			headers
 		).then((response) => {
-			setLoading(false);
-			checkStatus(response, "isContinue text Updated");
-		});
+			setLoading(false)
+			checkStatus(response, "isContinue text Updated")
+		})
 	}
 
 	return (
@@ -68,28 +68,57 @@ const IsContinueAPIComponent = () => {
 						required={true}
 					/>
 					<CustomSelectInput
-						onChange={(e) => handleProdType(e)}
 						heading={"Select Product Type"}
-						values={["b2b", "cus"]}
-						options={["Online Delivery", "Customer"]}
+						customOnChange={handleProdType}
+						value={inputs.prodType}
+						options={[
+							{
+								name: "Online Delivery",
+								id: "b2b"
+							},
+							{
+								name: "Customer",
+								id: "cus"
+							}]
+						}
+						optionText="name"
 					/>
 					<CustomSelectInput
-						onChange={(e) => handleOrderType(e)}
 						heading={"Select Order Type"}
-						values={["delivery", "pickup"]}
-						options={["Delivery", "Pick up"]}
+						customOnChange={handleOrderType}
+						value={inputs.orderType}
+						options={[
+							{
+								name: "Delivery",
+								id: "delivery"
+							},
+							{
+								name: "Pick up",
+								id: "pickup"
+							}]
+						}
+						optionText="name"
 					/>
 					<CustomSelectInput
-						position={"bottom"}
-						onChange={(e) => handleCity(e)}
 						heading={"Select City"}
-						values={["karachi", "peshawar"]}
-						options={["Karachi", "Peshawar"]}
+						customOnChange={handleCity}
+						value={inputs.city}
+						options={[
+							{
+								name: "Karachi",
+								id: "karachi"
+							},
+							{
+								name: "Peshawar",
+								id: "peshawar"
+							}]
+						}
+						optionText="name"
 					/>
 				</>
 			}
 		/>
 	)
-};
+}
 
-export default IsContinueAPIComponent;
+export default IsContinueAPIComponent

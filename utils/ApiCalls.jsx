@@ -558,7 +558,7 @@ export const isContinueUpdateApi = async (
 ) => {
 	let url =
 		baseUrl +
-		`/admin/iscontinue/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`
+		`/misc/isContinue/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`
 	try {
 		return await axios.get(url, {
 			headers,
