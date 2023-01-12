@@ -1,29 +1,31 @@
-import { useState } from "react";
-import { createAndUpdateRoleApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
-import CustomInput from "../../Misc/CustomInput";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
+import { useState } from "react"
+
+import { createAndUpdateRoleApi } from "../../../utils/ApiCalls"
+import { checkStatus, getGeneralApiParams } from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomInput from "../../Misc/CustomInput"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const CreateAndUpdateRolesAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [name, setName] = useState("");
-	const [active, setActive] = useState("Y");
+	const [loading, setLoading] = useState(false)
+	const [name, setName] = useState("")
+	const [active, setActive] = useState("Y")
 
 	const handleName = (e) => {
-		setName(e.target.value);
-	};
+		setName(e.target.value)
+	}
 
 	const handleSubmit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
 		await createAndUpdateRoleApi(baseUrl, name, active, "", headers).then(
 			(response) => {
-				setLoading(false);
+				setLoading(false)
+				checkStatus(response, "New role made")
 			}
-		);
-	};
+		)
+	}
 
 	return (
 		<SingleAPILayout
@@ -39,11 +41,22 @@ const CreateAndUpdateRolesAPIComponent = () => {
 						value={name}
 						onChange={(e) => handleName(e)}
 					/>
+
 					<CustomSelectInput
-						onChange={(e) => setActive(e.target.value)}
 						heading={"Active/Inactive"}
-						values={["Y", "N"]}
-						options={["Yes", "No"]}
+						customOnChange={(e) => setActive(e.target.value)}
+						value={active}
+						options={[
+							{
+								name: "Yes",
+								id: "Y",
+							},
+							{
+								name: "No",
+								id: "N",
+							},
+						]}
+						optionText="name"
 					/>
 				</>
 			}
