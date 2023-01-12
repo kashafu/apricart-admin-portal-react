@@ -40,6 +40,7 @@ const SideBar = ({ allApis, setAllApis }) => {
 		dispatch(selectTabs(tabs))
 		const stripped = each.replace(/\s+/g, "")
 		router.push("/apis/management")
+		router.reload()
 	}
 
 	useEffect(() => {
