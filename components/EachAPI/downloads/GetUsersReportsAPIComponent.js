@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
-import { downloadUsersApi } from "../../../utils/ApiCalls";
-import { getGeneralApiParams } from "../../../utils/GeneralVariables";
-import CustomButton from "../../Misc/CustomButton";
-import Heading from "../../Misc/Heading";
-import Loading from "../../../utils/Loading";
+import { downloadUsersApi } from "../../../utils/ApiCalls"
+import { getGeneralApiParams } from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const GetUsersReportsAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [disabler, setDisabler] = useState(false);
+	const [loading, setLoading] = useState(false)
+	const [disabler, setDisabler] = useState(false)
 	const fetchReport = async () => {
-		setDisabler(true);
-		setLoading(true);
-		const { baseUrl, headers } = getGeneralApiParams();
+		setDisabler(true)
+		setLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
 		await downloadUsersApi(baseUrl, headers).then((res) => {
 			toast.info(
 				"File will begin downloading shortly, you may click the Download button again in a couple seconds if it does not start",
@@ -27,31 +25,23 @@ const GetUsersReportsAPIComponent = () => {
 					theme: "dark",
 					toastId: "XD",
 				}
-			);
-			setLoading(false);
-		});
+			)
+			setLoading(false)
+		})
 
 		setTimeout(() => {
-			setDisabler(false);
-		}, 8000);
-	};
+			setDisabler(false)
+		}, 8000)
+	}
 
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			<form className="grid grid-cols-2 pt-6" action="">
-				{/* <Heading>Total Users Report</Heading> */}
-				<section />
-				<CustomButton
-					onClick={(e) => fetchReport(e)}
-					disabled={disabler}
-					width={"1/3"}
-				>
-					Download
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
+		<SingleAPILayout
+			heading={"Total Users Report"}
+			loading={loading}
+			buttonOnClick={(e) => fetchReport(e)}
+			buttonText={"Download"}
+		/>
+	)
+}
 
-export default GetUsersReportsAPIComponent;
+export default GetUsersReportsAPIComponent

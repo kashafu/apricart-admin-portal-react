@@ -256,7 +256,7 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 }
 
 export const downloadUsersApi = async (baseUrl, headers) => {
-	const url = baseUrl + "/admin/download/users"
+	const url = baseUrl + "/download/users"
 
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD")
 	try {
