@@ -538,7 +538,7 @@ export const sendNotificationApi = async (
 ) => {
 	let url =
 		baseUrl +
-		`/admin/notification?type=${type}&value=${value}&title=${title}&message=${message}&city=${city}&to=${to}`
+		`/misc/notification?type=${type}&value=${value}&title=${title}&message=${message}&city=${city}&to=${to}`
 	try {
 		return await axios.get(url, {
 			headers,
