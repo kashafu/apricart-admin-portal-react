@@ -12,8 +12,8 @@ import { useDispatch } from "react-redux"
 const SideBar = ({ allApis, setAllApis }) => {
 	const dispatch = useDispatch()
 	const router = useRouter()
-	const handleProductRoute = () => router.push("/home/product")
-	const handleUserRoute = () => router.push("/home/user")
+	const handleProductRoute = () => router.push("/apis")
+	const handleUserRoute = () => router.push("/profile")
 	const [categories, setCategories] = useState([])
 	const [show, setShow] = useState(false)
 	const [selected, setSelected] = useState("")
@@ -39,7 +39,7 @@ const SideBar = ({ allApis, setAllApis }) => {
 		dispatch(addToRecent(tabs[0]))
 		dispatch(selectTabs(tabs))
 		const stripped = each.replace(/\s+/g, "")
-		router.push(`/tabs/${stripped.toLowerCase()}`)
+		router.push("/apis/management")
 	}
 
 	useEffect(() => {
