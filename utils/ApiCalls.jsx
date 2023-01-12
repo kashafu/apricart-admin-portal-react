@@ -514,7 +514,7 @@ export const updateTickerApi = async (
 ) => {
 	let url =
 		baseUrl +
-		`/admin/ticker/update?text=${encodeURIComponent(
+		`/misc/ticker/update?text=${encodeURIComponent(
 			text
 		)}&prod_type=${prodType}&order_type=${orderType}&city=${city}`
 	try {

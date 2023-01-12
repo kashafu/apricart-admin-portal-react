@@ -1,43 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import { updateTickerApi } from "../../../utils/ApiCalls";
-import Loading from "../../../utils/Loading";
+import { updateTickerApi } from "../../../utils/ApiCalls"
+import Loading from "../../../utils/Loading"
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import CustomButton from "../../Misc/CustomButton";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
+} from "../../../utils/GeneralVariables"
+import CustomButton from "../../Misc/CustomButton"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
+import Heading from "../../Misc/Heading"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const TickerUpdateAPIComponent = () => {
 	const [inputs, setInputs] = useState({
 		text: "",
-		prodType: "cus",
+		prodType: "b2b",
 		orderType: "delivery",
 		city: "karachi",
-	});
-	const [loading, setLoading] = useState(false);
-	const { text, prodType, orderType, city } = inputs;
+	})
+	const [loading, setLoading] = useState(false)
+	const { text, prodType, orderType, city } = inputs
 
 	const handleText = (e) => {
-		setInputs({ ...inputs, text: e.target.value });
-	};
+		setInputs({ ...inputs, text: e.target.value })
+	}
 	const handleProdType = (e) => {
-		setInputs({ ...inputs, prodType: e.target.value });
-	};
+		setInputs({ ...inputs, prodType: e.target.value })
+	}
 	const handleOrderType = (e) => {
-		setInputs({ ...inputs, orderType: e.target.value });
-	};
+		setInputs({ ...inputs, orderType: e.target.value })
+	}
 	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
-	};
+		setInputs({ ...inputs, city: e.target.value })
+	}
 
 	const submitHandler = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
 
 		await updateTickerApi(
 			baseUrl,
@@ -47,9 +47,9 @@ const TickerUpdateAPIComponent = () => {
 			city,
 			headers
 		).then((response) => {
-			setLoading(false);
-			checkStatus(response);
-		});
+			setLoading(false)
+			checkStatus(response)
+		})
 	}
 
 	return (
@@ -61,23 +61,52 @@ const TickerUpdateAPIComponent = () => {
 			gridItems={
 				<>
 					<CustomSelectInput
-						position={"top"}
-						onChange={(e) => handleProdType(e)}
 						heading={"Select Product Type"}
-						values={["b2b", "cus"]}
-						options={["Online Delivery", "Customer"]}
+						customOnChange={handleProdType}
+						value={inputs.prodType}
+						options={[
+							{
+								name: "Online Delivery",
+								id: "b2b"
+							},
+							{
+								name: "Customer",
+								id: "cus"
+							}]
+						}
+						optionText="name"
 					/>
 					<CustomSelectInput
-						onChange={(e) => handleOrderType(e)}
 						heading={"Select Order Type"}
-						values={["delivery", "pickup"]}
-						options={["Delivery", "Pick up"]}
+						customOnChange={handleOrderType}
+						value={inputs.orderType}
+						options={[
+							{
+								name: "Delivery",
+								id: "delivery"
+							},
+							{
+								name: "Pick up",
+								id: "pickup"
+							}]
+						}
+						optionText="name"
 					/>
 					<CustomSelectInput
-						onChange={(e) => handleCity(e)}
 						heading={"Select City"}
-						values={["karachi", "peshawar"]}
-						options={["Karachi", "Peshawar"]}
+						customOnChange={handleCity}
+						value={inputs.city}
+						options={[
+							{
+								name: "Karachi",
+								id: "karachi"
+							},
+							{
+								name: "Peshawar",
+								id: "peshawar"
+							}]
+						}
+						optionText="name"
 					/>
 				</>
 			}
@@ -103,4 +132,4 @@ const TickerUpdateAPIComponent = () => {
 	)
 }
 
-export default TickerUpdateAPIComponent;
+export default TickerUpdateAPIComponent
