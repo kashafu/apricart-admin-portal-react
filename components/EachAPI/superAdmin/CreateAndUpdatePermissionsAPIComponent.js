@@ -1,28 +1,31 @@
-import { useState } from "react";
+import { useState } from "react"
 
-import { createAndUpdatePermsissionApi } from "../../../utils/ApiCalls";
-import { checkStatus, getGeneralApiParams, } from "../../../utils/GeneralVariables";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
-import CustomInput from "../../Misc/CustomInput";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
+import { createAndUpdatePermsissionApi } from "../../../utils/ApiCalls"
+import {
+	checkStatus,
+	getGeneralApiParams,
+} from "../../../utils/GeneralVariables"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import CustomInput from "../../Misc/CustomInput"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const CreateAndUpdatePermissionsAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [name, setName] = useState("");
-	const [url, setUrl] = useState("");
-	const [active, setActive] = useState("Y");
+	const [loading, setLoading] = useState(false)
+	const [name, setName] = useState("")
+	const [url, setUrl] = useState("")
+	const [active, setActive] = useState("Y")
 
 	const handleName = (e) => {
-		setName(e.target.value);
-	};
+		setName(e.target.value)
+	}
 	const handleUrl = (e) => {
-		setUrl(e.target.value);
-	};
+		setUrl(e.target.value)
+	}
 
 	const handleSubmit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
+		setLoading(true)
+		e.preventDefault()
+		const { baseUrl, headers } = getGeneralApiParams()
 		await createAndUpdatePermsissionApi(
 			baseUrl,
 			"",
@@ -31,9 +34,9 @@ const CreateAndUpdatePermissionsAPIComponent = () => {
 			active,
 			headers
 		).then((response) => {
-			checkStatus(response, "New Permission Created");
-			setLoading(false);
-		});
+			checkStatus(response, "New Permission Created")
+			setLoading(false)
+		})
 	}
 
 	return (
@@ -57,10 +60,20 @@ const CreateAndUpdatePermissionsAPIComponent = () => {
 						onChange={(e) => handleUrl(e)}
 					/>
 					<CustomSelectInput
-						onChange={(e) => setActive(e.target.value)}
 						heading={"Active/Inactive"}
-						values={["Y", "N"]}
-						options={["Yes", "No"]}
+						customOnChange={(e) => setActive(e.target.value)}
+						value={active}
+						options={[
+							{
+								name: "Yes",
+								id: "Y"
+							},
+							{
+								name: "No",
+								id: "N"
+							}]
+						}
+						optionText="name"
 					/>
 				</>
 			}
