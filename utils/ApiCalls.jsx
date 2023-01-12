@@ -237,7 +237,7 @@ export const offerSaveApi = async (baseUrl, input, headers) => {
 	const { price, buying, buyingCondition, expiry, products, categories } =
 		input
 	let newExp = expiry.concat("T00:00:00Z")
-	let url = baseUrl + "/offers/save?city=karachi&lang=en"
+	let url = baseUrl + "/offers/add?city=karachi&lang=en"
 	let body = {
 		price,
 		buying,

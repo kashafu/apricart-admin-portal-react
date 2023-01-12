@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react"
 
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import { offerSaveApi } from "../../../utils/ApiCalls";
-import Loading from "../../../utils/Loading";
-import Heading from "../../Misc/Heading";
-import CustomInput from "../../Misc/CustomInput";
-import CustomButton from "../../Misc/CustomButton";
-import CustomRadioInput from "../../Misc/CustomRadioInput";
+} from "../../../utils/GeneralVariables"
+import { offerSaveApi } from "../../../utils/ApiCalls"
+import CustomInput from "../../Misc/CustomInput"
+import CustomRadioInput from "../../Misc/CustomRadioInput"
+import SingleAPILayout from "../../Layouts/SingleAPILayout"
+import Heading from "../../Misc/Heading"
 
 const OfferSaveAPIComponent = () => {
-	const [offerId, setOfferId] = useState("");
-	const [loading, setLoading] = useState(false);
+	const [offerId, setOfferId] = useState("")
+	const [loading, setLoading] = useState(false)
 	const [input, setInput] = useState({
 		price: "",
 		buying: "",
@@ -22,18 +21,18 @@ const OfferSaveAPIComponent = () => {
 		products: "",
 		categories: "",
 		type: "products",
-	});
+	})
 	const { price, buying, buyingCondition, expiry, products, categories } =
-		input;
+		input
 
 	const handleRadioButton = (e) => {
-		setInput({ ...input, type: e.target.value });
-	};
+		setInput({ ...input, type: e.target.value })
+	}
 
 	const submitHandler = async (e) => {
-		e.preventDefault();
-		setLoading(true);
-		let newInput = {};
+		e.preventDefault()
+		setLoading(true)
+		let newInput = {}
 		if (input.type === "categories") {
 			newInput = {
 				price,
@@ -42,7 +41,7 @@ const OfferSaveAPIComponent = () => {
 				expiry,
 				products: "",
 				categories,
-			};
+			}
 		} else {
 			newInput = {
 				price,
@@ -51,26 +50,30 @@ const OfferSaveAPIComponent = () => {
 				expiry,
 				products,
 				categories: "",
-			};
+			}
 		}
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
 		await offerSaveApi(baseUrl, newInput, headers).then((response) => {
-			setLoading(false);
-			let status = checkStatus(response);
-			status && setOfferId(response.data.data.id);
-		});
-	};
+			setLoading(false)
+			let status = checkStatus(response)
+			status && setOfferId(response.data.data.id)
+		})
+	}
 
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Save Offer</Heading> */}
-			<form>
-				<section className="grid grid-cols-2 pt-6">
+		<SingleAPILayout
+			heading={"Add Offer"}
+			loading={loading}
+			buttonOnClick={(e) => submitHandler(e)}
+			buttonText={"Create"}
+			gridItems={
+				<>
 					<CustomInput
 						value={price}
 						heading={"Price"}
-						onChange={(e) => setInput({ ...input, price: e.target.value })}
+						onChange={(e) =>
+							setInput({ ...input, price: e.target.value })
+						}
 						type="number"
 						placeholder="Price eg. 320"
 						position={"top"}
@@ -78,7 +81,10 @@ const OfferSaveAPIComponent = () => {
 					<CustomInput
 						value={buyingCondition}
 						onChange={(e) =>
-							setInput({ ...input, buyingCondition: e.target.value })
+							setInput({
+								...input,
+								buyingCondition: e.target.value,
+							})
 						}
 						x
 						type="text"
@@ -87,7 +93,9 @@ const OfferSaveAPIComponent = () => {
 					/>
 					<CustomInput
 						value={expiry}
-						onChange={(e) => setInput({ ...input, expiry: e.target.value })}
+						onChange={(e) =>
+							setInput({ ...input, expiry: e.target.value })
+						}
 						type="date"
 						placeholder="Expiry Date"
 						heading={"Expiry date"}
@@ -102,7 +110,9 @@ const OfferSaveAPIComponent = () => {
 					{input.type === "products" && (
 						<CustomInput
 							value={products}
-							onChange={(e) => setInput({ ...input, products: e.target.value })}
+							onChange={(e) =>
+								setInput({ ...input, products: e.target.value })
+							}
 							type="text"
 							placeholder="Products"
 							heading="Products"
@@ -112,7 +122,10 @@ const OfferSaveAPIComponent = () => {
 						<CustomInput
 							value={categories}
 							onChange={(e) =>
-								setInput({ ...input, categories: e.target.value })
+								setInput({
+									...input,
+									categories: e.target.value,
+								})
 							}
 							type="text"
 							placeholder="Categories"
@@ -122,28 +135,27 @@ const OfferSaveAPIComponent = () => {
 
 					<CustomInput
 						value={buying}
-						onChange={(e) => setInput({ ...input, buying: e.target.value })}
+						onChange={(e) =>
+							setInput({ ...input, buying: e.target.value })
+						}
 						type="text"
 						placeholder="Buying"
 						heading={"Buying"}
 						position={"bottom"}
 					/>
-				</section>
-				<CustomButton width={"1/3"} onClick={(e) => submitHandler(e)}>
-					Create
-				</CustomButton>
-			</form>
-
+				</>
+			}
+		>
 			{offerId && (
 				<div className="inline-flex animate-dropdown justify-center items-center">
-					{/* <Heading>Your Offer Id = </Heading> */}
+					<Heading>Your Offer Id = </Heading>
 					<h2 className="text-5xl font-bold font-nunito text-main-blue">
 						{offerId}
 					</h2>
 				</div>
 			)}
-		</section>
-	);
-};
+		</SingleAPILayout>
+	)
+}
 
-export default OfferSaveAPIComponent;
+export default OfferSaveAPIComponent
