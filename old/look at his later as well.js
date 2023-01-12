@@ -2,13 +2,13 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { useDashboardApi } from "../../utils/ApiCalls"
+import { useDashboardApi } from "../utils/ApiCalls"
 import {
 	addToRecent,
 	deleteEntry,
 	selectTabs,
-} from "../../Redux/Recents/recentsSlice"
-import { toKebabCase } from "../../helpers/TextHelpers"
+} from "../Redux/Recents/recentsSlice"
+import { toKebabCase } from "../helpers/TextHelpers"
 
 import { FiChevronRight } from "react-icons/fi"
 import { IoNavigate } from "react-icons/io5"
