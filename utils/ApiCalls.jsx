@@ -578,7 +578,7 @@ export const recommendedUpdateApi = async (
 ) => {
 	let url =
 		baseUrl +
-		`/admin/recommended/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`
+		`/misc/recommended/update?text=${text}&prod_type=${prodType}&order_type=${orderType}&city=${city}`
 	try {
 		return await axios.get(url, {
 			headers,
