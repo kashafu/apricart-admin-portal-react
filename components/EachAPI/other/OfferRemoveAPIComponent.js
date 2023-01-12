@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import {
 	checkStatus,
@@ -10,6 +10,7 @@ import Heading from "../../Misc/Heading";
 import CustomInput from "../../Misc/CustomInput";
 import CustomButton from "../../Misc/CustomButton";
 import CustomRadioInput from "../../Misc/CustomRadioInput";
+import SingleAPILayout from "../../Layouts/SingleAPILayout";
 
 const OfferRemoveAPIComponent = () => {
 	const [offerId, setOfferId] = useState("");
@@ -60,6 +61,26 @@ const OfferRemoveAPIComponent = () => {
 			status && setOfferId(response.data.data.id);
 		});
 	};
+
+	return (
+		<SingleAPILayout
+			heading={"Remove Offer"}
+			loading={loading}
+			buttonOnClick={(e) => submitHandler(e)}
+			buttonText={"Remove"}
+			rowItems={
+				<CustomInput
+					value={price}
+					heading={"Offer ID"}
+					onChange={(e) => setInput({ ...input, price: e.target.value })}
+					type="number"
+					placeholder="Price eg. 320"
+					position={"top"}
+				/>
+			}
+		/>
+	)
+
 	return (
 		<section className="px-10">
 			<Loading loading={loading} />
