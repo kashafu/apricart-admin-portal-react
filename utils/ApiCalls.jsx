@@ -307,7 +307,7 @@ export const downloadOrdersApi = async (
 ) => {
 	const url =
 		baseUrl +
-		`/admin/download/orders?cityid=${cityId}&from=${fromDate}&to=${toDate}&skus=${skus}`
+		`/download/orders?cityid=${cityId}&from=${fromDate}&to=${toDate}&skus=${skus}`
 
 	const dateString1 = moment(Date.now()).format("YYYY-MM-DD")
 	try {
