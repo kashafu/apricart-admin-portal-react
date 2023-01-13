@@ -1,4 +1,4 @@
-const TableView = ({ headings, data, dataKeys }) => {
+const TableView = ({ headings, data, dataKeys, key }) => {
 
     return (
         <table className="table-auto w-full rounded-lg overflow-hidden">
@@ -20,7 +20,7 @@ const TableView = ({ headings, data, dataKeys }) => {
                 {data.map((eachData) => {
                     return (
                         <tr
-                            key={eachData}
+                            key={eachData[key]}
                             className="h-11"
                         >
                             {dataKeys.map((eachKey) => {

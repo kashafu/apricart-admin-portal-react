@@ -50,6 +50,7 @@ import GetAllPermissionsCurrentRoleAPIComponent from "../../components/EachAPI/s
 import GetAllRolesAPIComponent from "../../components/EachAPI/superAdmin/GetAllRolesAPIComponent"
 import LinkRoleAndPermissionsAPIComponent from "../../components/EachAPI/superAdmin/LinkRoleAndPermissionsAPIComponent"
 import UpdatePermissionsAPIComponent from "../../components/EachAPI/superAdmin/UpdatePermissionsAPIComponent"
+import ManagePermissions from "../../components/EachAPI/permissions/ManagePermissions"
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch()
@@ -211,6 +212,10 @@ const MainTabComponent = () => {
 				{selected === "/v1/adminUser/permission/getAllActive" && (
 					<GetAllActivePermissionsAPIComponent />
 				)}
+				{selected === "/v1/adminUser/permission/manage" && (
+					<ManagePermissions />
+				)}
+
 
 				{/* ERP */}
 				{selected === "/v1/erp/category/add" && <p></p>}
