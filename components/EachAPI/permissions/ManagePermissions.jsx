@@ -23,6 +23,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
 
     const headingStyle = "flex items-center w-full h-full border-b"
     const cellStyle = "flex items-center w-full h-full"
+    const inputStyle = "flex items-center w-full h-full border-gray-500 border-2 rounded-lg px-2"
     const buttonStyle = "text-white font-semibold py-2 rounded-md w-full duration-200 hover:scale-105"
 
     const callUpdatePermissionAPI = async (e) => {
@@ -38,9 +39,10 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
             updatedValue.active,
             headers
         ).then((response) => {
-            checkStatus(response, "Permission Updated")
-            setIsEditId(null)
-            reloadPermissionsList()
+            if (checkStatus(response, "Permission Updated")) {
+                setIsEditId(null)
+                reloadPermissionsList()
+            }
             setIsLoading(false)
         })
     }
@@ -92,14 +94,22 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
         await createAndUpdatePermsissionApi(
             baseUrl,
             "",
-            updatedValue.apiName,
-            updatedValue.apiURL,
-            updatedValue.category,
-            updatedValue.active,
+            newPermission.apiName,
+            newPermission.apiURL,
+            newPermission.category,
+            newPermission.active,
             headers
         ).then((response) => {
-            checkStatus(response, "New Permission Created")
-            reloadPermissionsList()
+            if (checkStatus(response, "New Permission Created")) {
+                reloadPermissionsList()
+                setIsAddNewPermission(false)
+                setIsAddNewPermission({
+                    "apiName": "",
+                    "apiURL": "",
+                    "category": "",
+                    "active": ""
+                })
+            }
             setIsLoading(false)
         })
     }
@@ -124,7 +134,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                     <button
                         className={buttonStyle + [" bg-main-blue-100"]}
                         onClick={(e) => {
-                            callCreatePermissionAPI(e)
+                            setIsAddNewPermission(true)
                         }}
                     >
                         ADD NEW PERMISSION
@@ -134,9 +144,9 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
 
             {/* ADD NEW PERMISSION VIEW IF NEW PERMISSION BEING ADDED */}
             {isAddNewPermission && (
-                <div className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold p-2">
+                <div className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold p-2 animate-dropdown">
                     <input
-                        className={cellStyle + [" col-span-2 pl-6"]}
+                        className={inputStyle + [" col-span-2 pl-6"]}
                         value={newPermission.apiName}
                         onChange={(e) => {
                             setNewPermission({
@@ -146,7 +156,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                         }}
                     />
                     <input
-                        className={cellStyle + [" col-span-4"]}
+                        className={inputStyle + [" col-span-4"]}
                         value={newPermission.apiURL}
                         onChange={(e) => {
                             setNewPermission({
@@ -156,7 +166,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                         }}
                     />
                     <input
-                        className={cellStyle + [" col-span-2"]}
+                        className={inputStyle + [" col-span-2"]}
                         value={newPermission.category}
                         onChange={(e) => {
                             setNewPermission({
@@ -167,7 +177,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                     />
                     <input
                         type={"checkbox"}
-                        className={cellStyle + [" col-span-1"]}
+                        className={inputStyle + [" col-span-1"]}
                         checked={newPermission.active === "Y" ? true : false}
                         onChange={(e) => {
                             setNewPermission({
@@ -180,15 +190,15 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                         <button
                             className={buttonStyle + [" bg-green-400"]}
                             onClick={(e) => {
-                                callUpdatePermissionAPI(e)
+                                callCreatePermissionAPI(e)
                             }}
                         >
-                            Update
+                            Create
                         </button>
                         <button
                             className={buttonStyle + [" bg-red-500"]}
                             onClick={() => {
-                                setIsEditId(null)
+                                setIsAddNewPermission(false)
                             }}
                         >
                             Cancel
@@ -210,7 +220,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                         {isEditId === id ? (
                             <>
                                 <input
-                                    className={cellStyle + [" col-span-2 pl-6"]}
+                                    className={inputStyle + [" col-span-2 pl-6"]}
                                     value={updatedValue.apiName}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -220,7 +230,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     }}
                                 />
                                 <input
-                                    className={cellStyle + [" col-span-4"]}
+                                    className={inputStyle + [" col-span-4"]}
                                     value={updatedValue.apiURL}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -230,7 +240,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     }}
                                 />
                                 <input
-                                    className={cellStyle + [" col-span-2"]}
+                                    className={inputStyle + [" col-span-2"]}
                                     value={updatedValue.category}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -241,7 +251,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                 />
                                 <input
                                     type={"checkbox"}
-                                    className={cellStyle + [" col-span-1"]}
+                                    className={inputStyle + [" col-span-1"]}
                                     checked={updatedValue.active === "Y" ? true : false}
                                     onChange={(e) => {
                                         setUpdatedValue({

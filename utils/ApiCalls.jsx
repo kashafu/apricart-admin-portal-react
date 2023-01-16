@@ -988,7 +988,7 @@ export const createAndUpdatePermsissionApi = async (
 	let body
 	let url = baseUrl + "/adminUser/permission/saveOrUpdate"
 	if (id.length === 0) {
-		body = { apiName, apiURL, active }
+		body = { apiName, apiURL, active, category }
 	} else {
 		body = {
 			id,
