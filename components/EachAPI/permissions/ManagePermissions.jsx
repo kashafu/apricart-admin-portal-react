@@ -6,6 +6,7 @@ import SingleTabLayout from "../../Layouts/SingleTabLayout"
 
 const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
     const [isEditId, setIsEditId] = useState(null)
+    const [isAddNewPermission, setIsAddNewPermission] = useState(false)
     const [updatedValue, setUpdatedValue] = useState({
         "id": "",
         "apiName": "",
@@ -19,6 +20,10 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
         "category": "",
         "active": ""
     })
+
+    const headingStyle = "flex items-center w-full h-full border-b"
+    const cellStyle = "flex items-center w-full h-full"
+    const buttonStyle = "text-white font-semibold py-2 rounded-md w-full duration-200 hover:scale-105"
 
     const callUpdatePermissionAPI = async (e) => {
         setIsLoading(true)
@@ -101,21 +106,98 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
 
     return (
         <section className="w-full shadow-xl border-gray-200 border-2 rounded py-6">
+            {/* HEADINGS */}
             <div className="w-full grid grid-cols-12 py-2 items-center justify-center">
-                <p className="col-span-2 w-full h-full border-b ml-6">
+                <p className={headingStyle + [" col-span-2 ml-6"]}>
                     Name
                 </p>
-                <p className="col-span-4 w-full h-full border-b">
+                <p className={headingStyle + [" col-span-4"]}>
                     API URL
                 </p>
-                <p className="col-span-2 w-full h-full border-b">
+                <p className={headingStyle + [" col-span-2"]}>
                     Category
                 </p>
-                <p className="col-span-1 w-full h-full border-b">
+                <p className={headingStyle + [" col-span-1"]}>
                     Active
                 </p>
-                <p className="col-span-3 h-full border-b mr-6" />
+                <div className={cellStyle + [" col-span-3 pr-6"]}>
+                    <button
+                        className={buttonStyle + [" bg-main-blue-100"]}
+                        onClick={(e) => {
+                            callCreatePermissionAPI(e)
+                        }}
+                    >
+                        ADD NEW PERMISSION
+                    </button>
+                </div>
             </div>
+
+            {/* ADD NEW PERMISSION VIEW IF NEW PERMISSION BEING ADDED */}
+            {isAddNewPermission && (
+                <div className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold p-2">
+                    <input
+                        className={cellStyle + [" col-span-2 pl-6"]}
+                        value={newPermission.apiName}
+                        onChange={(e) => {
+                            setNewPermission({
+                                ...newPermission,
+                                apiName: e.target.value
+                            })
+                        }}
+                    />
+                    <input
+                        className={cellStyle + [" col-span-4"]}
+                        value={newPermission.apiURL}
+                        onChange={(e) => {
+                            setNewPermission({
+                                ...newPermission,
+                                apiURL: e.target.value
+                            })
+                        }}
+                    />
+                    <input
+                        className={cellStyle + [" col-span-2"]}
+                        value={newPermission.category}
+                        onChange={(e) => {
+                            setNewPermission({
+                                ...newPermission,
+                                category: e.target.value
+                            })
+                        }}
+                    />
+                    <input
+                        type={"checkbox"}
+                        className={cellStyle + [" col-span-1"]}
+                        checked={newPermission.active === "Y" ? true : false}
+                        onChange={(e) => {
+                            setNewPermission({
+                                ...newPermission,
+                                active: e.target.checked ? "Y" : "N"
+                            })
+                        }}
+                    />
+                    <div className={cellStyle + [" space-x-4 col-span-3 pr-6"]}>
+                        <button
+                            className={buttonStyle + [" bg-green-400"]}
+                            onClick={(e) => {
+                                callUpdatePermissionAPI(e)
+                            }}
+                        >
+                            Update
+                        </button>
+                        <button
+                            className={buttonStyle + [" bg-red-500"]}
+                            onClick={() => {
+                                setIsEditId(null)
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* LIST ALL PERMISSIONS */}
             {allPermissions.map((each) => {
                 let { id, active, apiName, apiURL, catgeory } = each
 
@@ -124,10 +206,11 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                         key={id}
                         className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold even:bg-white odd:bg-gray-50 p-2"
                     >
+                        {/* IF IS EDIT, SHOW INPUT FIELDS, OTHERWISE LIST NORMALLY */}
                         {isEditId === id ? (
                             <>
                                 <input
-                                    className="col-span-2 pl-6 w-full h-full"
+                                    className={cellStyle + [" col-span-2 pl-6"]}
                                     value={updatedValue.apiName}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -137,7 +220,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     }}
                                 />
                                 <input
-                                    className="col-span-4 w-full h-full"
+                                    className={cellStyle + [" col-span-4"]}
                                     value={updatedValue.apiURL}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -147,7 +230,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     }}
                                 />
                                 <input
-                                    className="col-span-2 w-full h-full"
+                                    className={cellStyle + [" col-span-2"]}
                                     value={updatedValue.category}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -158,7 +241,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                 />
                                 <input
                                     type={"checkbox"}
-                                    className="col-span-1 w-full h-full"
+                                    className={cellStyle + [" col-span-1"]}
                                     checked={updatedValue.active === "Y" ? true : false}
                                     onChange={(e) => {
                                         setUpdatedValue({
@@ -167,9 +250,9 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                         })
                                     }}
                                 />
-                                <div className="flex w-full h-full space-x-4 col-span-3 pr-6">
+                                <div className={cellStyle + [" space-x-4 col-span-3 pr-6"]}>
                                     <button
-                                        className="bg-green-400 text-white font-semibold py-2 rounded-md w-full duration-200"
+                                        className={buttonStyle + [" bg-green-400"]}
                                         onClick={(e) => {
                                             callUpdatePermissionAPI(e)
                                         }}
@@ -177,7 +260,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                         Update
                                     </button>
                                     <button
-                                        className="bg-red-500 text-white font-semibold py-2 rounded-md w-full duration-200"
+                                        className={buttonStyle + [" bg-red-500"]}
                                         onClick={() => {
                                             setIsEditId(null)
                                         }}
@@ -188,22 +271,22 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                             </>
                         ) : (
                             <>
-                                <p className="col-span-2 pl-6 w-full h-full">
+                                <p className={cellStyle + [" col-span-2 pl-6"]}>
                                     {apiName}
                                 </p>
-                                <p className="col-span-4 w-full h-full">
+                                <p className={cellStyle + [" col-span-4"]}>
                                     {apiURL}
                                 </p>
-                                <p className="col-span-2 w-full h-full">
+                                <p className={cellStyle + [" col-span-2"]}>
                                     {catgeory}
                                 </p>
-                                <p className="col-span-1 w-full h-full">
+                                <p className={cellStyle + [" col-span-1"]}>
                                     {active === "Y" && "True"}
                                     {active === "N" && "False"}
                                 </p>
-                                <div className="flex w-full h-full space-x-4 col-span-3 pr-6">
+                                <div className={cellStyle + [" space-x-4 col-span-3 pr-6"]}>
                                     <button
-                                        className="bg-main-blue text-white font-semibold py-2 rounded-md w-full duration-200"
+                                        className={buttonStyle + [" bg-main-blue"]}
                                         onClick={() => {
                                             setIsEditId(id)
                                             setUpdatedValue({
@@ -219,7 +302,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     </button>
                                     {active === "Y" && (
                                         <button
-                                            className="bg-red-500 text-white font-semibold py-2 rounded-md w-full duration-200"
+                                            className={buttonStyle + [" bg-red-500"]}
                                             onClick={(e) => {
                                                 callDisablePermissionAPI(e, id, apiName, apiURL, catgeory)
                                             }}
@@ -229,7 +312,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                     )}
                                     {active === "N" && (
                                         <button
-                                            className="bg-green-400 text-white font-semibold py-2 rounded-md w-full duration-200"
+                                            className={buttonStyle + [" bg-green-400"]}
                                             onClick={(e) => {
                                                 callEnablePermissionAPI(e, id, apiName, apiURL, catgeory)
                                             }}
