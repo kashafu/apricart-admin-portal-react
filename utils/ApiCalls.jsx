@@ -981,6 +981,7 @@ export const createAndUpdatePermsissionApi = async (
 	id,
 	apiName,
 	apiURL,
+	category,
 	active,
 	headers
 ) => {
@@ -993,6 +994,7 @@ export const createAndUpdatePermsissionApi = async (
 			id,
 			apiName,
 			apiURL,
+			category,
 			active,
 		}
 	}
