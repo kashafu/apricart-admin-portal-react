@@ -113,33 +113,6 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
         })
     }
 
-    const callCreatePermissionAPI = async (e) => {
-        setIsLoading(true)
-        e.preventDefault()
-        const { baseUrl, headers } = getGeneralApiParams()
-        await createAndUpdatePermsissionApi(
-            baseUrl,
-            "",
-            newPermission.apiName,
-            newPermission.apiURL,
-            newPermission.category,
-            newPermission.active,
-            headers
-        ).then((response) => {
-            if (checkStatus(response, "New Permission Created")) {
-                reloadPermissionsList()
-                setIsAddNewPermission(false)
-                setIsAddNewPermission({
-                    apiName: "",
-                    apiURL: "",
-                    category: "",
-                    active: "",
-                })
-            }
-            setIsLoading(false)
-        })
-    }
-
     return (
         <section className="w-full shadow-xl border-gray-200 border-2 rounded py-6">
             {/* HEADINGS */}
@@ -216,82 +189,8 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                 >
                     Active
                 </p>
-                <div className={cellStyle + [" col-span-3 pr-6"]}>
-                    <button
-                        className={buttonStyle + [" bg-main-blue-100"]}
-                        onClick={(e) => {
-                            setIsAddNewPermission(true)
-                        }}
-                    >
-                        ADD NEW PERMISSION
-                    </button>
-                </div>
+                <p className={headingStyle + [" w-auto col-span-3 mr-6"]} />
             </div>
-
-            {/* ADD NEW PERMISSION VIEW IF NEW PERMISSION BEING ADDED */}
-            {isAddNewPermission && (
-                <div className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold p-2 animate-dropdown">
-                    <input
-                        className={inputStyle + [" col-span-2 pl-6"]}
-                        value={newPermission.apiName}
-                        onChange={(e) => {
-                            setNewPermission({
-                                ...newPermission,
-                                apiName: e.target.value,
-                            })
-                        }}
-                    />
-                    <input
-                        className={inputStyle + [" col-span-4"]}
-                        value={newPermission.apiURL}
-                        onChange={(e) => {
-                            setNewPermission({
-                                ...newPermission,
-                                apiURL: e.target.value,
-                            })
-                        }}
-                    />
-                    <input
-                        className={inputStyle + [" col-span-2"]}
-                        value={newPermission.category}
-                        onChange={(e) => {
-                            setNewPermission({
-                                ...newPermission,
-                                category: e.target.value,
-                            })
-                        }}
-                    />
-                    <input
-                        type={"checkbox"}
-                        className={inputStyle + [" col-span-1"]}
-                        checked={newPermission.active === "Y" ? true : false}
-                        onChange={(e) => {
-                            setNewPermission({
-                                ...newPermission,
-                                active: e.target.checked ? "Y" : "N",
-                            })
-                        }}
-                    />
-                    <div className={cellStyle + [" space-x-4 col-span-3 pr-6"]}>
-                        <button
-                            className={buttonStyle + [" bg-green-400"]}
-                            onClick={(e) => {
-                                callCreatePermissionAPI(e)
-                            }}
-                        >
-                            Create
-                        </button>
-                        <button
-                            className={buttonStyle + [" bg-red-500"]}
-                            onClick={() => {
-                                setIsAddNewPermission(false)
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
 
             {/* LIST ALL PERMISSIONS */}
             {permissions.map((each) => {
