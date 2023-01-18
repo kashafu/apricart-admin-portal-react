@@ -116,7 +116,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
     return (
         <section className="w-full shadow-xl border-gray-200 border-2 rounded py-6">
             {/* HEADINGS */}
-            <div className="w-full grid grid-cols-12 py-2 items-center justify-center">
+            <div className="w-full grid grid-cols-8 py-2 items-center justify-center">
                 <p
                     className={headingStyle + [" col-span-2 ml-6"]}
                     onClick={() => {
@@ -134,24 +134,6 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                     }}
                 >
                     Permission Name
-                </p>
-                <p
-                    className={headingStyle + [" col-span-4"]}
-                    onClick={() => {
-                        const sortedArray = [...permissions]
-                        sortedArray.sort((a, b) => {
-                            if (a.apiURL < b.apiURL) {
-                                return -1
-                            }
-                            if (a.apiURL > b.apiURL) {
-                                return 1
-                            }
-                            return 0
-                        })
-                        setPermissions(sortedArray)
-                    }}
-                >
-                    API URL
                 </p>
                 <p
                     className={headingStyle + [" col-span-2"]}
@@ -199,7 +181,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                 return (
                     <div
                         key={id}
-                        className="w-full grid grid-cols-12 gap-x-2 font-nunito text-lg font-semibold even:bg-white odd:bg-gray-50 p-2"
+                        className="w-full grid grid-cols-8 gap-x-2 font-nunito text-lg font-semibold even:bg-white odd:bg-gray-50 p-2"
                     >
                         {/* IF IS EDIT, SHOW INPUT FIELDS, OTHERWISE LIST NORMALLY */}
                         {isEditId === id ? (
@@ -213,16 +195,6 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                         setUpdatedValue({
                                             ...updatedValue,
                                             apiName: e.target.value,
-                                        })
-                                    }}
-                                />
-                                <input
-                                    className={inputStyle + [" col-span-4"]}
-                                    value={updatedValue.apiURL}
-                                    onChange={(e) => {
-                                        setUpdatedValue({
-                                            ...updatedValue,
-                                            apiURL: e.target.value,
                                         })
                                     }}
                                 />
@@ -285,9 +257,6 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                             <>
                                 <p className={cellStyle + [" col-span-2 pl-6"]}>
                                     {apiName}
-                                </p>
-                                <p className={cellStyle + [" col-span-4"]}>
-                                    {apiURL}
                                 </p>
                                 <p className={cellStyle + [" col-span-2"]}>
                                     {category}
