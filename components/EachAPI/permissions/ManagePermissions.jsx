@@ -13,15 +13,8 @@ import SingleTabLayout from "../../Layouts/SingleTabLayout"
 const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
     const [permissions, setPermissions] = useState(allPermissions)
     const [isEditId, setIsEditId] = useState(null)
-    const [isAddNewPermission, setIsAddNewPermission] = useState(false)
     const [updatedValue, setUpdatedValue] = useState({
         id: "",
-        apiName: "",
-        apiURL: "",
-        category: "",
-        active: "",
-    })
-    const [newPermission, setNewPermission] = useState({
         apiName: "",
         apiURL: "",
         category: "",
