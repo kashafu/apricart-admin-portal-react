@@ -5,7 +5,6 @@ const CustomSelectInput = ({ options, optionText, customOnChange, onChange, valu
 				className="z-20 block px-2.5 pb-2.5 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-md border-[1.5px] appearance-none border-slate-300 focus:outline-none focus:ring-0 focus:border-main-blue peer"
 				disabled={disabled}
 				onChange={(e) => {
-					console.log(e.target.value)
 					if (customOnChange) {
 						customOnChange(e)
 					}
