@@ -1,251 +1,255 @@
-import React, { useEffect, useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
+import { useEffect, useState } from "react"
 
 import {
 	getActivePermissionsApi,
 	getAllRolesApi,
 	getPermissionByRoleApi,
 	linkRoleAndPermissionApi,
-} from "../../../utils/ApiCalls";
+} from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	getGeneralApiParams,
-	sortAscending,
-	updateRen,
-} from "../../../utils/GeneralVariables";
-import Loading from "../../../utils/Loading";
-import SingleAPILayout from "../../Layouts/SingleAPILayout";
-import CustomButton from "../../Misc/CustomButton";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
-import Heading from "../../Misc/Heading";
+} from "../../../utils/GeneralVariables"
+import SingleTabLayout from "../../Layouts/SingleTabLayout"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
+
+const Table = ({ allPermissions, allPermissionsByRole, setIsLoading, reloadPermissionsList, roleId }) => {
+	const [permissions, setPermissions] = useState(allPermissions)
+
+	const headingStyle =
+		"flex items-center w-full h-full border-b cursor-pointer"
+	const cellStyle = "flex items-center w-full h-full"
+	const buttonStyle =
+		"text-white font-semibold py-2 rounded-md w-full duration-200 hover:scale-105"
+
+	useEffect(() => {
+		setPermissions(allPermissions)
+	}, [allPermissions])
+
+	const link = (id) => {
+		let temp = []
+		allPermissionsByRole.forEach(element => {
+			temp.push(element.permission.id)
+		})
+		temp.push(id)
+		callLinkRoleWithPermissionsApi(temp)
+	}
+
+	const remove = (id) => {
+		let temp = []
+		allPermissionsByRole.forEach(element => {
+			if (element.permission.id !== id) {
+				temp.push(element.permission.id)
+			}
+		})
+		callLinkRoleWithPermissionsApi(temp)
+	}
+
+	const callLinkRoleWithPermissionsApi = async (ids) => {
+		setIsLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
+		await linkRoleAndPermissionApi(baseUrl, roleId, ids, headers).then(
+			(response) => {
+				checkStatus(response, "Permissions Updated Successfully")
+				setIsLoading(false)
+				reloadPermissionsList()
+			}
+		)
+	}
+
+	return (
+		<section className="w-full shadow-xl border-gray-200 border-2 rounded py-6">
+			{/* HEADINGS */}
+			<div className="w-full grid grid-cols-8 py-2 items-center justify-center">
+				<p
+					className={headingStyle + [" col-span-3 ml-6"]}
+					onClick={() => {
+						const sortedArray = [...permissions]
+						sortedArray.sort((a, b) => {
+							if (a.apiName < b.apiName) {
+								return -1
+							}
+							if (a.apiName > b.apiName) {
+								return 1
+							}
+							return 0
+						})
+						setPermissions(sortedArray)
+					}}
+				>
+					Permission Name
+				</p>
+				<p
+					className={headingStyle + [" col-span-2"]}
+					onClick={() => {
+						const sortedArray = [...permissions]
+						sortedArray.sort((a, b) => {
+							if (a.category < b.category) {
+								return -1
+							}
+							if (a.category > b.category) {
+								return 1
+							}
+							return 0
+						})
+						setPermissions(sortedArray)
+					}}
+				>
+					Category
+				</p>
+				<p className={headingStyle + [" col-span-1"]}>
+					Status
+				</p>
+				<p className={headingStyle + [" w-auto col-span-2 mr-6"]} />
+			</div>
+
+			{/* LIST ALL PERMISSIONS */}
+			{permissions.map((each) => {
+				let { id, apiName, category } = each
+
+				return (
+					<div
+						key={id}
+						className="w-full grid grid-cols-8 gap-x-2 font-nunito text-lg font-semibold even:bg-white odd:bg-gray-50 p-2"
+					>
+						<p className={cellStyle + [" col-span-3 pl-6"]}>
+							{apiName}
+						</p>
+						<p className={cellStyle + [" col-span-2"]}>
+							{category}
+						</p>
+						<p className={cellStyle + [" col-span-1"]}>
+							{allPermissionsByRole.some((a) => {
+								return id === a.permission.id
+							}) ? "Linked" : "Not Linked"}
+						</p>
+						<div
+							className={
+								cellStyle +
+								[" space-x-4 col-span-2 pr-6"]
+							}
+						>
+							{allPermissionsByRole.some((a) => {
+								return id === a.permission.id
+							}) ? (
+								<button
+									className={
+										buttonStyle + [" bg-red-500"]
+									}
+									onClick={() => {
+										remove(id)
+									}}
+								>
+									Remove
+								</button>
+							) : (
+								<button
+									className={
+										buttonStyle + [" bg-green-400"]
+									}
+									onClick={() => {
+										link(id)
+									}}
+								>
+									Link
+								</button>
+							)}
+						</div>
+					</div>
+				)
+			})}
+		</section>
+	)
+}
 
 const LinkRoleAndPermissionsAPIComponent = () => {
-	const [loading, setLoading] = useState(false);
-	const [ren, setRen] = useState("");
+	const [loading, setLoading] = useState(false)
 	const [roleArray, setRoleArray] = useState([
 		{
 			name: "Loading...",
 		},
-	]);
-	const [permissionArray, setPermissionArray] = useState([]);
-	// Array to contain permissions for this role
-	const [linked, setLinked] = useState([]);
-	const [roleId, setRoleId] = useState("");
+	])
+	const [allPermissions, setAllPermissions] = useState([])
+	const [allPermissionsByRole, setAllPermissionsByRole] = useState([])
+	const [roleId, setRoleId] = useState("")
+	const [isRefreshApis, setIsRefreshApis] = useState(false)
 
 	useEffect(() => {
-		getAllRoles();
-		getAllPermissions();
+		getAllRoles()
+		getAllPermissions()
 	}, [])
 
-	const handleRoleId = (e) => {
-		getAllPermissionsByRole(e.target.value);
-		updateRen(setRen);
-		setRoleId(e.target.value);
-		setLinked([]);
-	};
+	useEffect(() => {
+		if (isRefreshApis) {
+			getAllPermissionsByRole(roleId)
+			setIsRefreshApis(false)
+		}
+	}, [isRefreshApis])
 
-	const fitIntoMultiArray = (array) => {
-		let tempArr = [];
-		array.map((each) => {
-			tempArr.push({ label: each.apiName, value: each.id });
-		});
-		setPermissionArray(tempArr);
-	};
+	const reloadApis = () => {
+		setIsRefreshApis(true)
+	}
+
+	const handleRoleId = (e) => {
+		getAllPermissionsByRole(e.target.value)
+		setRoleId(e.target.value)
+	}
 
 	const getAllPermissions = async () => {
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
+		setLoading(true)
 		await getActivePermissionsApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "");
-			status && setPermissionArray(sortAscending(response.data.data));
-			// sets up all permissions into the linked
-			status && fitIntoMultiArray(response.data.data);
+			let status = checkStatus(response, "")
+			status && setAllPermissions(response.data.data)
+			setLoading(false)
+		})
+	}
 
-			setLoading(false);
-		});
-	};
 	const getAllRoles = async () => {
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
+		setLoading(true)
 		await getAllRolesApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "");
-			status && setRoleArray(response.data.data);
-			setRoleId(response.data.data[0].id);
-			getAllPermissionsByRole(response.data.data[0].id);
-			setLoading(false);
-		});
-	};
-
-	const addPermsToLinked = (array) => {
-		// add already added permissions to tne linked array
-		let newArray = [];
-		let sorted = sortAscending(array);
-		sorted?.map((each) => {
-			newArray.push({
-				label: each.permission.apiName,
-				value: each.permission.id,
-			});
-		});
-
-		return newArray;
-	};
+			let status = checkStatus(response, "")
+			status && setRoleArray(response.data.data)
+			setRoleId(response.data.data[0].id)
+			getAllPermissionsByRole(response.data.data[0].id)
+			setLoading(false)
+		})
+	}
 
 	const getAllPermissionsByRole = async (id) => {
-		const { baseUrl, headers } = getGeneralApiParams();
+		const { baseUrl, headers } = getGeneralApiParams()
+		setLoading(true)
 		await getPermissionByRoleApi(baseUrl, id, headers).then((response) => {
-			let existentData = addPermsToLinked(response.data.data);
-			setLinked(existentData);
-		});
-	};
-
-	// const handleCheck = (e) => {
-	// 	// if target checked, add to the linked array
-	// 	// if not checked, delete from linked array
-	// 	let id = e.target.value;
-	// 	let checked = e.target.checked;
-	// 	if (checked) {
-	// 		setLinked([...linked, e.target.value]);
-	// 	} else {
-	// 		let killIndex = linked.findIndex((each) => each === id);
-	// 		console.log("Kill Index", killIndex);
-	// 		let newLinked = linked;
-	// 		newLinked.splice(killIndex, 1);
-	// 		setLinked(newLinked);
-	// 	}
-	// };
-
-	const submitIdsOnly = (array) => {
-		let tempArr = [];
-		array.map((each) => {
-			tempArr.push(each.value);
-		});
-
-		return tempArr;
+			let status = checkStatus(response, "")
+			status && setAllPermissionsByRole(response.data.data)
+			setLoading(false)
+		})
 	}
-
-	const handleSubmit = async (e) => {
-		setLoading(true);
-		e.preventDefault();
-		const { baseUrl, headers } = getGeneralApiParams();
-		let newPerms = submitIdsOnly(linked);
-		await linkRoleAndPermissionApi(baseUrl, roleId, newPerms, headers).then(
-			(response) => {
-				checkStatus(response, "Permissions Assigned Successfully");
-				setLoading(false);
-			}
-		);
-	}
-
-	// return (
-	// 	<SingleAPILayout
-	// 		heading={"Assign Permissions to Role"}
-	// 		loading={loading}
-	// 		buttonOnClick={(e) => handleSubmit(e)}
-	// 		buttonText={"Assign Roles"}
-	// 		rowItems={
-	// 			<CustomSelectInput
-	// 				onChange={(e) => handleRoleId(e)}
-	// 				heading={"Role Name"}
-	// 				values={roleArray.map((each) => each.id)}
-	// 				options={roleArray.map((each) => each.name)}
-	// 			/>
-	// 		}
-	// 	>
-	// 		<div className={`w-full grid grid-cols-5`}>
-	// 			<div>
-	// 				<p className="ml-2 font-nunito">Permissions</p>
-	// 			</div>
-	// 			<div className="col-span-1 lg:hidden" />
-	// 			<div className="col-span-3 relative pr-2">
-	// 				<MultiSelect
-	// 					className="col-span-2 border-[1px] border-gray-800"
-	// 					options={permissionArray}
-	// 					value={linked}
-	// 					onChange={setLinked}
-	// 					labelledBy="Select"
-	// 				/>
-	// 			</div>
-	// 		</div>
-	// 	</SingleAPILayout>
-	// )
 
 	return (
-		<section className="pl-10 pt-6">
-			<Loading loading={loading} />
-			{/* <Heading>Assign Permissions to Role</Heading> */}
-			<form action="" method="POST">
+		<SingleTabLayout
+			heading={"Assign Permissions to Role"}
+			loading={loading}
+			rowItems={
 				<CustomSelectInput
-					onChange={(e) => handleRoleId(e)}
 					heading={"Role Name"}
-					values={roleArray.map((each) => each.id)}
-					options={roleArray.map((each) => each.name)}
+					customOnChange={(e) => handleRoleId(e)}
+					value={roleId}
+					options={roleArray}
+					optionText="name"
 				/>
-				{/* {permissionArray?.map((each, index) => (
-					<section
-						key={each.id}
-						className="flex my-4 mb-4 items-center justify-center "
-					>
-						<div className="px-4 text-lg font-medium font-lato">
-							ID: {each.id}
-						</div>
-						<div className="px-8 font-nunito font-bold w-1/4">
-							<div>API Name</div>
-						</div>
+			}
+		>
+			<Table
+				allPermissions={allPermissions}
+				allPermissionsByRole={allPermissionsByRole}
+				setIsLoading={setLoading}
+				roleId={roleId}
+				reloadPermissionsList={reloadApis}
+			/>
+		</SingleTabLayout>
+	)
+}
 
-						<div className="px-8 font-nunito w-1/4">
-							<div>{each.label}</div>
-						</div>
-						<div className="px-4 w-1/4">
-							<input
-								type="checkbox"
-								className="w-5 h-5"
-								key={ren}
-								onChange={(e) => handleCheck(e)}
-								value={each.id}
-								checked={linked.includes(each.id, 0)}
-							/>
-						</div>
-					</section>
-				))} */}
-
-				<div className="flex">
-					{/* <div className="grid grid-cols-5">
-						<div className="col-span-1 bg-red-500">
-							<p className="ml-2 font-nunito">Permissions</p>
-						</div>
-
-						<MultiSelect
-							className="col-span-2"
-							options={permissionArray}
-							value={linked}
-							onChange={setLinked}
-							labelledBy="Select"
-						/>
-					</div> */}
-					<div className={`w-full grid grid-cols-5`}>
-						<div>
-							<p className="ml-2 font-nunito">Permissions</p>
-						</div>
-						<div className="col-span-1 lg:hidden" />
-						<div className="col-span-3 relative pr-2">
-							<MultiSelect
-								className="col-span-2 border-[1px] border-gray-800"
-								options={permissionArray}
-								value={linked}
-								onChange={setLinked}
-								labelledBy="Select"
-							/>
-						</div>
-					</div>
-				</div>
-				<CustomButton
-					className="col-span-1"
-					width={"1/3"}
-					onClick={handleSubmit}
-				>
-					Assign Roles
-				</CustomButton>
-			</form>
-		</section>
-	);
-};
-
-export default LinkRoleAndPermissionsAPIComponent;
+export default LinkRoleAndPermissionsAPIComponent
