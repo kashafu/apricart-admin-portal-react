@@ -239,16 +239,6 @@ const Table = ({ allPermissions, permissionCategories, setIsLoading, reloadPermi
                                         }}
                                     />
                                 )}
-                                {/* <input
-                                    className={inputStyle + [" col-span-2"]}
-                                    value={updatedValue.category}
-                                    onChange={(e) => {
-                                        setUpdatedValue({
-                                            ...updatedValue,
-                                            category: e.target.value,
-                                        })
-                                    }}
-                                /> */}
                                 <input
                                     type={"checkbox"}
                                     className={inputStyle + [" col-span-1"]}
