@@ -1047,6 +1047,17 @@ export const getAllPermissionsApi = async (baseUrl, headers) => {
 	}
 }
 
+export const getAllPermissionCategoriesApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/permission/getAllCategories"
+	try {
+		return await axios.get(url, {
+			headers,
+		})
+	} catch (error) {
+		return error?.response
+	}
+}
+
 export const getPermissionByRoleApi = async (baseUrl, roleId, headers) => {
 	let url = baseUrl + `/adminUser/rolePermission/getByRoleId?roleId=${roleId}`
 	try {

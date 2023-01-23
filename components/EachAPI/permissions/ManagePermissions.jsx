@@ -6,13 +6,15 @@ import {
 } from "../../../utils/GeneralVariables"
 import {
     createAndUpdatePermsissionApi,
+    getAllPermissionCategoriesApi,
     getAllPermissionsApi,
 } from "../../../utils/ApiCalls"
 import SingleTabLayout from "../../Layouts/SingleTabLayout"
 
-const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
+const Table = ({ allPermissions, permissionCategories, setIsLoading, reloadPermissionsList }) => {
     const [permissions, setPermissions] = useState(allPermissions)
     const [isEditId, setIsEditId] = useState(null)
+    const [isCustomCategory, setIsCustomCategory] = useState(false)
     const [updatedValue, setUpdatedValue] = useState({
         id: "",
         apiName: "",
@@ -191,7 +193,53 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                         })
                                     }}
                                 />
-                                <input
+                                <select
+                                    className={inputStyle + [isCustomCategory ? " col-span-1" : " col-span-2"]}
+                                    value={updatedValue.category}
+                                    onChange={(e) => {
+                                        if (e.target.value === "custom category") {
+                                            setIsCustomCategory(true)
+                                        }
+                                        else {
+                                            setUpdatedValue({
+                                                ...updatedValue,
+                                                category: e.target.value,
+                                            })
+                                            setIsCustomCategory(false)
+                                        }
+                                    }}
+                                >
+                                    {permissionCategories.map((permission) => {
+                                        return (
+                                            <option
+                                                key={permission}
+                                                value={permission}
+                                            >
+                                                {permission}
+                                            </option>
+                                        )
+                                    })}
+                                    <option
+                                        value={"custom category"}
+                                    >
+                                        New Category...
+                                    </option>
+                                </select>
+                                {isCustomCategory && (
+                                    <input
+                                        className={
+                                            inputStyle + [" col-span-1"]
+                                        }
+                                        value={updatedValue.category}
+                                        onChange={(e) => {
+                                            setUpdatedValue({
+                                                ...updatedValue,
+                                                category: e.target.value,
+                                            })
+                                        }}
+                                    />
+                                )}
+                                {/* <input
                                     className={inputStyle + [" col-span-2"]}
                                     value={updatedValue.category}
                                     onChange={(e) => {
@@ -200,7 +248,7 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
                                             category: e.target.value,
                                         })
                                     }}
-                                />
+                                /> */}
                                 <input
                                     type={"checkbox"}
                                     className={inputStyle + [" col-span-1"]}
@@ -330,9 +378,11 @@ const Table = ({ allPermissions, setIsLoading, reloadPermissionsList }) => {
 const ManagePermissions = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [allPermissions, setAllPermissions] = useState([])
+    const [permissionCategories, setPermissionCategories] = useState([])
 
     useEffect(() => {
         callGetAllPermissionsApi()
+        callGetAllPermissionsCategoriesApi()
     }, [])
 
     const callGetAllPermissionsApi = async () => {
@@ -346,12 +396,24 @@ const ManagePermissions = () => {
         })
     }
 
+    const callGetAllPermissionsCategoriesApi = async () => {
+        setIsLoading(true)
+
+        const { baseUrl, headers } = getGeneralApiParams()
+        await getAllPermissionCategoriesApi(baseUrl, headers).then((response) => {
+            let status = checkStatus(response, "")
+            status && setPermissionCategories(response.data.data)
+            setIsLoading(false)
+        })
+    }
+
     return (
         <SingleTabLayout heading={"Manage Permissions"} loading={isLoading}>
             <Table
                 allPermissions={allPermissions}
                 setIsLoading={setIsLoading}
                 reloadPermissionsList={callGetAllPermissionsApi}
+                permissionCategories={permissionCategories}
             />
         </SingleTabLayout>
     )
