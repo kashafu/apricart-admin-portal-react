@@ -152,13 +152,6 @@ export const getAllAPIsPhase2Api = async (baseUrl, headers) => {
 		let response = await axios.get(url, {
 			headers,
 		})
-		// Hard coded get all categories api
-		response.data.data.apis.unshift({
-			id: 0,
-			name: "View Category",
-			endpoint: "/v1/category/view",
-			category: "Category",
-		})
 		return response
 	} catch (error) {
 		return error?.response
