@@ -3,9 +3,8 @@ import FormData from "form-data"
 
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput"
 import {
-	getAllCategoriesApi,
 	updateCategoryBannerApi,
-	useCategoriesApi,
+	useCategoriesAllLevelsApi,
 } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
@@ -37,7 +36,7 @@ const UpdateCategoryBannerAPIComponent = () => {
 		orderType: selectedOrderType.id.orderType,
 	})
 
-	const { categories, setCity, setOrderType, setProdType, isLoading } = useCategoriesApi()
+	const { categories, setCity, setOrderType, setProdType, isLoading } = useCategoriesAllLevelsApi()
 
 	useEffect(() => {
 		setLoading(isLoading)

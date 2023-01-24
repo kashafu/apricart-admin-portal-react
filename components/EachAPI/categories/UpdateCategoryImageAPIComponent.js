@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react"
 import FormData from "form-data"
 
-import CustomInput from "../../Misc/CustomInput"
 import CustomSingleImageInput from "../../Misc/CustomSingleImageInput"
-import Heading from "../../Misc/Heading"
 import {
-	getAllCategoriesApi,
 	updateCategoryImageApi,
-	useCategoriesApi,
+	useCategoriesAllLevelsApi,
 } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
@@ -38,7 +35,7 @@ const UpdateCategoryImageAPIComponent = () => {
 		orderType: selectedOrderType.id.orderType,
 	})
 
-	const { categories, setCity, setOrderType, setProdType, isLoading } = useCategoriesApi()
+	const { categories, setCity, setOrderType, setProdType, isLoading } = useCategoriesAllLevelsApi()
 
 	useEffect(() => {
 		setLoading(isLoading)

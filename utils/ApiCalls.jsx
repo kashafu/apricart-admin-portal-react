@@ -905,6 +905,45 @@ export const useCategoriesApi = () => {
 	return { isLoading, categories, errorMessage, setOrderType, setCity, setProdType }
 }
 
+export const useCategoriesAllLevelsApi = () => {
+	const [city, setCity] = useState("")
+	const [prodType, setProdType] = useState("")
+	const [orderType, setOrderType] = useState("")
+	const [isLoading, setIsLoading] = useState(true)
+	const [categories, setCategories] = useState(null)
+	const [errorMessage, setErrorMessage] = useState("")
+
+	useEffect(() => {
+		callApi()
+	}, [city, prodType, orderType])
+
+	const callApi = async () => {
+		setIsLoading(true)
+		let { headers, baseUrl } = getGeneralApiParams()
+		let url = baseUrl + `/catalog/categories?level=all&city=${city}&userid=abc123&client_type=apricart&prod_type=${prodType}&order_type=${orderType}&lang=en`
+
+		try {
+			let apiResponse = await axios.get(url, {
+				headers: headers,
+			})
+			let temp = []
+			apiResponse.data.data.forEach(element => {
+				temp.push(element)
+				element.childrenData?.forEach(subElement => {
+					temp.push(subElement)
+				})
+			})
+			setCategories(temp)
+		} catch (error) {
+			setErrorMessage(error?.response?.data?.message)
+		} finally {
+			setIsLoading(false)
+		}
+	}
+
+	return { isLoading, categories, errorMessage, setOrderType, setCity, setProdType }
+}
+
 export const getAllCategoriesApi = async (baseUrl, headers) => {
 	const url = baseUrl + `/catalog/categories?level=all&userid=abc123`
 	var instance = axios.create()
