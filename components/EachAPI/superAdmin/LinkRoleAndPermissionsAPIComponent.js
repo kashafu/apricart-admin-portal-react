@@ -222,9 +222,18 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 		setLoading(true)
 		await getAllRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "")
-			status && setRoleArray(response.data.data)
-			setRoleId(response.data.data[0].id)
-			getAllPermissionsByRole(response.data.data[0].id)
+			if (status) {
+				let temp = []
+				// Do not show super admin on frontend
+				response.data.data.forEach((each) => {
+					if (each.id !== 1) {
+						temp.push(each)
+					}
+				})
+				setRoleArray(temp)
+				setRoleId(temp[0].id)
+				getAllPermissionsByRole(temp[0].id)
+			}
 			setLoading(false)
 		})
 	}
