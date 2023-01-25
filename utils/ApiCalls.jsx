@@ -983,9 +983,9 @@ export const editBannerApi = async (baseUrl, banner, headers) => {
 
 export const createAndUpdateRoleApi = async (
 	baseUrl,
+	id,
 	name,
 	active,
-	id,
 	headers
 ) => {
 	let body
@@ -1125,6 +1125,17 @@ export const getCurrentRolePermissionsDetailsApi = async (baseUrl, headers) => {
 
 export const getActiveRolesApi = async (baseUrl, headers) => {
 	let url = baseUrl + `/adminUser/role/getAllActive`
+	try {
+		return await axios.get(url, {
+			headers,
+		})
+	} catch (error) {
+		return error?.response
+	}
+}
+
+export const getRolesApi = async (baseUrl, headers) => {
+	let url = baseUrl + `/adminUser/role/getAll`
 	try {
 		return await axios.get(url, {
 			headers,
