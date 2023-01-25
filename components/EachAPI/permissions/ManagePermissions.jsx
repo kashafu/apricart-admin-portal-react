@@ -381,7 +381,19 @@ const ManagePermissions = () => {
         const { baseUrl, headers } = getGeneralApiParams()
         await getAllPermissionsApi(baseUrl, headers).then((response) => {
             let status = checkStatus(response, "")
-            status && setAllPermissions(response.data.data)
+            if (status) {
+                const sortedArray = [...response.data.data]
+                sortedArray.sort((a, b) => {
+                    if (a.category < b.category) {
+                        return -1
+                    }
+                    if (a.category > b.category) {
+                        return 1
+                    }
+                    return 0
+                })
+                setAllPermissions(sortedArray)
+            }
             setIsLoading(false)
         })
     }
