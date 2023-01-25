@@ -1,39 +1,82 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-import {
-	checkStatus,
-	getGeneralApiParams,
-} from "../../../utils/GeneralVariables"
-import { getAllCategoriesApi } from "../../../utils/ApiCalls"
-import SingleTabLayout from "../../Layouts/SingleTabLayout"
+import { useCategoriesApi } from "../../../utils/ApiCalls"
 
 import { FiChevronsRight } from "react-icons/fi"
+import SingleTabLayout from "../../Layouts/SingleTabLayout"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
 
 const ViewAllCategories = () => {
-	const [loading, setLoading] = useState(false)
-	const [categories, setCategories] = useState([])
 	const [selected, setSelected] = useState("")
+	const [selectedOrderType, setSelectedOrderType] = useState({
+		name: "Online Delivery",
+		id: {
+			"prodType": "b2b",
+			"orderType": "delivery"
+		}
+	})
 
-	useEffect(() => {
-		getCategories()
-	}, [])
+	const { categories, setCity, city, setOrderType, setProdType, isLoading } = useCategoriesApi()
 
-	const getCategories = async () => {
-		setLoading(true)
-		const { baseUrl } = getGeneralApiParams()
+	const handleCity = (e) => {
+		setCity(e.target.value)
+	}
 
-		await getAllCategoriesApi(baseUrl, {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		}).then((response) => {
-			let status = checkStatus(response, "")
-			status && setCategories(response.data.data)
-			setLoading(false)
-		})
+	const handleOrderType = (e) => {
+		let json = JSON.parse(e.target.value)
+		setSelectedOrderType(json)
+
+		setOrderType(json.id.orderType)
+		setProdType(json.id.prodType)
 	}
 
 	return (
-		<SingleTabLayout heading={"Manage Permissions"} loading={loading}>
+		<SingleTabLayout
+			heading={"Manage Permissions"}
+			loading={isLoading}
+			gridItems={
+				<>
+					<CustomSelectInput
+						heading={"Select City"}
+						customOnChange={handleCity}
+						value={city}
+						options={[
+							{
+								name: "Karachi",
+								id: "karachi"
+							},
+							{
+								name: "Peshawar",
+								id: "peshawar"
+							}]
+						}
+						optionText="name"
+					/>
+					<CustomSelectInput
+						heading={"Select Order Type"}
+						customOnChange={handleOrderType}
+						customValue
+						value={selectedOrderType}
+						options={[
+							{
+								name: "Online Delivery",
+								id: {
+									"prodType": "b2b",
+									"orderType": "delivery"
+								}
+							}, {
+								name: "Click n Collect",
+								id: {
+									"prodType": "cus",
+									"orderType": "pickup"
+								}
+							}
+						]}
+						optionText="name"
+					/>
+				</>
+			}
+		>
 			<aside className="overflow-hidden grid grid-cols-2 bg-white shadow-xl border-slate-100 border mx-2">
 				<section className="col-span-1">
 					<h3 className="p-[2.35rem] font-nunito font-bold text-lg border-b-[1px] text-txt-dark">
@@ -47,7 +90,7 @@ const ViewAllCategories = () => {
 							<p className="col-span-3 py-4 px-6">Position</p>
 						</div>
 						<div className="overflow-y-auto scroller-mini h-96">
-							{categories.map((each) => (
+							{categories?.map((each) => (
 								<section
 									key={each.index}
 									className=" justify-center items-center "

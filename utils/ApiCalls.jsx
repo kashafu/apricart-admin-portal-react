@@ -902,7 +902,7 @@ export const useCategoriesApi = () => {
 		}
 	}
 
-	return { isLoading, categories, errorMessage, setOrderType, setCity, setProdType }
+	return { isLoading, categories, errorMessage, setOrderType, setCity, city, setProdType }
 }
 
 export const useCategoriesAllLevelsApi = () => {
