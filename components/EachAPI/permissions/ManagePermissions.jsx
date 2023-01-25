@@ -293,8 +293,8 @@ const Table = ({ allPermissions, permissionCategories, setIsLoading, reloadPermi
                                     {category}
                                 </p>
                                 <p className={cellStyle + [" col-span-1"]}>
-                                    {active === "Y" && "True"}
-                                    {active === "N" && "False"}
+                                    {active === "Y" && "Active"}
+                                    {active === "N" && "Inactive"}
                                 </p>
                                 <div
                                     className={
