@@ -1068,6 +1068,17 @@ export const getAllRolesApi = async (baseUrl, headers) => {
 	}
 }
 
+export const getAllRolesWithUsersApi = async (baseUrl, headers) => {
+	let url = baseUrl + "/adminUser/role/getAllActiveRolesWithUsers"
+	try {
+		return await axios.get(url, {
+			headers,
+		})
+	} catch (error) {
+		return error?.response
+	}
+}
+
 export const getAllPermissionsApi = async (baseUrl, headers) => {
 	let url = baseUrl + "/adminUser/permission/getAll"
 	try {

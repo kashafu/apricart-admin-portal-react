@@ -51,6 +51,7 @@ import GetAllRolesAPIComponent from "../../components/EachAPI/superAdmin/GetAllR
 import LinkRoleAndPermissionsAPIComponent from "../../components/EachAPI/superAdmin/LinkRoleAndPermissionsAPIComponent"
 import UpdatePermissionsAPIComponent from "../../components/EachAPI/superAdmin/UpdatePermissionsAPIComponent"
 import ManagePermissions from "../../components/EachAPI/permissions/ManagePermissions"
+import ManageRoles from "../../components/EachAPI/roles/ManageRoles"
 
 const MainTabComponent = () => {
 	const dispatch = useDispatch()
@@ -214,6 +215,9 @@ const MainTabComponent = () => {
 				)}
 				{selected === "/v1/adminUser/permission/manage" && (
 					<ManagePermissions />
+				)}
+				{selected === "/v1/adminUser/role/viewUsers" && (
+					<ManageRoles />
 				)}
 
 
