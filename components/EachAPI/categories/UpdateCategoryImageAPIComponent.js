@@ -75,11 +75,8 @@ const UpdateCategoryImageAPIComponent = () => {
 	}
 
 	const fillFormData = () => {
-		bannerData.append("app", input.bannerUrlApp)
+		bannerData.append("image", input.bannerUrlApp)
 		bannerData.append("category_id", input.categoryId)
-		bannerData.append("city", input.city)
-		bannerData.append("order_type", input.orderType)
-		bannerData.append("prod_type", input.prodType)
 	}
 
 	const submitHandler = async (e) => {

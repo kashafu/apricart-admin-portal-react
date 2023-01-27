@@ -839,7 +839,7 @@ export const updateCategoryBannerApi = async (baseUrl, banner) => {
 }
 
 export const updateCategoryImageApi = async (baseUrl, banner) => {
-	let url = baseUrl + "/admin/category/image/update"
+	let url = baseUrl + "/category/update/image"
 	try {
 		return await axios.post(url, banner, {
 			Accept: "application/json",
