@@ -53,7 +53,7 @@ const AssignUserRoleAPIComponent = () => {
 			heading={"Assign Role to User"}
 			loading={loading}
 			buttonOnClick={(e) => handleSubmit(e)}
-			buttonText={"Create Role"}
+			buttonText={"Assign Role"}
 			gridItems={
 				<>
 					<CustomInput
