@@ -1,19 +1,15 @@
+import "../styles/globals.css"
+
 import { ToastContainer } from "react-toastify"
 import Cookies from "universal-cookie"
 import axios from "axios"
-import "../styles/globals.css"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Provider } from "react-redux"
 import { store } from "../Redux/store"
 import { ConfigProvider } from "react-avatar"
 
 import Navbar from "../components/Misc/Navbar"
-import { getAllAPIsApi } from "../utils/ApiCalls"
-import {
-	checkStatus,
-	getGeneralApiParams,
-} from "../utils/GeneralVariables"
 import SideBar from "../components/SideBar"
 
 const Layout = ({ children }) => {
@@ -22,22 +18,7 @@ const Layout = ({ children }) => {
 
 	const [apiList, setApiList] = useState(false)
 	const [allApis, setAllApis] = useState([])
-	const [loading, setLoading] = useState(true)
-
-	let token = cookies.get("cookies-token")
 	let name = cookies.get("cookies-name")
-
-	useEffect(() => {
-		router.pathname !== "/login" && getSidebarItems()
-	}, [token, router])
-
-	const getSidebarItems = async () => {
-		const { baseUrl, headers } = getGeneralApiParams()
-		await getAllAPIsApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "")
-			setLoading(false)
-		})
-	}
 
 	return (
 		<div className="min-h-screen w-screen flex">

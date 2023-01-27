@@ -133,25 +133,6 @@ export const getAllAPIsApi = async (baseUrl, headers) => {
 		let response = await axios.get(url, {
 			headers,
 		})
-		// Hard coded get all categories api
-		response.data.data.apis.unshift({
-			id: 0,
-			name: "View Category",
-			endpoint: "/admin/category/view",
-			category: "Category",
-		})
-		return response
-	} catch (error) {
-		return error?.response
-	}
-}
-
-export const getAllAPIsPhase2Api = async (baseUrl, headers) => {
-	const url = baseUrl + `/adminUser/dashboard`
-	try {
-		let response = await axios.get(url, {
-			headers,
-		})
 		return response
 	} catch (error) {
 		return error?.response

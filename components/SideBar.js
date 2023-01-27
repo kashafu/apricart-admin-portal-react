@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { AiOutlineUser } from "react-icons/ai"
-import { getAllAPIsPhase2Api } from "../utils/ApiCalls"
+import { getAllAPIsApi } from "../utils/ApiCalls"
 import { FiChevronRight } from "react-icons/fi"
 import { TbApi } from "react-icons/tb"
 
@@ -20,7 +20,7 @@ const SideBar = ({ allApis, setAllApis }) => {
 
 	const getCategories = async () => {
 		const { baseUrl, headers } = getGeneralApiParams()
-		await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
+		await getAllAPIsApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "")
 			// to get the unique category names from all the apis
 			const unique = [

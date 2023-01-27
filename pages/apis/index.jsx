@@ -1,4 +1,4 @@
-import { getAllAPIsPhase2Api } from "../../utils/ApiCalls"
+import { getAllAPIsApi } from "../../utils/ApiCalls"
 import { checkStatus, getGeneralApiParams } from "../../utils/GeneralVariables"
 import {
     addToRecent,
@@ -23,7 +23,7 @@ const ProductAPIPage = () => {
 
     const getAPIs = async () => {
         const { baseUrl, headers } = getGeneralApiParams()
-        await getAllAPIsPhase2Api(baseUrl, headers).then((response) => {
+        await getAllAPIsApi(baseUrl, headers).then((response) => {
             let status = checkStatus(response, "")
             // to get the unique category names from all the apis
             const unique = [

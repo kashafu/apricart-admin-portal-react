@@ -1,31 +1,11 @@
-import { useEffect, useState } from "react"
 import Link from "next/link"
-
-import Loading from "../utils/Loading"
-import { getAllAPIsApi } from "../utils/ApiCalls"
-import { checkStatus, getGeneralApiParams } from "../utils/GeneralVariables"
 
 import { SiQuantconnect } from "react-icons/si"
 import { MdManageAccounts } from "react-icons/md"
 
 const Index = () => {
-	const [loading, setLoading] = useState(true)
-
-	const getSidebarItems = async () => {
-		const { baseUrl, headers } = getGeneralApiParams()
-		await getAllAPIsApi(baseUrl, headers).then((response) => {
-			let status = checkStatus(response, "")
-			setLoading(false)
-		})
-	}
-
-	useEffect(() => {
-		getSidebarItems()
-	}, [])
-
 	return (
 		<section className="bg-slate-100 py-12 h-full w-full">
-			<Loading loading={loading} />
 			<section className="mt-14 px-10 grid grid-cols-3 w-full">
 				<Link
 					href={"/apis"}
