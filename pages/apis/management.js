@@ -57,10 +57,10 @@ import ManageRoles from "../../components/EachAPI/roles/ManageRoles"
 const MainTabComponent = () => {
 	const dispatch = useDispatch()
 	const tabs = useSelector((state) => state.recent.tabs)
-	const each = useSelector((state) => state.recent.recents)
+	const recents = useSelector((state) => state.recent.recents)
 	const [allTabs, setAllTabs] = useState(tabs)
 	const [selected, setSelected] = useState(
-		each[0]?.endpoint || allTabs[0]?.endpoint
+		recents[0]?.endpoint || allTabs[0]?.endpoint
 	)
 
 	const handleSelect = (each) => {
@@ -72,7 +72,7 @@ const MainTabComponent = () => {
 		<section className="w-full">
 			<div className="m-4">
 				<h1>
-					{each[0]?.category}{" "}
+					{recents[0]?.category}{" "}
 					<span className="font-semibold font-lato text-main-blue">
 						Management
 					</span>

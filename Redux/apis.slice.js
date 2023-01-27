@@ -6,15 +6,13 @@ const apisSlice = createSlice({
 	reducers: {
 		initializeApis: (state, action) => {
 			state.splice(0, state.length)
-			action.payload.forEach(element => {
+			action.payload.forEach((element) => {
 				state.push(element)
-			});
+			})
 		},
 	},
 })
 
 export const apisReducer = apisSlice.reducer
 
-export const {
-	initializeApis
-} = apisSlice.actions
+export const { initializeApis } = apisSlice.actions

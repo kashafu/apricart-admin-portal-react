@@ -11,17 +11,19 @@ import { ConfigProvider } from "react-avatar"
 
 import Navbar from "../components/Misc/Navbar"
 import SideBar from "../components/SideBar"
+import Loading from "../utils/Loading"
+import { useDashboardApi } from "../utils/ApiCalls"
 
 const Layout = ({ children }) => {
 	const router = useRouter()
 	const cookies = new Cookies()
-
-	const [apiList, setApiList] = useState(false)
-	const [allApis, setAllApis] = useState([])
 	let name = cookies.get("cookies-name")
+
+	let { isLoading } = useDashboardApi()
 
 	return (
 		<div className="min-h-screen w-screen flex">
+			<Loading loading={isLoading} />
 			{router.pathname !== "/login" && (
 				<div className="pb-12 z-50">
 					<Navbar name={name} />
@@ -29,12 +31,7 @@ const Layout = ({ children }) => {
 			)}
 			{router.pathname !== "/login" && (
 				<section className="z-40">
-					<SideBar
-						apiList={apiList}
-						setApiList={setApiList}
-						allApis={allApis}
-						setAllApis={setAllApis}
-					/>
+					<SideBar />
 				</section>
 			)}
 			<section
