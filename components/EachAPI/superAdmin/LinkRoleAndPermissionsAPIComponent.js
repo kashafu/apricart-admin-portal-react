@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import {
 	getActivePermissionsApi,
-	getAllRolesApi,
+	getActiveRolesApi,
 	getPermissionByRoleApi,
 	linkRoleAndPermissionApi,
 } from "../../../utils/ApiCalls"
@@ -220,7 +220,7 @@ const LinkRoleAndPermissionsAPIComponent = () => {
 	const getAllRoles = async () => {
 		const { baseUrl, headers } = getGeneralApiParams()
 		setLoading(true)
-		await getAllRolesApi(baseUrl, headers).then((response) => {
+		await getActiveRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "")
 			if (status) {
 				let temp = []

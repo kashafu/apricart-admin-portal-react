@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { assignRoleApi, getAllRolesApi } from "../../../utils/ApiCalls"
+import { assignRoleApi, getActiveRolesApi } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	getGeneralApiParams,
@@ -41,7 +41,7 @@ const AssignUserRoleAPIComponent = () => {
 
 	const getAllRoles = async () => {
 		const { baseUrl, headers } = getGeneralApiParams()
-		await getAllRolesApi(baseUrl, headers).then((response) => {
+		await getActiveRolesApi(baseUrl, headers).then((response) => {
 			let status = checkStatus(response, "")
 			status && setRoleArray(response.data.data)
 			setLoading(false)
