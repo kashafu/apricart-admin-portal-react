@@ -19,7 +19,7 @@ const CreateAndUpdateRolesAPIComponent = () => {
 		setLoading(true)
 		e.preventDefault()
 		const { baseUrl, headers } = getGeneralApiParams()
-		await createAndUpdateRoleApi(baseUrl, name, active, "", headers).then(
+		await createAndUpdateRoleApi(baseUrl, "", name, active, headers).then(
 			(response) => {
 				setLoading(false)
 				checkStatus(response, "New role made")
