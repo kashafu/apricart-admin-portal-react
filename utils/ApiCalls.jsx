@@ -831,6 +831,18 @@ export const updateCategoryImageApi = async (baseUrl, banner) => {
 	}
 }
 
+export const updateProductImageApi = async (baseUrl, image) => {
+	let url = baseUrl + "/products/update/image"
+	try {
+		return await axios.post(url, image, {
+			Accept: "application/json",
+			"Content-Type": "multipart/form-data",
+		})
+	} catch (error) {
+		return error?.response
+	}
+}
+
 export const updateWelcomeVideoApi = async (baseUrl, link, headers) => {
 	const url = baseUrl + `/misc/video/welcome/update?url=${link}`
 	try {

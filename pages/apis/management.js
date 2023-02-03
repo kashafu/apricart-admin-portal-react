@@ -120,7 +120,9 @@ const MainTabComponent = () => {
 				{selected === 8 && <ProductPositionDetailAdminAPIComponent />}
 				{selected === 9 && <UpdateProductPositionCSVAPIComponent />}
 				{selected === 32 && <AddnUpdateProductCSVAPIComponent />}
-				{selected === 33 && <UploadProductImageAPIComponent />}
+				{selected === "/v1/products/update/image" && (
+					<UploadProductImageAPIComponent />
+				)}
 
 				{/* REPORTS */}
 				{selected === "/v1/download/users" && (
@@ -170,7 +172,9 @@ const MainTabComponent = () => {
 				{selected === "/v1/misc/welcomevideo" && (
 					<UpdateWelcomeVideoAPIComponent />
 				)}
-				{selected === "/v1/misc/thankyouimage" && <ThankyouImageAddUpdateAPIComponent />}
+				{selected === "/v1/misc/thankyouimage" && (
+					<ThankyouImageAddUpdateAPIComponent />
+				)}
 
 				{/* OFFERS MANAGEMENT */}
 				{selected === "/v1/offers/add" && <OfferSaveAPIComponent />}
@@ -217,13 +221,10 @@ const MainTabComponent = () => {
 				{selected === "/v1/adminUser/permission/manage" && (
 					<ManagePermissions />
 				)}
-				{selected === "/v1/adminUser/role/manage" && (
-					<ManageRoles />
-				)}
+				{selected === "/v1/adminUser/role/manage" && <ManageRoles />}
 				{selected === "/v1/adminUser/role/viewUsers" && (
 					<ViewRolesWithUsers />
 				)}
-
 
 				{/* ERP */}
 				{selected === "/v1/erp/category/add" && <p></p>}
