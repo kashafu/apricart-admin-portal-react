@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import { useState } from "react"
 
-import CustomButton from "../../Misc/CustomButton"
 import CustomSelectInput from "../../Misc/CustomSelectInput"
 import CustomInput from "../../Misc/CustomInput"
 import {
@@ -8,8 +7,6 @@ import {
 	getGeneralApiParams,
 } from "../../../utils/GeneralVariables"
 import { sendNotificationApi } from "../../../utils/ApiCalls"
-import Heading from "../../Misc/Heading"
-import Loading from "../../../utils/Loading"
 import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const NewNotificationSendAPIComponent = () => {
@@ -128,7 +125,7 @@ const NewNotificationSendAPIComponent = () => {
 							heading={"Category"}
 							type={"text"}
 							value={value}
-							onChange={handleCategory}
+							onChange={handleValue}
 							required={true}
 							min={0}
 							placeholder={"Enter Category"}
@@ -139,7 +136,7 @@ const NewNotificationSendAPIComponent = () => {
 							heading={"Sub Category"}
 							type={"text"}
 							value={value}
-							onChange={handleSubCategory}
+							onChange={handleValue}
 							required={true}
 							min={0}
 							placeholder={"Enter Category"}
@@ -150,7 +147,7 @@ const NewNotificationSendAPIComponent = () => {
 							heading={"SKU"}
 							type={"text"}
 							value={value}
-							onChange={handleSKU}
+							onChange={handleValue}
 							required={true}
 							min={0}
 							placeholder={"Enter SKU"}
