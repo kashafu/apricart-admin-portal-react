@@ -401,6 +401,15 @@ export const productImageUpdateApi = async (baseUrl, data, headers) => {
 	}
 }
 
+export const offerRemoveApi = async (baseUrl, data, headers) => {
+	const url = baseUrl + "/offers/remove"
+	try {
+		return await axios.post(url, data, { headers })
+	} catch (error) {
+		return error?.response
+	}
+}
+
 export const productIsActiveApi = async (
 	baseUrl,
 	sku,
@@ -430,6 +439,18 @@ export const getAllBannersApi = async (
 	const url =
 		baseUrl +
 		`/offers/banners?prod_type=${prodType}&order_type=${orderType}&city=${city}&lang=en`
+
+	try {
+		return await axios.get(url, {
+			headers,
+		})
+	} catch (error) {
+		return error?.response
+	}
+}
+
+export const getAllOffersApi = async (baseUrl, headers) => {
+	const url = baseUrl + "/offers/all?page=1&size=10000&city=karachi&lang=en"
 
 	try {
 		return await axios.get(url, {

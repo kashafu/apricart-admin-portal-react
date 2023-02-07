@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import FormData from "form-data"
-import { saveBannersApi } from "../../../utils/ApiCalls"
+import { getAllOffersApi, saveBannersApi } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	displayErrorToast,
@@ -17,6 +17,7 @@ import SingleAPILayout from "../../Layouts/SingleAPILayout"
 const SaveBannersAPIComponent = () => {
 	var bannerData = new FormData()
 	const [loading, setLoading] = useState(false)
+	const [allOffers, setAllOffers] = useState([])
 	const [ren, setRen] = useState("")
 	const [input, setInput] = useState({
 		bannerUrlApp: [],
@@ -38,6 +39,21 @@ const SaveBannersAPIComponent = () => {
 		level,
 		city,
 	} = input
+
+	useEffect(() => {
+		callAllOffersApi()
+	}, [])
+
+	const callAllOffersApi = async () => {
+		setLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
+		await getAllOffersApi(baseUrl, headers).then((response) => {
+			setLoading(false)
+			let status = checkStatus(response)
+			status && setAllOffers(response.data.data)
+			status && setInput({ ...input, offerId: response.data.data[0].id })
+		})
+	}
 
 	const handleWebImage = (e) => {
 		let verify = e.target.files[0]
@@ -163,14 +179,14 @@ const SaveBannersAPIComponent = () => {
 						placeholder="Type"
 						heading="Enter Type"
 					/>
-					<CustomInput
-						value={offerId}
-						onChange={(e) =>
+					<CustomSelectInput
+						heading={"Offer ID"}
+						customOnChange={(e) => {
 							setInput({ ...input, offerId: e.target.value })
-						}
-						type="text"
-						placeholder="Offer Id"
-						heading="Enter Offer Id"
+						}}
+						value={offerId}
+						options={allOffers}
+						optionText="id"
 					/>
 					<CustomSelectInput
 						heading={"Select Level"}
