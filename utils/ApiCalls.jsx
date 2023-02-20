@@ -972,7 +972,7 @@ export const getAllCategoriesApi = async (baseUrl, headers) => {
 }
 
 export const addCouponApi = async (baseUrl, coupon, headers) => {
-	let url = baseUrl + "/admin/coupons/save"
+	let url = baseUrl + "/coupons/addUpdate"
 
 	try {
 		return await axios.post(url, coupon, { headers })

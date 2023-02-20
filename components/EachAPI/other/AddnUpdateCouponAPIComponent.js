@@ -12,7 +12,6 @@ const AddnUpdateCouponAPIComponent = () => {
 	const [loading, setLoading] = useState(false)
 	const [displayExpiry, setDisplayExpiry] = useState("")
 
-	const [categories, setCategories] = useState([])
 	const [inputs, setInputs] = useState({
 		name: "",
 		discount: "",
@@ -22,38 +21,14 @@ const AddnUpdateCouponAPIComponent = () => {
 		minSubTotal: "",
 		expiry: "",
 		productSkus: "",
-		category: "",
 		whitelist: true,
 		phoneNumber: "",
 		whitelistPhoneNumber: true,
-		oncePhoneNumber: true,
+		oncePhoneNumber: false,
 		deliveryOnly: true,
-		prodType: "cus",
+		prodType: "b2b",
 		cityInfo: 1,
 	})
-
-	useEffect(() => {
-		fetchCategoryIds()
-	}, [])
-
-	const {
-		name,
-		discount,
-		isPercent,
-		active,
-		usageLimit,
-		minSubTotal,
-		expiry,
-		productSkus,
-		category,
-		whitelist,
-		phoneNumber,
-		whitelistPhoneNumber,
-		oncePhoneNumber,
-		deliveryOnly,
-		prodType,
-		cityInfo,
-	} = inputs
 
 	const handleName = (e) => {
 		setInputs({ ...inputs, name: e.target.value })
@@ -78,23 +53,8 @@ const AddnUpdateCouponAPIComponent = () => {
 		setInputs({ ...inputs, expiry: newExp })
 		setDisplayExpiry(e.target.value)
 	}
-	const handleProductSkus = (e) => {
-		setInputs({ ...inputs, productSkus: e.target.value })
-	}
-	const handleCategory = (e) => {
-		setInputs({ ...inputs, category: e.target.value })
-	}
-	const handleWhiteList = (e) => {
-		setInputs({ ...inputs, whitelist: e.target.value })
-	}
 	const handlePhoneNumber = (e) => {
 		setInputs({ ...inputs, phoneNumber: e.target.value })
-	}
-	const handleWhiteListPhoneNumber = (e) => {
-		setInputs({ ...inputs, whitelistPhoneNumber: e.target.value })
-	}
-	const handleOncePhoneNumber = (e) => {
-		setInputs({ ...inputs, oncePhoneNumber: e.target.value })
 	}
 	const handleDeliveryOnly = (e) => {
 		setInputs({ ...inputs, deliveryOnly: e.target.value })
@@ -108,22 +68,10 @@ const AddnUpdateCouponAPIComponent = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		setLoading(true)
 		const { baseUrl, headers } = getGeneralApiParams()
 		await addCouponApi(baseUrl, inputs, headers).then((response) => {
 			checkStatus(response, "Coupon created successfully")
-		})
-	}
-
-	const fetchCategoryIds = async () => {
-		const { baseUrl } = getGeneralApiParams()
-		await getAllCategoriesApi(baseUrl, {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		}).then((response) => {
-			setInputs({ ...inputs, category: response.data.data[0].id })
-
-			let status = checkStatus(response, "")
-			status && setCategories(response.data.data)
 			setLoading(false)
 		})
 	}
@@ -138,14 +86,14 @@ const AddnUpdateCouponAPIComponent = () => {
 				<>
 					<CustomInput
 						type={"text"}
-						value={name}
+						value={inputs.name}
 						onChange={(e) => handleName(e)}
 						required={true}
 						heading={"Name"}
 					/>
 					<CustomInput
 						type={"number"}
-						value={discount}
+						value={inputs.discount}
 						onChange={(e) => handleDiscount(e)}
 						required={true}
 						heading={"Discount"}
@@ -184,14 +132,14 @@ const AddnUpdateCouponAPIComponent = () => {
 					/>
 					<CustomInput
 						type={"number"}
-						value={usageLimit}
+						value={inputs.usageLimit}
 						onChange={(e) => handleUsageLimit(e)}
 						required={true}
 						heading={"Usage Limit"}
 					/>
 					<CustomInput
 						type={"number"}
-						value={minSubTotal}
+						value={inputs.minSubTotal}
 						onChange={(e) => handleMinSubTotal(e)}
 						required={true}
 						heading={"Minimum Subtotal"}
@@ -204,73 +152,10 @@ const AddnUpdateCouponAPIComponent = () => {
 					/>
 					<CustomInput
 						type={"text"}
-						value={productSkus}
-						onChange={(e) => handleProductSkus(e)}
-						required={true}
-						heading={"Product SKUs"}
-					/>
-					<CustomSelectInput
-						heading={"Select Category"}
-						placeholder="Select Category"
-						customOnChange={handleCategory}
-						value={inputs.category}
-						options={categories}
-						optionText="name"
-					/>
-					<CustomSelectInput
-						heading={"White List"}
-						customOnChange={handleWhiteList}
-						value={inputs.active}
-						options={[
-							{
-								name: "True",
-								id: true,
-							},
-							{
-								name: "False",
-								id: false,
-							},
-						]}
-						optionText="name"
-					/>
-					<CustomInput
-						type={"text"}
-						value={phoneNumber}
+						value={inputs.phoneNumber}
 						onChange={(e) => handlePhoneNumber(e)}
 						required={true}
 						heading={"Phone Number"}
-					/>
-					<CustomSelectInput
-						heading={"White List Phone Number"}
-						customOnChange={handleWhiteListPhoneNumber}
-						value={inputs.whitelistPhoneNumber}
-						options={[
-							{
-								name: "True",
-								id: true,
-							},
-							{
-								name: "False",
-								id: false,
-							},
-						]}
-						optionText="name"
-					/>
-					<CustomSelectInput
-						heading={"Phone Number Once?"}
-						customOnChange={handleOncePhoneNumber}
-						value={inputs.oncePhoneNumber}
-						options={[
-							{
-								name: "True",
-								id: true,
-							},
-							{
-								name: "False",
-								id: false,
-							},
-						]}
-						optionText="name"
 					/>
 					<CustomSelectInput
 						heading={"Delivery Only?"}
