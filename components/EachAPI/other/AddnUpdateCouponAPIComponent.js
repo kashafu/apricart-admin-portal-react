@@ -155,7 +155,7 @@ const AddnUpdateCouponAPIComponent = () => {
 						value={inputs.phoneNumber}
 						onChange={(e) => handlePhoneNumber(e)}
 						required={true}
-						heading={"Phone Number"}
+						heading={"Phone Number (ex. 923319970706)"}
 					/>
 					<CustomSelectInput
 						heading={"Delivery Only?"}
