@@ -24,21 +24,11 @@ const SaveBannersAPIComponent = () => {
 		bannerUrlWeb: [],
 		prodType: "b2b",
 		orderType: "delivery",
-		type: "",
+		type: "none",
 		offerId: "",
-		level: 0,
+		level: 1,
 		city: "karachi",
 	})
-	const {
-		bannerUrlApp,
-		bannerUrlWeb,
-		prodType,
-		orderType,
-		type,
-		offerId,
-		level,
-		city,
-	} = input
 
 	useEffect(() => {
 		callAllOffersApi()
@@ -81,25 +71,25 @@ const SaveBannersAPIComponent = () => {
 		}
 	}
 
-	const handleProdType = (e) => {
-		setInput({ ...input, prodType: e.target.value })
-	}
-	const handleOrderType = (e) => {
-		setInput({ ...input, orderType: e.target.value })
-	}
-	const handleCity = (e) => {
-		setInput({ ...input, city: e.target.value })
-	}
-
 	const fillFormData = () => {
-		bannerData.append("app", bannerUrlApp)
-		bannerData.append("web", bannerUrlWeb)
-		bannerData.append("prod_type", prodType)
-		bannerData.append("order_type", orderType)
-		bannerData.append("type", type)
-		bannerData.append("offer_id", offerId)
-		bannerData.append("level", level)
-		bannerData.append("city", city)
+		bannerData.append("app", input.bannerUrlApp)
+		bannerData.append("web", input.bannerUrlWeb)
+		bannerData.append("prod_type", input.prodType)
+		bannerData.append("order_type", input.orderType)
+		if (input.type === 'none') {
+			bannerData.append("type", "offer")
+			bannerData.append("offer_id", 0)
+		}
+		else if (input.type === 'offer') {
+			bannerData.append("type", "offer")
+			bannerData.append("offer_id", input.offerId)
+		}
+		else if (input.type === 'product') {
+			bannerData.append("type", "product")
+			bannerData.append("offer_id", input.offerId)
+		}
+		bannerData.append("level", input.level)
+		bannerData.append("city", input.city)
 		bannerData.append("lang", "en")
 	}
 
@@ -107,7 +97,7 @@ const SaveBannersAPIComponent = () => {
 		e.preventDefault()
 		setLoading(true)
 		const { baseUrl, headers } = getGeneralApiParams()
-		await fillFormData()
+		fillFormData()
 		await saveBannersApi(baseUrl, bannerData, headers).then((response) => {
 			setLoading(false)
 			checkStatus(response)
@@ -124,7 +114,9 @@ const SaveBannersAPIComponent = () => {
 				<>
 					<CustomSelectInput
 						heading={"Select Product Type"}
-						customOnChange={handleProdType}
+						customOnChange={(e) => {
+							setInput({ ...input, prodType: e.target.value })
+						}}
 						value={input.prodType}
 						options={[
 							{
@@ -140,7 +132,9 @@ const SaveBannersAPIComponent = () => {
 					/>
 					<CustomSelectInput
 						heading={"Select Order Type"}
-						customOnChange={handleOrderType}
+						customOnChange={(e) => {
+							setInput({ ...input, orderType: e.target.value })
+						}}
 						value={input.orderType}
 						options={[
 							{
@@ -156,7 +150,9 @@ const SaveBannersAPIComponent = () => {
 					/>
 					<CustomSelectInput
 						heading={"Select City"}
-						customOnChange={handleCity}
+						customOnChange={(e) => {
+							setInput({ ...input, city: e.target.value })
+						}}
 						value={input.city}
 						options={[
 							{
@@ -170,24 +166,48 @@ const SaveBannersAPIComponent = () => {
 						]}
 						optionText="name"
 					/>
-					<CustomInput
-						value={type}
-						onChange={(e) =>
-							setInput({ ...input, type: e.target.value })
-						}
-						type="text"
-						placeholder="Type"
-						heading="Enter Type"
-					/>
 					<CustomSelectInput
-						heading={"Offer ID"}
+						heading={"Select Type"}
 						customOnChange={(e) => {
-							setInput({ ...input, offerId: e.target.value })
+							setInput({ ...input, type: e.target.value })
 						}}
-						value={offerId}
-						options={allOffers}
-						optionText="id"
+						value={input.type}
+						options={[
+							{
+								name: "No Redirection",
+								id: "none",
+							},
+							{
+								name: "Offer",
+								id: "offer",
+							},
+							{
+								name: "Product",
+								id: "product",
+							},
+						]}
+						optionText="name"
 					/>
+					{input.type === 'offer' && (
+						<CustomSelectInput
+							heading={"Offer ID"}
+							customOnChange={(e) => {
+								setInput({ ...input, offerId: e.target.value })
+							}}
+							value={input.offerId}
+							options={allOffers}
+							optionText="id"
+						/>
+					)}
+					{input.type === 'product' && (
+						<CustomInput
+							heading={"Product SKU"}
+							onChange={(e) => {
+								setInput({ ...input, offerId: e.target.value })
+							}}
+							value={input.offerId}
+						/>
+					)}
 					<CustomSelectInput
 						heading={"Select Level"}
 						customOnChange={(e) =>
@@ -196,28 +216,20 @@ const SaveBannersAPIComponent = () => {
 						value={input.level}
 						options={[
 							{
-								name: "0",
-								id: 0,
-							},
-							{
-								name: "1",
+								name: "Main Scrollable",
 								id: 1,
 							},
 							{
-								name: "2",
+								name: "Second Level",
 								id: 2,
 							},
 							{
-								name: "3",
+								name: "Third Level",
 								id: 3,
 							},
 							{
-								name: "4",
+								name: "Fourth Level",
 								id: 4,
-							},
-							{
-								name: "5",
-								id: 5,
 							},
 						]}
 						optionText="name"

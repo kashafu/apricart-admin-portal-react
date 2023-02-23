@@ -462,7 +462,7 @@ export const getAllOffersApi = async (baseUrl, headers) => {
 }
 
 export const deleteBannerApi = async (baseUrl, id, headers) => {
-	const url = baseUrl + `/offers/banners/remove`
+	const url = baseUrl + "/banners/remove"
 	try {
 		return await axios.post(
 			url,

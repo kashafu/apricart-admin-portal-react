@@ -153,6 +153,7 @@ const MainTabComponent = () => {
 				{/* BANNER */}
 				{selected === 15 && <ThankyouImageAddUpdateAPIComponent />}
 				{selected === "/v1/banners/add" && <SaveBannersAPIComponent />}
+				{selected === "/v1/banners/manage" && <BannersAPIComponent />}
 				{selected === 30 && <BannersAPIComponent />}
 				{/* {selected === 30 && <EditBannersAPIComponent />} */}
 

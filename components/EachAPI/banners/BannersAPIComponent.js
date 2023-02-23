@@ -1,100 +1,126 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react"
 
-import Loading from "../../../utils/Loading";
-import CustomButton from "../../Misc/CustomButton";
-import Heading from "../../Misc/Heading";
-import { getAllBannersApi } from "../../../utils/ApiCalls";
+import { getAllBannersApi } from "../../../utils/ApiCalls"
 import {
 	checkStatus,
 	getGeneralApiParams,
-} from "../../../utils/GeneralVariables";
-import EachBannerRenderComponent from "./EachBannerRenderComponent";
-import CustomSelectInput from "../../Misc/CustomSelectInput";
+} from "../../../utils/GeneralVariables"
+import EachBannerRenderComponent from "./EachBannerRenderComponent"
+import CustomSelectInput from "../../Misc/CustomSelectInput"
+import SingleTabLayout from "../../Layouts/SingleTabLayout"
 
 const BannersAPIComponent = () => {
-	const [banners, setBanners] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [banners, setBanners] = useState([])
+	const [loading, setLoading] = useState(false)
 	const [inputs, setInputs] = useState({
-		prodType: "cus",
+		prodType: "b2b",
 		orderType: "delivery",
 		city: "karachi",
-	});
-	const { prodType, orderType, city } = inputs;
-	const router = useRouter();
-
-	const handleProdType = (e) => {
-		setInputs({ ...inputs, prodType: e.target.value });
-	};
-	const handleOrderType = (e) => {
-		setInputs({ ...inputs, orderType: e.target.value });
-	};
-	const handleCity = (e) => {
-		setInputs({ ...inputs, city: e.target.value });
-	};
-
-	const fetchBannerData = async () => {
-		setLoading(true);
-		const { baseUrl, headers } = getGeneralApiParams();
-		await getAllBannersApi(baseUrl, prodType, orderType, city, headers).then(
-			(response) => {
-				let status = checkStatus(response);
-				status && setBanners(response.data.data);
-				setLoading(false);
-			}
-		);
-	};
-
-	const handleAddBanner = () => {
-		router.push("/offer/banners/save");
-	};
+	})
+	const { prodType, orderType, city } = inputs
 
 	useEffect(() => {
-		fetchBannerData();
-	}, [inputs]);
+		fetchBannerData()
+	}, [inputs])
+
+	const handleProdType = (e) => {
+		setInputs({ ...inputs, prodType: e.target.value })
+	}
+
+	const handleOrderType = (e) => {
+		setInputs({ ...inputs, orderType: e.target.value })
+	}
+
+	const handleCity = (e) => {
+		setInputs({ ...inputs, city: e.target.value })
+	}
+
+	const fetchBannerData = async () => {
+		setLoading(true)
+		const { baseUrl, headers } = getGeneralApiParams()
+		await getAllBannersApi(
+			baseUrl,
+			prodType,
+			orderType,
+			city,
+			headers
+		).then((response) => {
+			let status = checkStatus(response)
+			status && setBanners(response.data.data)
+			setLoading(false)
+		})
+	}
 
 	return (
-		<section className="px-10">
-			<Loading loading={loading} />
-			{/* <Heading>Banners</Heading> */}
-			<form className="grid grid-cols-2 pt-6">
-				<CustomSelectInput
-					position={"top"}
-					onChange={(e) => handleProdType(e)}
-					heading={"Select Product Type"}
-					values={["b2b", "cus"]}
-					options={["Online Delivery", "Customer"]}
-				/>
-				<CustomSelectInput
-					onChange={(e) => handleOrderType(e)}
-					heading={"Select Order Type"}
-					values={["delivery", "pickup"]}
-					options={["Delivery", "Pick up"]}
-				/>
-				<CustomSelectInput
-					position={"bottom"}
-					onChange={(e) => handleCity(e)}
-					heading={"Select City"}
-					values={["karachi", "peshawar"]}
-					options={["Karachi", "Peshawar"]}
-				/>
-			</form>
+		<SingleTabLayout
+			heading={"Banner Save"}
+			loading={loading}
+			gridItems={
+				<>
+					<CustomSelectInput
+						heading={"Select Product Type"}
+						customOnChange={handleProdType}
+						value={inputs.prodType}
+						options={[
+							{
+								name: "Online Delivery",
+								id: "b2b",
+							},
+							{
+								name: "Customer",
+								id: "cus",
+							},
+						]}
+						optionText="name"
+					/>
+					<CustomSelectInput
+						heading={"Select Order Type"}
+						customOnChange={handleOrderType}
+						value={inputs.orderType}
+						options={[
+							{
+								name: "Delivery",
+								id: "delivery",
+							},
+							{
+								name: "Pick up",
+								id: "pickup",
+							},
+						]}
+						optionText="name"
+					/>
+					<CustomSelectInput
+						heading={"Select City"}
+						customOnChange={handleCity}
+						value={inputs.city}
+						options={[
+							{
+								name: "Karachi",
+								id: "karachi",
+							},
+							{
+								name: "Peshawar",
+								id: "peshawar",
+							},
+						]}
+						optionText="name"
+					/>
+				</>
+			}
+		>
 			<div className="divide-y-[1px] divide-main-blue">
 				{banners.length > 0 ? (
 					banners?.map((banner) => (
 						<div key={banner.id}>
-							<EachBannerRenderComponent props={banner} />
+							<EachBannerRenderComponent banner={banner} />
 						</div>
 					))
 				) : (
 					<h3 className="text-center py-4">No Banners</h3>
 				)}
 			</div>
-			<CustomButton onClick={handleAddBanner} width="1/3">
-				Add a Banner
-			</CustomButton>
-		</section>
-	);
-};
+		</SingleTabLayout>
+	)
+}
 
-export default BannersAPIComponent;
+export default BannersAPIComponent
