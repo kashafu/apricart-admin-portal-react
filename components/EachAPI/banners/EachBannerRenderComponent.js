@@ -53,7 +53,7 @@ const EachBannerRenderComponent = ({ banner, refreshBannerList }) => {
 					<CustomButton
 						onClick={(e) => deleteThisBanner(banner.id)}
 					>
-						Delete Banner
+						Remove Banner
 					</CustomButton>
 				</div>
 			</div>
