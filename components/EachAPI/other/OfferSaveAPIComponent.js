@@ -6,7 +6,6 @@ import {
 } from "../../../utils/GeneralVariables"
 import { offerSaveApi } from "../../../utils/ApiCalls"
 import CustomInput from "../../Misc/CustomInput"
-import CustomRadioInput from "../../Misc/CustomRadioInput"
 import SingleAPILayout from "../../Layouts/SingleAPILayout"
 import Heading from "../../Misc/Heading"
 
@@ -14,7 +13,7 @@ const OfferSaveAPIComponent = () => {
 	const [offerId, setOfferId] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [input, setInput] = useState({
-		price: "",
+		price: 22.0,
 		buying: "",
 		buyingCondition: "",
 		expiry: "",
@@ -22,38 +21,13 @@ const OfferSaveAPIComponent = () => {
 		categories: "",
 		type: "products",
 	})
-	const { price, buying, buyingCondition, expiry, products, categories } =
-		input
-
-	const handleRadioButton = (e) => {
-		setInput({ ...input, type: e.target.value })
-	}
+	const { buying, expiry, products } = input
 
 	const submitHandler = async (e) => {
 		e.preventDefault()
 		setLoading(true)
-		let newInput = {}
-		if (input.type === "categories") {
-			newInput = {
-				price,
-				buying,
-				buyingCondition,
-				expiry,
-				products: "",
-				categories,
-			}
-		} else {
-			newInput = {
-				price,
-				buying,
-				buyingCondition,
-				expiry,
-				products,
-				categories: "",
-			}
-		}
 		const { baseUrl, headers } = getGeneralApiParams()
-		await offerSaveApi(baseUrl, newInput, headers).then((response) => {
+		await offerSaveApi(baseUrl, input, headers).then((response) => {
 			setLoading(false)
 			let status = checkStatus(response)
 			status && setOfferId(response.data.data.id)
@@ -69,27 +43,14 @@ const OfferSaveAPIComponent = () => {
 			gridItems={
 				<>
 					<CustomInput
-						value={price}
-						heading={"Price"}
-						onChange={(e) =>
-							setInput({ ...input, price: e.target.value })
-						}
-						type="number"
-						placeholder="Price eg. 320"
-						position={"top"}
-					/>
-					<CustomInput
-						value={buyingCondition}
-						onChange={(e) =>
-							setInput({
-								...input,
-								buyingCondition: e.target.value,
-							})
-						}
-						x
+						value={buying}
+						onChange={(e) => {
+							setInput({ ...input, buying: e.target.value, buyingCondition: e.target.value })
+						}}
 						type="text"
-						placeholder="Buying Condition"
-						heading={"Buying Condition"}
+						placeholder="Offer name"
+						heading={"Offer name"}
+						position={"bottom"}
 					/>
 					<CustomInput
 						value={expiry}
@@ -100,55 +61,21 @@ const OfferSaveAPIComponent = () => {
 						placeholder="Expiry Date"
 						heading={"Expiry date"}
 					/>
-					<CustomRadioInput
-						inputs={["Products", "Categories"]}
-						values={["products", "categories"]}
-						name="type"
-						heading={"Select Type"}
-						onChange={(e) => handleRadioButton(e)}
-					/>
-					{input.type === "products" && (
-						<CustomInput
-							value={products}
-							onChange={(e) =>
-								setInput({ ...input, products: e.target.value })
-							}
-							type="text"
-							placeholder="Products"
-							heading="Products"
-						/>
-					)}
-					{input.type === "categories" && (
-						<CustomInput
-							value={categories}
-							onChange={(e) =>
-								setInput({
-									...input,
-									categories: e.target.value,
-								})
-							}
-							type="text"
-							placeholder="Categories"
-							heading="Categories"
-						/>
-					)}
-
 					<CustomInput
-						value={buying}
+						value={products}
 						onChange={(e) =>
-							setInput({ ...input, buying: e.target.value })
+							setInput({ ...input, products: e.target.value })
 						}
 						type="text"
-						placeholder="Buying"
-						heading={"Buying"}
-						position={"bottom"}
+						placeholder="Products"
+						heading="Products SKUS (comma seperated)"
 					/>
 				</>
 			}
 		>
 			{offerId && (
-				<div className="inline-flex animate-dropdown justify-center items-center">
-					<Heading>Your Offer Id = </Heading>
+				<div className="inline-flex animate-dropdown justify-center items-center space-x-2">
+					<Heading>Your Offer Id is </Heading>
 					<h2 className="text-5xl font-bold font-nunito text-main-blue">
 						{offerId}
 					</h2>
