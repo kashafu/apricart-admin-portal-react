@@ -11,11 +11,11 @@ import SingleAPILayout from "../../Layouts/SingleAPILayout"
 
 const NewNotificationSendAPIComponent = () => {
 	const [inputs, setInputs] = useState({
-		type: "product",
+		type: "offer",
 		value: "",
 		title: "",
 		message: "",
-		city: "karachi",
+		city: "Karachi",
 		to: "alldev",
 	})
 	const [loading, setLoading] = useState(false)
@@ -194,11 +194,11 @@ const NewNotificationSendAPIComponent = () => {
 							options={[
 								{
 									name: "Karachi",
-									id: "karachi"
+									id: "Karachi"
 								},
 								{
 									name: "Peshawar",
-									id: "peshawar"
+									id: "Peshawar"
 								}]
 							}
 							optionText="name"
