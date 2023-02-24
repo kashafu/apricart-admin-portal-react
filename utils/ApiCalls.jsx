@@ -1194,3 +1194,36 @@ export const assignRoleApi = async (baseUrl, phoneNumber, roleId, headers) => {
 		return error?.response
 	}
 }
+
+export const useGetOfferDetailsApi = () => {
+	const [offerId, setOfferId] = useState(null)
+	const [isLoading, setIsLoading] = useState(false)
+	const [details, setDetails] = useState(null)
+	const [errorMessage, setErrorMessage] = useState("")
+
+	useEffect(() => {
+		if (offerId) {
+			callApi()
+		}
+	}, [offerId])
+
+	const callApi = async () => {
+		setIsLoading(true)
+		let { headers, baseUrl } = getGeneralApiParams()
+		// let url = baseUrl + `/catalog/categories?level=all&city=${city}&userid=abc123&client_type=apricart&prod_type=${prodType}&order_type=${orderType}&lang=en`
+		let url = baseUrl + `/offers/detail?id=${offerId}&userid=abc123&client_type=apricart&prod_type=b2b&order_type=delivery&city=karachi`
+
+		try {
+			let apiResponse = await axios.get(url, {
+				headers: headers,
+			})
+			setDetails(apiResponse.data.data)
+		} catch (error) {
+			setErrorMessage(error?.response?.data?.message)
+		} finally {
+			setIsLoading(false)
+		}
+	}
+
+	return { isLoading, details, errorMessage, setOfferId }
+}

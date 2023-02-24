@@ -112,7 +112,10 @@ const BannersAPIComponent = () => {
 				{banners.length > 0 ? (
 					banners?.map((banner) => (
 						<div key={banner.id}>
-							<EachBannerRenderComponent banner={banner} />
+							<EachBannerRenderComponent
+								banner={banner}
+								refreshBannerList={fetchBannerData}
+							/>
 						</div>
 					))
 				) : (

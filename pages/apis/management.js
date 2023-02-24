@@ -17,6 +17,7 @@ import GetAbundantCartReportsAPIComponent from "../../components/EachAPI/downloa
 import ProductPriceUpdatedLast24hAPIComponent from "../../components/EachAPI/products/ProductPriceUpdatedLast24hAPIComponent"
 import AddnUpdateCouponAPIComponent from "../../components/EachAPI/other/AddnUpdateCouponAPIComponent"
 import OfferSaveAPIComponent from "../../components/EachAPI/other/OfferSaveAPIComponent"
+import ViewOfferDetails from "../../components/EachAPI/offers/ViewOfferDetails"
 import ThankyouImageAddUpdateAPIComponent from "../../components/EachAPI/other/ThankyouImageAddUpdateAPIComponent"
 import UpdateWelcomeVideoAPIComponent from "../../components/EachAPI/other/UpdateWelcomeVideoAPIComponent"
 import PopupRedirectionUpdateAPIComponent from "../../components/EachAPI/other/PopupRedirectionUpdateAPIComponent"
@@ -182,8 +183,7 @@ const MainTabComponent = () => {
 				{selected === "/v1/offers/remove" && (
 					<OfferRemoveAPIComponent />
 				)}
-				{selected === "/v1/offers/all" && <p></p>}
-				{selected === "/v1/offers/detail" && <p></p>}
+				{selected === "/v1/offers/detail" && <ViewOfferDetails />}
 
 				{/* ADMIN MANAGEMENT */}
 				{/* TODO ADd a is update field which will take id if u wanna update */}

@@ -7,11 +7,12 @@ import {
 import { deleteBannerApi } from "../../../utils/ApiCalls"
 import CustomButton from "../../Misc/CustomButton"
 
-const EachBannerRenderComponent = ({ banner }) => {
+const EachBannerRenderComponent = ({ banner, refreshBannerList }) => {
 	const deleteThisBanner = async (id) => {
 		const { baseUrl, headers } = getGeneralApiParams()
 		await deleteBannerApi(baseUrl, id, headers).then((response) => {
 			checkStatus(response)
+			refreshBannerList()
 		})
 	}
 
